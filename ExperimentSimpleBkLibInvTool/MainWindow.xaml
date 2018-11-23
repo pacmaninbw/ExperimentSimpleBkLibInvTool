@@ -5,8 +5,29 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Library Inventory Tool" Height="350" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="35*"/>
+            <ColumnDefinition Width="229*"/>
+        </Grid.ColumnDefinitions>
+        <Image Stretch="None" Source="Images/Chernick-Consulting-1-6-11.png" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.ColumnSpan="3" Margin="83,10,107,137"/>
+        <!-- Row 1 Buttons -->
+        <Button Content="Authors" Name="Btn_AuthorsTable" HorizontalAlignment="Left" Margin="75,60,0,0" VerticalAlignment="Top" Width="80" Grid.ColumnSpan="2" Click="OnBtn_AuthorsTable_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Series" Name="Btn_SeriesTable" HorizontalAlignment="Left" Margin="115,60,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_SeriesTable_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Books" Name="Btn_BooksTable" HorizontalAlignment="Left" Margin="265,60,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_BooksTable_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Categories" Name="Btn_CategoriesTable" HorizontalAlignment="Left" Margin="415,60,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_CategoriesTable_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Statuses" Name="Btn_StatusTable" HorizontalAlignment="Left" Margin="545,60,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_StatusTable_Click" Background="Transparent" FontWeight="Bold"/>
+        <!-- Row 2 Buttons -->
+        <Button Content="Formats" Name="Btn_FormatsTable" HorizontalAlignment="Left" Margin="75,120,0,0" VerticalAlignment="Top" Width="80" Grid.ColumnSpan="2" Click="Btn_FormatsTable_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Conditions" Name="Btn_ConditionsTable" HorizontalAlignment="Left" Margin="115,120,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_ConditionsTable_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Add Book" Name="Btn_AddBook" HorizontalAlignment="Left" Margin="265,120,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_AddBook_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Add Category" Name="Btn_AddCategory" HorizontalAlignment="Left" Margin="415,120,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_AddCategory_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Add Format" Name="Btn_AddFormat" HorizontalAlignment="Left" Margin="545,120,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_AddFormat_Click" Background="Transparent" FontWeight="Bold"/>
+        <!-- Row 3 Buttons -->
+        <Button Content="Add Author" Name="Btn_AddAuthor" HorizontalAlignment="Left" Margin="75,180,0,0" VerticalAlignment="Top" Width="80" Grid.ColumnSpan="2" Click="Btn_AddAuthor_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Add Series" Name="Btn_AddSeries" HorizontalAlignment="Left" Margin="115,180,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_AddSeries_Click" Background="Transparent" FontWeight="Bold"/>
+        <Button Content="Exit" Name="Btn_Exit" HorizontalAlignment="Center" Margin="253,240,358,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_Exit_Click" Background="Red" FontWeight="Bold"/>
+        <Label Content="Copyright 2018 Chernick Consulting" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="0,280,0,0" VerticalAlignment="Top" FontSize="6"/>
     </Grid>
 </Window>

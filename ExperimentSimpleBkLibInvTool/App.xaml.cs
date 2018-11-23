@@ -5,6 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using ExperimentSimpleBkLibInvTool.ModelInMVC;
 
 namespace ExperimentSimpleBkLibInvTool
 {
@@ -13,5 +14,6 @@ namespace ExperimentSimpleBkLibInvTool
     /// </summary>
     public partial class App : Application
     {
+        public Model Model = new Model();
     }
 }

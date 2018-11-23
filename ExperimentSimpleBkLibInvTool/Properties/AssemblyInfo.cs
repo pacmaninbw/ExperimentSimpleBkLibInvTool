@@ -8,9 +8,9 @@ using System.Windows;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("ExperimentSimpleBkLibInvTool")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Simple Library Inventory Tool for initial debug and testing")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Paul A. Chernick")]
 [assembly: AssemblyProduct("ExperimentSimpleBkLibInvTool")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]

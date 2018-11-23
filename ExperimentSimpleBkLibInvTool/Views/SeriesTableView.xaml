@@ -1,0 +1,15 @@
+﻿<Window x:Class="ExperimentSimpleBkLibInvTool.Views.SeriesTableView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool.Views"
+        mc:Ignorable="d"
+        Title="Series" Height="768" Width="1024">
+    <Grid>
+        <Image Stretch="None" Source="/Images/Chernick-Consulting-1-6-11.png" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="83,10,107,137"/>
+        <Button Content="Add Series" Name="Btn_SeriesAddSeries" HorizontalAlignment="Left" Margin="80,30,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Background="Transparent" FontWeight="Bold" Click="Btn_SeriesAddSeries_Click"/>
+        <Button Content="Close" Name="Btn_SeriesTableClose" HorizontalAlignment="Left" Margin="875,30,0,0" VerticalAlignment="Top" Width="75" Background="Red" FontWeight="Bold" Click="Btn_SeriesTableClose_Click"/>
+        <DataGrid Name="SeriesGrid" HorizontalAlignment="Left" Height="530" Margin="65,105,0,0" VerticalAlignment="Top" Width="890" Background="Transparent" ItemsSource="{Binding}"/>
+    </Grid>
+</Window>

@@ -1,0 +1,14 @@
+﻿<Window x:Class="ExperimentSimpleBkLibInvTool.Views.CategoriesTableView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool.Views"
+        mc:Ignorable="d"
+        Title="Categories" Height="650" Width="600">
+    <Grid>
+        <Button Content="Add Category" Name="Btn_CategoriesAddCategory" HorizontalAlignment="Left" Margin="80,30,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Background="LightBlue" FontWeight="Bold" Click="Btn_CategoriesAddCategory_Click"/>
+        <Button Content="Close" Name="Btn_CategoriesTableClose" HorizontalAlignment="Left" Margin="430,30,0,0" VerticalAlignment="Top" Width="75" Background="Red" FontWeight="Bold" Click="Btn_CategoriesTableClose_Click"/>
+        <DataGrid Name="CategoriesDataGrid" HorizontalAlignment="Left" Height="450" Margin="75,75,0,0" VerticalAlignment="Top" Width="450" ItemsSource="{Binding}"/>
+    </Grid>
+</Window>

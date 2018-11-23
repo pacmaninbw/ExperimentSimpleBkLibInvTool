@@ -1,0 +1,20 @@
+﻿<Window x:Class="ExperimentSimpleBkLibInvTool.Views.AddSeriesToAuthor"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool.Views"
+        mc:Ignorable="d"
+        Title="Add Author Series" Height="330" Width="354">
+    <Grid>
+        <Label Content="First Name" Name="Lab_SeriesAuthorFirstName" HorizontalAlignment="Left" Margin="62,43,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtBx_SeriesAuthorFirstName" Height="22" Margin="159,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Middle Name" Name="Lab_SeriesAuthorMiddleName" HorizontalAlignment="Left" Margin="62,88,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtBx_SeriesAuthorMiddleName" Height="22" Margin="159,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Last Name" Name="Lab_AuthorLastName" HorizontalAlignment="Left" Margin="62,133,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtBx_SeriesAuthorLastName" Height="22" Margin="159,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Series Title" Name="Lab_SeriesAuthorYTitleh" HorizontalAlignment="Left" Margin="62,175,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Name="TxtBx_SeriesAuthorTitle" Height="22" Margin="159,177,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <Button Content="Save" Name="Btn_AddSeriesSave" HorizontalAlignment="Center" Margin="0,230,0,0" VerticalAlignment="Top" Width="75" Click="Btn_AddSeriesSave_Click" Background="GreenYellow" FontWeight="Bold"/>
+    </Grid>
+</Window>
