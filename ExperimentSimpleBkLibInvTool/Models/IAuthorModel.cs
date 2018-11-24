@@ -1,8 +1,9 @@
 ﻿namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
 {
-    interface IAuthorModel
+    public interface IAuthorModel
     {
         string FirstName { get; }
+        bool IsValid { get; }
         string LastName { get; }
         string MiddleName { get; }
         string YearOfBirth { get; }

@@ -46,7 +46,8 @@ namespace ExperimentSimpleBkLibInvTool
 
         private void Btn_SeriesTable_Click(object sender, RoutedEventArgs e)
         {
-
+            SeriesTableView seriesTableView = new SeriesTableView();
+            seriesTableView.Show();
         }
 
         private void Btn_StatusTable_Click(object sender, RoutedEventArgs e)
@@ -72,27 +73,32 @@ namespace ExperimentSimpleBkLibInvTool
 
         private void Btn_AddBook_Click(object sender, RoutedEventArgs e)
         {
-
+            AddBookDlg addBook = new AddBookDlg();
+            addBook.Show();
         }
 
         private void Btn_AddCategory_Click(object sender, RoutedEventArgs e)
         {
-
+            AddCategory addCategory = new AddCategory();
+            addCategory.Show();
         }
 
         private void Btn_AddFormat_Click(object sender, RoutedEventArgs e)
         {
-
+            AddFormat addFormat = new AddFormat();
+            addFormat.Show();
         }
 
         private void Btn_AddAuthor_Click(object sender, RoutedEventArgs e)
         {
-
+            AddAuthorDlg addAuthorDlg = new AddAuthorDlg();
+            addAuthorDlg.Show();
         }
 
         private void Btn_AddSeries_Click(object sender, RoutedEventArgs e)
         {
-
+            AddSeriesToAuthor addSeriesToAuthor = new AddSeriesToAuthor();
+            addSeriesToAuthor.Show();
         }
     }
 }

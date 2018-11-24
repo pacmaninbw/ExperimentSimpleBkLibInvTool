@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
 {
-    class OwnerShipModel : IOwnerShipModel
+    public class OwnerShipModel : IOwnerShipModel
     {
         private int _bookId;
         private bool _isOwned;

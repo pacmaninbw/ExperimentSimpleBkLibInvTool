@@ -9,5 +9,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
 
         void SetAuthor(AuthorModel author);
         void SetTitle(string seriesTitle);
+
+        bool IsValid { get; }
     }
 }

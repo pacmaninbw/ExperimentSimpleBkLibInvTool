@@ -2,7 +2,7 @@
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
 {
-    interface IPuchaseInfoModel
+    public interface IPuchaseInfoModel
     {
         double ListPrice { get; set; }
         double PaidPrice { get; set; }

@@ -20,12 +20,16 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
         private SeriesTableModel _series;
         private CategoryTableModel _categories;
         private FormatTableModel _formats;
+        private BookTableModel _books;
+        private AuthorTableModel _authors;
 
         public Model()
         {
             _series = new SeriesTableModel();
             _formats = new FormatTableModel();
             _categories = new CategoryTableModel();
+            _books = new BookTableModel();
+            _authors = new AuthorTableModel();
         }
 
         public FormatTableModel FormatModel
@@ -49,6 +53,22 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
             get
             {
                 return _series;
+            }
+        }
+
+        public BookTableModel BookTable
+        {
+            get
+            {
+                return _books;
+            }
+        }
+
+        public AuthorTableModel AuthorTable
+        {
+            get
+            {
+                return _authors;
             }
         }
     }

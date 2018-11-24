@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo;
@@ -12,7 +13,7 @@ using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 {
-    class BookInfoModel
+    public class BookInfoModel
     {
         private int _idBookInfo;
         private int _category;
@@ -94,6 +95,70 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         public int AuthorId { get { return _authorKey; } }
 
         public int TitleId { get { return _titleKey; } }
+
+        public bool IsValid { get { return _dataIsValid(); } }
+
+        private bool _dataIsValid()
+        {
+            bool dataIsValid = true;
+            bool seriesIsValid = true;
+            bool purchaseIsValid = true;
+            bool publishIsValid = true;
+            bool authorIsValid = true;
+            bool forSaleIsValid = true;
+
+            if (_seriesInfo != null)
+            {
+                seriesIsValid = _seriesInfo.IsValid;
+            }
+
+            if (_puchaseInfo != null)
+            {
+                purchaseIsValid = _puchaseInfo.IsValid;
+            }
+
+            if (_publishInfo != null)
+            {
+                publishIsValid = _publishInfo.IsValid;
+            }
+
+            if (_authorInfo != null)
+            {
+                authorIsValid = _authorInfo.IsValid;
+            }
+            else
+            {
+                string errorMsg = "Author first and last names are required fields.";
+                MessageBox.Show(errorMsg);
+                authorIsValid = false;
+            }
+
+            if (_forSale != null)
+            {
+                forSaleIsValid = _forSale.IsValid;
+            }
+
+            if (_category < 1)
+            {
+                string errorMsg = "The book category is a required field.";
+                MessageBox.Show(errorMsg);
+                dataIsValid = false;
+            }
+
+            if (!seriesIsValid || !purchaseIsValid || !publishIsValid || !authorIsValid || !forSaleIsValid)
+            {
+                dataIsValid = false;
+            }
+
+            if (_title == null || _title.Length < 1)
+            {
+                string errorMsg = "The book title is a required field.";
+                MessageBox.Show(errorMsg);
+                dataIsValid = false;
+            }
+
+            return dataIsValid;
+        }
 
     }
 }

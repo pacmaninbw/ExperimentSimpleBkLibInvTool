@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,15 @@ namespace ExperimentSimpleBkLibInvTool.Views
     /// </summary>
     public partial class AuthorsTableView : Window
     {
+        private AuthorTableModel _authorTableModel;
+        private DataTable _authorTable;
+
         public AuthorsTableView()
         {
             InitializeComponent();
+            _authorTableModel = ((App)Application.Current).Model.AuthorTable;
+            _authorTable = _authorTableModel.AuthorTable;
+            AuthorsDataGrid.DataContext = _authorTable.DefaultView;
         }
 
         private void Btn_AuthorsAddAuthor_Click(object sender, RoutedEventArgs e)
@@ -39,7 +46,8 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void Btn_AuthorsAddBook_Click(object sender, RoutedEventArgs e)
         {
-
+            AddBookDlg addBookDlg = new AddBookDlg();
+            addBookDlg.Show();
         }
 
         private void Btn_AuthorTableClose_Click(object sender, RoutedEventArgs e)

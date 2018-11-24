@@ -1,6 +1,6 @@
 ﻿namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
 {
-    interface IPublishInfoModel
+    public interface IPublishInfoModel
     {
         string CopyRight { get; set; }
         int Edition { get; set; }
@@ -8,5 +8,7 @@
         bool OutOfPrint { get; set; }
         int Printing { get; set; }
         string Publisher { get; set; }
+
+        bool IsValid { get; }
     }
 }

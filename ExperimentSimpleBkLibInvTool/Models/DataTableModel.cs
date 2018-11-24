@@ -35,6 +35,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
             _dbConnectionString = ConfigurationManager.ConnectionStrings["LibInvToolDBConnStr"].ConnectionString;
         }
 
+        protected void InitializeDataTable()
+        {
+            _dataTable = getDataTable();
+        }
+
         protected uint AddItemToDataTable(string ItemTitleValue)
         {
             uint NewKey = _dbAddItem(ItemTitleValue);

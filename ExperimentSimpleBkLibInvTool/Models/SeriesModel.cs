@@ -21,6 +21,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
 
         public string SeriesTitle { get { return title; } }
 
+        public bool IsValid { get { return _dataIsValid();  } }
+
         public SeriesModel()
         {
             authorId = 0;
@@ -54,6 +56,26 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
         {
             authorId = AuthorId;
         }
+
+        private bool _dataIsValid()
+        {
+            bool dataIsValid = true;
+            if (_author == null)
+            {
+                dataIsValid = false;
+            }
+            else
+            {
+                dataIsValid = _author.IsValid;
+                if (title == null || title.Length < 1)
+                {
+                    string errorMsg = "Add Series error: Missing title of series";
+                    MessageBox.Show(errorMsg);
+                    dataIsValid = false;
+                }
+            }
+            return dataIsValid;
+        }
     }
 
     public class SeriesTableModel : CDataTableModel
@@ -73,54 +95,19 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             }
         }
 
-        private void ShowAuthorNameError()
-        {
-            string errorMsg = "Add Series error: The first and last names of the author are required fields";
-            MessageBox.Show(errorMsg);
-        }
-
         public bool AddSeries(ISeriesModel SeriesData)
         {
             bool canInsertData = true;
 
-            if (SeriesData.Author == null)
-            {
-                ShowAuthorNameError();
-                canInsertData = false;
-            }
-            else
-            {
-                if (SeriesData.Author.FirstName == null || SeriesData.Author.FirstName.Length < 1)
-                {
-                    ShowAuthorNameError();
-                    canInsertData = false;
-                }
-                else
-                {
-                    if (SeriesData.Author.LastName == null || SeriesData.Author.LastName.Length < 1)
-                    {
-                        ShowAuthorNameError();
-                        canInsertData = false;
-                    }
-                    else
-                    {
-                        if (SeriesData.SeriesTitle == null || SeriesData.SeriesTitle.Length < 1)
-                        {
-                            string errorMsg = "Add Series error: Missing title of series";
-                            MessageBox.Show(errorMsg);
-                            canInsertData = false;
-                        }
-                        else
-                        {
-                            canInsertData = _dbAddSeries(SeriesData);
-                        }
-                    }
-                }
-            }
+            canInsertData = SeriesData.IsValid;
 
+            if (canInsertData) {
+                canInsertData = _dbAddSeries(SeriesData);
+            }
 
             return canInsertData;
         }
+
         private bool _dbAddSeries(ISeriesModel SeriesData)
         {
             bool AddSeriesSuccess = true;

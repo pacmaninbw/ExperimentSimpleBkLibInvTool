@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
 {
-    class ForSaleModel : IForSaleModel
+    public class ForSaleModel : IForSaleModel
     {
         private int _bookId;
         private double _askingPrice;
@@ -49,6 +49,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
             }
         }
 
+        public bool IsValid { get { return _dataIsValid(); } }
+
         public ForSaleModel(bool isForSale=false, double askingPrice=0.0, double estimatedPrice=0.0)
         {
             _bookId = 0;
@@ -65,6 +67,23 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
         public int getBookId()
         {
             return _bookId;
+        }
+
+        private bool _dataIsValid()
+        {
+            bool dataIsValid = true;
+
+            if (_estimatedPrice < 0)
+            {
+                dataIsValid = false; ;
+            }
+
+            if (_askingPrice < 0)
+            {
+                dataIsValid = false; ;
+            }
+
+            return dataIsValid;
         }
     }
 }

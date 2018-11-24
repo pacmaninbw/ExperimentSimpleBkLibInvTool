@@ -163,7 +163,9 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Models\AuthorTableModel.cs" />
     <Compile Include="Models\BookInfoModel.cs" />
+    <Compile Include="Models\BookTableModel.cs" />
     <Compile Include="Models\CategoryTableModel.cs" />
     <Compile Include="Models\DataTableModel.cs" />
     <Compile Include="Models\DictionaryTableModel.cs" />
@@ -178,6 +180,9 @@
     <Compile Include="Models\PuchaseInfoModel.cs" />
     <Compile Include="Views\AddAuthorDlg.xaml.cs">
       <DependentUpon>AddAuthorDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddBookDlg.xaml.cs">
+      <DependentUpon>AddBookDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AuthorsTableView.xaml.cs">
       <DependentUpon>AuthorsTableView.xaml</DependentUpon>
@@ -207,6 +212,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Views\AddAuthorDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddBookDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
