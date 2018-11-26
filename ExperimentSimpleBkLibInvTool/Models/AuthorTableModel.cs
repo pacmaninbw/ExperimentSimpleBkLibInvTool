@@ -16,7 +16,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
         {
             _getTableStoredProcedureName = "getAllAuthorsData";
             _addItemStoredProcedureName = "addAuthor";
-            _firstParameterName = "categoryName";
             InitializeDataTable();
         }
 
@@ -56,10 +55,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
                         cmd.Parameters.AddWithValue("authorMiddleName", NewAuthor.MiddleName);
                         cmd.Parameters.AddWithValue("dob", NewAuthor.YearOfBirth);
                         cmd.Parameters.AddWithValue("dod", NewAuthor.YearOfDeath);
-                        cmd.Parameters.Add(new MySqlParameter(_secondParameterName, MySqlDbType.UInt32));
-                        cmd.Parameters[_secondParameterName].Direction = ParameterDirection.Output;
+                        cmd.Parameters.Add(new MySqlParameter(_lastParameterName, MySqlDbType.UInt32));
+                        cmd.Parameters[_lastParameterName].Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
-                        NewKey = (uint)cmd.Parameters[_secondParameterName].Value;
+                        NewKey = (uint)cmd.Parameters[_lastParameterName].Value;
                     }
                 }
                 catch (Exception ex)

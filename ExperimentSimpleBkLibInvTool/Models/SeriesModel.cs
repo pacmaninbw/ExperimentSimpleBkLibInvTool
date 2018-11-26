@@ -82,9 +82,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
     {
         public SeriesTableModel()
         {
-            _getTableStoredProcedureName = "getAllBookCategoriesWithKeys";
+            _getTableStoredProcedureName = "getAllSeriesData";
             _addItemStoredProcedureName = "addAuthorSeries";
-            _firstParameterName = "categoryName";
         }
 
         public DataTable Series
@@ -97,9 +96,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
 
         public bool AddSeries(ISeriesModel SeriesData)
         {
-            bool canInsertData = true;
-
-            canInsertData = SeriesData.IsValid;
+            bool canInsertData = SeriesData.IsValid;
 
             if (canInsertData) {
                 canInsertData = _dbAddSeries(SeriesData);

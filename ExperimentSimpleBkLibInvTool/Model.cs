@@ -11,6 +11,8 @@ using ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable;
 
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC
@@ -22,6 +24,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
         private FormatTableModel _formats;
         private BookTableModel _books;
         private AuthorTableModel _authors;
+        private StatusTableModel _statuses;
+        private ConditionsTableModel _conditions;
 
         public Model()
         {
@@ -30,6 +34,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
             _categories = new CategoryTableModel();
             _books = new BookTableModel();
             _authors = new AuthorTableModel();
+            _statuses = new StatusTableModel();
+            _conditions = new ConditionsTableModel();
         }
 
         public FormatTableModel FormatModel
@@ -69,6 +75,22 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
             get
             {
                 return _authors;
+            }
+        }
+
+        public StatusTableModel StatusTable
+        {
+            get
+            {
+                return _statuses;
+            }
+        }
+
+        public ConditionsTableModel ConditionsTable
+        {
+            get
+            {
+                return _conditions;
             }
         }
     }

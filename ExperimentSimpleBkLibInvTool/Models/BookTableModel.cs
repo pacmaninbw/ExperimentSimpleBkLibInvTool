@@ -23,7 +23,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         {
             _getTableStoredProcedureName = "getallbooks";
             _addItemStoredProcedureName = "addBookToLibrary";
-            _firstParameterName = "categoryName";
             InitializeDataTable();
         }
 

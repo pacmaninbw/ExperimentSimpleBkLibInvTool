@@ -52,7 +52,8 @@ namespace ExperimentSimpleBkLibInvTool
 
         private void Btn_StatusTable_Click(object sender, RoutedEventArgs e)
         {
-
+            StatusTableView statusTable = new StatusTableView();
+            statusTable.Show();
         }
 
         private void Btn_Exit_Click(object sender, RoutedEventArgs e)
@@ -68,7 +69,8 @@ namespace ExperimentSimpleBkLibInvTool
 
         private void Btn_ConditionsTable_Click(object sender, RoutedEventArgs e)
         {
-
+            ConditionsTableView conditionsTable = new ConditionsTableView();
+            conditionsTable.Show();
         }
 
         private void Btn_AddBook_Click(object sender, RoutedEventArgs e)
