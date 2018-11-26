@@ -27,7 +27,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void Btn_FormatsAddFormat_Click(object sender, RoutedEventArgs e)
         {
-            AddFormat addFormat = new AddFormat();
+            AddFormatDlg addFormat = new AddFormatDlg();
             addFormat.Show();
         }
     }

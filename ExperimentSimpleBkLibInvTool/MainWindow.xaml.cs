@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using ExperimentSimpleBkLibInvTool.Views;
 
 namespace ExperimentSimpleBkLibInvTool
@@ -81,13 +68,13 @@ namespace ExperimentSimpleBkLibInvTool
 
         private void Btn_AddCategory_Click(object sender, RoutedEventArgs e)
         {
-            AddCategory addCategory = new AddCategory();
+            AddCategoryDlg addCategory = new AddCategoryDlg();
             addCategory.Show();
         }
 
         private void Btn_AddFormat_Click(object sender, RoutedEventArgs e)
         {
-            AddFormat addFormat = new AddFormat();
+            AddFormatDlg addFormat = new AddFormatDlg();
             addFormat.Show();
         }
 
@@ -99,7 +86,7 @@ namespace ExperimentSimpleBkLibInvTool
 
         private void Btn_AddSeries_Click(object sender, RoutedEventArgs e)
         {
-            AddSeriesToAuthor addSeriesToAuthor = new AddSeriesToAuthor();
+            AddSeriesToAuthorDlg addSeriesToAuthor = new AddSeriesToAuthorDlg();
             addSeriesToAuthor.Show();
         }
     }

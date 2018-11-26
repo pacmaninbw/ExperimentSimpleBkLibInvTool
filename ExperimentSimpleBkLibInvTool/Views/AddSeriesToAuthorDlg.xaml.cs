@@ -1,27 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
+﻿using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
 
 namespace ExperimentSimpleBkLibInvTool.Views
 {
     /// <summary>
-    /// Interaction logic for AddSeriesToAuthor.xaml
+    /// Interaction logic for AddSeriesToAuthorDlg.xaml
     /// </summary>
-    public partial class AddSeriesToAuthor : Window
+    public partial class AddSeriesToAuthorDlg : Window
     {
-        public AddSeriesToAuthor()
+        public AddSeriesToAuthorDlg()
         {
             InitializeComponent();
         }

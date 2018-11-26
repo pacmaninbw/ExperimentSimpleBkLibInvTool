@@ -189,8 +189,8 @@
     <Compile Include="Views\AuthorsTableView.xaml.cs">
       <DependentUpon>AuthorsTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BooksTableGrid.xaml.cs">
-      <DependentUpon>BooksTableGrid.xaml</DependentUpon>
+    <Compile Include="Views\BooksTableView.xaml.cs">
+      <DependentUpon>BooksTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CategoriesTableView.xaml.cs">
       <DependentUpon>CategoriesTableView.xaml</DependentUpon>
@@ -198,8 +198,8 @@
     <Compile Include="Views\ConditionsTableView.xaml.cs">
       <DependentUpon>ConditionsTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FormatTable.xaml.cs">
-      <DependentUpon>FormatTable.xaml</DependentUpon>
+    <Compile Include="Views\FormatTableView.xaml.cs">
+      <DependentUpon>FormatTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SeriesTableView.xaml.cs">
       <DependentUpon>SeriesTableView.xaml</DependentUpon>
@@ -227,26 +227,26 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddCategory.xaml">
+    <Page Include="Views\AddCategoryDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Views\AddCategory.xaml.cs">
-      <DependentUpon>AddCategory.xaml</DependentUpon>
+    <Compile Include="Views\AddCategoryDlg.xaml.cs">
+      <DependentUpon>AddCategoryDlg.xaml</DependentUpon>
     </Compile>
-    <Page Include="Views\AddFormat.xaml">
+    <Page Include="Views\AddFormatDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddSeriesToAuthor.xaml">
+    <Page Include="Views\AddSeriesToAuthorDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Compile Include="Views\AddFormat.xaml.cs">
-      <DependentUpon>AddFormat.xaml</DependentUpon>
+    <Compile Include="Views\AddFormatDlg.xaml.cs">
+      <DependentUpon>AddFormatDlg.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AddSeriesToAuthor.xaml.cs">
-      <DependentUpon>AddSeriesToAuthor.xaml</DependentUpon>
+    <Compile Include="Views\AddSeriesToAuthorDlg.xaml.cs">
+      <DependentUpon>AddSeriesToAuthorDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthorModel.cs" />
     <Compile Include="Models\IAuthorModel.cs" />
@@ -274,7 +274,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\BooksTableGrid.xaml">
+    <Page Include="Views\BooksTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -286,7 +286,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\FormatTable.xaml">
+    <Page Include="Views\FormatTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
