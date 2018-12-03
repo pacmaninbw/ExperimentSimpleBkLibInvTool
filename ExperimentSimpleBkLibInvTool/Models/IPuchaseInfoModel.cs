@@ -8,7 +8,5 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
         double PaidPrice { get; set; }
         DateTime PurchaseDate { get; set; }
         string Vendor { get; set; }
-
-        int getBookId();
     }
 }

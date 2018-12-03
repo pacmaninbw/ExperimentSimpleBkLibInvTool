@@ -10,10 +10,11 @@ using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 {
-    public class BookInfoModel
+    public class BookInfoModel : DataTableItemBaseModel
     {
         private int _idBookInfo;
         private int _category;
@@ -66,7 +67,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public IForSaleModel ForSale
         {
-            get { return _forSale; }
+            get { return (IForSaleModel) _forSale; }
             set { _forSale = (ForSaleModel) value; }
         }
 
@@ -96,9 +97,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public int TitleId { get { return _titleKey; } }
 
-        public bool IsValid { get { return _dataIsValid(); } }
-
-        private bool _dataIsValid()
+        protected override bool _dataIsValid()
         {
             bool dataIsValid = true;
             bool seriesIsValid = true;

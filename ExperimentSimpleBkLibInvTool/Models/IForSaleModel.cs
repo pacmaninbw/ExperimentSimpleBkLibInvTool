@@ -7,7 +7,5 @@
         double EstimatedValue { get; set; }
 
         bool IsForSale { get; set; }
-
-        bool IsValid { get; }
     }
 }

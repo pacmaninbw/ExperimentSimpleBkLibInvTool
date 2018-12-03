@@ -8,7 +8,5 @@
         bool OutOfPrint { get; set; }
         int Printing { get; set; }
         string Publisher { get; set; }
-
-        bool IsValid { get; }
     }
 }

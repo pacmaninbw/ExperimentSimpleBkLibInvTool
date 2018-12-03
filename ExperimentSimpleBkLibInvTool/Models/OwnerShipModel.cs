@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
 {
-    public class OwnerShipModel : IOwnerShipModel
+    public class OwnerShipModel : DataTableItemBaseModel, IOwnerShipModel
     {
         private int _bookId;
         private bool _isOwned;
@@ -51,6 +47,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
         public int getBookId()
         {
             return _bookId;
+        }
+
+        protected override bool _dataIsValid()
+        {
+            return true;    // No required fields
         }
     }
 }

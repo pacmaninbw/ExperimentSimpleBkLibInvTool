@@ -59,6 +59,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
                 string errorMsg = "Database Error: NewKey returned value lest than 1: NewKey = " + NewKey.ToString();
                 MessageBox.Show(errorMsg);
             }
+            else
+            {
+                _tableWasUpdated = true;
+            }
 
             return NewKey;
         }

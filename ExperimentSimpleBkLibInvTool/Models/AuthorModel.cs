@@ -1,44 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using MySql.Data.MySqlClient;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
 {
-    public class AuthorModel : IAuthorModel
+    public class AuthorModel : DataTableItemBaseModel, IAuthorModel
     {
-        private string lastName;
-        private string firstName;
-        private string middleName;
-        private string yearOfBirth;
-        private string yearOfDeath;
         private bool errorWasReported;
 
-        public string FirstName { get { return firstName; } }
+        public string FirstName {
+            get { return GetParameterValue("First Name"); }
+            set { SetFirstName(value); }
+        }
 
-        public string MiddleName { get { return middleName; } }
+        public string MiddleName {
+            get { return GetParameterValue("Middle Name"); }
+            set { SetParameterValue("Middle Name", value); }
+        }
 
-        public string LastName { get { return lastName; } }
+        public string LastName {
+            get { return GetParameterValue("Last Name"); }
+            set { SetLastName(value); }
+        }
 
-        public string YearOfBirth { get { return yearOfBirth; } }
+        public string YearOfBirth {
+            get { return GetParameterValue("Year of Birth"); }
+            set { SetParameterValue("Year of Birth", value); }
+        }
 
-        public string YearOfDeath { get { return yearOfDeath; } }
-
-        public bool IsValid { get { return _isValidData(); } }
+        public string YearOfDeath {
+            get { return GetParameterValue("Year of Death"); }
+            set { SetParameterValue("Year of Death", value); }
+        }
 
         public AuthorModel()
         {
-            lastName = null;
-            firstName = null;
-            middleName = null;
-            yearOfBirth = null;
-            yearOfDeath = null;
             errorWasReported = false;
+            _addSqlCommandParameter("idAuthors", "idAuthors", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
+            _addSqlCommandParameter("Last Name", "LastName", "authorLastName", MySqlDbType.String, true, ParameterDirection.Input);
+            _addSqlCommandParameter("First Name", "FirstName", "authorFirstName", MySqlDbType.String, true, ParameterDirection.Input);
+            _addSqlCommandParameter("Middle Name", "MiddleName", "authorMiddleName", MySqlDbType.String, false, ParameterDirection.Input);
+            _addSqlCommandParameter("Year of Birth", "YearOfBirth", "dob", MySqlDbType.String, false, ParameterDirection.Input);
+            _addSqlCommandParameter("Year of Death", "YearOfDeath", "dod", MySqlDbType.String, false, ParameterDirection.Input);
+            _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
         }
 
-        public void SetFirstName(string textBoxInput)
+        private void SetFirstName(string textBoxInput)
         {
             if (textBoxInput == null || textBoxInput.Length < 1)
             {
@@ -48,16 +61,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             }
             else
             {
-                firstName = textBoxInput;
+                SetParameterValue("First Name", textBoxInput);
             }
         }
 
-        public void SetMiddleName(string textBoxInput)
-        {
-            middleName = textBoxInput;
-        }
-
-        public void SetLastName(string textBoxInput)
+        private void SetLastName(string textBoxInput)
         {
             if (textBoxInput == null || textBoxInput.Length < 1)
             {
@@ -67,32 +75,23 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             }
             else
             {
-                lastName = textBoxInput;
+                SetParameterValue("Last Name", textBoxInput);
             }
         }
 
-        public void SetYearOfBirth(string textBoxInput)
+        protected override bool _dataIsValid()
         {
-            yearOfBirth = textBoxInput;
-        }
+            bool isValid = _defaultIsValid();
 
-        public void SetYearOfDeath(string textBoxInput)
-        {
-            yearOfDeath = textBoxInput;
-        }
-
-        protected bool _isValidData()
-        {
-            bool isValid = true;
-
-            if (firstName == null || firstName.Length < 1)
+            if (isValid)
             {
-                isValid = false;
+                return isValid;
             }
 
-            if (lastName == null || lastName.Length < 1)
+            isValid = GetParameterIsValid("First Name");
+            if (isValid)
             {
-                isValid = false;
+                isValid = GetParameterIsValid("Last Name");
             }
 
             if (!isValid && !errorWasReported)

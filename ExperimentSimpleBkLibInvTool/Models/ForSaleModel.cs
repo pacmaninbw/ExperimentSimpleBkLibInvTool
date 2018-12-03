@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
 {
-    public class ForSaleModel : IForSaleModel
+    public class ForSaleModel : DataTableItemBaseModel, IForSaleModel
     {
         private int _bookId;
         private double _askingPrice;
@@ -49,8 +50,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
             }
         }
 
-        public bool IsValid { get { return _dataIsValid(); } }
-
         public ForSaleModel(bool isForSale=false, double askingPrice=0.0, double estimatedPrice=0.0)
         {
             _bookId = 0;
@@ -69,7 +68,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
             return _bookId;
         }
 
-        private bool _dataIsValid()
+        protected override bool _dataIsValid()
         {
             bool dataIsValid = true;
 

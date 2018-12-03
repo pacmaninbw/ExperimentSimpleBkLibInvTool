@@ -17,9 +17,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private void Btn_AddSeriesSave_Click(object sender, RoutedEventArgs e)
         {
             AuthorModel author = new AuthorModel();
-            author.SetFirstName(TxtBx_SeriesAuthorFirstName.Text);
-            author.SetLastName(TxtBx_SeriesAuthorMiddleName.Text);
-            author.SetMiddleName(TxtBx_SeriesAuthorLastName.Text);
+            author.FirstName = TxtBx_SeriesAuthorFirstName.Text;
+            author.LastName = TxtBx_SeriesAuthorMiddleName.Text;
+            author.MiddleName = TxtBx_SeriesAuthorLastName.Text;
 
             if (author.IsValid)
             {

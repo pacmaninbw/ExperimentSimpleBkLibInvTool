@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
 {
-    public class PublishInfoModel : IPublishInfoModel
+    public class PublishInfoModel : DataTableItemBaseModel, IPublishInfoModel
     {
         private int _bookId;
         private string _isbnNumber;
@@ -89,8 +90,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
             }
         }
 
-        public bool IsValid { get { return _dataIsValid(); } }
-
         public PublishInfoModel()
         {
             _bookId = 0;
@@ -123,7 +122,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
             _bookId = BookId;
         }
 
-        private bool _dataIsValid()
+        protected override bool _dataIsValid()
         {
             bool dataIsValid = true;
             bool hasStringDataError = false;

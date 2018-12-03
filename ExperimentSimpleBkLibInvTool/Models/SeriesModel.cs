@@ -6,12 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
 {
-    public class SeriesModel : ISeriesModel
+    public class SeriesModel : DataTableItemBaseModel, ISeriesModel
     {
         private string title;
         private int authorId;
@@ -20,8 +21,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
         public AuthorModel Author { get { return _author; }  }
 
         public string SeriesTitle { get { return title; } }
-
-        public bool IsValid { get { return _dataIsValid();  } }
 
         public SeriesModel()
         {
@@ -57,7 +56,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             authorId = AuthorId;
         }
 
-        private bool _dataIsValid()
+        protected override bool _dataIsValid()
         {
             bool dataIsValid = true;
             if (_author == null)
@@ -94,18 +93,19 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             }
         }
 
-        public bool AddSeries(ISeriesModel SeriesData)
+        public bool AddSeries(ISeriesModel iSeriesData)
         {
-            bool canInsertData = SeriesData.IsValid;
+            SeriesModel seriesModel = (SeriesModel)iSeriesData;
+            bool canInsertData = seriesModel.IsValid;
 
             if (canInsertData) {
-                canInsertData = _dbAddSeries(SeriesData);
+                canInsertData = _dbAddSeries(seriesModel);
             }
 
             return canInsertData;
         }
 
-        private bool _dbAddSeries(ISeriesModel SeriesData)
+        private bool _dbAddSeries(SeriesModel SeriesData)
         {
             bool AddSeriesSuccess = true;
             using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))

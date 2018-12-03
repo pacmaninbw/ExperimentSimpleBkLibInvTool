@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
 
@@ -28,25 +29,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public bool AddBook(BookInfoModel NewBook)
         {
-            bool canAddBookToLibrary = true;
-
-            canAddBookToLibrary = InputIsValid(NewBook);
-            if (canAddBookToLibrary)
-            {
-                canAddBookToLibrary = _dbAddBookToLibrary(NewBook);
-            }
-
-            return canAddBookToLibrary;
-        }
-
-        // Make sure all required data is valid
-        private bool InputIsValid(BookInfoModel NewBook)
-        {
-            bool inputIsValid = true;
-
-            inputIsValid = NewBook.IsValid;
-
-            return inputIsValid;
+            return addItem(NewBook);
         }
 
         private bool _dbAddBookToLibrary(BookInfoModel NewBook)

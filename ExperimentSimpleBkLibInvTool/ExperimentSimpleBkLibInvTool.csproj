@@ -168,17 +168,21 @@
     <Compile Include="Models\BookTableModel.cs" />
     <Compile Include="Models\CategoryTableModel.cs" />
     <Compile Include="Models\ConditionsTableModel.cs" />
+    <Compile Include="Models\DataTableItemBaseModel.cs" />
     <Compile Include="Models\DataTableModel.cs" />
     <Compile Include="Models\DictionaryTableModel.cs" />
     <Compile Include="Models\FormatsTableModel.cs" />
     <Compile Include="Models\ForSaleModel.cs" />
+    <Compile Include="Models\IAuthorModel.cs" />
     <Compile Include="Models\IForSaleModel.cs" />
     <Compile Include="Models\IOwnerShipModel.cs" />
     <Compile Include="Models\IPublishInfoModel.cs" />
     <Compile Include="Models\IPuchaseInfoModel.cs" />
+    <Compile Include="Models\ISeriesModel1.cs" />
     <Compile Include="Models\OwnerShipModel.cs" />
     <Compile Include="Models\PublishInfoModel.cs" />
     <Compile Include="Models\PuchaseInfoModel.cs" />
+    <Compile Include="Models\SqlCmdParameter.cs" />
     <Compile Include="Models\StatusTableModel.cs" />
     <Compile Include="Views\AddAuthorDlg.xaml.cs">
       <DependentUpon>AddAuthorDlg.xaml</DependentUpon>
@@ -249,9 +253,7 @@
       <DependentUpon>AddSeriesToAuthorDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\AuthorModel.cs" />
-    <Compile Include="Models\IAuthorModel.cs" />
     <Compile Include="Model.cs" />
-    <Compile Include="Models\ISeriesModel.cs" />
     <Compile Include="Models\SeriesModel.cs" />
     <Compile Include="pacswlibinvtool\Authorstab.cs" />
     <Compile Include="pacswlibinvtool\Bkconditions.cs" />

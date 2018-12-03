@@ -16,11 +16,11 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private void Btn_AddAuthorSave_Click(object sender, RoutedEventArgs e)
         {
             AuthorModel newAuthor = new AuthorModel();
-            newAuthor.SetFirstName(TxtBx_AuthorFirstName.Text);
-            newAuthor.SetLastName(TxtBx_AuthorLastName.Text);
-            newAuthor.SetMiddleName(TxtBx_AuthorMiddleName.Text);
-            newAuthor.SetYearOfBirth(TxtBx_AuthorYearOfBirth.Text);
-            newAuthor.SetYearOfDeath(TxtBx_AuthorYearOfDeath.Text);
+            newAuthor.FirstName = TxtBx_AuthorFirstName.Text;
+            newAuthor.LastName = TxtBx_AuthorLastName.Text;
+            newAuthor.MiddleName = TxtBx_AuthorMiddleName.Text;
+            newAuthor.YearOfBirth = TxtBx_AuthorYearOfBirth.Text;
+            newAuthor.YearOfDeath = TxtBx_AuthorYearOfDeath.Text;
 
             if (newAuthor.IsValid)
             {

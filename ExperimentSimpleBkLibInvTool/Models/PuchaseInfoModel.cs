@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
 {
-    public class PuchaseInfoModel : IPuchaseInfoModel
+    public class PuchaseInfoModel : DataTableItemBaseModel, IPuchaseInfoModel
     {
         private int _bookId;
         private double _listPrice;
@@ -63,8 +64,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
             }
         }
 
-        public bool IsValid { get { return _dataIsValid(); } }
-
         public PuchaseInfoModel()
         {
             _bookId = 0;
@@ -93,7 +92,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
             _bookId = BookId;
         }
 
-        private bool _dataIsValid()
+        protected override bool _dataIsValid()
         {
             bool dataIsValid = true;
 
