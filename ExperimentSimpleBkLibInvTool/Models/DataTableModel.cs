@@ -11,7 +11,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
 {
     public class CDataTableModel
     {
-        private DataTable _dataTable;
+        protected DataTable _dataTable;
 
         protected string _dbConnectionString;
         protected string _getTableStoredProcedureName;

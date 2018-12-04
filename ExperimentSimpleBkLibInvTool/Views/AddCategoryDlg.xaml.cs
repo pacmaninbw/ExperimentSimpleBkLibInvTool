@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.Category;
 
 namespace ExperimentSimpleBkLibInvTool.Views
 {
@@ -14,8 +15,16 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void Btn_AddCategorySave_Click(object sender, RoutedEventArgs e)
         {
-            ((App)Application.Current).Model.CategoryTable.AddCategory(TxtBx_CategorTitle.Text);
-            Close();
+            if (string.IsNullOrEmpty(TxtBx_CategorTitle.Text))
+            {
+                MessageBox.Show("Please enter a category name before clicking the Save button.");
+            }
+            else
+            {
+                CategoryModel category = new CategoryModel(TxtBx_CategorTitle.Text);
+                ((App)Application.Current).Model.CategoryTable.AddCategory(category);
+                Close();
+            }
         }
     }
 }

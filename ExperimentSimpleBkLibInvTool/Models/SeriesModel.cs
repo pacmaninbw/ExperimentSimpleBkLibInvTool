@@ -66,7 +66,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             else
             {
                 dataIsValid = _author.IsValid;
-                if (title == null || title.Length < 1)
+                if (string.IsNullOrEmpty(title))
                 {
                     string errorMsg = "Add Series error: Missing title of series";
                     MessageBox.Show(errorMsg);

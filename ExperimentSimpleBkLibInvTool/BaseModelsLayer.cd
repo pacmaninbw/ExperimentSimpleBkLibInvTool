@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel.CDataTableModel">
+    <Position X="1" Y="0.5" Width="3.75" />
+    <TypeIdentifier>
+      <HashCode>AAAGAYAAQCAEBAAEAAKAAAABAAAAEgAAAAgAAAAAAQA=</HashCode>
+      <FileName>Models\DataTableModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel.DataTableItemBaseModel">
+    <Position X="6" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgCAAAAAgAAAAkgigCAACAAAAAAAEAAAAAAAAAEgQ=</HashCode>
+      <FileName>Models\DataTableItemBaseModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel.SqlCmdParameter">
+    <Position X="10.75" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AJBAAAQAEAAAAgUBCCgAAAAgEAIAEoAAAQAoAAAgEAA=</HashCode>
+      <FileName>Models\SqlCmdParameter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

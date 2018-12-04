@@ -5,6 +5,8 @@ using System.Linq;
 using System.Windows;
 using MySql.Data.MySqlClient;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
 {
@@ -14,7 +16,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
  
         private Dictionary<uint, string> _keyToTitle;
         private Dictionary<string, uint> _titleToKey;
-        private DataTable _dataTable;
 
         public DictionaryTableModel()
         {
@@ -44,12 +45,34 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
             }
         }
 
+        protected void AddItemToDicionary(DataTableItemBaseModel NewItem)
+        {
+            bool AddedSuccessfully = addItem(NewItem);
+
+            if (AddedSuccessfully && _newKeyValue > 0)
+            {
+                _keyToTitle.Add(_newKeyValue, NewItem.GetParameterValue("Name"));
+                _titleToKey.Add(NewItem.GetParameterValue("Name"), _newKeyValue);
+            }
+            else
+            {
+                string errorMsg = "Database Error: Failed to add item";
+                MessageBox.Show(errorMsg);
+            }
+        }
+
         protected void InitializeDictionaries()
         {
-            _dataTable = getDataTable();
+            if (_dataTable == null)
+            {
+                InitializeDataTable();
+                _dataTable = DataTable;
+            }
+
             _titleToKey = _dataTable.AsEnumerable().ToDictionary(row => row.Field<string>(0), row => row.Field<uint>(1));
             _keyToTitle = _dataTable.AsEnumerable().ToDictionary(row => row.Field<uint>(1), row => row.Field<string>(0));
         }
+
         protected uint AddItemToDataTable(string ItemTitleValue)
         {
             uint NewKey = _dbAddItem(ItemTitleValue);
@@ -85,7 +108,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
                         cmd.Parameters.Add(new MySqlParameter(_lastParameterName, MySqlDbType.UInt32));
                         cmd.Parameters[_lastParameterName].Direction = ParameterDirection.Output;
                         cmd.ExecuteNonQuery();
-                        NewKey = (uint)cmd.Parameters[_lastParameterName].Value;
+                        _newKeyValue = (uint)cmd.Parameters[_lastParameterName].Value;
+                        NewKey = _newKeyValue;
                     }
                 }
                 catch (Exception ex)
@@ -97,6 +121,5 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
 
             return NewKey;
         }
-
     }
 }

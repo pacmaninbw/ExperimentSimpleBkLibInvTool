@@ -15,6 +15,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
             _getTableStoredProcedureName = "getAllBookCategoriesWithKeys";
             _addItemStoredProcedureName = "addCategory";
             _firstParameterName = "categoryName";
+            _lastParameterName = "primaryKey";
 
             InitializeDictionaries();
         }
@@ -29,9 +30,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
             return NameToKey(CategoryTitle);
         }
 
-        public void AddCategory(string CategoryTitle)
+        public void AddCategory(CategoryModel Category)
         {
-            AddItemToDicionary(CategoryTitle);
+            AddItemToDicionary(Category);
         }
     }
 }

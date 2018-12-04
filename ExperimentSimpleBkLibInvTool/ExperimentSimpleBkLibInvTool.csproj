@@ -166,6 +166,7 @@
     <Compile Include="Models\AuthorTableModel.cs" />
     <Compile Include="Models\BookInfoModel.cs" />
     <Compile Include="Models\BookTableModel.cs" />
+    <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CategoryTableModel.cs" />
     <Compile Include="Models\ConditionsTableModel.cs" />
     <Compile Include="Models\DataTableItemBaseModel.cs" />
@@ -319,6 +320,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="BaseModelsLayer.cd" />
+    <None Include="ModelsClassDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
