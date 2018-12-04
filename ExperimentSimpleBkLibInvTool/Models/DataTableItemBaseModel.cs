@@ -188,6 +188,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
                 return;
             }
 
+            if (string.IsNullOrEmpty(SBParamName))
+            {
+                string eMsg = "Programmer error: SBParamName is null or empty in _addSqlCommandParameter";
+                MessageBox.Show(eMsg);
+                return;
+            }
+
             SqlCmdParameter NewParameter = new SqlCmdParameter(PublicName, DataBaseColumnName, SBParamName, Type, IsRequired, Direction, SkipInsert);
             _parameterIndexByPublicName.Add(PublicName, _sqlCmdParameters.Count);
             _parameterIndexByDatabaseTableName.Add(DataBaseColumnName, _sqlCmdParameters.Count);

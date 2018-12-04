@@ -10,7 +10,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
         {
             _getTableStoredProcedureName = "getAllBookFormatsWithKeys";
             _addItemStoredProcedureName = "addFormat";
-            _firstParameterName = "bookFormatStr";
+            _lastParameterName = "primaryKey";
 
             InitializeDictionaries();
         }
@@ -19,6 +19,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
         {
             get { return DataTable; }
         }
+
         public string FormatTitle(uint Key)
         {
             return KeyToName(Key);
@@ -29,9 +30,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
             return NameToKey(FormatTitle);
         }
 
-        public void AddFormat(string FormatTitle)
+        public void AddFormat(FormatModel Format)
         {
-            AddItemToDicionary(FormatTitle);
+            AddItemToDicionary(Format);
         }
     }
 }

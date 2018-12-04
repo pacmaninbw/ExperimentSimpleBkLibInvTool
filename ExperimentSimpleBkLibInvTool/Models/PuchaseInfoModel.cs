@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 
@@ -18,50 +14,26 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
 
         public double ListPrice
         {
-            get
-            {
-                return _listPrice;
-            }
-            set
-            {
-                _listPrice = value;
-            }
+            get { return _listPrice; }
+            set { _listPrice = value; }
         }
 
         public double PaidPrice
         {
-            get
-            {
-                return _paidPrice;
-            }
-            set
-            {
-                _paidPrice = value;
-            }
+            get {  return _paidPrice; }
+            set { _paidPrice = value; }
         }
 
         public string Vendor
         {
-            get
-            {
-                return _vendor;
-            }
-            set
-            {
-                _vendor = value;
-            }
+            get { return _vendor; }
+            set { _vendor = value; }
         }
 
         public DateTime PurchaseDate
         {
-            get
-            {
-                return _datePurchased;
-            }
-            set
-            {
-                _datePurchased = value;
-            }
+            get { return _datePurchased; }
+            set { _datePurchased = value; }
         }
 
         public PuchaseInfoModel()

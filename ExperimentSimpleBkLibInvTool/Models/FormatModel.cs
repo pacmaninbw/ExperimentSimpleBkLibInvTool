@@ -2,22 +2,23 @@
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 using MySql.Data.MySqlClient;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
+
+namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
 {
-    public class CategoryModel : DataTableItemBaseModel
+    public class FormatModel : DataTableItemBaseModel
     {
-        public CategoryModel()
+        public FormatModel()
         {
             InitParametersList();
         }
 
-        public CategoryModel(string CategoryName)
+        public FormatModel(string FormatName)
         {
             InitParametersList();
-            SetParameterValue("Name", CategoryName);
+            SetParameterValue("Name", FormatName);
         }
 
-        public string Category
+        public string Format
         {
             get { return GetParameterValue("Name"); }
             set { SetParameterValue("Name", value); }
@@ -32,8 +33,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
 
         private void InitParametersList()
         {
-            _addSqlCommandParameter("idBookCategories", "idBookCategories", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
-            _addSqlCommandParameter("Name", "CategoryName", "categoryName", MySqlDbType.String, true, ParameterDirection.Input);
+            _addSqlCommandParameter("idFormat", "idFormat", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
+            _addSqlCommandParameter("Name", "FormatName", "bookFormatStr", MySqlDbType.String, true, ParameterDirection.Input);
             _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
         }
     }

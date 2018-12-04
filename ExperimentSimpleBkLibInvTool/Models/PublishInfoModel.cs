@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
@@ -20,74 +15,39 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
 
         public string ISBNumber
         {
-            get
-            {
-                return _isbnNumber;
-            }
-            set
-            {
-                _isbnNumber = value;
-            }
+            get { return _isbnNumber; }
+            set { _isbnNumber = value; }
         }
 
         public string CopyRight
         {
-            get
-            {
-                return _copyRight;
-            }
-            set
-            {
-                _copyRight = value;
-            }
+            get { return _copyRight; }
+            set { _copyRight = value; }
         }
 
         public string Publisher
         {
-            get
-            {
-                return _publisher;
-            }
-            set
-            {
-                _publisher = value;
-            }
+            get { return _publisher; }
+            set { _publisher = value; }
         }
 
         public int Printing
         {
-            get
-            {
-                return _printing;
-            }
-            set
-            {
-                _printing = value;
-            }
+            get { return _printing; }
+            set { _printing = value; }
         }
 
         public int Edition
         {
-            get
-            {
-                return _edition;
-            }
+            get { return _edition; }
             set
-            {
-                _edition = value;
-            }
+            { _edition = value; }
         }
 
         public bool OutOfPrint
         {
-            get
-            {
-                return _outOfPrint;
-            }
-            set
-            {
-                _outOfPrint = value;
-            }
+            get { return _outOfPrint; }
+            set { _outOfPrint = value; }
         }
 
         public PublishInfoModel()

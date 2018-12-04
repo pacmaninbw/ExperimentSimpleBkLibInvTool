@@ -10,26 +10,14 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
 
         public bool IsOwned
         {
-            get
-            {
-                return _isOwned;
-            }
-            set
-            {
-                _isOwned = value;
-            }
+            get { return _isOwned; }
+            set { _isOwned = value; }
         }
 
         public bool IsWishListed
         {
-            get
-            {
-                return _isWishListed;
-            }
-            set
-            {
-                _isWishListed = value;
-            }
+            get  { return _isWishListed; }
+            set { _isWishListed = value; }
         }
 
         public OwnerShipModel(bool isOwned=true, bool isWishListed=false)

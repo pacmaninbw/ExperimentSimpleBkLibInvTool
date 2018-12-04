@@ -172,6 +172,7 @@
     <Compile Include="Models\DataTableItemBaseModel.cs" />
     <Compile Include="Models\DataTableModel.cs" />
     <Compile Include="Models\DictionaryTableModel.cs" />
+    <Compile Include="Models\FormatModel.cs" />
     <Compile Include="Models\FormatsTableModel.cs" />
     <Compile Include="Models\ForSaleModel.cs" />
     <Compile Include="Models\IAuthorModel.cs" />
