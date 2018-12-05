@@ -32,7 +32,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
 
         private void InitParametersList()
         {
-            _addSqlCommandParameter("idBookCategories", "idBookCategories", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
+            _addSqlCommandParameter("ID", "idBookCategories", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
             _addSqlCommandParameter("Name", "CategoryName", "categoryName", MySqlDbType.String, true, ParameterDirection.Input);
             _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
         }

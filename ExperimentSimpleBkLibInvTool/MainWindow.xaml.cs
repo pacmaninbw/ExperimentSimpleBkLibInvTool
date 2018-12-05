@@ -86,8 +86,8 @@ namespace ExperimentSimpleBkLibInvTool
 
         private void Btn_AddSeries_Click(object sender, RoutedEventArgs e)
         {
-            AddSeriesToAuthorDlg addSeriesToAuthor = new AddSeriesToAuthorDlg();
-            addSeriesToAuthor.Show();
+            SelectAuthorDlg selectAuthor = new SelectAuthorDlg();
+            selectAuthor.Show();
         }
     }
 }

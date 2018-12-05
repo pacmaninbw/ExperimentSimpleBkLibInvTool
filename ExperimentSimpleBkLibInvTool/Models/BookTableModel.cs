@@ -47,7 +47,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
                         cmd.CommandText = _addItemStoredProcedureName;
                         cmd.Parameters.AddWithValue("authorFirst", NewBook.AuthorInfo.FirstName);
                         cmd.Parameters.AddWithValue("authorLast", NewBook.AuthorInfo.LastName);
-                        cmd.Parameters.AddWithValue("seriesTitle", NewBook.SeriesInfo.SeriesTitle);
+                        cmd.Parameters.AddWithValue("seriesTitle", NewBook.SeriesInfo.Title);
                         cmd.ExecuteNonQuery();
                     }
                 }

@@ -180,7 +180,7 @@
     <Compile Include="Models\IOwnerShipModel.cs" />
     <Compile Include="Models\IPublishInfoModel.cs" />
     <Compile Include="Models\IPuchaseInfoModel.cs" />
-    <Compile Include="Models\ISeriesModel1.cs" />
+    <Compile Include="Models\ISeriesModel.cs" />
     <Compile Include="Models\OwnerShipModel.cs" />
     <Compile Include="Models\PublishInfoModel.cs" />
     <Compile Include="Models\PuchaseInfoModel.cs" />
@@ -206,6 +206,9 @@
     </Compile>
     <Compile Include="Views\FormatTableView.xaml.cs">
       <DependentUpon>FormatTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectAuthorDlg.xaml.cs">
+      <DependentUpon>SelectAuthorDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SeriesTableView.xaml.cs">
       <DependentUpon>SeriesTableView.xaml</DependentUpon>
@@ -257,6 +260,7 @@
     <Compile Include="Models\AuthorModel.cs" />
     <Compile Include="Model.cs" />
     <Compile Include="Models\SeriesModel.cs" />
+    <Compile Include="Models\SeriesTableModel.cs" />
     <Compile Include="pacswlibinvtool\Authorstab.cs" />
     <Compile Include="pacswlibinvtool\Bkconditions.cs" />
     <Compile Include="pacswlibinvtool\Bkstatuses.cs" />
@@ -294,6 +298,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\SelectAuthorDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\SeriesTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -322,7 +330,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="BaseModelsLayer.cd" />
-    <None Include="ModelsClassDiagram.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

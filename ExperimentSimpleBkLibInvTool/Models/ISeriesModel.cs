@@ -4,12 +4,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
 {
     public interface ISeriesModel
     {
-        AuthorModel Author { get; }
+        AuthorModel Author { get; set; }
 
-        string SeriesTitle { get; }
+        uint AuthorId { get; }
 
-        void SetAuthor(AuthorModel author);
-
-        void SetTitle(string seriesTitle);
+        string Title { get; set; }
     }
 }

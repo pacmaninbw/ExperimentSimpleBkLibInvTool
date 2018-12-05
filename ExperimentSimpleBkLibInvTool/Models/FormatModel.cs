@@ -33,7 +33,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
 
         private void InitParametersList()
         {
-            _addSqlCommandParameter("idFormat", "idFormat", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
+            _addSqlCommandParameter("ID", "idFormat", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
             _addSqlCommandParameter("Name", "FormatName", "bookFormatStr", MySqlDbType.String, true, ParameterDirection.Input);
             _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
         }

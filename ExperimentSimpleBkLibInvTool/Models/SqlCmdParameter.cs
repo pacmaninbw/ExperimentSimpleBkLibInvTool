@@ -115,6 +115,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             set { SetValue(value); }
         }
 
+        public uint KeyValue
+        {
+            get { return _valueKey; }
+            set { _valueKey = value; }
+        }
+
         public MySqlDbType Type
         {
             get { return _type; }

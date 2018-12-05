@@ -1,55 +1,55 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
 {
     public class SeriesModel : DataTableItemBaseModel, ISeriesModel
     {
-        private string title;
-        private int authorId;
         private AuthorModel _author;
+        private uint _authorId;
 
-        public AuthorModel Author { get { return _author; }  }
+        public AuthorModel Author {
+            get { return _author; }
+            set {
+                _author = value;
+                _authorId = _author.ID;
+                SetParameterValue("First Name", _author.FirstName);
+                SetParameterValue("Last Name", _author.LastName);
+            }
+        }
 
-        public string SeriesTitle { get { return title; } }
+        public string Title {
+            get { return GetParameterValue("Series Title"); }
+            set { SetParameterValue("Series Title", value); }
+        }
+
+        public uint AuthorId { get { return _authorId; } }
 
         public SeriesModel()
         {
-            authorId = 0;
-            title = null;
+            InitializeParameters();
             _author = null;
+            _authorId = 0;
         }
 
         public SeriesModel(AuthorModel author)
         {
-            authorId = 0;
+            InitializeParameters();
             _author = author;
-            title = null;
+            _authorId = _author.ID;
+            SetParameterValue("First Name", _author.FirstName);
+            SetParameterValue("Last Name", _author.LastName);
         }
 
-        public void SetAuthor(AuthorModel author)
+        private void InitializeParameters()
         {
-            _author = author;
-        }
-
-        public void  SetTitle(string seriesTitle)
-        {
-            title = seriesTitle;
-        }
-
-        public int getAuthorId()
-        {
-            return authorId;
-        }
-
-        public void setAuthorId(int AuthorId)
-        {
-            authorId = AuthorId;
+            _addSqlCommandParameter("ID", "idSeries", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
+            _addSqlCommandParameter("First Name", "FirstName", "authorFirst", MySqlDbType.String, true, ParameterDirection.Input);
+            _addSqlCommandParameter("Last Name", "LastName", "authorLast", MySqlDbType.String, true, ParameterDirection.Input);
+            _addSqlCommandParameter("Series Title", "SeriesName", "seriesTitle", MySqlDbType.String, true, ParameterDirection.Input);
         }
 
         protected override bool _dataIsValid()
@@ -62,72 +62,14 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             else
             {
                 dataIsValid = _author.IsValid;
-                if (string.IsNullOrEmpty(title))
+                if (!GetParameterIsValid("Series Title"))
                 {
-                    string errorMsg = "Add Series error: Missing title of series";
+                    string errorMsg = "Add Series error: Missing title of series.";
                     MessageBox.Show(errorMsg);
                     dataIsValid = false;
                 }
             }
             return dataIsValid;
-        }
-    }
-
-    public class SeriesTableModel : CDataTableModel
-    {
-        public SeriesTableModel()
-        {
-            _getTableStoredProcedureName = "getAllSeriesData";
-            _addItemStoredProcedureName = "addAuthorSeries";
-        }
-
-        public DataTable Series
-        {
-            get
-            {
-                return DataTable;
-            }
-        }
-
-        public bool AddSeries(ISeriesModel iSeriesData)
-        {
-            SeriesModel seriesModel = (SeriesModel)iSeriesData;
-            bool canInsertData = seriesModel.IsValid;
-
-            if (canInsertData) {
-                canInsertData = _dbAddSeries(seriesModel);
-            }
-
-            return canInsertData;
-        }
-
-        private bool _dbAddSeries(SeriesModel SeriesData)
-        {
-            bool AddSeriesSuccess = true;
-            using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
-            {
-                try
-                {
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand())
-                    {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = _addItemStoredProcedureName;
-                        cmd.Parameters.AddWithValue("authorFirst", SeriesData.Author.FirstName);
-                        cmd.Parameters.AddWithValue("authorLast", SeriesData.Author.LastName);
-                        cmd.Parameters.AddWithValue("seriesTitle", SeriesData.SeriesTitle);
-                        cmd.ExecuteNonQuery();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    string errorMsg = "Database Error: " + ex.Message;
-                    MessageBox.Show(errorMsg);
-                    AddSeriesSuccess = false;
-                }
-            }
-            return AddSeriesSuccess;
         }
     }
 }

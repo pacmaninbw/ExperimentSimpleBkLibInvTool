@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
@@ -17,9 +18,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
          * indexes into the command parameters list. To maintain good performance the
          * dictionaries are used rather than using a find in the list.
          */
-        protected List<SqlCmdParameter> _sqlCmdParameters;
-        protected Dictionary<string, int> _parameterIndexByPublicName;
-        protected Dictionary<string, int> _parameterIndexByDatabaseTableName;
+        private List<SqlCmdParameter> _sqlCmdParameters;
+        private Dictionary<string, int> _parameterIndexByPublicName;
+        private Dictionary<string, int> _parameterIndexByDatabaseTableName;
 
         public bool IsValid { get { return _dataIsValid(); } }
 
@@ -30,10 +31,15 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             _parameterIndexByDatabaseTableName = new Dictionary<string, int>();
         }
 
-        public bool AddParameterToCommand(MySqlCommand cmd, string DBParameterName)
+        /*
+         * Sometimes the number of parameters in the stored procedure count doesn't
+         * match the nummber of columns in the table. This function can be overriden
+         * in those cases. Two examples of this are the Series and Books.
+         */
+        public virtual bool AddParameterToCommand(MySqlCommand cmd, string ParameterName)
         {
             bool success = true;
-            int tableIndex = getParameterIndexFromDBColumn(DBParameterName);
+            int tableIndex = getParameterIndex(ParameterName);
             if (tableIndex >= 0)
             {
                 MySqlParameterCollection parameters = cmd.Parameters;
@@ -46,10 +52,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             return success;
         }
 
-        public ParameterDirection GetParameterDirection(string DBParameterName)
+        public ParameterDirection GetParameterDirection(string ParameterName)
         {
             ParameterDirection Direction = ParameterDirection.Input;
-            int tableIndex = getParameterIndexFromDBColumn(DBParameterName);
+            int tableIndex = getParameterIndex(ParameterName);
             if (tableIndex >= 0)
             {
                 Direction = _sqlCmdParameters[tableIndex].Direction;
@@ -57,10 +63,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             return Direction;
         }
 
-        public MySqlDbType GetParameterType(string DBParameterName)
+        public MySqlDbType GetParameterType(string ParameterName)
         {
             MySqlDbType Type = MySqlDbType.String;
-            int tableIndex = getParameterIndexFromDBColumn(DBParameterName);
+            int tableIndex = getParameterIndex(ParameterName);
             if (tableIndex >= 0)
             {
                 Type = _sqlCmdParameters[tableIndex].Type;
@@ -68,20 +74,20 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             return Type;
         }
 
-        public void SetParameterValue(string UserColumnName, string value)
+        public void SetParameterValue(string ParameterName, string value)
         {
-            int tableIndex = getParameterIndexFromPublicName(UserColumnName);
+            int tableIndex = getParameterIndex(ParameterName);
             if (tableIndex >= 0)
             {
                 _sqlCmdParameters[tableIndex].Value = value;
             }
         }
 
-        public string GetParameterValue(string UserColumnName)
+        public string GetParameterValue(string ParameterName)
         {
             string ParameterValue = "Failure";
 
-            int tableIndex = getParameterIndexFromPublicName(UserColumnName);
+            int tableIndex = getParameterIndex(ParameterName);
             if (tableIndex >= 0)
             {
                 ParameterValue = _sqlCmdParameters[tableIndex].Value;
@@ -90,20 +96,65 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             return ParameterValue;
         }
 
-        public void SetParameterValue(string UserColumnName, bool value)
+        public void SetParameterValue(string ParameterName, uint value)
         {
-            int tableIndex = getParameterIndexFromPublicName(UserColumnName);
+            int tableIndex = getParameterIndex(ParameterName);
+            if (tableIndex >= 0)
+            {
+                _sqlCmdParameters[tableIndex].Value = value.ToString();
+                _sqlCmdParameters[tableIndex].KeyValue = value;
+            }
+        }
+
+        public uint GetParameterKValue(string ParameterName)
+        {
+            uint ParameterValue = 0;
+
+            int tableIndex = getParameterIndex(ParameterName);
+            if (tableIndex >= 0)
+            {
+                ParameterValue = _sqlCmdParameters[tableIndex].KeyValue;
+            }
+
+            return ParameterValue;
+        }
+
+        public void SetParameterValue(string ParameterName, int value)
+        {
+            int tableIndex = getParameterIndex(ParameterName);
+            if (tableIndex >= 0)
+            {
+                _sqlCmdParameters[tableIndex].Value = value.ToString();
+            }
+        }
+
+        public int GetParameterIValue(string ParameterName)
+        {
+            int ParameterValue = -1;
+
+            int tableIndex = getParameterIndex(ParameterName);
+            if (tableIndex >= 0)
+            {
+                ParameterValue = Convert.ToInt32(_sqlCmdParameters[tableIndex].Value);
+            }
+
+            return ParameterValue;
+        }
+
+        public void SetParameterValue(string ParameterName, bool value)
+        {
+            int tableIndex = getParameterIndex(ParameterName);
             if (tableIndex >= 0)
             {
                 _sqlCmdParameters[tableIndex].BValue = value;
             }
         }
 
-        public bool GetParameterBValue(string UserColumnName)
+        public bool GetParameterBValue(string ParameterName)
         {
             bool ParameterValue = false;
 
-            int tableIndex = getParameterIndexFromPublicName(UserColumnName);
+            int tableIndex = getParameterIndex(ParameterName);
             if (tableIndex >= 0)
             {
                 ParameterValue = _sqlCmdParameters[tableIndex].BValue;
@@ -112,11 +163,33 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             return ParameterValue;
         }
 
-        public bool GetParameterIsValid(string UserColumnName)
+        public uint GetKeyValue()
+        {
+            uint KeyValue = 0;
+
+            int tableIndex = getParameterIndex("ID");
+            if (tableIndex >= 0)
+            {
+                KeyValue = _sqlCmdParameters[tableIndex].KeyValue;
+            }
+
+            return KeyValue;
+        }
+
+        public void SetKeyValue(uint KeyValue)
+        {
+            int tableIndex = getParameterIndex("ID");
+            if (tableIndex >= 0)
+            {
+                _sqlCmdParameters[tableIndex].KeyValue = KeyValue;
+            }
+        }
+
+        public bool GetParameterIsValid(string ParameterName)
         {
             bool ParameterIsValid = false;
 
-            int tableIndex = getParameterIndexFromPublicName(UserColumnName);
+            int tableIndex = getParameterIndex(ParameterName);
             if (tableIndex >= 0)
             {
                 ParameterIsValid = _sqlCmdParameters[tableIndex].IsValid;
@@ -125,11 +198,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             return ParameterIsValid;
         }
 
-        public bool GetParameterIsRequired(string UserColumnName)
+        public bool GetParameterIsRequired(string ParameterName)
         {
             bool ParameterIsRequired = false;
 
-            int tableIndex = getParameterIndexFromPublicName(UserColumnName);
+            int tableIndex = getParameterIndex(ParameterName);
             if (tableIndex >= 0)
             {
                 ParameterIsRequired = _sqlCmdParameters[tableIndex].IsRequired;
@@ -138,41 +211,30 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             return ParameterIsRequired;
         }
 
-        protected int getParameterIndexFromPublicName(string UserColumnName)
+        private int getParameterIndex(string parameterName)
         {
-            int ParaIndex = -1;
+            int parameterIndex = -1;
+            int tableIndex;
 
-            if (_parameterIndexByPublicName.TryGetValue(UserColumnName, out int tableIndex))
+            if (_parameterIndexByPublicName.TryGetValue(parameterName, out tableIndex))
             {
-                ParaIndex = tableIndex;
+                parameterIndex = tableIndex;
+            }
+            else if (_parameterIndexByDatabaseTableName.TryGetValue(parameterName, out tableIndex))
+            {
+                parameterIndex = tableIndex;
             }
             else
             {
-                string eMsg = "Programmer error: Parameter not found: " + UserColumnName;
+                string eMsg = "Programmer error in getParameterIndex(): Parameter not found: " + parameterName;
                 MessageBox.Show(eMsg);
             }
 
-            return ParaIndex;
+            return parameterIndex;
         }
 
-        protected int getParameterIndexFromDBColumn(string DBParameterName)
-        {
-            int ParaIndex = -1;
-
-            if (_parameterIndexByDatabaseTableName.TryGetValue(DBParameterName, out int tableIndex))
-            {
-                ParaIndex = tableIndex;
-            }
-            else
-            {
-                string eMsg = "Programmer error: Parameter not found: " + DBParameterName;
-                MessageBox.Show(eMsg);
-            }
-
-            return ParaIndex;
-        }
-
-        protected void _addSqlCommandParameter(string PublicName, string DataBaseColumnName, string SBParamName, MySqlDbType Type, bool IsRequired = false, ParameterDirection Direction = ParameterDirection.Input, bool SkipInsert=false)
+        protected void _addSqlCommandParameter(string PublicName, string DataBaseColumnName, string StoredProcedureParamName, MySqlDbType Type,
+            bool IsRequired = false, ParameterDirection Direction = ParameterDirection.Input, bool SkipInsert=false)
         {
             if (string.IsNullOrEmpty(PublicName))
             {
@@ -188,14 +250,14 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
                 return;
             }
 
-            if (string.IsNullOrEmpty(SBParamName))
+            if (string.IsNullOrEmpty(StoredProcedureParamName))
             {
                 string eMsg = "Programmer error: SBParamName is null or empty in _addSqlCommandParameter";
                 MessageBox.Show(eMsg);
                 return;
             }
 
-            SqlCmdParameter NewParameter = new SqlCmdParameter(PublicName, DataBaseColumnName, SBParamName, Type, IsRequired, Direction, SkipInsert);
+            SqlCmdParameter NewParameter = new SqlCmdParameter(PublicName, DataBaseColumnName, StoredProcedureParamName, Type, IsRequired, Direction, SkipInsert);
             _parameterIndexByPublicName.Add(PublicName, _sqlCmdParameters.Count);
             _parameterIndexByDatabaseTableName.Add(DataBaseColumnName, _sqlCmdParameters.Count);
             _sqlCmdParameters.Add(NewParameter);

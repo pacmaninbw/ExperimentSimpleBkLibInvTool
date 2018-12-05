@@ -28,8 +28,8 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void Btn_AuthorsAddSeries_Click(object sender, RoutedEventArgs e)
         {
-            AddSeriesToAuthorDlg AddSeriesControl = new AddSeriesToAuthorDlg();
-            AddSeriesControl.Show();
+            SelectAuthorDlg selectAuthor = new SelectAuthorDlg();
+            selectAuthor.Show();
         }
 
         private void Btn_AuthorsAddBook_Click(object sender, RoutedEventArgs e)

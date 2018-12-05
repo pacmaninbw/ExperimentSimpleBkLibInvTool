@@ -22,8 +22,8 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void Btn_SeriesAddSeries_Click(object sender, RoutedEventArgs e)
         {
-            AddSeriesToAuthorDlg addSeriesToAuthor = new AddSeriesToAuthorDlg();
-            addSeriesToAuthor.Show();
+            SelectAuthorDlg selectAuthor = new SelectAuthorDlg();
+            selectAuthor.Show();
         }
 
         private void Btn_SeriesTableClose_Click(object sender, RoutedEventArgs e)

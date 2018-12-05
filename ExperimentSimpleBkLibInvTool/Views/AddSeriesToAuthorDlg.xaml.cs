@@ -9,22 +9,22 @@ namespace ExperimentSimpleBkLibInvTool.Views
     /// </summary>
     public partial class AddSeriesToAuthorDlg : Window
     {
-        public AddSeriesToAuthorDlg()
+        private AuthorModel _author;
+
+        public AddSeriesToAuthorDlg(AuthorModel author)
         {
             InitializeComponent();
+            _author = author;
+            TxtBx_SeriesAuthorFirstName.Text = author.FirstName;
+            TxtBx_SeriesAuthorMiddleName.Text = author.LastName;
         }
 
         private void Btn_AddSeriesSave_Click(object sender, RoutedEventArgs e)
         {
-            AuthorModel author = new AuthorModel();
-            author.FirstName = TxtBx_SeriesAuthorFirstName.Text;
-            author.LastName = TxtBx_SeriesAuthorMiddleName.Text;
-            author.MiddleName = TxtBx_SeriesAuthorLastName.Text;
-
-            if (author.IsValid)
+            if (_author.IsValid)
             {
-                SeriesModel series = new SeriesModel(author);
-                series.SetTitle(TxtBx_SeriesAuthorTitle.Text);
+                SeriesModel series = new SeriesModel(_author);
+                series.Title = TxtBx_SeriesAuthorTitle.Text;
                 if (series.IsValid)
                 {
                     SeriesTableModel seriesTableModle = ((App)Application.Current).Model.SeriesModel;
