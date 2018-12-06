@@ -22,56 +22,63 @@ namespace ExperimentSimpleBkLibInvTool.Views
     public partial class SelectAuthorDlg : Window
     {
         private AuthorTableModel _authorTableModel;
-        private DataRow[] _authors;
-        private AuthorModel _author;
+        DataRow[] _authors;
 
-        private const int IDColumnIndex = 0;
-        private const int LastNameColumnIndex = 1;
-        private const int FirstNameColumnIndex = 2;
-        private const int MiddleNameColumnIndex = 3;
-        private const int DobColumnIndex = 4;
-        private const int DodColumnIntex = 5;
-
-        public AuthorModel SelectedAuthor { get { return _author; } }
+        public AuthorModel SelectedAuthor { get; private set; }
 
         public SelectAuthorDlg()
         {
             InitializeComponent();
             _authorTableModel = ((App)Application.Current).Model.AuthorTable;
-            _author = null;
+            SelectedAuthor = null;
+            _authors = _authorTableModel.FindAuthors("");
+            AddRowsToListBox();     // Start with all authors
+        }
+
+        public void ForceRefreshAfterAuthorAddition()
+        {
+            DataTable _authorTable = _authorTableModel.AuthorTable;
+            _authors = _authorTableModel.FindAuthors(AuthorLastNameSelect.Text, AuthorFirststNameSelect.Text);
+            AddRowsToListBox();
         }
 
         private void AuthorSelectorLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataRow Author = _authors[AuthorSelectorLB.SelectedIndex];
-            _author = new AuthorModel(Author[FirstNameColumnIndex].ToString(), Author[LastNameColumnIndex].ToString(), Author[MiddleNameColumnIndex].ToString(),
-                Author[DobColumnIndex].ToString(), Author[DodColumnIntex].ToString(), Convert.ToUInt32(Author[IDColumnIndex].ToString()));
-            AddSeriesToAuthorDlg addSeriesToAuthor = new AddSeriesToAuthorDlg(_author);
+            SelectedAuthor = _authorTableModel.ConvertDataRowToAuthor(_authors[AuthorSelectorLB.SelectedIndex]);
+            AddSeriesToAuthorDlg addSeriesToAuthor = new AddSeriesToAuthorDlg(SelectedAuthor);
             addSeriesToAuthor.Show();
             Close();
         }
 
-        private void AuthorLastNameSelect_KeyUp(object sender, KeyEventArgs e)
+        private void AddRowsToListBox()
         {
-            int authorCount = 0;
             AuthorSelectorLB.Items.Clear();
-            _authors = _authorTableModel.FindAuthors(AuthorLastNameSelect.Text, AuthorFirststNameSelect.Text);
-            foreach (DataRow author in _authors)
+
+            int authorCount = 0;
+            List<string> authorNames = _authorTableModel.AuthorNamesForSelector(_authors);
+            foreach (string author in authorNames)
             {
-                string authorFirstMiddleLast = author[LastNameColumnIndex].ToString() + ", " + author[FirstNameColumnIndex].ToString() + " " + author[MiddleNameColumnIndex].ToString();
-                AuthorSelectorLB.Items.Add(authorFirstMiddleLast);
+                AuthorSelectorLB.Items.Add(author);
                 authorCount++;
             }
+
             if (authorCount < 1)
             {
                 string mbMsg = "There are no authors with that name, would you like to add an author?";
-                MessageBoxResult messageBoxResult = System.Windows.MessageBox.Show(mbMsg, "Delete Confirmation", MessageBoxButton.YesNo);
+                MessageBoxResult messageBoxResult = MessageBox.Show(mbMsg, "Delete Confirmation", MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
                     AddAuthorDlg AddAuthorControl = new AddAuthorDlg();
                     AddAuthorControl.Show();
                 }
             }
+        }
+
+        private void AuthorLastNameSelect_KeyUp(object sender, KeyEventArgs e)
+        {
+            _authors = _authorTableModel.FindAuthors(AuthorLastNameSelect.Text, AuthorFirststNameSelect.Text);
+
+            AddRowsToListBox();
         }
     }
 }

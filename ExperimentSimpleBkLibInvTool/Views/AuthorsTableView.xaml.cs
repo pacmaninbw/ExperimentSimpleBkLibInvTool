@@ -20,6 +20,12 @@ namespace ExperimentSimpleBkLibInvTool.Views
             AuthorsDataGrid.DataContext = _authorTable.DefaultView;
         }
 
+        public void ForceRefreshAfterAddition()
+        {
+            _authorTable = _authorTableModel.AuthorTable;
+            AuthorsDataGrid.DataContext = _authorTable.DefaultView;
+        }
+
         private void Btn_AuthorsAddAuthor_Click(object sender, RoutedEventArgs e)
         {
             AddAuthorDlg AddAuthorControl = new AddAuthorDlg();
