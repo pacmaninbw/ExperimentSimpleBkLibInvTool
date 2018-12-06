@@ -18,10 +18,16 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
             SetParameterValue("Name", FormatName);
         }
 
-        public string Format
+        public string Name
         {
             get { return GetParameterValue("Name"); }
             set { SetParameterValue("Name", value); }
+        }
+
+        public string Format
+        {
+            get { return Name; }
+            set { Name = value; }
         }
 
         protected override bool _dataIsValid()

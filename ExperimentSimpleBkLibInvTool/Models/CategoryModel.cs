@@ -17,10 +17,16 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
             SetParameterValue("Name", CategoryName);
         }
 
-        public string Category
+        public string Name
         {
             get { return GetParameterValue("Name"); }
             set { SetParameterValue("Name", value); }
+        }
+
+        public string Category
+        {
+            get { return Name; }
+            set { Name = value; }
         }
 
         protected override bool _dataIsValid()

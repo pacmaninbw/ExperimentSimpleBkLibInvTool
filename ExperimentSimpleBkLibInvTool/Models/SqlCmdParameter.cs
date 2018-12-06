@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Windows;
 using MySql.Data.MySqlClient;
 
 /*
@@ -173,27 +174,50 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
 
             _value = value;
 
+            string eMsg = null;
             switch (_type)
             {
                 case MySqlDbType.Int16:
-                    bool tmp = Convert.ToBoolean(value);
+                    bool tmp = false;
+                    if (!bool.TryParse(_value, out tmp))
+                    {
+                        eMsg = _publicName + ": Value is not True or False";
+                    }
                     _valueInt = (tmp) ? 1 : 0;
                     break;
                 case MySqlDbType.Int32:
-                    _valueInt = Convert.ToInt32(value);
+                    if (!int.TryParse(_value, out _valueInt))
+                    {
+                        eMsg = _publicName + ": Value is not in the proper format of an integer";
+                    }
                     break;
                 case MySqlDbType.Double:
-                    _valueDouble = Convert.ToDouble(value);
+                    if (!double.TryParse(_value, out _valueDouble))
+                    {
+                        eMsg = _publicName + ": Value is not in the proper format of an floating point number";
+                    }
                     break;
                 case MySqlDbType.UInt32:
                     _valueKey = Convert.ToUInt32(value);
+                    if (!uint.TryParse(_value, out _valueKey))
+                    {
+                        eMsg = _publicName + ": Value is not in the proper format of an unsigned integer";
+                    }
                     break;
                 case MySqlDbType.String:
+                default:
                     break;
             }
 
-            // If any of the conversions fail we can't get here. This is important!
-            _isValueSet = true;
+            if (eMsg != null)
+            {
+                MessageBox.Show(eMsg);
+                _isValueSet = false;
+            }
+            else
+            {
+                _isValueSet = true;
+            }
         }
 
         protected void SetValue(bool InVal)

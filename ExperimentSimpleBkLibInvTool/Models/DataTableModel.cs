@@ -102,14 +102,14 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
         protected virtual bool dbAddItem(DataTableItemBaseModel NewDataItem)
         {
             bool AddItemSuccess = true;
-
+#if DEBUG
             if (string.IsNullOrEmpty(_addItemStoredProcedureName))
             {
                 string errorMsg = "Programmer ERROR : _addItemStoredProcedureName is not set!";
                 MessageBox.Show(errorMsg);
                 return false;
             }
-
+#endif
             using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
             {
                 try
@@ -148,13 +148,14 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
         {
             int ResultCount = 0;
             DataTable Dt = new DataTable();
+#if DEBUG
             if(string.IsNullOrEmpty(_getTableStoredProcedureName))
             {
                 string errorMsg = "Programmer ERROR : _getTableStoredProcedureName is not set!";
                 MessageBox.Show(errorMsg);
                 return Dt;
             }
-
+#endif
             using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
             {
                 try
