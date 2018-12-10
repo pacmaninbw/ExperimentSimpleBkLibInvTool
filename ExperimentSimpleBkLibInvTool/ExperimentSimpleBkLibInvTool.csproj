@@ -185,6 +185,7 @@
     <Compile Include="Models\OwnerShipModel.cs" />
     <Compile Include="Models\PublishInfoModel.cs" />
     <Compile Include="Models\PuchaseInfoModel.cs" />
+    <Compile Include="Models\RatingsModel.cs" />
     <Compile Include="Models\SqlCmdParameter.cs" />
     <Compile Include="Models\StatusTableModel.cs" />
     <Compile Include="Views\AddAuthorDlg.xaml.cs">

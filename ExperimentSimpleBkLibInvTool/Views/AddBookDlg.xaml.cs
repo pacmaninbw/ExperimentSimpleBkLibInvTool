@@ -43,7 +43,13 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private PuchaseInfoModel purchaseInfo;
         private CategoryModel category;
         private FormatModel formatModel;
+        private RatingsModel ratings;
+        private OwnerShipModel owned;
+        private ForSaleModel salesInfo;
+        private SeriesModel seriesInfo;
         private string title;
+        private string bookStatus;
+        private string bookCondition;
 
         public AddBookDlg()
         {
@@ -57,7 +63,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             if (selectedAuthor != null && selectedAuthor.IsValid && !string.IsNullOrEmpty(title))
             {
-                newBook = new BookInfoModel(selectedAuthor, title, category, purchaseInfo, publishInfo);
+                newBook = new BookInfoModel(selectedAuthor, title, category, purchaseInfo, publishInfo, owned, salesInfo, seriesInfo, formatModel, ratings, bookStatus, bookCondition);
                 myLibrary = TheApp.Model.BookTable;
                 if (myLibrary.AddBook(newBook))
                 {
@@ -78,6 +84,15 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private void Btn_AddBookCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void TB_BookTitle_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(TB_BookTitle.Text))
+            {
+                title = TB_BookTitle.Text;
+                TB_BookTitle.Background = Brushes.White;
+            }
         }
 
         #region AuthorSelection
@@ -171,14 +186,5 @@ namespace ExperimentSimpleBkLibInvTool.Views
         }
 
         #endregion
-
-        private void TB_BookTitle_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(TB_BookTitle.Text))
-            {
-                title = TB_BookTitle.Text;
-                TB_BookTitle.Background = Brushes.White;
-            }
-        }
     }
 }

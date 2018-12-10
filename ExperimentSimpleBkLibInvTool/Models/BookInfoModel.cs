@@ -20,8 +20,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         private int _authorKey;
         private int _seriesKey;
         private int _formatKey;
-        private int _statusKey;
-        private int _conditionKey;
+        private string _status;
+        private string _condition;
         private PuchaseInfoModel _puchaseInfo;
         private PublishInfoModel _publishInfo;
         private OwnerShipModel _owned;
@@ -30,6 +30,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         private SeriesModel _seriesInfo;
         private CategoryModel _categoryM;
         private FormatModel _formatM;
+        private RatingsModel _ratings;
 
         public BookInfoModel()
         {
@@ -45,13 +46,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             _titleKey = 0;
             _authorKey = 0;
             _seriesKey = 0;
-            _statusKey = 0;
-            _conditionKey = 0;
+            _status = null;
+            _condition = null;
             _title = null;
         }
 
         public BookInfoModel(int category, string title, IPublishInfoModel publishInfo, IPuchaseInfoModel puchaseInfo, IOwnerShipModel owned,
-            IForSaleModel forSale, IAuthorModel authorInfo, ISeriesModel seriesInfo)
+            IForSaleModel forSale, IAuthorModel authorInfo, ISeriesModel seriesInfo, RatingsModel ratings, string Status = null, string Condition = null)
         {
             _category = category;
             _title = title;
@@ -61,10 +62,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             ForSale = forSale;
             AuthorInfo = authorInfo;
             SeriesInfo = seriesInfo;
+            _ratings = ratings;
+            _condition = Condition;
+            _status = Status;
         }
 
         public BookInfoModel(AuthorModel authorInfo, string title, CategoryModel category, PuchaseInfoModel puchaseInfo=null, PublishInfoModel publishInfo=null,
-            OwnerShipModel owned=null, ForSaleModel forSale=null, SeriesModel seriesInfo=null, FormatModel formatm=null, int StatusKey=1, int ConditionKey=1)
+            OwnerShipModel owned=null, ForSaleModel forSale=null, SeriesModel seriesInfo=null, FormatModel formatm=null,  RatingsModel ratings=null, string Status=null, string Condition=null)
         {
             _categoryM = category;
             _title = title;
@@ -75,8 +79,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             _authorInfo = authorInfo;
             _seriesInfo = seriesInfo;
             _formatM = formatm;
-            _conditionKey = ConditionKey;
-            _statusKey = StatusKey;
+            _condition = Condition;
+            _status = Status;
+            _ratings = ratings;
         }
 
         public IPublishInfoModel PublishInfo
@@ -113,6 +118,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         {
             get { return _seriesInfo; }
             set { _seriesInfo = (SeriesModel)value; }
+        }
+
+        public RatingsModel Ratings
+        {
+            get { return _ratings; }
+            set { _ratings = value; }
         }
 
         public string Title { get { return _title; } }
@@ -169,7 +180,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
                 forSaleIsValid = _forSale.IsValid;
             }
 
-            if (_category < 1)
+            if (_categoryM == null)
             {
                 string errorMsg = "The book category is a required field.";
                 MessageBox.Show(errorMsg);
