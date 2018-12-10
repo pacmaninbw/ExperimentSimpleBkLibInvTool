@@ -15,7 +15,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         public FormatTable()
         {
             InitializeComponent();
-            _formatsModel = ((App)Application.Current).Model.FormatModel;
+            _formatsModel = ((App)Application.Current).Model.FormatTable;
             _FormatsTable = _formatsModel.FormatTable;
             FormatsGrid.DataContext = _FormatsTable.DefaultView;
         }

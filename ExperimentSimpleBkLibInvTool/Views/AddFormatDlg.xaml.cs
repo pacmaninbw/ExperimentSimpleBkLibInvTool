@@ -22,7 +22,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
             else
             {
                 FormatModel format = new FormatModel(TxtBx_FormatName.Text);
-                FormatTableModel formats = ((App)Application.Current).Model.FormatModel;
+                FormatTableModel formats = ((App)Application.Current).Model.FormatTable;
                 formats.AddFormat(format);
                 Close();
             }

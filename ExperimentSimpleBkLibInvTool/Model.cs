@@ -38,7 +38,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
             _conditions = new ConditionsTableModel();
         }
 
-        public FormatTableModel FormatModel
+        public FormatTableModel FormatTable
         {
             get
             {

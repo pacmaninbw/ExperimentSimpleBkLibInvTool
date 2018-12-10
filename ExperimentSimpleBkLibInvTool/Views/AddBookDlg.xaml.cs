@@ -39,7 +39,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private CategoryTableModel categoryTable;
         private FormatTableModel formatTable;
         private StatusTableModel statusTable;
-        private ConditionsTableModel ConditionsTable;
+        private ConditionsTableModel conditionsTable;
         private SeriesTableModel seriesTable;
         DataRow[] _authors;
         private AuthorModel selectedAuthor;
@@ -63,6 +63,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
             InitCategorySelection();
             InitPublishingInfo();
             InitPuchaseInfo();
+            InitStatusSelection();
+            InitFormatSelection();
+            InitConditionSelection();
         }
 
         private void Btn_AddBookSave_Click(object sender, RoutedEventArgs e)
@@ -324,25 +327,77 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void InitFormatSelection()
         {
+            formatTable = TheApp.Model.FormatTable;
+            List<string> formats = formatTable.ListBoxSelectionList();
+            LB_FormatSelector.DataContext = formats;
+            if (formats.Count < 1)
+            {
+                string mbMsg = "There are no formats, would you like to add one?";
+                MessageBoxResult messageBoxResult = MessageBox.Show(mbMsg, "Add Format Confirmation", MessageBoxButton.YesNo);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    AddFormatDlg AddformatControl = new AddFormatDlg();
+                    AddformatControl.Show();
+                    return;
+                }
+            }
+            LB_FormatSelector.Items.Clear();
+            foreach (string format in formats)
+            {
+                LB_FormatSelector.Items.Add(format);
+            }
 
         }
 
         private void LB_FormatSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            formatModel = new FormatModel();
+            formatModel.Format = LB_FormatSelector.SelectedValue.ToString();
         }
 
         #endregion
 
+        #region Status Selection
+
+        private void InitStatusSelection()
+        {
+            statusTable = TheApp.Model.StatusTable;
+            List<string> statuses = statusTable.ListBoxSelectionList();
+            LB_StatusSelector.DataContext = statuses;
+            LB_StatusSelector.Items.Clear();
+            foreach (string status in statuses)
+            {
+                LB_StatusSelector.Items.Add(status);
+            }
+        }
+
         private void LB_StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            bookStatus = LB_StatusSelector.SelectedValue.ToString();
+        }
 
+        #endregion
+
+        #region Condition Selection
+
+        private void InitConditionSelection()
+        {
+            conditionsTable  = TheApp.Model.ConditionsTable;
+            List<string> conditions = conditionsTable.ListBoxSelectionList();
+            LB_ConditionSelector.DataContext = conditions;
+            LB_ConditionSelector.Items.Clear();
+            foreach (string condition in conditions)
+            {
+                LB_ConditionSelector.Items.Add(condition);
+            }
         }
 
         private void LB_ConditionSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            bookCondition = LB_ConditionSelector.SelectedValue.ToString();
         }
+
+        #endregion
 
     }
 }
