@@ -181,6 +181,7 @@
     <Compile Include="Models\IPublishInfoModel.cs" />
     <Compile Include="Models\IPuchaseInfoModel.cs" />
     <Compile Include="Models\ISeriesModel.cs" />
+    <Compile Include="Models\ObservableModelObject.cs" />
     <Compile Include="Models\OwnerShipModel.cs" />
     <Compile Include="Models\PublishInfoModel.cs" />
     <Compile Include="Models\PuchaseInfoModel.cs" />
@@ -195,6 +196,7 @@
     <Compile Include="Views\AuthorsTableView.xaml.cs">
       <DependentUpon>AuthorsTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\BaseViewObject.cs" />
     <Compile Include="Views\BooksTableView.xaml.cs">
       <DependentUpon>BooksTableView.xaml</DependentUpon>
     </Compile>
@@ -206,6 +208,10 @@
     </Compile>
     <Compile Include="Views\FormatTableView.xaml.cs">
       <DependentUpon>FormatTableView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ObservableViewObject.cs" />
+    <Compile Include="Views\SelAuthStackPaneled.xaml.cs">
+      <DependentUpon>SelAuthStackPaneled.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectAuthorDlg.xaml.cs">
       <DependentUpon>SelectAuthorDlg.xaml</DependentUpon>
@@ -295,6 +301,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FormatTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SelAuthStackPaneled.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

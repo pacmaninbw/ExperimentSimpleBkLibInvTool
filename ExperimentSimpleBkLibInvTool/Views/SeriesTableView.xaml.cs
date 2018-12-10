@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 
 namespace ExperimentSimpleBkLibInvTool.Views
 {
@@ -22,7 +23,8 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void Btn_SeriesAddSeries_Click(object sender, RoutedEventArgs e)
         {
-            SelectAuthorDlg selectAuthor = new SelectAuthorDlg();
+            AuthorTableModel authorTable = ((App)Application.Current).Model.AuthorTable;
+            SelectAuthorDlg selectAuthor = new SelectAuthorDlg(authorTable);
             selectAuthor.Show();
         }
 

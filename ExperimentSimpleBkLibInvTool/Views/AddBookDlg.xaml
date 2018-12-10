@@ -5,14 +5,82 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool.Views"
         mc:Ignorable="d"
-        Title="Add Book" Height="450" Width="800">
+        Title="Add Book" Height="768" Width="1024">
     <Grid>
-        <Label Content="First Name" Name="Lab_BookFirstName" HorizontalAlignment="Left" Margin="62,43,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Name="TxtBx_BookFirstName" Height="22" Margin="159,45,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Middle Name" Name="Lab_BookMiddleName" HorizontalAlignment="Left" Margin="62,88,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Name="TxtBx_BookMiddleName" Height="22" Margin="159,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
-        <Label Content="Last Name" Name="Lab_BookLastName" HorizontalAlignment="Left" Margin="62,133,0,0" VerticalAlignment="Top"/>
-        <TextBox HorizontalAlignment="Left" Name="TxtBx_BookLastName" Height="22" Margin="159,135,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Button Content="Save" Name="Btn_AddBookSave" HorizontalAlignment="Center" Margin="0,260,0,0" VerticalAlignment="Top" Width="75" Click="Btn_AddBookSave_Click"/>
+        <StackPanel Orientation="Vertical" Height="768" Width="1022">
+            <StackPanel Orientation="Horizontal" Height="315" Width="1000" VerticalAlignment="Top" HorizontalAlignment="Left">
+                <GroupBox Height="300" Header="Select Author" Background="White" BorderThickness="2">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="245" VerticalAlignment="Top" Width="455"  Margin="0,0,0,0" Background="White">
+                            <StackPanel Orientation="Vertical" Height="240" Width="160" HorizontalAlignment="Center" Margin="7,0,0,0">
+                                <TextBlock HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="Select a name from the list on the right, or enter the last name of the author." VerticalAlignment="Top" Width="160" TextAlignment="Center"/>
+                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
+                                    <Label Content="Last Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                    <TextBox Name="TB_SelectAuthorLastName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="TB_SelectAuthorLastName_KeyUp"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
+                                    <Label Content="First Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                    <TextBox Name="TB_SelectAuthorFirstName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="TB_SelectAuthorFirstName_KeyUp"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
+                                    <Label Content="Middle Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                    <TextBox Name="TB_SelectAuthorMiddleName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                                </StackPanel>
+                            </StackPanel>
+                            <ListBox Name="AuthorSelectorLB" HorizontalAlignment="Left" Height="240" Margin="7,5,0,0" VerticalAlignment="Top" Width="275" FontWeight="Bold" Background="Wheat" SelectionChanged="AuthorSelectorLB_SelectionChanged"/>
+                        </StackPanel>
+                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="* Author is Required" FontWeight="Bold" Foreground="Red" />
+                    </StackPanel>
+                </GroupBox>
+                <StackPanel Orientation="Vertical" Width="370" Margin="20,0,0,0">
+                    <StackPanel Orientation="Horizontal" Width="340">
+                        <Label Content="Title" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Margin="10,5,0,0" FontWeight="Bold"/>
+                        <TextBox Name="TB_BookTitle" Width="180" HorizontalAlignment="Right" VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,10,0,0" LostFocus="TB_BookTitle_LostFocus"/>
+                        <Label Content="*Required" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Margin="10,5,0,0" FontWeight="Bold" Foreground="Red"/>
+                    </StackPanel>
+                    <GroupBox Header="Publishing Information" Height="260" Width="340"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="25,15,0,0">
+                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,10,0,0">
+                            <StackPanel Orientation="Vertical" Height="230" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top">
+                                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
+                                    <Label Content="Copyright" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                    <TextBox Name="TB_Copyright" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FocusableChanged="TB_Copyright_FocusableChanged" />
+                                    <Label Content="Strongly Required" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
+                                    <Label Content="ISB Number" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                    <TextBox Name="TB_ISBNumber" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+                                    <Label Content="Recommended" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
+                                    <Label Content="Publisher" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                    <TextBox Name="TB_Publisher" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+                                </StackPanel>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Height="230" Width="160"  HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top">
+                                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
+                                    <Label Content="Edition" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                    <TextBox Name="TB_Edition" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
+                                    <Label Content="Printing" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                    <TextBox Name="TB_Printing" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
+                                    <CheckBox Content="Out of Print" Name="CB_OutofPrint" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Height="280" Width="1000">
+                <GroupBox Height="280" Width="465" Header="Purchashing Information" Background="White" BorderThickness="2" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="0,0,0,0">
+                </GroupBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
+                <Button Content="Save" Name="Btn_AddBookSave" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Click="Btn_AddBookSave_Click"/>
+                <Button Content="Cancel" Name="Btn_AddBookCancel" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Margin="50,0,0,0" Click="Btn_AddBookCancel_Click"/>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

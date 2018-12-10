@@ -8,7 +8,7 @@ using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
 {
-    public class CDataTableModel
+    public class CDataTableModel : ObservableModelObject
     {
         protected DataTable _dataTable;
 
@@ -44,7 +44,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
 
         protected void InitializeDataTable()
         {
-            _dataTable = getDataTable();
+            RefreshDataTableWhenNescessary();
             foreach (DataColumn column in _dataTable.Columns)
             {
                 _columns.Add(column.ColumnName);
@@ -54,11 +54,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
         // To maintain the best performance only refersh the table after it has been modified.
         protected void RefreshDataTableWhenNescessary()
         {
-            if (_tableWasUpdated)
+            if (_dataTable == null || _tableWasUpdated)
             {
                 _dataTable = null;
                 _dataTable = getDataTable();
                 _tableWasUpdated = false;
+                OnPropertyChanged();
             }
         }
 
@@ -130,6 +131,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
                         }
                         else
                         {
+                            OnPropertyChanged();
                             AddItemSuccess = false;
                         }
                     }
@@ -169,6 +171,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
 
                         MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
                         ResultCount = sda.Fill(Dt);
+                        OnPropertyChanged();
                     }
                 }
                 catch (Exception ex)

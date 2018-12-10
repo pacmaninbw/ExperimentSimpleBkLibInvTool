@@ -34,7 +34,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void Btn_AuthorsAddSeries_Click(object sender, RoutedEventArgs e)
         {
-            SelectAuthorDlg selectAuthor = new SelectAuthorDlg();
+            SelectAuthorDlg selectAuthor = new SelectAuthorDlg(_authorTableModel);
             selectAuthor.Show();
         }
 

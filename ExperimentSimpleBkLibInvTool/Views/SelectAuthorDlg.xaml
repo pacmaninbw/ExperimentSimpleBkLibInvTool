@@ -13,7 +13,7 @@
         <TextBox Name="AuthorFirststNameSelect" HorizontalAlignment="Left" Height="23" Margin="50,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Label Content="Middle Name" HorizontalAlignment="Left" Margin="70,260,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBox Name="AuthorMiddleNameSelect" HorizontalAlignment="Left" Height="23" Margin="50,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListBox Name="AuthorSelectorLB" HorizontalAlignment="Left" Height="300" Margin="240,50,0,0" VerticalAlignment="Top" Width="265" SelectionChanged="AuthorSelectorLB_SelectionChanged" FontWeight="Bold"/>
+        <ListBox Name="AuthorSelectorLB" HorizontalAlignment="Left" Height="300" Margin="240,50,0,0" VerticalAlignment="Top" Width="265" SelectionChanged="AuthorSelectorLB_SelectionChanged" FontWeight="Bold" ItemsSource="{Binding}"/>
         <TextBlock HorizontalAlignment="Left" Margin="50,50,0,0" TextWrapping="Wrap" Text="Select a name from the list on the right, or enter the last name of the author." VerticalAlignment="Top" Width="160"/>
     </Grid>
 </Window>
