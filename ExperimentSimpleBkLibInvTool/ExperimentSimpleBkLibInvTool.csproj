@@ -194,6 +194,9 @@
     <Compile Include="Views\AddBookDlg.xaml.cs">
       <DependentUpon>AddBookDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddRatingsDlg.xaml.cs">
+      <DependentUpon>AddRatingsDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AuthorsTableView.xaml.cs">
       <DependentUpon>AuthorsTableView.xaml</DependentUpon>
     </Compile>
@@ -204,6 +207,9 @@
     <Compile Include="Views\CategoriesTableView.xaml.cs">
       <DependentUpon>CategoriesTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ConditionsEtAl.xaml.cs">
+      <DependentUpon>ConditionsEtAl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ConditionsTableView.xaml.cs">
       <DependentUpon>ConditionsTableView.xaml</DependentUpon>
     </Compile>
@@ -211,6 +217,9 @@
       <DependentUpon>FormatTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ObservableViewObject.cs" />
+    <Compile Include="Views\PurchasingDialog.xaml.cs">
+      <DependentUpon>PurchasingDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\SelAuthStackPaneled.xaml.cs">
       <DependentUpon>SelAuthStackPaneled.xaml</DependentUpon>
     </Compile>
@@ -251,6 +260,10 @@
       <DependentUpon>AddCategoryDlg.xaml</DependentUpon>
     </Compile>
     <Page Include="Views\AddFormatDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddRatingsDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,11 +310,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ConditionsEtAl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\ConditionsTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FormatTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PurchasingDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

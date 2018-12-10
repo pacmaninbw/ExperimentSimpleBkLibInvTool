@@ -7,18 +7,18 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
     public class PuchaseInfoModel : DataTableItemBaseModel, IPuchaseInfoModel
     {
         private int _bookId;
-        private double _listPrice;
-        private double _paidPrice;
+        private string _listPrice;
+        private string _paidPrice;
         private string _vendor;
         private DateTime _datePurchased;
 
-        public double ListPrice
+        public string ListPrice
         {
             get { return _listPrice; }
             set { _listPrice = value; }
         }
 
-        public double PaidPrice
+        public string PaidPrice
         {
             get {  return _paidPrice; }
             set { _paidPrice = value; }
@@ -39,13 +39,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
         public PuchaseInfoModel()
         {
             _bookId = 0;
-            _listPrice = 0.0;
-            _paidPrice = 0.0;
+            _listPrice = null;
+            _paidPrice = null;
             _vendor = null;
             _datePurchased = new DateTime(1970,1,1);
         }
 
-        public PuchaseInfoModel(string vendor, double listPrice, double paidPrice, DateTime puchaseDate)
+        public PuchaseInfoModel(string vendor, string listPrice, string paidPrice, DateTime puchaseDate)
         {
             _bookId = 0;
             _listPrice = listPrice;
@@ -80,6 +80,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
                     dataIsValid = false;
                 }
 
+#if false
                 if (_paidPrice < 0.01)
                 {
                     string errorMsg = "The price paid for the book is less than one cent.";
@@ -93,6 +94,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
                     MessageBox.Show(errorMsg);
                     dataIsValid = false;
                 }
+#endif
             }
 
             return dataIsValid;

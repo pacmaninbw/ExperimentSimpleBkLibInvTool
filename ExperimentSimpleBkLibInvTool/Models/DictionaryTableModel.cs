@@ -19,6 +19,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
             _lastParameterName = "primaryKey";      // This is a default value, it can be changed in superclasses.
         }
 
+        public List<string> ListBoxSelectionList()
+        {
+            List<string> listBoxSelectionValues = _keyToTitle.Values.ToList<string>();
+
+            return listBoxSelectionValues;
+        }
+
         protected string KeyToName(uint Key)
         {
             return _keyToTitle[Key];

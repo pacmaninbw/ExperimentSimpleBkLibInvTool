@@ -1,0 +1,33 @@
+﻿<Window x:Class="ExperimentSimpleBkLibInvTool.Views.PurchasingDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool.Views"
+        mc:Ignorable="d"
+        Title="PurchasingDialog" Height="450" Width="800">
+    <Grid>
+        <GroupBox Header="Purchase Information" HorizontalAlignment="Left" Height="245" Margin="10,5,0,0" VerticalAlignment="Top" Width="184" >
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Height="235" Width="182" Background="AliceBlue">
+                <StackPanel Orientation="Vertical" Height="55" Margin="0,0,0,0" Width="180" Background="GreenYellow">
+                    <Label Content="Book Seller" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox Name="TB_Vendor" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Height="55" Margin="0,0,0,0" Width="180" Background="GreenYellow">
+                    <Label Content="List Price" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox Name="TB_ListPrice" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.00"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Height="55" Margin="0,0,0,0" Width="180" Background="GreenYellow">
+                    <Label Content="Amount Paid" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox Name="TB_PaidPrice" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.00"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Height="55" Margin="0,0,0,0" Width="180" Background="GreenYellow">
+                    <Label Content="Date Purchased" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <DatePicker Name="DP_DatePurchased" Width="150"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+
+    </Grid>
+</Window>

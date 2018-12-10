@@ -19,7 +19,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
 {
     public class Model
     {
-        private SeriesTableModel _series;
+        private SeriesTableModel _seriesTable;
         private CategoryTableModel _categories;
         private FormatTableModel _formats;
         private BookTableModel _books;
@@ -29,7 +29,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
 
         public Model()
         {
-            _series = new SeriesTableModel();
+            _seriesTable = new SeriesTableModel();
             _formats = new FormatTableModel();
             _categories = new CategoryTableModel();
             _books = new BookTableModel();
@@ -54,11 +54,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
             }
         }
 
-        public SeriesTableModel SeriesModel
+        public SeriesTableModel SeriesTable
         {
             get
             {
-                return _series;
+                return _seriesTable;
             }
         }
 

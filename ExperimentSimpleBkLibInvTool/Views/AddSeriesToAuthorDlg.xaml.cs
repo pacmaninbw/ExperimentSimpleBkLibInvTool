@@ -27,7 +27,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
                 series.Title = TxtBx_SeriesAuthorTitle.Text;
                 if (series.IsValid)
                 {
-                    SeriesTableModel seriesTableModle = ((App)Application.Current).Model.SeriesModel;
+                    SeriesTableModel seriesTableModle = ((App)Application.Current).Model.SeriesTable;
                     if (seriesTableModle.AddSeries(series))
                     {
                         Close();

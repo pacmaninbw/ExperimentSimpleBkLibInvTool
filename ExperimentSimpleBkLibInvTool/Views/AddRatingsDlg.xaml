@@ -1,0 +1,28 @@
+﻿<Window x:Class="ExperimentSimpleBkLibInvTool.Views.AddRatingsDlg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool.Views"
+        mc:Ignorable="d"
+        Title="AddRatingsDlg" Height="450" Width="800">
+    <Grid>
+        <GroupBox Header="Ratings" HorizontalAlignment="Left" Height="245" Margin="10,0,0,0" VerticalAlignment="Top" Width="164" >
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Height="235" Width="162">
+                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0" Width="160">
+                    <Label Content="My Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox Name="TB_MyRating" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Height="75" Margin="0,0,0,0" Width="160">
+                    <Label Content="Amazon Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox Name="TB_AmazonRating" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0"/>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Height="75" Margin="0,0,0,0" Width="160">
+                    <Label Content="GoodReads Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                    <TextBox Name="TB_GoodReadsRating" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+    </Grid>
+</Window>

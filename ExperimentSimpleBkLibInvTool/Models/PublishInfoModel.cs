@@ -9,8 +9,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
         private string _isbnNumber;
         private string _copyRight;
         private string _publisher;
-        private int _printing;
-        private int _edition;
+        private string _printing;
+        private string _edition;
         private bool _outOfPrint;
 
         public string ISBNumber
@@ -31,17 +31,16 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
             set { _publisher = value; }
         }
 
-        public int Printing
+        public string Printing
         {
             get { return _printing; }
             set { _printing = value; }
         }
 
-        public int Edition
+        public string Edition
         {
             get { return _edition; }
-            set
-            { _edition = value; }
+            set { _edition = value; }
         }
 
         public bool OutOfPrint
@@ -56,12 +55,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
             _isbnNumber = null;
             _copyRight = null;
             _publisher = null;
-            _printing = 0;
-            _edition = 0;
+            _printing = null;
+            _edition = null;
             _outOfPrint = false;
         }
 
-        public PublishInfoModel(string ISBNumber, string CopyRight, string Publisher, int Printing=1, int Edition=1, bool OutOfPrint=false)
+        public PublishInfoModel(string ISBNumber, string CopyRight, string Publisher, string Printing=null, string Edition=null, bool OutOfPrint=false)
         {
             _bookId = 0;
             _isbnNumber = ISBNumber;
@@ -90,31 +89,24 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
 
             // If none of the fields have been updated the data is valid, if any of the fields
             // have been updated that at least the ISBN, CopyRight and Publisher should have values
-            if (_isbnNumber == null && _copyRight == null && _publisher == null && _printing == 0 && _edition == 0 && _outOfPrint == false)
+            if (_isbnNumber == null && _copyRight == null && _publisher == null && _printing == null && _edition == null && _outOfPrint == false)
             {
                 return dataIsValid;
             }
 
-            if (_isbnNumber == null || _isbnNumber.Length < 1)
+            if (string.IsNullOrEmpty(_isbnNumber))
             {
                 hasStringDataError = true;
             }
 
-            if (_copyRight == null || _copyRight.Length < 1)
+            if (string.IsNullOrEmpty(_copyRight))
             {
                 hasStringDataError = true;
             }
 
-            if (_publisher == null || _publisher.Length < 1)
+            if (string.IsNullOrEmpty(_publisher))
             {
                 hasStringDataError = true;
-            }
-
-            if (_printing < 1 || _edition < 1)
-            {
-                string errorMsg = "When using the publishing the Printing and Edition must be greater than or equal to 1";
-                MessageBox.Show(errorMsg);
-                dataIsValid = false;
             }
 
             if (hasStringDataError)

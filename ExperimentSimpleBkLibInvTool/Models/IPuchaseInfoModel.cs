@@ -4,9 +4,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
 {
     public interface IPuchaseInfoModel
     {
-        double ListPrice { get; set; }
+        string ListPrice { get; set; }
 
-        double PaidPrice { get; set; }
+        string PaidPrice { get; set; }
 
         DateTime PurchaseDate { get; set; }
 

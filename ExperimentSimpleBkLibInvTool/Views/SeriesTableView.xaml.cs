@@ -16,7 +16,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         public SeriesTableView()
         {
             InitializeComponent();
-            _seriesTableModel = ((App)Application.Current).Model.SeriesModel;
+            _seriesTableModel = ((App)Application.Current).Model.SeriesTable;
             _seriesTable = _seriesTableModel.Series;
             SeriesGrid.DataContext = _seriesTable.DefaultView;
         }
