@@ -171,8 +171,6 @@ namespace ExperimentSimpleBkLibInvTool.Views
             }
         }
 
-
-
         #endregion
 
         #region Publishing Info
@@ -353,6 +351,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             formatModel = new FormatModel();
             formatModel.Format = LB_FormatSelector.SelectedValue.ToString();
+            formatModel.Key = formatTable.FormatKey(formatModel.Format);
         }
 
         #endregion

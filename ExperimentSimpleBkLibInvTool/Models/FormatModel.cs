@@ -30,6 +30,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
             set { Name = value; }
         }
 
+        public uint Key
+        {
+            get { return GetKeyValue(); }
+            set { SetKeyValue(value); }
+        }
+
         protected override bool _dataIsValid()
         {
             bool isValid = GetParameterIsValid("Name");
