@@ -88,6 +88,11 @@ namespace ExperimentSimpleBkLibInvTool.Views
                 MessageBox.Show("The title is required for adding a new book!");
                 TB_BookTitle.Background = Brushes.Red;
             }
+            if (string.IsNullOrEmpty(category.Category))
+            {
+                LB_CategorySelector.Background = Brushes.Red;
+                MessageBox.Show("A category is required for adding a new book!");
+            }
         }
 
         private void Btn_AddBookCancel_Click(object sender, RoutedEventArgs e)
@@ -301,6 +306,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void LB_CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            LB_CategorySelector.Background = Brushes.Wheat;
             category.Category = (string)LB_CategorySelector.SelectedValue;
             category.Key = categoryTable.CategoryKey(category.Category);
         }
@@ -395,6 +401,16 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             bookCondition = LB_ConditionSelector.SelectedValue.ToString();
         }
+
+        #endregion
+
+        #region For Sale 
+
+
+        #endregion
+
+        #region Owned
+
 
         #endregion
 
