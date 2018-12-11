@@ -60,6 +60,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             InitializeComponent();
             InitAuthorSelection();
+            InitSeriesSelection();
             InitCategorySelection();
             InitPublishingInfo();
             InitPuchaseInfo();
@@ -141,6 +142,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
             TB_SelectAuthorLastName.Background = Brushes.White;
             TB_SelectAuthorFirstName.Background = Brushes.White;
             AuthorSelectorLB.Background = Brushes.White;
+            PopulateSeriesSelector();   // if the author has any series list them so they can be selected.
         }
 
         private void HighLightAuthorAndReportError()
@@ -306,7 +308,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void LB_CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            LB_CategorySelector.Background = Brushes.Wheat;
+            LB_CategorySelector.Background = Brushes.White;
             category.Category = (string)LB_CategorySelector.SelectedValue;
             category.Key = categoryTable.CategoryKey(category.Category);
         }
@@ -318,11 +320,41 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private void InitSeriesSelection()
         {
             seriesTable = TheApp.Model.SeriesTable;
+            seriesInfo = null;
+            PopulateSeriesSelector();
         }
 
         private void LB_SeriesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (selectedAuthor != null && selectedAuthor.IsValid)
+            {
+                seriesInfo = new SeriesModel(selectedAuthor, LB_SeriesSelector.SelectedValue.ToString());
+            }
+        }
 
+        private void PopulateSeriesSelector()
+        {
+            LB_SeriesSelector.Items.Clear();
+            if (selectedAuthor == null || !selectedAuthor.IsValid)
+            {
+                LB_SeriesSelector.Items.Add("No Series to select.");
+            }
+            else
+            {
+                List<string> seriesTitles = seriesTable.SeriesSelectionListCreator(selectedAuthor);
+                if (seriesTitles.Count < 1)
+                {
+                    LB_SeriesSelector.Items.Add("No Series to select.");
+                }
+                else
+                {
+                    LB_SeriesSelector.DataContext = seriesTitles;
+                    foreach (string title in seriesTitles)
+                    {
+                        LB_SeriesSelector.Items.Add(title);
+                    }
+                }
+            }
         }
 
         #endregion

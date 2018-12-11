@@ -38,6 +38,18 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
         public SeriesModel(AuthorModel author)
         {
             InitializeParameters();
+            InitAuthorDetails(author);
+        }
+
+        public SeriesModel(AuthorModel author, string title)
+        {
+            InitializeParameters();
+            InitAuthorDetails(author);
+            SetParameterValue("Series Title", title);
+        }
+
+        private void InitAuthorDetails(AuthorModel author)
+        {
             _author = author;
             _authorId = _author.ID;
             SetParameterValue("First Name", _author.FirstName);
