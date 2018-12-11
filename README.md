@@ -23,3 +23,5 @@ d.	LibInvUnitTests.sql - This provides some data for testing and experimentation
 4.	The Add Author and Add Series dialogs are implemented. The Add Series dialog is rather clunky and not in its final form because events aren’t handled properly yet (no controller).
 5.	Tables do not refresh automatically when an Author or Series is added.
 6.	The entire user interface is clunky and not in its final form.
+# A Note on the user interface
+I am not and never have been a graphic artist. I realize that the Add Book Dialog is crowded and too busy. I would value input on what might make it more attractive to users. The application may need a few more dialogs such as Buy Book, and Describe Book.
