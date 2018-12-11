@@ -10,35 +10,23 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
     public class ForSaleModel : DataTableItemBaseModel, IForSaleModel
     {
         private int _bookId;
-        private double _askingPrice;
-        private double _estimatedPrice;
+        private string _askingPrice;
+        private string _estimatedPrice;
         private bool _isForSale;
 
         public bool IsForSale
         {
-            get
-            {
-                return _isForSale;
-            }
-            set
-            {
-                _isForSale = value;
-            }
+            get { return _isForSale; }
+            set { _isForSale = value; }
         }
 
-        public double AskingPrice
+        public string AskingPrice
         {
-            get
-            {
-                return _askingPrice;
-            }
-            set
-            {
-                _askingPrice = value;
-            }
+            get { return _askingPrice; }
+            set {  _askingPrice = value; }
         }
 
-        public double EstimatedValue
+        public string EstimatedValue
         {
             get
             {
@@ -50,7 +38,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
             }
         }
 
-        public ForSaleModel(bool isForSale=false, double askingPrice=0.0, double estimatedPrice=0.0)
+        public ForSaleModel(bool isForSale=false, string askingPrice=null, string estimatedPrice=null)
         {
             _bookId = 0;
             _askingPrice = askingPrice;
@@ -72,12 +60,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
         {
             bool dataIsValid = true;
 
-            if (_estimatedPrice < 0)
+            if (string.IsNullOrEmpty(_estimatedPrice))
             {
                 dataIsValid = false; ;
             }
 
-            if (_askingPrice < 0)
+            if (string.IsNullOrEmpty(_askingPrice))
             {
                 dataIsValid = false; ;
             }

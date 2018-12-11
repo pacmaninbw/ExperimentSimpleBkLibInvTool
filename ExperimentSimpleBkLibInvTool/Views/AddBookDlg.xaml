@@ -59,11 +59,11 @@
                             <StackPanel Orientation="Vertical" Height="230" Width="160"  HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top">
                                 <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
                                     <Label Content="Edition" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_Edition" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="First or 1" LostFocus="TB_Edition_LostFocus"/>
+                                    <TextBox Name="TB_Edition" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="1,2,3, etc." LostFocus="TB_Edition_LostFocus"/>
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
                                     <Label Content="Printing" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_Printing" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="1,2,etc." LostFocus="TB_Printing_LostFocus" />
+                                    <TextBox Name="TB_Printing" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="1,2,3, etc." LostFocus="TB_Printing_LostFocus" />
                                 </StackPanel>
                                 <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
                                     <CheckBox Content="Out of Print" Name="CB_OutofPrint" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Click="CB_OutofPrint_Click"/>
@@ -131,6 +131,27 @@
                         </StackPanel>
                     </StackPanel>
                 </GroupBox>
+                <StackPanel Orientation="Vertical" Width="180" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top" Margin="10,0,0,0">
+                    <GroupBox  Header="Ownership" Width="178" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <StackPanel Orientation="Vertical">
+                            <CheckBox Name="ChkBx_BookIsOwned" Content="I own this book" Margin="10,10,0,0" HorizontalAlignment="Left" FontWeight="Bold" Click="ChkBx_BookIsOwned_Click"/>
+                            <CheckBox Name="ChkBx_Wishlisted" Content="I want this book"  Margin="10,10,0,0" HorizontalAlignment="Left"  FontWeight="Bold" Click="ChkBx_Wishlisted_Click"/>
+                        </StackPanel>
+                    </GroupBox>
+                    <GroupBox Header="For Sale" Height="163" HorizontalAlignment="Left" VerticalAlignment="Top">
+                        <StackPanel Orientation="Vertical">
+                            <CheckBox Name="ChkBx_IsForSale" Content="This book is for sale" Margin="10,10,0,0"  FontWeight="Bold" Click="ChkBx_IsForSale_Click"/>
+                            <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0" Width="160">
+                                <Label Content="Asking Price" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                <TextBox Name="TB_AskingPrice" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.00" LostFocus="TB_AskingPrice_LostFocus"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Vertical" Height="55" Margin="0,0,0,0" Width="160">
+                                <Label Content="Estimated Value" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                                <TextBox Name="TB_EstimatedValue" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.00" LostFocus="TB_EstimatedValue_LostFocus"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0">
                 <Button Content="Save" Name="Btn_AddBookSave" HorizontalAlignment="Center" VerticalAlignment="Top" Width="75" Click="Btn_AddBookSave_Click"/>

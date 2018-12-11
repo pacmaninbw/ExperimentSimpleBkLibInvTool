@@ -217,6 +217,9 @@
       <DependentUpon>FormatTableView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ObservableViewObject.cs" />
+    <Compile Include="Views\OwnerShipDialog.xaml.cs">
+      <DependentUpon>OwnerShipDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PurchasingDialog.xaml.cs">
       <DependentUpon>PurchasingDialog.xaml</DependentUpon>
     </Compile>
@@ -319,6 +322,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\FormatTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\OwnerShipDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

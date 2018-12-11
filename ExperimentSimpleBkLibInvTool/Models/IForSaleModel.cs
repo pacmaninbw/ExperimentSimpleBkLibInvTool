@@ -2,9 +2,9 @@
 {
     public interface IForSaleModel
     {
-        double AskingPrice { get; set; }
+        string AskingPrice { get; set; }
 
-        double EstimatedValue { get; set; }
+        string EstimatedValue { get; set; }
 
         bool IsForSale { get; set; }
     }

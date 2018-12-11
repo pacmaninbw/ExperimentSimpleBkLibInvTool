@@ -41,7 +41,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private StatusTableModel statusTable;
         private ConditionsTableModel conditionsTable;
         private SeriesTableModel seriesTable;
-        DataRow[] _authors;
+        private DataRow[] _authors;
         private AuthorModel selectedAuthor;
         private BookInfoModel newBook;
         private PublishInfoModel publishInfo;
@@ -67,11 +67,13 @@ namespace ExperimentSimpleBkLibInvTool.Views
             InitStatusSelection();
             InitFormatSelection();
             InitConditionSelection();
+            InitForSaleData();
+            InitOwnerShip();
         }
 
         private void Btn_AddBookSave_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedAuthor != null && selectedAuthor.IsValid && !string.IsNullOrEmpty(title))
+            if (selectedAuthor != null && selectedAuthor.IsValid && !string.IsNullOrEmpty(title) && category.IsValid)
             {
                 newBook = new BookInfoModel(selectedAuthor, title, category, purchaseInfo, publishInfo, owned, salesInfo, seriesInfo, formatModel, ratings, bookStatus, bookCondition);
                 myLibrary = TheApp.Model.BookTable;
@@ -208,12 +210,12 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void TB_Printing_LostFocus(object sender, RoutedEventArgs e)
         {
-
+            publishInfo.Printing = TB_Printing.Text;
         }
 
         private void CB_OutofPrint_Click(object sender, RoutedEventArgs e)
         {
-
+            publishInfo.OutOfPrint = CB_OutofPrint.IsChecked.Value;
         }
 
         #endregion
@@ -437,11 +439,44 @@ namespace ExperimentSimpleBkLibInvTool.Views
         #endregion
 
         #region For Sale 
+        private void InitForSaleData()
+        {
+            salesInfo = new ForSaleModel();
+        }
 
+        private void ChkBx_IsForSale_Click(object sender, RoutedEventArgs e)
+        {
+            salesInfo.IsForSale = ChkBx_IsForSale.IsChecked.Value;
+        }
+
+        private void TB_AskingPrice_LostFocus(object sender, RoutedEventArgs e)
+        {
+            salesInfo.AskingPrice = TB_AskingPrice.Text;
+        }
+
+        private void TB_EstimatedValue_LostFocus(object sender, RoutedEventArgs e)
+        {
+            salesInfo.EstimatedValue = TB_EstimatedValue.Text;
+        }
 
         #endregion
 
         #region Owned
+
+        private void InitOwnerShip()
+        {
+            owned = new OwnerShipModel(false);
+        }
+
+        private void ChkBx_BookIsOwned_Click(object sender, RoutedEventArgs e)
+        {
+            owned.IsOwned = ChkBx_BookIsOwned.IsChecked.Value;
+        }
+
+        private void ChkBx_Wishlisted_Click(object sender, RoutedEventArgs e)
+        {
+            owned.IsWishListed = ChkBx_Wishlisted.IsChecked.Value;
+        }
 
 
         #endregion
