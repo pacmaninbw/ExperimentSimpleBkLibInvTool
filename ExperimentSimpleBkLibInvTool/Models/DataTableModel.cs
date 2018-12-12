@@ -45,6 +45,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
         protected void InitializeDataTable()
         {
             RefreshDataTableWhenNescessary();
+            GetParametersNamesFromCommand();
             foreach (DataColumn column in _dataTable.Columns)
             {
                 _columns.Add(column.ColumnName);
@@ -183,5 +184,37 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
 
             return Dt;
         }
+
+        private void GetParametersNamesFromCommand()
+        {
+            if (string.IsNullOrEmpty(_addItemStoredProcedureName))
+            {
+                // Neither the status table or the condition table have stored procedures to
+                // add data to the tables, these are included in add book.
+                return;
+            }
+            MySqlCommand cmd = new MySqlCommand();
+            MySqlConnection conn = new MySqlConnection(_dbConnectionString);
+            cmd.CommandType = CommandType.StoredProcedure;
+            cmd.CommandText = _addItemStoredProcedureName;
+            cmd.Connection = conn;
+
+            conn.Open();
+            MySqlCommandBuilder.DeriveParameters(cmd);
+            conn.Close();
+
+            MySqlParameterCollection collection = cmd.Parameters;
+            string fullFileSpec = System.IO.Directory.GetCurrentDirectory();
+            fullFileSpec += "\\" + _addItemStoredProcedureName + ".txt";
+            using (System.IO.StreamWriter file = new System.IO.StreamWriter(fullFileSpec))
+            {
+                foreach (var param in collection)
+                {
+                    file.WriteLine(param.ToString());
+                }
+            }
+
+        }
+
     }
 }

@@ -43,26 +43,15 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
         public AuthorModel()
         {
             errorWasReported = false;
-            _addSqlCommandParameter("ID", "idAuthors", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
-            _addSqlCommandParameter("Last Name", "LastName", "authorLastName", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("First Name", "FirstName", "authorFirstName", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("Middle Name", "MiddleName", "authorMiddleName", MySqlDbType.String, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Year of Birth", "YearOfBirth", "dob", MySqlDbType.String, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Year of Death", "YearOfDeath", "dod", MySqlDbType.String, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
+
+            InitializeSqlCommands();
         }
 
         public AuthorModel(string firstName, string lastName, string middleName=null, string yearOfBirth=null, string yearOfDeath=null, uint iD=0)
         {
             errorWasReported = false;
 
-            _addSqlCommandParameter("ID", "idAuthors", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
-            _addSqlCommandParameter("Last Name", "LastName", "authorLastName", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("First Name", "FirstName", "authorFirstName", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("Middle Name", "MiddleName", "authorMiddleName", MySqlDbType.String, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Year of Birth", "YearOfBirth", "dob", MySqlDbType.String, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Year of Death", "YearOfDeath", "dod", MySqlDbType.String, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
+            InitializeSqlCommands();
 
             FirstName = firstName;
             LastName = lastName;
@@ -82,6 +71,17 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             }
 
             ID = iD;
+        }
+
+        private void InitializeSqlCommands()
+        {
+            _addSqlCommandParameter("ID", "idAuthors", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
+            _addSqlCommandParameter("Last Name", "LastName", "authorLastName", MySqlDbType.String, true, ParameterDirection.Input);
+            _addSqlCommandParameter("First Name", "FirstName", "authorFirstName", MySqlDbType.String, true, ParameterDirection.Input);
+            _addSqlCommandParameter("Middle Name", "MiddleName", "authorMiddleName", MySqlDbType.String, false, ParameterDirection.Input);
+            _addSqlCommandParameter("Year of Birth", "YearOfBirth", "dob", MySqlDbType.String, false, ParameterDirection.Input);
+            _addSqlCommandParameter("Year of Death", "YearOfDeath", "dod", MySqlDbType.String, false, ParameterDirection.Input);
+            _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
         }
 
         private void SetFirstName(string textBoxInput)

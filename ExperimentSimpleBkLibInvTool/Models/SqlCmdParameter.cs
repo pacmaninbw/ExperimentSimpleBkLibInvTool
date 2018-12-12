@@ -165,6 +165,33 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             return true;
         }
 
+        protected bool SetMySqlParameterValue(MySqlParameter parameter)
+        {
+            bool isValid = true;
+            if (!IsValid)
+            {
+                return IsValid;
+            }
+            switch (_type)
+            {
+                case MySqlDbType.Int16:
+                case MySqlDbType.Int32:
+                    parameter.Value = _valueInt;
+                    break;
+                case MySqlDbType.Double:
+                    parameter.Value = _valueDouble;
+                    break;
+                case MySqlDbType.UInt32:
+                    parameter.Value = _valueKey;
+                    break;
+                case MySqlDbType.String:
+                    parameter.Value = _value;
+                    break;
+            }
+
+            return isValid;
+        }
+
         protected void SetValue(string value)
         {
             if (string.IsNullOrEmpty(value))

@@ -30,6 +30,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         public bool AddBook(BookInfoModel NewBook)
         {
             return addItem(NewBook);
+            return true;
         }
 
         private bool _dbAddBookToLibrary(BookInfoModel NewBook)
@@ -60,6 +61,5 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             }
             return AddSeriesSuccess;
         }
-
     }
 }
