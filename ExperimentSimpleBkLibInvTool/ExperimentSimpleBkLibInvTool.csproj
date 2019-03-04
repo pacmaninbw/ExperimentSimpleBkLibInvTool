@@ -373,7 +373,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="BaseModelsLayer.cd" />
-    <None Include="ClassDiagram1.cd" />
+    <None Include="ModelsClassDiagram.cd" />
+    <None Include="ItemModels.cd" />
+    <None Include="DataTableBaseModel.cd" />
     <None Include="DataTableItemsModel.cd" />
     <None Include="DataTableModel.cd" />
     <None Include="packages.config" />
