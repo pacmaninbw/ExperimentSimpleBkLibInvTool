@@ -18,7 +18,7 @@ d.	LibInvUnitTests.sql - This provides some data for testing and experimentation
 4.	Run
 # Known Issues:
 1.	While there are models and views there is no controller. This limits some of the functionality and will be corrected in a later version or another repository.
-2.	Add Book does not update the database yet. The controls are all in place, and all data is stored in the in memory models. Four of the models including BookInfoModel do not yet support updating the database.
+2.	Add Book does not update the database yet. The controls are all in place, and all data is stored in the in memory models. All other models update the database, several new models have been added to implement Add Book.
 3.	Not all of the current table views will be available in the final product. The table views for Categories, Statuses, Formats and Conditions will be removed. These tables are for debugging purposes. They will be list controls on the Add Book Dialog.
 4.	All Add dialogs are implemented except for Add Book.
 5.	The entire user interface is clunky and not in its final form.
