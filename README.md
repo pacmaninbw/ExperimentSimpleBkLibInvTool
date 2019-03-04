@@ -20,8 +20,7 @@ d.	LibInvUnitTests.sql - This provides some data for testing and experimentation
 1.	While there are models and views there is no controller. This limits some of the functionality and will be corrected in a later version or another repository.
 2.	Add Book does not update the database yet. The controls are all in place, and all data is stored in the in memory models. Four of the models including BookInfoModel do not yet support updating the database.
 3.	Not all of the current table views will be available in the final product. The table views for Categories, Statuses, Formats and Conditions will be removed. These tables are for debugging purposes. They will be list controls on the Add Book Dialog.
-4.	The Add Author and Add Series dialogs are implemented. The Add Series dialog is rather clunky and not in its final form because events aren’t handled properly yet (no controller).
-5.	Tables do not refresh automatically when an Author or Series is added.
-6.	The entire user interface is clunky and not in its final form.
+4.	All Add dialogs are implemented except for Add Book.
+5.	The entire user interface is clunky and not in its final form.
 # A Note on the user interface
 I am not and never have been a graphic artist. I realize that the Add Book Dialog is crowded and too busy. I would value input on what might make it more attractive to users. The application may need a few more dialogs such as Buy Book, and Describe Book.
