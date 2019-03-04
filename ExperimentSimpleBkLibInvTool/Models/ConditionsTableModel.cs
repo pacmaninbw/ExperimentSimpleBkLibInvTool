@@ -10,10 +10,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable
             get { return DataTable; }
         }
 
-        public ConditionsTableModel()
+        public ConditionsTableModel() : base("bookcondition", "getAllConditionsWithKeys", null)
         {
-            _getTableStoredProcedureName = "getAllConditionsWithKeys";
-            InitializeDictionaries();
         }
 
         public string ConditionTitle(uint Key)
@@ -24,6 +22,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable
         public uint ConditionKey(string Title)
         {
             return NameToKey(Title);
+        }
+
+        protected override void InitializeSqlCommandParameters()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

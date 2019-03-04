@@ -1,6 +1,5 @@
-﻿using System.Data;
+﻿using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
-using MySql.Data.MySqlClient;
 
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
@@ -8,13 +7,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
     public class FormatModel : DataTableItemBaseModel
     {
         public FormatModel()
+            : base(((App)Application.Current).Model.FormatTable)
         {
-            InitParametersList();
         }
 
         public FormatModel(string FormatName)
+            : base(((App)Application.Current).Model.FormatTable)
         {
-            InitParametersList();
             SetParameterValue("Name", FormatName);
         }
 
@@ -30,24 +29,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
             set { Name = value; }
         }
 
-        public uint Key
-        {
-            get { return GetKeyValue(); }
-            set { SetKeyValue(value); }
-        }
-
         protected override bool _dataIsValid()
         {
             bool isValid = GetParameterIsValid("Name");
 
             return isValid;
-        }
-
-        private void InitParametersList()
-        {
-            _addSqlCommandParameter("ID", "idFormat", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
-            _addSqlCommandParameter("Name", "FormatName", "bookFormatStr", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
         }
     }
 }

@@ -1,0 +1,6 @@
+@authorLastName
+@authorFirstName
+@authorMiddleName
+@dob
+@dod
+@primaryKey

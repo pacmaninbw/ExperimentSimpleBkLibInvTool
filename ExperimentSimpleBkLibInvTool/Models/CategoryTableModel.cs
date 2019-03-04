@@ -1,22 +1,15 @@
 ﻿using System.Data;
+using MySql.Data.MySqlClient;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
 {
     public class CategoryTableModel : DictionaryTableModel
     {
-        public DataTable CategoryTable
-        {
-            get { return DataTable; }
-        }
+        public DataTable CategoryTable { get { return DataTable; } }
 
-        public CategoryTableModel()
+        public CategoryTableModel() : base("bookcategories", "getAllBookCategoriesWithKeys", "addCategory")
         {
-            _getTableStoredProcedureName = "getAllBookCategoriesWithKeys";
-            _addItemStoredProcedureName = "addCategory";
-            _lastParameterName = "primaryKey";
-
-            InitializeDictionaries();
         }
 
         public string CategoryTitle(uint Key)
@@ -31,7 +24,15 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
 
         public void AddCategory(CategoryModel Category)
         {
-            AddItemToDicionary(Category);
+            AddItemToDictionary(Category);
+        }
+
+        protected override void InitializeSqlCommandParameters()
+        {
+            MySqlParameterCollection parameters = AddItemParameters;
+
+            _addSqlCommandParameter("Name", GetDBColumnData("CategoryName"), parameters["@categoryName"]);
+            _addSqlCommandParameter("Primary Key", GetDBColumnData("idBookCategories"), parameters["@primaryKey"]);
         }
     }
 }

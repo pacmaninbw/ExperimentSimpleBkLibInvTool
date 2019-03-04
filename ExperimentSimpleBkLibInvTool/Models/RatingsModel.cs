@@ -1,11 +1,9 @@
-﻿using System.Data;
+﻿using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
-using MySql.Data.MySqlClient;
 
-
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
+namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings
 {
-    public class RatingsModel : DataTableItemBaseModel
+    public class RatingsModel : DataTableItemBaseModel, IRatingsModel
     {
 
         public string MyRating
@@ -32,26 +30,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             set { SetKeyValue(value); }
         }
 
-        public RatingsModel()
+        public RatingsModel(string myRating=null, string amazonRating=null, string goodReadsRating=null, uint iD=0)
+            : base(((App)Application.Current).Model.RatingsTable)
         {
-            InitCommandParameters();
-        }
-
-        public RatingsModel(string myRating, string amazonRating, string goodReadsRating, uint iD)
-        {
-            InitCommandParameters();
             MyRating = myRating;
             AmazonRating = amazonRating;
             GoodReadsRating = goodReadsRating;
             ID = iD;
-        }
-
-        private void InitCommandParameters()
-        {
-            _addSqlCommandParameter("ID", "BookFKRats", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
-            _addSqlCommandParameter("My Rating", "MyRatings", "myRating", MySqlDbType.Double, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Amazon Rating", "AmazonRatings", "amazonRating", MySqlDbType.Double, false, ParameterDirection.Input);
-            _addSqlCommandParameter("GoodReads Rating", "GoodReadsRatings", "goodReadsRating", MySqlDbType.Double, false, ParameterDirection.Input);
         }
 
         protected override bool _dataIsValid()

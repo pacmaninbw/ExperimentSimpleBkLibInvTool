@@ -1,6 +1,4 @@
-﻿using System.Data;
-using System.Windows;
-using MySql.Data.MySqlClient;
+﻿using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 
@@ -15,7 +13,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             get { return _author; }
             set {
                 _author = value;
-                _authorId = _author.ID;
                 SetParameterValue("First Name", _author.FirstName);
                 SetParameterValue("Last Name", _author.LastName);
             }
@@ -29,21 +26,21 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
         public uint AuthorId { get { return _authorId; } }
 
         public SeriesModel()
+            : base(((App)Application.Current).Model.SeriesTable)
         {
-            InitializeParameters();
             _author = null;
             _authorId = 0;
         }
 
         public SeriesModel(AuthorModel author)
+            : base(((App)Application.Current).Model.SeriesTable)
         {
-            InitializeParameters();
             InitAuthorDetails(author);
         }
 
         public SeriesModel(AuthorModel author, string title)
+            : base(((App)Application.Current).Model.SeriesTable)
         {
-            InitializeParameters();
             InitAuthorDetails(author);
             SetParameterValue("Series Title", title);
         }
@@ -51,17 +48,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
         private void InitAuthorDetails(AuthorModel author)
         {
             _author = author;
-            _authorId = _author.ID;
             SetParameterValue("First Name", _author.FirstName);
             SetParameterValue("Last Name", _author.LastName);
-        }
-
-        private void InitializeParameters()
-        {
-            _addSqlCommandParameter("ID", "idSeries", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
-            _addSqlCommandParameter("First Name", "FirstName", "authorFirst", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("Last Name", "LastName", "authorLast", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("Series Title", "SeriesName", "seriesTitle", MySqlDbType.String, true, ParameterDirection.Input);
         }
 
         protected override bool _dataIsValid()

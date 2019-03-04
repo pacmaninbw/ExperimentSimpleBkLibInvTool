@@ -5,7 +5,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
 {
     public class PublishInfoModel : DataTableItemBaseModel, IPublishInfoModel
     {
-        private int _bookId;
         private string _isbnNumber;
         private string _copyRight;
         private string _publisher;
@@ -50,8 +49,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
         }
 
         public PublishInfoModel()
+            : base(((App)Application.Current).Model.PublishingData)
         {
-            _bookId = 0;
+            // InitializeSqlCommandParameters();
             _isbnNumber = null;
             _copyRight = null;
             _publisher = null;
@@ -61,24 +61,15 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
         }
 
         public PublishInfoModel(string ISBNumber, string CopyRight, string Publisher, string Printing=null, string Edition=null, bool OutOfPrint=false)
+            :base(((App)Application.Current).Model.PublishingData)
         {
-            _bookId = 0;
+            // InitializeSqlCommandParameters();
             _isbnNumber = ISBNumber;
             _copyRight = CopyRight;
             _publisher = Publisher;
             _printing = Printing;
             _edition = Edition;
             _outOfPrint = OutOfPrint;
-        }
-
-        public int getBookID()
-        {
-            return _bookId;
-        }
-
-        public void setBookId(int BookId)
-        {
-            _bookId = BookId;
         }
 
         protected override bool _dataIsValid()

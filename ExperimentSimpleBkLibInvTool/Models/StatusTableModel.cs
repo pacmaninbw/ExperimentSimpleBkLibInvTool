@@ -10,10 +10,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable
             get { return DataTable; }
         }
 
-        public StatusTableModel()
+        public StatusTableModel() : base("bkstatuses", "getAllStatusesWithKeys", null)
         {
-            _getTableStoredProcedureName = "getAllStatusesWithKeys";
-            InitializeDictionaries();
         }
 
         public string StatusTitle(uint Key)
@@ -26,5 +24,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable
             return NameToKey(Title);
         }
 
+        protected override void InitializeSqlCommandParameters()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

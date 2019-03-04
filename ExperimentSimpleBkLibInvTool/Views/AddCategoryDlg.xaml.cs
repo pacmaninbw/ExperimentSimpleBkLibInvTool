@@ -13,6 +13,8 @@ namespace ExperimentSimpleBkLibInvTool.Views
             InitializeComponent();
         }
 
+        public string NewGenre { get { return TxtBx_CategorTitle.Text; } }
+
         private void Btn_AddCategorySave_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TxtBx_CategorTitle.Text))

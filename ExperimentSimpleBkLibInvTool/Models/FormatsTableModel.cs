@@ -1,24 +1,16 @@
 ﻿using System.Data;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel;
-
+using MySql.Data.MySqlClient;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
 {
     public class FormatTableModel : DictionaryTableModel
     {
-        public FormatTableModel()
+        public FormatTableModel() : base("bookformat", "getAllBookFormatsWithKeys", "addFormat")
         {
-            _getTableStoredProcedureName = "getAllBookFormatsWithKeys";
-            _addItemStoredProcedureName = "addFormat";
-            _lastParameterName = "primaryKey";
-
-            InitializeDictionaries();
         }
 
-        public DataTable FormatTable
-        {
-            get { return DataTable; }
-        }
+        public DataTable FormatTable { get { return DataTable; } }
 
         public string FormatTitle(uint Key)
         {
@@ -32,7 +24,15 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
 
         public void AddFormat(FormatModel Format)
         {
-            AddItemToDicionary(Format);
+            AddItemToDictionary(Format);
+        }
+
+        protected override void InitializeSqlCommandParameters()
+        {
+            MySqlParameterCollection parameters = AddItemParameters;
+
+            _addSqlCommandParameter("Name", GetDBColumnData("FormatName"), parameters["@bookFormatStr"]);
+            _addSqlCommandParameter("Primary Key", GetDBColumnData("idFormat"), parameters["@primaryKey"]);
         }
     }
 }

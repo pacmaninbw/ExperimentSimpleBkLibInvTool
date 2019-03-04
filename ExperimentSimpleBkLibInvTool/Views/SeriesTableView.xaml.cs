@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
@@ -23,9 +24,15 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void Btn_SeriesAddSeries_Click(object sender, RoutedEventArgs e)
         {
-            AuthorTableModel authorTable = ((App)Application.Current).Model.AuthorTable;
-            SelectAuthorDlg selectAuthor = new SelectAuthorDlg(authorTable);
-            selectAuthor.Show();
+            AddSeriesToAuthorDlg addSeriesDlg = new AddSeriesToAuthorDlg();
+            addSeriesDlg.Closed += new EventHandler(AddSeriesClosed);
+            addSeriesDlg.Show();
+        }
+
+        private void AddSeriesClosed(object sender, EventArgs e)
+        {
+            _seriesTable = _seriesTableModel.Series;
+            SeriesGrid.DataContext = _seriesTable.DefaultView;
         }
 
         private void Btn_SeriesTableClose_Click(object sender, RoutedEventArgs e)

@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
 
 /*
+ * There is a tight coupling between each model and the table it belongs to. This
+ * is due to the models ability to add parameters to the tables call to the stored
+ * procedure. This is only true when a model can be added to a table.
+ * 
  * This class represents a row of data in a data table. Generally it will be used
  * to add a row to a database table.
  */
@@ -12,6 +17,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
 {
     public abstract class DataTableItemBaseModel
     {
+        private uint _bookId;
         /*
          * To save memory and correctly change the proper command parameter, only the
          * _sqlCmdParameters list contains SqlCmdParameters and the dictionaries provide
@@ -21,14 +27,39 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
         private List<SqlCmdParameter> _sqlCmdParameters;
         private Dictionary<string, int> _parameterIndexByPublicName;
         private Dictionary<string, int> _parameterIndexByDatabaseTableName;
+        private Dictionary<string, int> _parameterIndexByParameterName;
 
         public bool IsValid { get { return _dataIsValid(); } }
 
-        protected DataTableItemBaseModel()
+        public uint KeyValue { get { return _bookId; } }
+
+        public uint getBookID()
         {
+            return _bookId;
+        }
+
+        public void setBookId(uint BookId)
+        {
+            _bookId = BookId;
+        }
+
+        protected abstract bool _dataIsValid();
+
+        protected DataTableItemBaseModel(CDataTableModel DBInterfaceModel)
+        {
+            _bookId = 0;
             _sqlCmdParameters = new List<SqlCmdParameter>();
-            _parameterIndexByPublicName = new Dictionary<string, int>();
+            List<SqlCmdParameter> sqlCmdParameters = DBInterfaceModel.SQLCommandParameters;
+            foreach (SqlCmdParameter parameter in sqlCmdParameters)
+            {
+                SqlCmdParameter p = new SqlCmdParameter(parameter);
+                _sqlCmdParameters.Add(p);
+            }
+
+            _parameterIndexByPublicName = new Dictionary<string, int>(DBInterfaceModel.PublicNameParameterIndex);
+            _parameterIndexByParameterName = new Dictionary<string, int>(DBInterfaceModel.ParametersIndexByStoredProcedureName);
             _parameterIndexByDatabaseTableName = new Dictionary<string, int>();
+            _parameterIndexByDatabaseTableName = new Dictionary<string, int>(DBInterfaceModel.ParametersIndexByDbColumnName);
         }
 
         /*
@@ -36,7 +67,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
          * match the nummber of columns in the table. This function can be overriden
          * in those cases. Two examples of this are the Series and Books.
          */
-        public virtual bool AddParameterToCommand(MySqlCommand cmd, string ParameterName)
+        public bool AddParameterToCommand(MySqlCommand cmd, string ParameterName)
         {
             bool success = true;
             int tableIndex = getParameterIndex(ParameterName);
@@ -216,7 +247,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             int parameterIndex = -1;
             int tableIndex;
 
-            if (_parameterIndexByPublicName.TryGetValue(parameterName, out tableIndex))
+            if (_parameterIndexByParameterName.TryGetValue(parameterName, out tableIndex))
+            {
+                parameterIndex = tableIndex;
+            }
+            else if (_parameterIndexByPublicName.TryGetValue(parameterName, out tableIndex)) 
             {
                 parameterIndex = tableIndex;
             }
@@ -225,49 +260,16 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
                 parameterIndex = tableIndex;
             }
 #if DEBUG
+            // ASSERT
             else
             {
                 string eMsg = "Programmer error in getParameterIndex(): Parameter not found: " + parameterName;
-                MessageBox.Show(eMsg);
+                MessageBox.Show(eMsg, "Programmer Error:", MessageBoxButton.OK, MessageBoxImage.Error);
             }
 #endif
 
             return parameterIndex;
         }
-
-        protected void _addSqlCommandParameter(string PublicName, string DataBaseColumnName, string StoredProcedureParamName, MySqlDbType Type,
-            bool IsRequired = false, ParameterDirection Direction = ParameterDirection.Input, bool SkipInsert=false)
-        {
-#if DEBUG
-            if (string.IsNullOrEmpty(PublicName))
-            {
-                string eMsg = "Programmer error: PublicName is null or empty in _addSqlCommandParameter";
-                MessageBox.Show(eMsg);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(DataBaseColumnName))
-            {
-                string eMsg = "Programmer error: DataBaseColumnName is null or empty in _addSqlCommandParameter";
-                MessageBox.Show(eMsg);
-                return;
-            }
-
-            if (string.IsNullOrEmpty(StoredProcedureParamName))
-            {
-                string eMsg = "Programmer error: SBParamName is null or empty in _addSqlCommandParameter";
-                MessageBox.Show(eMsg);
-                return;
-            }
-#endif
-
-            SqlCmdParameter NewParameter = new SqlCmdParameter(PublicName, DataBaseColumnName, StoredProcedureParamName, Type, IsRequired, Direction, SkipInsert);
-            _parameterIndexByPublicName.Add(PublicName, _sqlCmdParameters.Count);
-            _parameterIndexByDatabaseTableName.Add(DataBaseColumnName, _sqlCmdParameters.Count);
-            _sqlCmdParameters.Add(NewParameter);
-        }
-
-        protected abstract bool _dataIsValid();
 
         protected bool _defaultIsValid()
         {

@@ -22,6 +22,7 @@ using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable;
 
@@ -43,7 +44,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private SeriesTableModel seriesTable;
         private DataRow[] _authors;
         private AuthorModel selectedAuthor;
-        private BookInfoModel newBook;
+        private BookModel newBook;
         private PublishInfoModel publishInfo;
         private PuchaseInfoModel purchaseInfo;
         private CategoryModel category;
@@ -75,7 +76,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             if (selectedAuthor != null && selectedAuthor.IsValid && !string.IsNullOrEmpty(title) && category.IsValid)
             {
-                newBook = new BookInfoModel(selectedAuthor, title, category, purchaseInfo, publishInfo, owned, salesInfo, seriesInfo, formatModel, ratings, bookStatus, bookCondition);
+                newBook = new BookModel(selectedAuthor, title, category, purchaseInfo, publishInfo, owned, salesInfo, seriesInfo, formatModel, ratings, bookStatus, bookCondition);
                 myLibrary = TheApp.Model.BookTable;
                 if (myLibrary.AddBook(newBook))
                 {
@@ -121,7 +122,6 @@ namespace ExperimentSimpleBkLibInvTool.Views
             _authors = _authorTable.FindAuthors("", "");    // Show all authors to beging with.
             AddRowsToListBox();
         }
-
 
         private void TB_SelectAuthorLastName_KeyUp(object sender, KeyEventArgs e)
         {
@@ -391,7 +391,6 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             formatModel = new FormatModel();
             formatModel.Format = LB_FormatSelector.SelectedValue.ToString();
-            formatModel.Key = formatTable.FormatKey(formatModel.Format);
         }
 
         #endregion

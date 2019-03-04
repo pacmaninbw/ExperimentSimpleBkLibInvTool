@@ -35,6 +35,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private void Btn_BooksAddBook_Click(object sender, RoutedEventArgs e)
         {
             AddBookDlg addBook = new AddBookDlg();
+            addBook.Closed += new EventHandler(AddBook_FormClosed);
             addBook.Show();
         }
 
@@ -42,5 +43,14 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             Close();
         }
+
+        private void AddBook_FormClosed(object sender, EventArgs e)
+        {
+            _bookTable = _bookTableModel.BookTable;
+            BooksGrid.DataContext = _bookTable.DefaultView;
+            BooksGrid.Items.Refresh();
+        }
+
+
     }
 }

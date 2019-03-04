@@ -1,149 +1,78 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using MySql.Data.MySqlClient;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Category;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 {
-    public class BookInfoModel : DataTableItemBaseModel
+    public class BookInfoModel : DataTableItemBaseModel, IBookInfoModel
     {
         private uint _idBookInfo;
-        private uint _category;
+        private uint _genreKey;
         private uint _titleKey;
-        private string _title;
         private uint _authorKey;
         private uint _seriesKey;
         private uint _formatKey;
-        private string _status;
-        private string _condition;
-        private PuchaseInfoModel _puchaseInfo;
-        private PublishInfoModel _publishInfo;
-        private OwnerShipModel _owned;
-        private ForSaleModel _forSale;
-        private AuthorModel _authorInfo;
-        private SeriesModel _seriesInfo;
-        private CategoryModel _categoryM;
-        private FormatModel _formatM;
-        private RatingsModel _ratings;
 
-        public BookInfoModel()
+        public BookInfoModel(uint BookID = 0, uint Genre = 0, uint TitleId = 0, uint AuthorId = 0, uint SeriesId = 0, uint FormatId = 0)
+            : base(((App)Application.Current).Model.BookInfoTable)
         {
-            InitializeSqlCommands();
+            _idBookInfo = BookID;
+            _genreKey = Genre;
+            _titleKey = TitleId;
+            _authorKey = AuthorId;
+            _seriesKey = SeriesId;
+            _formatKey = FormatId;
+    }
 
-            _authorInfo = null;
-            _publishInfo = null;
-            _puchaseInfo = null;
-            _owned = null;
-            _forSale = null;
-            _seriesInfo = null;
+        public BookInfoModel(IAuthorModel Author, string Genre, string Title, string Series, string Format)
+            : base(((App)Application.Current).Model.BookInfoTable)
+        {
             _idBookInfo = 0;
-            _formatKey = 0;
-            _category = 0;
-            _titleKey = 0;
-            _authorKey = 0;
-            _seriesKey = 0;
-            _status = null;
-            _condition = null;
-            _title = null;
+            _genreKey = ConvertGenreToKey(Genre);
+            _titleKey = ConvertTitleToKey(Title);
+            _authorKey = ConvertAuthorToKey(Author);
+            _seriesKey = ConvertSeriesToKey(Author, Series);
+            _formatKey = ConvertFormatToKey(Format);
         }
-
-        public BookInfoModel(uint category, string title, IPublishInfoModel publishInfo, IPuchaseInfoModel puchaseInfo, IOwnerShipModel owned,
-            IForSaleModel forSale, IAuthorModel authorInfo, ISeriesModel seriesInfo, RatingsModel ratings, string Status = null, string Condition = null)
-        {
-            InitializeSqlCommands();
-
-            _category = category;
-            _title = title;
-            PublishInfo = publishInfo;
-            PuchaseInfo = puchaseInfo;
-            Owned = owned;
-            ForSale = forSale;
-            AuthorInfo = authorInfo;
-            SeriesInfo = seriesInfo;
-            _ratings = ratings;
-            _condition = Condition;
-            _status = Status;
-        }
-
-        public BookInfoModel(AuthorModel authorInfo, string title, CategoryModel category, PuchaseInfoModel puchaseInfo=null, PublishInfoModel publishInfo=null,
-            OwnerShipModel owned=null, ForSaleModel forSale=null, SeriesModel seriesInfo=null, FormatModel formatm=null,  RatingsModel ratings=null, string Status=null, string Condition=null)
-        {
-            InitializeSqlCommands();
-
-            _categoryM = category;
-            _title = title;
-            _puchaseInfo = puchaseInfo;
-            _publishInfo = publishInfo;
-            _owned = owned;
-            _forSale = forSale;
-            _authorInfo = authorInfo;
-            _seriesInfo = seriesInfo;
-            _formatM = formatm;
-            _condition = Condition;
-            _status = Status;
-            _ratings = ratings;
-
-            if (authorInfo.IsValid)
-            {
-                _authorKey = authorInfo.ID;
-            }
-        }
-
-        public IPublishInfoModel PublishInfo
-        {
-            get { return _publishInfo; }
-            set { _publishInfo = (PublishInfoModel)value; }
-        }
-
-        public IPuchaseInfoModel PuchaseInfo
-        {
-            get { return _puchaseInfo; }
-            set { _puchaseInfo = (PuchaseInfoModel)value; }
-        }
-
-        public IOwnerShipModel Owned
-        {
-            get { return _owned; }
-            set { _owned = (OwnerShipModel)value; }
-        }
-
-        public IForSaleModel ForSale
-        {
-            get { return (IForSaleModel) _forSale; }
-            set { _forSale = (ForSaleModel) value; }
-        }
-
-        public IAuthorModel AuthorInfo
-        {
-            get { return _authorInfo; }
-            set { _authorInfo = (AuthorModel)value; }
-        }
-
-        public ISeriesModel SeriesInfo
-        {
-            get { return _seriesInfo; }
-            set { _seriesInfo = (SeriesModel)value; }
-        }
-
-        public RatingsModel Ratings
-        {
-            get { return _ratings; }
-            set { _ratings = value; }
-        }
-
-        public string Title { get { return _title; } }
 
         public uint SeriesKey { get { return _seriesKey; } }
 
         public uint BookID { get { return _idBookInfo; } }
 
-        public uint CategoryId { get { return _category; } }
+        public uint CategoryId { get { return _genreKey; } }
+
+        public string Genre
+        {
+            get { return GetParameterValue("Genre"); }
+            set { SetParameterValue("Genre", value); }
+        }
+
+        public string Title
+        {
+            get { return GetParameterValue("Title"); }
+            set { SetParameterValue("Title", value); }
+        }
+
+        public string Format
+        {
+            get { return GetParameterValue("Format"); }
+            set { SetParameterValue("Format", value); }
+        }
 
         public uint FormatId { get { return _formatKey; } }
 
@@ -151,72 +80,55 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public uint TitleId { get { return _titleKey; } }
 
-        private void InitializeSqlCommands()
+        public bool AddBook()
         {
+            bool wasAdded = false;
 
+            return wasAdded;
         }
 
         protected override bool _dataIsValid()
         {
-            bool dataIsValid = true;
-            bool seriesIsValid = true;
-            bool purchaseIsValid = true;
-            bool publishIsValid = true;
-            bool authorIsValid = true;
-            bool forSaleIsValid = true;
-
-            if (_seriesInfo != null)
+            if (_defaultIsValid())
             {
-                seriesIsValid = _seriesInfo.IsValid;
+                return true;
             }
-
-            if (_puchaseInfo != null)
-            {
-                purchaseIsValid = _puchaseInfo.IsValid;
-            }
-
-            if (_publishInfo != null)
-            {
-                publishIsValid = _publishInfo.IsValid;
-            }
-
-            if (_authorInfo != null)
-            {
-                authorIsValid = _authorInfo.IsValid;
-            }
-            else
-            {
-                string errorMsg = "Author first and last names are required fields.";
-                MessageBox.Show(errorMsg);
-                authorIsValid = false;
-            }
-
-            if (_forSale != null)
-            {
-                forSaleIsValid = _forSale.IsValid;
-            }
-
-            if (_categoryM == null)
-            {
-                string errorMsg = "The book category is a required field.";
-                MessageBox.Show(errorMsg);
-                dataIsValid = false;
-            }
-
-            if (!seriesIsValid || !purchaseIsValid || !publishIsValid || !authorIsValid || !forSaleIsValid)
-            {
-                dataIsValid = false;
-            }
-
-            if (string.IsNullOrEmpty(_title))
-            {
-                string errorMsg = "The book title is a required field.";
-                MessageBox.Show(errorMsg);
-                dataIsValid = false;
-            }
-
-            return dataIsValid;
+            throw new NotImplementedException();
         }
 
+        private uint ConvertGenreToKey(string Genre)
+        {
+            uint genreId = 0;
+
+            return genreId;
+        }
+
+        private uint ConvertFormatToKey(string Format)
+        {
+            uint formatId = 0;
+
+            return formatId;
+        }
+
+        private uint ConvertAuthorToKey(IAuthorModel author)
+        {
+            uint authorid = 0;
+
+            return authorid;
+        }
+
+        private uint ConvertTitleToKey(string Title)
+        {
+            uint titleid = 0;
+
+            return titleid;
+        }
+
+        private uint ConvertSeriesToKey(IAuthorModel author, string Series)
+        {
+            uint seriesId = 0;
+
+            return seriesId;
+        }
     }
 }

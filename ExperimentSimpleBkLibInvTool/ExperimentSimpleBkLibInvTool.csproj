@@ -165,27 +165,38 @@
     </Compile>
     <Compile Include="Models\AuthorTableModel.cs" />
     <Compile Include="Models\BookInfoModel.cs" />
+    <Compile Include="Models\BookModel.cs" />
+    <Compile Include="Models\BookInfoTableModel.cs" />
     <Compile Include="Models\BookTableModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CategoryTableModel.cs" />
     <Compile Include="Models\ConditionsTableModel.cs" />
+    <Compile Include="Models\DBColParameterData.cs" />
     <Compile Include="Models\DataTableItemBaseModel.cs" />
     <Compile Include="Models\DataTableModel.cs" />
     <Compile Include="Models\DictionaryTableModel.cs" />
     <Compile Include="Models\FormatModel.cs" />
     <Compile Include="Models\FormatsTableModel.cs" />
     <Compile Include="Models\ForSaleModel.cs" />
+    <Compile Include="Models\ForSaleTableModel.cs" />
     <Compile Include="Models\IAuthorModel.cs" />
+    <Compile Include="Models\IBookInfoModel.cs" />
+    <Compile Include="Models\IBookModel.cs" />
     <Compile Include="Models\IForSaleModel.cs" />
     <Compile Include="Models\IOwnerShipModel.cs" />
     <Compile Include="Models\IPublishInfoModel.cs" />
     <Compile Include="Models\IPuchaseInfoModel.cs" />
+    <Compile Include="Models\IRatingsModel.cs" />
     <Compile Include="Models\ISeriesModel.cs" />
     <Compile Include="Models\ObservableModelObject.cs" />
     <Compile Include="Models\OwnerShipModel.cs" />
+    <Compile Include="Models\OwnerShipTableModel.cs" />
     <Compile Include="Models\PublishInfoModel.cs" />
+    <Compile Include="Models\PublishInfoTableModel.cs" />
     <Compile Include="Models\PuchaseInfoModel.cs" />
+    <Compile Include="Models\PurchaseInfoTableModel.cs" />
     <Compile Include="Models\RatingsModel.cs" />
+    <Compile Include="Models\RatingsTableModel.cs" />
     <Compile Include="Models\SqlCmdParameter.cs" />
     <Compile Include="Models\StatusTableModel.cs" />
     <Compile Include="Views\AddAuthorDlg.xaml.cs">
@@ -222,9 +233,6 @@
     </Compile>
     <Compile Include="Views\PurchasingDialog.xaml.cs">
       <DependentUpon>PurchasingDialog.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\SelAuthStackPaneled.xaml.cs">
-      <DependentUpon>SelAuthStackPaneled.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SelectAuthorDlg.xaml.cs">
       <DependentUpon>SelectAuthorDlg.xaml</DependentUpon>
@@ -333,10 +341,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SelAuthStackPaneled.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\SelectAuthorDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -369,6 +373,9 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="BaseModelsLayer.cd" />
+    <None Include="ClassDiagram1.cd" />
+    <None Include="DataTableItemsModel.cd" />
+    <None Include="DataTableModel.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

@@ -122,14 +122,14 @@ BEGIN
             CALL insertOrUpdateVolumeInSeries(bookKey, volumeNumber, seriesKey);
         END IF;
         IF isOwned > 0 THEN
-                CALL insertOrUpdateForSale(bookKey, isForSale, askingPrice, estimatedValue);
+            CALL insertOrUpdateForSale(bookKey, isForSale, askingPrice, estimatedValue);
         END IF;
         IF myRating IS NOT NULL THEN
-                CALL insertOrUpdateBookRatings(bookKey, myRating, amazonRating, goodReadsRating);
+            CALL insertOrUpdateBookRatings(bookKey, myRating, amazonRating, goodReadsRating);
         END IF;
         IF bookDescription IS NOT NULL OR LENGTH(bookDescription) > 0 THEN
-                -- Try to save space if there is no description.
-                CALL insertOrUpdateSynopsis(bookKey, bookDescription);
+            -- Try to save space if there is no description.
+            CALL insertOrUpdateSynopsis(bookKey, bookDescription);
         END IF;
             
     END IF;
@@ -351,7 +351,7 @@ BEGIN
     END IF;
 END$$
 
-DELIMITER ;
+DELIMITER ;getAllAuthorsData
 
 -- -----------------------------------------------------
 -- procedure insertOrUpdateOwned
@@ -1835,6 +1835,440 @@ BEGIN
         CALL addCategory('Fiction: Romance', primaryKey);
         CALL addCategory('Fiction: Science Fiction', primaryKey);
         CALL addCategory('Fiction: Western', primaryKey);
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getPublishingInfo
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getPublishingInfo`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getPublishingInfo` (
+    IN bookKey INT
+)
+DETERMINISTIC
+BEGIN
+
+    IF bookKey > 0 THEN
+        SELECT * FROM publishinginfo WHERE BookFKPubI = bookKey;
+    ELSE
+        SELECT * FROM publishinginfo;
+    END IF;
+    
+END$$
+
+DELIMITER ;
+
+--
+-- New add and get procedures added 02/23/2019.
+--
+
+-- -----------------------------------------------------
+-- procedure addPublishingInfo
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`addPublishingInfo`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `addPublishingInfo` (
+    IN bookKey INT,
+    IN copyright VARCHAR(4),
+    IN iSBNumber VARCHAR(30),
+    IN edition INT,
+    IN printing INT,
+    IN publisher VARCHAR(45),
+    IN outOfPrint TINYINT
+)
+DETERMINISTIC
+BEGIN
+
+    IF bookKey > 0 THEN
+        INSERT INTO publishinginfo (publishinginfo.BookFKPubI, publishinginfo.Copyright, publishinginfo.ISBNumber, publishinginfo.Edition, publishinginfo.Printing, publishinginfo.Publisher, publishinginfo.OutOfPrint)
+            VALUES(bookKey, copyright, iSBNumber, edition, printing, publisher, outOfPrint);
+    END IF;
+    
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure addOwnerShipData
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`addOwnerShipData`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `addOwnerShipData` 
+(
+    IN bookKey INT,
+    IN isOwned TINYINT,
+    IN isWishListed TINYINT
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        INSERT INTO owned (owned.BookFKo, owned.IsOwned, owned.IsWishListed)
+            VALUES(bookKey, isOwned, isWishListed);
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getOwnerShipData
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getOwnerShipData`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getOwnerShipData` 
+(
+    IN bookKey INT
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        SELECT * FROM owned WHERE BookFKPubI = bookKey;
+    ELSE
+        SELECT * FROM owned;
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure addConditionToBook
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`addConditionToBook`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `addConditionToBook`
+(
+    IN bookKey INT,
+    IN statusKey INT,
+    IN conditionKey INT,
+    IN physicalDescStr VARCHAR(256),
+    IN signedByAuthor TINYINT,
+    IN haveRead TINYINT
+)
+DETERMINISTIC
+BEGIN
+
+    IF bookKey > 0 THEN
+        INSERT INTO bookcondition (bookcondition.BookFKCond, bookcondition.NewOrUsed, bookcondition.ConditionOfBook, bookcondition.PhysicalDescriptionStr, bookcondition.IsSignedByAuthor, bookcondition.BookHasBeenRead)
+            VALUES(bookKey, statusKey, conditionKey, physicalDescStr, signedByAuthor, haveRead);
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getBookCondition
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getBookCondition`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getBookCondition` 
+(
+    IN bookKey INT
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        SELECT * FROM bookcondition WHERE BookFKCond = bookKey;
+    ELSE
+        SELECT * FROM bookcondition;
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure addForSaleDataToBook()
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`addForSaleDataToBook`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `addForSaleDataToBook`
+(
+    IN bookKey INT,
+    IN isForSale TINYINT,
+    IN askingPrice DOUBLE,
+    IN estimatedValue DOUBLE
+)
+DETERMINISTIC
+BEGIN
+
+    IF bookKey > 0 THEN
+        INSERT INTO forsale (forsale.BookFKfs, forsale.IsForSale, forsale.AskingPrice, forsale.EstimatedValue)
+            VALUES(bookKey, isForSale, askingPrice, estimatedValue);
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getBookForSaleData
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getBookForSaleData`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getBookForSaleData` 
+(
+    IN bookKey INT
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        SELECT * FROM foresale WHERE BookFKfs = bookKey;
+    ELSE
+        SELECT * FROM foresale;
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure addPurchaseInfo
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`addPurchaseInfo`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `addPurchaseInfo`
+(
+    IN bookKey INT,
+    IN purchaseDate DATE,
+    IN listPrice DOUBLE,
+    IN pricePaid DOUBLE,
+    vendor VARCHAR(64)
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        INSERT INTO purchaseinfo
+            (purchaseinfo.BookFKPurI, purchaseinfo.PurchaseDate, purchaseinfo.ListPrice, purchaseinfo.PaidPrice, purchaseinfo.Vendor)
+            VALUES(bookKey, purchaseDate, listPrice, pricePaid, vendor);
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getPurchaseInfo
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getPurchaseInfo`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getPurchaseInfo` 
+(
+    IN bookKey INT
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        SELECT * FROM purchaseinfo WHERE BookFKPurI = bookKey;
+    ELSE
+        SELECT * FROM purchaseinfo;
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure addBookRatings
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`addBookRatings`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `addBookRatings`
+(
+    IN bookKey INT,
+    IN myRatings DOUBLE,
+    IN amazonRatings DOUBLE,
+    IN goodReadsRatings DOUBLE
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        INSERT INTO ratings
+            (ratings.BookFKRats, ratings.MyRatings, ratings.AmazonRatings, ratings.GoodReadsRatings)
+            VALUES(bookKey, myRatings, amazonRatings, goodReadsRatings);
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getRatings
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getRatings`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getRatings` 
+(
+    IN bookKey INT
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        SELECT * FROM ratings WHERE BookFKRats = bookKey;
+    ELSE
+        SELECT * FROM ratings;
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getTableColumnData
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getTableColumnData`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getTableColumnData` 
+(
+    IN tableName varchar(128)
+)
+DETERMINISTIC
+BEGIN
+    
+    SELECT COLUMN_NAME, ORDINAL_POSITION, IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS WHERE Table_Name = tableName;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getStoredProcedureParameters
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getStoredProcedureParameters`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getStoredProcedureParameters` 
+(
+    IN procedureName varchar(128)
+)
+DETERMINISTIC
+BEGIN
+    
+    SELECT PARAMETER_NAME, ORDINAL_POSITION, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH, PARAMETER_MODE
+        FROM information_schema.parameters 
+        WHERE SPECIFIC_NAME = procedureName;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure addBookToBookInfo
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`addBookToBookInfo`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `addBookToBookInfo`
+(
+    IN authorKey INT,
+    IN titleKey INT,
+    IN genreKey INT,
+    IN formatKey INT,
+    IN seriesKey INT,
+    OUT bookKey INT
+)
+DETERMINISTIC
+BEGIN
+    
+    INSERT INTO bookinfo (bookinfo.AuthorFKbi, bookinfo.TitleFKbi, bookinfo.CategoryFKbi, bookinfo.BookFormatFKbi, bookinfo.SeriesFKbi)
+        VALUES (authorKey, titleKey, genreKey, formatKey, seriesKey);
+    SET bookKey := LAST_INSERT_ID();
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getBookInfo
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getBookInfo`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getBookInfo` 
+(
+    IN bookKey INT
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        SELECT * FROM bookinfo WHERE idBookInfo = bookKey;
+    ELSE
+        SELECT * FROM bookinfo;
     END IF;
 
 END$$

@@ -87,12 +87,5 @@ namespace ExperimentSimpleBkLibInvTool
             AddAuthorDlg addAuthorDlg = new AddAuthorDlg();
             addAuthorDlg.Show();
         }
-
-        private void Btn_AddSeries_Click(object sender, RoutedEventArgs e)
-        {
-            AuthorTableModel authorTable = TheApp.Model.AuthorTable;
-            SelectAuthorDlg selectAuthor = new SelectAuthorDlg(authorTable);
-            selectAuthor.Show();
-        }
     }
 }

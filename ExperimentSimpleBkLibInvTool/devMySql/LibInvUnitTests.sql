@@ -32,6 +32,8 @@ SET @procName = 'zzzUnitTestAddAuthors';
     CALL addAuthor('Weber', 'David', 'Mark', '1952', NULL, primaryKey);
     CALL addAuthor('Baxter', 'Stephen', NULL, '1957', NULL, primaryKey);
     CALL addAuthor('Knuth', 'Donald', 'Ervin', '1938', NULL, primaryKey);
+    CALL addAuthor('Monk', 'Devon', NULL, NULL, NULL, primaryKey);
+    CALL addAuthor('Anthony', 'Piers', NULL, '1934', NULL, primaryKey);
     
     IF (SELECT COUNT(*) FROM authorstab) != 14 THEN
         SELECT @procName, COUNT(*) FROM series;

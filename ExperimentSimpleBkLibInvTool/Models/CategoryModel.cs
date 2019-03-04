@@ -1,19 +1,18 @@
-﻿using System.Data;
+﻿using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
-using MySql.Data.MySqlClient;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
 {
     public class CategoryModel : DataTableItemBaseModel
     {
         public CategoryModel()
+            : base(((App)Application.Current).Model.CategoryTable)
         {
-            InitParametersList();
         }
 
         public CategoryModel(string CategoryName)
+            : base(((App)Application.Current).Model.CategoryTable)
         {
-            InitParametersList();
             SetParameterValue("Name", CategoryName);
         }
 
@@ -40,13 +39,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
             bool isValid = GetParameterIsValid("Name");
 
             return isValid;
-        }
-
-        private void InitParametersList()
-        {
-            _addSqlCommandParameter("ID", "idBookCategories", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
-            _addSqlCommandParameter("Name", "CategoryName", "categoryName", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Windows;
+using MySql.Data.MySqlClient;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 
@@ -8,18 +10,14 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
 {
     public class SeriesTableModel : CDataTableModel
     {
-        public SeriesTableModel()
+        private int seriesTitleIndex;
+
+        public SeriesTableModel() : base("series", "getAllSeriesData", "addAuthorSeries")
         {
-            _getTableStoredProcedureName = "getAllSeriesData";
-            _addItemStoredProcedureName = "addAuthorSeries";
-            _lastParameterName = null;
-            InitializeDataTable();
+            seriesTitleIndex = GetDBColumnData("SeriesName").Ordinal_Posistion;
         }
 
-        public DataTable Series
-        {
-            get { return DataTable; }
-        }
+        public DataTable Series { get { return DataTable; } }
 
         public bool AddSeries(ISeriesModel iSeriesData)
         {
@@ -31,10 +29,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
         {
             return addItem(seriesModel);
         }
-
-        private const int authorLastNameIndex = 0;
-        private const int authorFirstNameIndex = 1;
-        private const int seriesTitleIndex = 2;
 
         // This method could be rewritten to use the stored procedure getAllSeriesByThisAuthor
         // This is better because it doesn't require changing _getTableStoredProcedureName and
@@ -57,6 +51,17 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             }
 
             return seriesSelectionList;
+        }
+
+        protected override void InitializeSqlCommandParameters()
+        {
+            AuthorTableModel authorTable = ((App)Application.Current).Model.AuthorTable;
+            MySqlParameterCollection parameters = AddItemParameters;
+
+            _addSqlCommandParameter("First Name", authorTable.GetDBColumnData("FirstName"), parameters["@authorFirst"]);
+            _addSqlCommandParameter("Last Name", authorTable.GetDBColumnData("LastName"), parameters["@authorLast"]);
+            _addSqlCommandParameter("Series Title", GetDBColumnData("SeriesName"), parameters["@seriesTitle"]);
+
         }
     }
 }

@@ -1,33 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using MySql.Data.MySqlClient;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
 {
     public class AuthorTableModel : CDataTableModel
     {
-        // {TODO} This is a hack, there should be a way to get this info from the Datatable.
-        const int IDColumnIndex = 0;
-        const int LastNameColumnIndex = 1;
-        const int FirstNameColumnIndex = 2;
-        const int MiddleNameColumnIndex = 3;
-        const int DobColumnIndex = 4;
-        const int DodColumnIntex = 5;
+        private int LastNameColumnIndex;
+        private int FirstNameColumnIndex;
+        private int MiddleNameColumnIndex;
+        private int DobColumnIndex;
+        private int DodColumnIntex;
 
-        #region Database support
+        public DataTable AuthorTable { get { return DataTable; } }
 
-        public AuthorTableModel()
+        public AuthorTableModel() : base("authorstab", "getAllAuthorsData", "addAuthor")
         {
-            _getTableStoredProcedureName = "getAllAuthorsData";
-            _addItemStoredProcedureName = "addAuthor";
-            _lastParameterName = "primaryKey";
-            InitializeDataTable();
-        }
-
-        public DataTable AuthorTable
-        {
-            get { return DataTable; }
+            LastNameColumnIndex = GetDBColumnData("LastName").IndexBasedOnOrdinal;
+            FirstNameColumnIndex = GetDBColumnData("FirstName").IndexBasedOnOrdinal;
+            MiddleNameColumnIndex = GetDBColumnData("MiddleName").IndexBasedOnOrdinal;
+            DobColumnIndex = GetDBColumnData("YearOfBirth").IndexBasedOnOrdinal;
+            DodColumnIntex = GetDBColumnData("YearOfDeath").IndexBasedOnOrdinal;
         }
 
         public bool AddAuthor(AuthorModel NewAuthor)
@@ -35,9 +30,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             return addItem(NewAuthor);
         }
 
-        #endregion
 
-        #region Author Selector tool support
+#region Author Selector tool support
 
         public DataRow[] FindAuthors(string lastName, string firstname=null)
         {
@@ -52,7 +46,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
         public AuthorModel ConvertDataRowToAuthor(DataRow AuthorInfo)
         {
             AuthorModel author = new AuthorModel(AuthorInfo[FirstNameColumnIndex].ToString(), AuthorInfo[LastNameColumnIndex].ToString(), AuthorInfo[MiddleNameColumnIndex].ToString(),
-                AuthorInfo[DobColumnIndex].ToString(), AuthorInfo[DodColumnIntex].ToString(), Convert.ToUInt32(AuthorInfo[IDColumnIndex].ToString())); ;
+                AuthorInfo[DobColumnIndex].ToString(), AuthorInfo[DodColumnIntex].ToString());
 
             return author;
         }
@@ -74,6 +68,18 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             string LastFirstMiddle = author[LastNameColumnIndex].ToString() + ", " + author[FirstNameColumnIndex].ToString() + " " + author[MiddleNameColumnIndex].ToString();
 
             return LastFirstMiddle;
+        }
+
+        protected override void InitializeSqlCommandParameters()
+        {
+            MySqlParameterCollection parameters = AddItemParameters;
+
+            _addSqlCommandParameter("Last Name", GetDBColumnData("LastName"), parameters["@authorLastName"]);
+            _addSqlCommandParameter("First Name", GetDBColumnData("FirstName"), parameters["@authorFirstName"]);
+            _addSqlCommandParameter("Middle Name", GetDBColumnData("MiddleName"), parameters["@authorMiddleName"]);
+            _addSqlCommandParameter("Year of Birth", GetDBColumnData("YearOfBirth"), parameters["@dob"]);
+            _addSqlCommandParameter("Year of Death", GetDBColumnData("YearOfDeath"), parameters["@dod"]);
+            _addSqlCommandParameter("Primary Key", GetDBColumnData("idAuthors"), parameters["@primaryKey"]);
         }
 
         #endregion

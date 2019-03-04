@@ -5,15 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool.Views"
         mc:Ignorable="d"
-        Title="Select Author" Height="450" Width="585">
+        Title="Select Author" Height="320" Width="475">
     <Grid>
-        <Label Content="Last Name" HorizontalAlignment="Left" Margin="70,120,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="AuthorLastNameSelect" HorizontalAlignment="Left" Height="23" Margin="50,147,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="AuthorLastNameSelect_KeyUp"/>
-        <Label Content="First Name" HorizontalAlignment="Left" Margin="70,187,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="AuthorFirststNameSelect" HorizontalAlignment="Left" Height="23" Margin="50,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Middle Name" HorizontalAlignment="Left" Margin="70,260,0,0" VerticalAlignment="Top" FontWeight="Bold"/>
-        <TextBox Name="AuthorMiddleNameSelect" HorizontalAlignment="Left" Height="23" Margin="50,290,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListBox Name="AuthorSelectorLB" HorizontalAlignment="Left" Height="300" Margin="240,50,0,0" VerticalAlignment="Top" Width="265" SelectionChanged="AuthorSelectorLB_SelectionChanged" FontWeight="Bold" ItemsSource="{Binding}"/>
-        <TextBlock HorizontalAlignment="Left" Margin="50,50,0,0" TextWrapping="Wrap" Text="Select a name from the list on the right, or enter the last name of the author." VerticalAlignment="Top" Width="160"/>
+        <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="245" VerticalAlignment="Top" Width="455"  Margin="0,0,0,0" Background="White">
+                <StackPanel Orientation="Vertical" Height="240" Width="160" HorizontalAlignment="Center" Margin="7,0,0,0">
+                    <TextBlock HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="Select a name from the list on the right, or enter the last name of the author." VerticalAlignment="Top" Width="160" TextAlignment="Center"/>
+                    <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
+                        <Label Content="Last Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                        <TextBox Name="TB_SelectAuthorLastName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="TB_SelectAuthorLastName_KeyUp"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
+                        <Label Content="First Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                        <TextBox Name="TB_SelectAuthorFirstName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="TB_SelectAuthorFirstName_KeyUp"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
+                        <Label Content="Middle Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
+                        <TextBox Name="TB_SelectAuthorMiddleName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    </StackPanel>
+                </StackPanel>
+                <ListBox Name="AuthorSelectorLB" HorizontalAlignment="Left" Height="240" Margin="7,5,0,0" VerticalAlignment="Top" Width="275" FontWeight="Bold" Background="Wheat" SelectionChanged="AuthorSelectorLB_SelectionChanged"/>
+            </StackPanel>
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="* Author is Required" FontWeight="Bold" Foreground="Red" />
+        </StackPanel>
     </Grid>
 </Window>

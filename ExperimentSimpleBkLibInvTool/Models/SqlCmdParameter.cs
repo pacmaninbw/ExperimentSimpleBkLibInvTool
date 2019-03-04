@@ -15,7 +15,7 @@ using MySql.Data.MySqlClient;
  * type for the stored procedure. The coversion from input string to the expected SQL type
  * will occur during the input phase as an additional check on the validity of the input.
  */
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
+namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
 {
     public class SqlCmdParameter 
     {
@@ -40,12 +40,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
                 throw ex;
             }
 
-            if (string.IsNullOrEmpty(DataBaseColumnName))
-            {
-                ArgumentNullException ex = new ArgumentNullException("DataBaseColumnName");
-                throw ex;
-            }
-
             if (string.IsNullOrEmpty(SBParamName))
             {
                 ArgumentNullException ex = new ArgumentNullException("SBParamName");
@@ -59,6 +53,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
                 case MySqlDbType.Double:
                 case MySqlDbType.String:
                 case MySqlDbType.UInt32:
+                case MySqlDbType.Byte:      // TinyInt for boolean representation
+                    break;
+                case MySqlDbType.VarChar:
+                case MySqlDbType.Date:
+                    // In the user interface handle VarChar as a string.
+                    Type = MySqlDbType.String;
                     break;
 
                 default:
@@ -67,7 +67,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             }
 
             _publicName = PublicName;
-            _dataBaseColumnName = DataBaseColumnName;
             _storedProcedureParameterName = SBParamName;
             _direction = Direction;
             _isRequired = IsRequired;
@@ -80,14 +79,24 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             _skipInsertOfPrimaryKey = SkipInserOfPrimaryKey;
         }
 
+        public SqlCmdParameter(SqlCmdParameter original)
+        {
+            _publicName = original._publicName;
+            _storedProcedureParameterName = original._storedProcedureParameterName;
+            _direction = original._direction;
+            _isRequired = original._isRequired;
+            _type = original._type;
+            _isValueSet = original._isValueSet;
+            _value = original._value;
+            _valueKey = original._valueKey;
+            _valueInt = original._valueInt;
+            _valueDouble = original._valueDouble;
+            _skipInsertOfPrimaryKey = original._skipInsertOfPrimaryKey;
+        }
+
         public string PublicName
         {
             get { return _publicName; }
-        }
-
-        public string DataBaseColumnName
-        {
-            get { return _dataBaseColumnName; }
         }
 
         public ParameterDirection Direction
@@ -137,8 +146,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             // If it is an output variable validity doesn't matter.
             if (_direction != ParameterDirection.Input)
             {
-                cmd.Parameters.Add(new MySqlParameter(_dataBaseColumnName, _type));
-                cmd.Parameters[_dataBaseColumnName].Direction = _direction;
+                string IndexByNameValue = _storedProcedureParameterName;
+                cmd.Parameters.Add(new MySqlParameter(IndexByNameValue, _type));
+                cmd.Parameters[IndexByNameValue].Direction = _direction;
                 return true;
             }
 
@@ -146,8 +156,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             {
                 return IsValid;
             }
+
             switch (_type)
             {
+                case MySqlDbType.Byte:
                 case MySqlDbType.Int16:
                 case MySqlDbType.Int32:
                     cmd.Parameters.AddWithValue(_storedProcedureParameterName, _valueInt);
@@ -165,33 +177,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             return true;
         }
 
-        protected bool SetMySqlParameterValue(MySqlParameter parameter)
-        {
-            bool isValid = true;
-            if (!IsValid)
-            {
-                return IsValid;
-            }
-            switch (_type)
-            {
-                case MySqlDbType.Int16:
-                case MySqlDbType.Int32:
-                    parameter.Value = _valueInt;
-                    break;
-                case MySqlDbType.Double:
-                    parameter.Value = _valueDouble;
-                    break;
-                case MySqlDbType.UInt32:
-                    parameter.Value = _valueKey;
-                    break;
-                case MySqlDbType.String:
-                    parameter.Value = _value;
-                    break;
-            }
-
-            return isValid;
-        }
-
         protected void SetValue(string value)
         {
             if (string.IsNullOrEmpty(value))
@@ -205,6 +190,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             switch (_type)
             {
                 case MySqlDbType.Int16:
+                case MySqlDbType.Byte:
                     bool tmp = false;
                     if (!bool.TryParse(_value, out tmp))
                     {

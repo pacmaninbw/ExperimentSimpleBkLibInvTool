@@ -3,21 +3,24 @@
   <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel.CDataTableModel">
     <Position X="1" Y="0.5" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAGAYAAQCAEBAAEAAKAAAABAAAAEgAAAAgAAAAAAQA=</HashCode>
+      <HashCode>AAAGAIAAAAAEBIAAAiKAwBABAAAADDEAIAhAAAAAgYQ=</HashCode>
       <FileName>Models\DataTableModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_sqlCmdParameters" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel.DataTableItemBaseModel">
-    <Position X="6" Y="0.5" Width="3.5" />
+    <Position X="10.5" Y="0.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AIAgCAAAAAgAAAAkgigCAACAAAAAAAEAAAAAAAAAEgQ=</HashCode>
+      <HashCode>AIAwCEIAAAgCAgQkgigAQAiAAAAAAAAAAgAAAACAGAQ=</HashCode>
       <FileName>Models\DataTableItemBaseModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel.SqlCmdParameter">
-    <Position X="10.75" Y="0.5" Width="3.5" />
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel.SqlCmdParameter">
+    <Position X="6.25" Y="0.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AJBAAAQAEAAAAgUBCCgAAAAgEAIAEoAAAQAoAAAgEAA=</HashCode>
+      <HashCode>AJBAAAQAAAACAgUBCCgAAAAgEAIAEoAAAQAoAAAgEAA=</HashCode>
       <FileName>Models\SqlCmdParameter.cs</FileName>
     </TypeIdentifier>
   </Class>

@@ -1,0 +1,11 @@
+X  Add stored procedures for inserting ratings, Ownership, Purchase Data and For Sale
+X   Add Table Model classes for ratings, ownership, purchase data and for sale
+X   Move InitializeSqlCommandParameters for each of the above
+X  Add stored procedures to get column data and procedure parameters data
+Copy necessary data from table model to item model when item model is constructed
+
+
+   Move List<SqlCmdParameter> _sqlCmdParameters; from DataTableItemBaseModel to CDataTableModel
+   Build _sqlCmdParameters from database information add public name later during CDataTableModel Contstruction
+   Provide Parameter for _sqlCmdParameters in Table Model { get; private set; } so item model can access it.
+   Get column ordinal from data base rather than create constants in AuthorTableModel

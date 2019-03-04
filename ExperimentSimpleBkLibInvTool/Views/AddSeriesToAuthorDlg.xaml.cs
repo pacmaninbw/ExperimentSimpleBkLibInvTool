@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
 
@@ -11,13 +12,28 @@ namespace ExperimentSimpleBkLibInvTool.Views
     {
         private AuthorModel _author;
 
-        public AddSeriesToAuthorDlg(AuthorModel author)
+        public AddSeriesToAuthorDlg()
         {
             InitializeComponent();
-            _author = author;
-            TxtBx_SeriesAuthorFirstName.Text = author.FirstName;
-            TxtBx_SeriesAuthorMiddleName.Text = author.LastName;
+            Loaded += new RoutedEventHandler(bypassAuthorSelectionIfAuthorSelected);
         }
+
+        private void bypassAuthorSelectionIfAuthorSelected(object sender, RoutedEventArgs e)
+        {
+            if (_author == null)
+            {
+                SelectAuthorDlg selectAuthor = new SelectAuthorDlg();
+                selectAuthor.Closed += new EventHandler(SelectAuthorClosed);
+                selectAuthor.Show();
+            }
+            else
+            {
+                TxtBx_SeriesAuthorFirstName.Text = _author.FirstName;
+                TxtBx_SeriesAuthorMiddleName.Text = _author.LastName;
+            }
+        }
+
+        public AuthorModel SelectedAuthor { get { return _author; } set { _author = value; } }
 
         private void Btn_AddSeriesSave_Click(object sender, RoutedEventArgs e)
         {
@@ -33,6 +49,17 @@ namespace ExperimentSimpleBkLibInvTool.Views
                         Close();
                     }
                 }
+            }
+        }
+
+        private void SelectAuthorClosed(object sender, EventArgs e)
+        {
+            SelectAuthorDlg authorSelector = (SelectAuthorDlg)sender;
+            _author = authorSelector.SelectedAuthor;
+            if (_author != null)
+            {
+                TxtBx_SeriesAuthorFirstName.Text = _author.FirstName;
+                TxtBx_SeriesAuthorMiddleName.Text = _author.LastName;
             }
         }
     }

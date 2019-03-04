@@ -21,6 +21,7 @@ namespace ExperimentSimpleBkLibInvTool
         {
             base.OnStartup(e);
             Model = new Model();
+            Model.InitilizeTablesWithDependencies();
         }
 
         protected override void OnActivated(EventArgs e)

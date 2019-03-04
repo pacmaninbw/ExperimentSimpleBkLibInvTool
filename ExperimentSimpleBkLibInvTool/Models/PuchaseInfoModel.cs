@@ -6,7 +6,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
 {
     public class PuchaseInfoModel : DataTableItemBaseModel, IPuchaseInfoModel
     {
-        private int _bookId;
         private string _listPrice;
         private string _paidPrice;
         private string _vendor;
@@ -37,8 +36,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
         }
 
         public PuchaseInfoModel()
+            : base(((App)Application.Current).Model.PurchaseData)
         {
-            _bookId = 0;
             _listPrice = null;
             _paidPrice = null;
             _vendor = null;
@@ -46,22 +45,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
         }
 
         public PuchaseInfoModel(string vendor, string listPrice, string paidPrice, DateTime puchaseDate)
+            : base(((App)Application.Current).Model.PurchaseData)
         {
-            _bookId = 0;
             _listPrice = listPrice;
             _paidPrice = paidPrice;
             _vendor = vendor;
             _datePurchased = puchaseDate;
-        }
-
-        public int getBookId()
-        {
-            return _bookId;
-        }
-
-        public void setBookId(int BookId)
-        {
-            _bookId = BookId;
         }
 
         protected override bool _dataIsValid()

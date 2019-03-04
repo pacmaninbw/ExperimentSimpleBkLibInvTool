@@ -7,16 +7,18 @@ using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
 {
-    public class DictionaryTableModel : CDataTableModel
+    public abstract class DictionaryTableModel : CDataTableModel
     {
         private Dictionary<uint, string> _keyToTitle;
         private Dictionary<string, uint> _titleToKey;
 
-        public DictionaryTableModel()
+        public DictionaryTableModel(string TableName, string GetTableStoredProcedureName, string AddItemToTableStoredProcedureName = null) :
+            base(TableName, GetTableStoredProcedureName, AddItemToTableStoredProcedureName)
         {
             _titleToKey = new Dictionary<string, uint>();
             _keyToTitle = new Dictionary<uint, string>();
-            _lastParameterName = "primaryKey";      // This is a default value, it can be changed in superclasses.
+            _titleToKey = DataTable.AsEnumerable().ToDictionary(row => row.Field<string>(0), row => row.Field<uint>(1));
+            _keyToTitle = DataTable.AsEnumerable().ToDictionary(row => row.Field<uint>(1), row => row.Field<string>(0));
         }
 
         public List<string> ListBoxSelectionList()
@@ -36,7 +38,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
             return _titleToKey[CategoryTitle];
         }
 
-        protected void AddItemToDicionary(DataTableItemBaseModel NewItem)
+        protected void AddItemToDictionary(DataTableItemBaseModel NewItem)
         {
             bool AddedSuccessfully = addItem(NewItem);
 
@@ -50,18 +52,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
                 string errorMsg = "Database Error: Failed to add item";
                 MessageBox.Show(errorMsg);
             }
-        }
-
-        protected void InitializeDictionaries()
-        {
-            if (_dataTable == null)
-            {
-                InitializeDataTable();
-                _dataTable = DataTable;
-            }
-
-            _titleToKey = _dataTable.AsEnumerable().ToDictionary(row => row.Field<string>(0), row => row.Field<uint>(1));
-            _keyToTitle = _dataTable.AsEnumerable().ToDictionary(row => row.Field<uint>(1), row => row.Field<string>(0));
         }
     }
 }

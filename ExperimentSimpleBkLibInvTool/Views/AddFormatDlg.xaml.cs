@@ -13,6 +13,8 @@ namespace ExperimentSimpleBkLibInvTool.Views
             InitializeComponent();
         }
 
+        public string NewFormat { get { return TxtBx_FormatName.Text; } }
+
         private void Btn_AddFormatSave_Click(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(TxtBx_FormatName.Text))

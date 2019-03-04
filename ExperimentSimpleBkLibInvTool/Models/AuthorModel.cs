@@ -1,7 +1,5 @@
-﻿using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
-using MySql.Data.MySqlClient;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
 {
@@ -34,24 +32,16 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             set { SetParameterValue("Year of Death", value); }
         }
 
-        public uint ID
-        {
-            get { return GetKeyValue(); }
-            set { SetKeyValue(value); }
-        }
-
         public AuthorModel()
+            : base(((App)Application.Current).Model.AuthorTable)
         {
             errorWasReported = false;
-
-            InitializeSqlCommands();
         }
 
-        public AuthorModel(string firstName, string lastName, string middleName=null, string yearOfBirth=null, string yearOfDeath=null, uint iD=0)
+        public AuthorModel(string firstName, string lastName, string middleName=null, string yearOfBirth=null, string yearOfDeath=null)
+            : base(((App)Application.Current).Model.AuthorTable)
         {
             errorWasReported = false;
-
-            InitializeSqlCommands();
 
             FirstName = firstName;
             LastName = lastName;
@@ -65,28 +55,16 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             {
                 YearOfBirth = yearOfBirth;
             }
+
             if (!string.IsNullOrEmpty(yearOfDeath))
             {
                 YearOfDeath = yearOfDeath;
             }
-
-            ID = iD;
-        }
-
-        private void InitializeSqlCommands()
-        {
-            _addSqlCommandParameter("ID", "idAuthors", "N/A", MySqlDbType.UInt32, false, ParameterDirection.Input, true);
-            _addSqlCommandParameter("Last Name", "LastName", "authorLastName", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("First Name", "FirstName", "authorFirstName", MySqlDbType.String, true, ParameterDirection.Input);
-            _addSqlCommandParameter("Middle Name", "MiddleName", "authorMiddleName", MySqlDbType.String, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Year of Birth", "YearOfBirth", "dob", MySqlDbType.String, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Year of Death", "YearOfDeath", "dod", MySqlDbType.String, false, ParameterDirection.Input);
-            _addSqlCommandParameter("Primary Key", "primaryKey", "primaryKey", MySqlDbType.UInt32, false, ParameterDirection.Output);
         }
 
         private void SetFirstName(string textBoxInput)
         {
-            if (textBoxInput == null || textBoxInput.Length < 1)
+            if (string.IsNullOrEmpty(textBoxInput))
             {
                 string errorMsg = "The first name of the author is a required field!";
                 MessageBox.Show(errorMsg);
@@ -100,7 +78,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
 
         private void SetLastName(string textBoxInput)
         {
-            if (textBoxInput == null || textBoxInput.Length < 1)
+            if (string.IsNullOrEmpty(textBoxInput))
             {
                 string errorMsg = "The last name of the author is a required field!";
                 MessageBox.Show(errorMsg);
