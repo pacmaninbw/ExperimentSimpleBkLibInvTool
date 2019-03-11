@@ -12,17 +12,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
     {
         IAuthorModel AuthorInfo { get; set; }
 
-        string Category { get; set; }
+        string Genre { get; set; }
 
         string Condition { get; set; }
-
-        string FirstName { get; set; }
 
         string Format { get; set; }
 
         IForSaleModel ForSale { get; set; }
-
-        string LastName { get; set; }
 
         IOwnerShipModel Owned { get; set; }
 
@@ -33,8 +29,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         IRatingsModel Ratings { get; set; }
 
         ISeriesModel SeriesInfo { get; set; }
-
-        IBookInfoModel Book { get; set; }
 
         string Status { get; set; }
 

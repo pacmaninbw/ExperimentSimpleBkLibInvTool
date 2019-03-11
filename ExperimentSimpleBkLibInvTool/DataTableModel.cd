@@ -3,26 +3,26 @@
   <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Author.AuthorTableModel">
     <Position X="1.5" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAEACAAAAAAAgAEAABAAgACAAAAAAAAEAJBAAAAAAAA=</HashCode>
+      <HashCode>AAEACAAAAAAAgAEABBAAgACAgAAAAAAEAJBACAAAAAA=</HashCode>
       <FileName>Models\AuthorTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.BookTableModel">
     <Position X="5.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACCAAAAAAAAAAAAABAABAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACCAAAAABAAAAAAABAABAAAAAAAA=</HashCode>
       <FileName>Models\BookTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Category.CategoryTableModel">
-    <Position X="13.25" Y="9.75" Width="1.75" />
+    <Position X="13.25" Y="12" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQIAAAAAAAAIAAAAAAAAAAAAABIAAAAAAA=</HashCode>
       <FileName>Models\CategoryTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable.ConditionsTableModel" Collapsed="true">
-    <Position X="15.75" Y="9.75" Width="1.5" />
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable.ConditionsTableModel">
+    <Position X="15.75" Y="12" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAACAAAAAAAAAAAAAIAABAAAAAAAA=</HashCode>
       <FileName>Models\ConditionsTableModel.cs</FileName>
@@ -31,18 +31,18 @@
   <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel.CDataTableModel">
     <Position X="8.25" Y="0.5" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAGAIAAAAAEBIAAAiKAwBABAAAADDEAIAhAAAAAgYQ=</HashCode>
+      <HashCode>AEAGBIAAAAAEHIAAAAKAgBABIAAADDEAIAlAAAAAAYQ=</HashCode>
       <FileName>Models\DataTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel.FormatTableModel">
-    <Position X="7.75" Y="10" Width="1.75" />
+    <Position X="7.75" Y="12.25" Width="1.75" />
     <InheritanceLine Type="ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel.DictionaryTableModel" ManuallyRouted="true">
       <Path>
-        <Point X="13.125" Y="5.896" />
-        <Point X="13.125" Y="8.333" />
-        <Point X="8.625" Y="8.333" />
-        <Point X="8.625" Y="10" />
+        <Point X="9.875" Y="11.396" />
+        <Point X="9.875" Y="11.673" />
+        <Point X="8.625" Y="11.673" />
+        <Point X="8.625" Y="12.25" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
@@ -51,16 +51,16 @@
     </TypeIdentifier>
   </Class>
   <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel.DictionaryTableModel">
-    <Position X="12" Y="3.25" Width="2.25" />
+    <Position X="8.75" Y="8.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAACCAACAAAAAAAAAAAEAAAAAAAAI=</HashCode>
       <FileName>Models\DictionaryTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Series.SeriesTableModel">
-    <Position X="14.75" Y="1.75" Width="2" />
+    <Position X="14.75" Y="0.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAAAAIAACAAAAAAQAAAAAABAAAAABAE=</HashCode>
+      <HashCode>EAAAAAAAACAAAAAAAAAACAAAAAAAIAAAAABABAAQBAE=</HashCode>
       <FileName>Models\SeriesTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -71,11 +71,39 @@
       <FileName>Models\PublishInfoTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable.StatusTableModel" Collapsed="true">
-    <Position X="10.75" Y="9.75" Width="1.5" />
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable.StatusTableModel">
+    <Position X="10.75" Y="12" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAQABAAABAAAAAAABAAAAAAAA=</HashCode>
       <FileName>Models\StatusTableModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Options.ConditionOptionsTableModel">
+    <Position X="4.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgAAABAAAAAAAA=</HashCode>
+      <FileName>Models\ConditionOptionsTableModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.BookInfoTableModel">
+    <Position X="12.5" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAAQAAAAAAAAAAAAAABAAAAEAAAAABAAAAAAAA=</HashCode>
+      <FileName>Models\BookInfoTableModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo.PurchaseInfoTableModel">
+    <Position X="15.25" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Models\PurchaseInfoTableModel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned.OwnerShipTableModel">
+    <Position X="11.75" Y="2.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAABAAAIAAAA=</HashCode>
+      <FileName>Models\OwnerShipTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

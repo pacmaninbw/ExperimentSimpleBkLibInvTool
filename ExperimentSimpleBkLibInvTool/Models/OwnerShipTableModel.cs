@@ -34,7 +34,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
         protected override void InitializeSqlCommandParameters()
         {
             MySqlParameterCollection parameters = AddItemParameters;
-            _addSqlCommandParameter("Book Id", GetDBColumnData("BookFKo"), parameters["@bookKey"]);
+            _addSqlCommandParameter("ID", GetDBColumnData("BookFKo"), parameters["@bookKey"]);
             _addSqlCommandParameter("In Library", GetDBColumnData("IsOwned"), parameters["@isOwned"]);
             _addSqlCommandParameter("Wish Listed", GetDBColumnData("IsWishListed"), parameters["@isWishListed"]);
         }

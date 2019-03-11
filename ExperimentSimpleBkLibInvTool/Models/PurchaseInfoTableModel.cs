@@ -30,7 +30,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
         {
             MySqlParameterCollection parameters = AddItemParameters;
 
-            _addSqlCommandParameter("Book Id", GetDBColumnData("BookFKPurI"), parameters["@bookKey"]);
+            _addSqlCommandParameter("ID", GetDBColumnData("BookFKPurI"), parameters["@bookKey"]);
             _addSqlCommandParameter("Date of Purchase", GetDBColumnData("PurchaseDate"), parameters["@purchaseDate"]);
             _addSqlCommandParameter("List Price", GetDBColumnData("ListPrice"), parameters["@listPrice"]);
             _addSqlCommandParameter("Price Paid", GetDBColumnData("pricePaid"), parameters["@pricePaid"]);

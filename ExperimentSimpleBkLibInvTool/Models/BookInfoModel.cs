@@ -21,6 +21,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 {
     public class BookInfoModel : DataTableItemBaseModel, IBookInfoModel
     {
+        private readonly Model TheModel = ((App)Application.Current).Model;
+
         private uint _idBookInfo;
         private uint _genreKey;
         private uint _titleKey;
@@ -58,20 +60,29 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public string Genre
         {
-            get { return GetParameterValue("Genre"); }
-            set { SetParameterValue("Genre", value); }
+            get { return TheModel.CategoryTable.CategoryTitle(_genreKey); }
+            set { SetGenreParameter(value); }
         }
 
+        public string Series
+        {
+            get { return TheModel.SeriesTable.GetSeriesTitle(_seriesKey); }
+            set
+            {
+                _seriesKey = ConvertSeriesToKey(value);
+                SetParameterValue("Series Key", _seriesKey);
+            }
+        }
         public string Title
         {
-            get { return GetParameterValue("Title"); }
-            set { SetParameterValue("Title", value); }
+            get { return GetTitleByKey(); }
+            set { SetTitleKeyParameter(value); }
         }
 
         public string Format
         {
-            get { return GetParameterValue("Format"); }
-            set { SetParameterValue("Format", value); }
+            get { return TheModel.FormatTable.FormatTitle(_formatKey); }
+            set { SetFormatParameter(value); }
         }
 
         public uint FormatId { get { return _formatKey; } }
@@ -80,9 +91,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public uint TitleId { get { return _titleKey; } }
 
-        public bool AddBook()
+        public bool AddBookInfo()
         {
             bool wasAdded = false;
+
+            wasAdded = TheModel.BookInfoTable.AddBookInfo(this);
 
             return wasAdded;
         }
@@ -96,39 +109,80 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             throw new NotImplementedException();
         }
 
-        private uint ConvertGenreToKey(string Genre)
+        private void SetGenreParameter(string genre)
         {
-            uint genreId = 0;
+            _genreKey = ConvertGenreToKey(genre);
+            SetParameterValue("Genre Id", _genreKey);
+        }
 
-            return genreId;
+        private uint ConvertGenreToKey(string genre)
+        {
+            return TheModel.CategoryTable.CategoryKey(genre);
+        }
+
+        private void SetFormatParameter(string format)
+        {
+            _formatKey = ConvertFormatToKey(format);
+            SetParameterValue("Format Key", _formatKey);
         }
 
         private uint ConvertFormatToKey(string Format)
         {
-            uint formatId = 0;
-
-            return formatId;
+            return TheModel.FormatTable.FormatKey(Format);
         }
 
         private uint ConvertAuthorToKey(IAuthorModel author)
         {
-            uint authorid = 0;
-
-            return authorid;
+            return TheModel.AuthorTable.AuthorKey((AuthorModel)author);
         }
 
-        private uint ConvertTitleToKey(string Title)
+        private void SetAuthorKeyParameter(AuthorModel author)
+        {
+            _authorKey = ConvertAuthorToKey(author);
+            SetParameterValue("Author Id", _authorKey);
+        }
+
+        private string GetTitleByKey()
+        {
+            return TheModel.BookInfoTable.GetTitle(_titleKey);
+        }
+
+        private void SetTitleKeyParameter(string title)
+        {
+            _titleKey = ConvertTitleToKey(title);
+            SetParameterValue("Title Id", _authorKey);
+        }
+
+        private uint ConvertTitleToKey(string title)
         {
             uint titleid = 0;
+
+            titleid = TheModel.BookInfoTable.GetTitleKey(title);
 
             return titleid;
         }
 
-        private uint ConvertSeriesToKey(IAuthorModel author, string Series)
+        private uint ConvertSeriesToKey(IAuthorModel author, string series)
         {
-            uint seriesId = 0;
+            return ConvertSeriesToKey(author as AuthorModel, series);
+        }
 
-            return seriesId;
+        private uint ConvertSeriesToKey(AuthorModel author, string series)
+        {
+            return TheModel.SeriesTable.GetSeriesKey(author, series);
+        }
+
+        private uint ConvertSeriesToKey(string title)
+        {
+            uint key = 0; ;
+
+            if (_authorKey > 0)
+            {
+                AuthorModel author = TheModel.AuthorTable.GetAuthorFromId(_authorKey);
+                key = TheModel.SeriesTable.GetSeriesKey(author, title);
+            }
+
+            return key;
         }
     }
 }

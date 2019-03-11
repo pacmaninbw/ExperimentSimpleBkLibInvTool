@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Data;
+using System.Windows;
 using MySql.Data.MySqlClient;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned;
@@ -7,28 +8,40 @@ using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Category;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.Options;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 {
-    public class BookModel : DataTableItemBaseModel, IBookModel
+    /*
+     * 
+     * The book model is different from the other models, it is an aggregation of the other models.
+     * The book model is therefore not based on the DataTableItemBaseModel. The other data models
+     * are collected, any additional error checking is performed and the data for each model is
+     * entered into the database.
+     * 
+     */
+
+    public class BookModel : IBookModel
     {
+        private readonly Model TheModel = ((App)Application.Current).Model;
+
         private BookInfoModel _bookInfo;
         private PuchaseInfoModel _puchaseInfo;
         private PublishInfoModel _publishInfo;
-        private string _title;
         private OwnerShipModel _owned;
         private ForSaleModel _forSale;
         private AuthorModel _authorInfo;
         private SeriesModel _seriesInfo;
         private RatingsModel _ratings;
+        private ConditionsAndOtherOptionsModel _optionalItems;
+        private string _condition;
+        private string _status;
 
         public BookModel()
-            : base(((App)Application.Current).Model.BookTable)
         {
-            _bookInfo = null;
+            _bookInfo = new BookInfoModel();
             _authorInfo = null;
             _publishInfo = null;
             _puchaseInfo = null;
@@ -39,10 +52,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public BookModel(AuthorModel authorInfo, string Title, CategoryModel category, PuchaseInfoModel puchaseInfo=null, PublishInfoModel publishInfo=null,
             OwnerShipModel owned=null, ForSaleModel forSale=null, SeriesModel seriesInfo=null, FormatModel formatm=null,  RatingsModel ratings=null, string bkstatus=null, string bkcondition=null)
-            : base(((App)Application.Current).Model.BookTable)
         {
-            Category = category.Category;
-            _title = Title;
+            Genre = category.Category;
+            _bookInfo = new BookInfoModel();
+            _bookInfo.Title = Title;
             _puchaseInfo = puchaseInfo;
             _publishInfo = publishInfo;
             _owned = owned;
@@ -97,52 +110,34 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             set { _ratings = (RatingsModel)value; }
         }
 
-        public IBookInfoModel Book
+        public string Genre
         {
-            get { return _bookInfo; }
-            set { _bookInfo = (BookInfoModel)value; }
-        }
-
-        public string Category
-        {
-            get { return GetParameterValue("Genre"); }
-            set { SetParameterValue("Genre", value); }
-        }
-
-        public string LastName
-        {
-            get { return GetParameterValue("Author Last Name"); }
-            set { SetParameterValue("Author Last Name", value); }
-        }
-
-        public string FirstName
-        {
-            get { return GetParameterValue("Author First Name"); }
-            set { SetParameterValue("Author First Name", value); }
+            get { return _bookInfo.Genre; }
+            set { _bookInfo.Genre = value; }
         }
 
         public string Title
         {
-            get { return GetParameterValue("Title"); }
-            set { SetParameterValue("Title", value); }
+            get { return _bookInfo.Title; }
+            set { _bookInfo.Title = value; }
         }
 
         public string Format
         {
-            get { return GetParameterValue("Format"); }
-            set { SetParameterValue("Format", value); }
+            get { return _bookInfo.Format; }
+            set { _bookInfo.Format = value; }
         }
 
         public string Condition
         {
-            get { return GetParameterValue("Book Condition"); }
-            set { SetParameterValue("Book Condition", value); }
+            get { return _optionalItems.Condition; }
+            set { _optionalItems.Condition = value; }
         }
 
         public string Status
         {
-            get { return GetParameterValue("Book Status"); }
-            set { SetParameterValue("Book Status", value); }
+            get { return _optionalItems.Status; }
+            set { _optionalItems.Status = value; }
         }
 
         public bool AddBookToLibrary()
@@ -152,8 +147,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             return success;
         }
 
-        protected override bool _dataIsValid()
+        public bool IsValid { get { return _dataIsValid(); } }
+
+        protected bool _dataIsValid()
         {
+#if false
             if (_defaultIsValid())
             {
                 return true;
@@ -176,7 +174,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
                 string errorMsg = "The book category is a required field.";
                 MessageBox.Show(errorMsg, "Add Book Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-
+#endif
             return false;
         }
 
@@ -188,9 +186,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
                 MessageBox.Show(errorMsg);
                 return;
             }
-
-            LastName = authorInfo.LastName;
-            FirstName = authorInfo.FirstName;
         }
     }
 

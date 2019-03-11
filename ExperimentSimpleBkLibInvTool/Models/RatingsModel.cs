@@ -41,7 +41,29 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings
 
         protected override bool _dataIsValid()
         {
-            return _defaultIsValid();
+            bool isValid = true;
+
+            if (ID > 0)
+            {
+                return _defaultIsValid();
+            }
+
+            if (!GetParameterIsValid("My Rating"))
+            {
+                isValid = false;
+            }
+
+            if (!GetParameterIsValid("Amazon Rating"))
+            {
+                isValid = false;
+            }
+
+            if (!GetParameterIsValid("GoodReads Rating"))
+            {
+                isValid = false;
+            }
+
+            return isValid;
         }
     }
 }

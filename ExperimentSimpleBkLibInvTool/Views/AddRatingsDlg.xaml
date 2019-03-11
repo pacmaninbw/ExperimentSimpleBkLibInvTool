@@ -5,21 +5,25 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool.Views"
         mc:Ignorable="d"
-        Title="AddRatingsDlg" Height="450" Width="800">
+        Title="Rate This Book" Height="450" Width="365">
     <Grid>
-        <GroupBox Header="Ratings" HorizontalAlignment="Left" Height="245" Margin="10,0,0,0" VerticalAlignment="Top" Width="164" >
-            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Height="235" Width="162">
-                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0" Width="160">
-                    <Label Content="My Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <TextBox Name="TB_MyRating" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0"/>
+        <GroupBox Header="Ratings" HorizontalAlignment="Left" Height="440" Margin="10,0,0,0" VerticalAlignment="Top" Width="360" >
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Height="430" Width="350">
+                <StackPanel Orientation="Horizontal" Height="75" Margin="0,5,0,0" Width="340">
+                    <Label Content="My Rating" HorizontalAlignment="Left" VerticalAlignment="Top" FontWeight="Bold" Margin="10,18,40,0" Height="26"/>
+                    <TextBox x:Name="TB_MyRating" HorizontalAlignment="Right" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0" LostFocus="TB_MyRating_LostFocus" Margin="30,23,0,0"/>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Height="75" Margin="0,0,0,0" Width="160">
-                    <Label Content="Amazon Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <TextBox Name="TB_AmazonRating" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0"/>
+                <StackPanel Orientation="Horizontal" Height="75" Margin="10,0,0,0" Width="350">
+                    <Label Content="Amazon Rating" HorizontalAlignment="Right" VerticalAlignment="Top" FontWeight="Bold" Margin="5,18,0,0" Height="26" Width="128"/>
+                    <TextBox x:Name="TB_AmazonRating" HorizontalAlignment="Right" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0" LostFocus="TB_AmazonRating_LostFocus" Margin="10,18,0,0"/>
                 </StackPanel>
-                <StackPanel Orientation="Vertical" Height="75" Margin="0,0,0,0" Width="160">
-                    <Label Content="GoodReads Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                    <TextBox Name="TB_GoodReadsRating" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0"/>
+                <StackPanel Orientation="Horizontal" Height="75" Margin="0,0,0,0" Width="350">
+                    <Label Content="GoodReads Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="15,18,0,0" Height="26"/>
+                    <TextBox Name="TB_GoodReadsRating" HorizontalAlignment="Center" Height="26" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0" LostFocus="TB_GoodReadsRating_LostFocus"  Margin="26,23,0,0"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Height="75" Width="350">
+                    <Button Content="Save" Name="Btn_AddRatingsSave" VerticalAlignment="Top" HorizontalAlignment="Left" Height="26" Width="120" Click="Btn_AddRatingsSave_Click" Margin="30,10,0,0" Background="LightGreen"/>
+                    <Button Content="Cancel" Height="26" Width="120" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="30,10,0,0" Click="Button_Click"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>

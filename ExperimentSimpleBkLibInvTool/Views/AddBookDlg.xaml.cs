@@ -30,72 +30,70 @@ namespace ExperimentSimpleBkLibInvTool.Views
 {
     /// <summary>
     /// Interaction logic for AddBookDlg.xaml
+    /// Build the book from the parts that the user enters, then save the book to the database.
     /// </summary>
     public partial class AddBookDlg : Window
     {
         private readonly App TheApp = Application.Current as App;
 
         private AuthorTableModel _authorTable;
-        private BookTableModel myLibrary;
-        private CategoryTableModel categoryTable;
-        private FormatTableModel formatTable;
-        private StatusTableModel statusTable;
-        private ConditionsTableModel conditionsTable;
-        private SeriesTableModel seriesTable;
         private DataRow[] _authors;
-        private AuthorModel selectedAuthor;
         private BookModel newBook;
-        private PublishInfoModel publishInfo;
-        private PuchaseInfoModel purchaseInfo;
-        private CategoryModel category;
-        private FormatModel formatModel;
-        private RatingsModel ratings;
         private OwnerShipModel owned;
         private ForSaleModel salesInfo;
-        private SeriesModel seriesInfo;
-        private string title;
-        private string bookStatus;
-        private string bookCondition;
+
+        public IAuthorModel SelectedAuthor { get { return newBook.AuthorInfo; } set { newBook.AuthorInfo = value as AuthorModel; } }
 
         public AddBookDlg()
         {
             InitializeComponent();
+            newBook = new BookModel();
             InitAuthorSelection();
-            InitSeriesSelection();
+            PopulateSeriesSelector();
             InitCategorySelection();
-            InitPublishingInfo();
-            InitPuchaseInfo();
             InitStatusSelection();
             InitFormatSelection();
             InitConditionSelection();
             InitForSaleData();
             InitOwnerShip();
+            Loaded += new RoutedEventHandler(bypassAuthorSelectionIfAuthorSelected);
         }
 
         private void Btn_AddBookSave_Click(object sender, RoutedEventArgs e)
         {
-            if (selectedAuthor != null && selectedAuthor.IsValid && !string.IsNullOrEmpty(title) && category.IsValid)
-            {
-                newBook = new BookModel(selectedAuthor, title, category, purchaseInfo, publishInfo, owned, salesInfo, seriesInfo, formatModel, ratings, bookStatus, bookCondition);
-                myLibrary = TheApp.Model.BookTable;
-                if (myLibrary.AddBook(newBook))
-                {
-                    Close();
-                }
-            }
-            if (selectedAuthor == null || !selectedAuthor.IsValid)
+            bool hasErrors = false;
+            AuthorModel author = newBook.AuthorInfo as AuthorModel;
+            if (author == null || !author.IsValid)
             {
                 HighLightAuthorAndReportError();
+                hasErrors = true;
             }
-            if (string.IsNullOrEmpty(title))
+
+            if (string.IsNullOrEmpty(newBook.Title))
             {
                 MessageBox.Show("The title is required for adding a new book!");
                 TB_BookTitle.Background = Brushes.Red;
+                hasErrors = true;
             }
-            if (string.IsNullOrEmpty(category.Category))
+
+            if (string.IsNullOrEmpty(newBook.Genre))
             {
                 LB_CategorySelector.Background = Brushes.Red;
                 MessageBox.Show("A category is required for adding a new book!");
+                hasErrors = true;
+            }
+
+            if (!newBook.IsValid)
+            {
+                hasErrors = true;
+            }
+
+            if (!hasErrors)
+            {
+                if (newBook.AddBookToLibrary())
+                {
+                    Close();
+                }
             }
         }
 
@@ -108,7 +106,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             if (!string.IsNullOrEmpty(TB_BookTitle.Text))
             {
-                title = TB_BookTitle.Text;
+                newBook.Title = TB_BookTitle.Text;
                 TB_BookTitle.Background = Brushes.White;
             }
         }
@@ -117,27 +115,72 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void InitAuthorSelection()
         {
-            selectedAuthor = null;
             _authorTable = TheApp.Model.AuthorTable;
             _authors = _authorTable.FindAuthors("", "");    // Show all authors to beging with.
             AddRowsToListBox();
         }
 
+        private void SetAuthorNameValues()
+        {
+            AuthorModel selectedAuthor = newBook.AuthorInfo as AuthorModel;
+            TB_SelectAuthorFirstName.Text = selectedAuthor.FirstName;
+            TB_SelectAuthorLastName.Text = selectedAuthor.LastName;
+            TB_SelectAuthorMiddleName.Text = selectedAuthor.MiddleName;
+            TB_SelectAuthorLastName.Background = Brushes.White;
+            TB_SelectAuthorFirstName.Background = Brushes.White;
+            AuthorSelectorLB.Background = Brushes.White;
+            PopulateSeriesSelector();   // if the author has any series list them so they can be selected.
+        }
+
+        private void SelectAuthorClosed(object sender, EventArgs e)
+        {
+            SelectAuthorDlg authorSelector = (SelectAuthorDlg)sender;
+            newBook.AuthorInfo = authorSelector.SelectedAuthor;
+            if (newBook.AuthorInfo != null)
+            {
+                SetAuthorNameValues();
+            }
+            else
+            {
+                HighLightAuthorAndReportError();
+            }
+        }
+
+        private void bypassAuthorSelectionIfAuthorSelected(object sender, RoutedEventArgs e)
+        {
+            if (newBook.AuthorInfo == null)
+            {
+                SelectAuthorDlg selectAuthor = new SelectAuthorDlg();
+                selectAuthor.Closed += new EventHandler(SelectAuthorClosed);
+                selectAuthor.Show();
+            }
+            else
+            {
+                SetAuthorNameValues();
+            }
+        }
+
         private void TB_SelectAuthorLastName_KeyUp(object sender, KeyEventArgs e)
         {
-            _authors = _authorTable.FindAuthors(TB_SelectAuthorLastName.Text, TB_SelectAuthorFirstName.Text);
-            AddRowsToListBox();
+            SelectAuthorDlg selectAuthor = new SelectAuthorDlg();
+            selectAuthor.Closed += new EventHandler(SelectAuthorClosed);
+            selectAuthor.TB_SelectAuthorLastName.Text = TB_SelectAuthorLastName.Text;
+            selectAuthor.Show();
         }
 
         private void TB_SelectAuthorFirstName_KeyUp(object sender, KeyEventArgs e)
         {
-            _authors = _authorTable.FindAuthors(TB_SelectAuthorLastName.Text, TB_SelectAuthorFirstName.Text);
-            AddRowsToListBox();
+            SelectAuthorDlg selectAuthor = new SelectAuthorDlg();
+            selectAuthor.Closed += new EventHandler(SelectAuthorClosed);
+            selectAuthor.TB_SelectAuthorFirstName.Text = TB_SelectAuthorFirstName.Text;
+            selectAuthor.Show();
         }
 
         private void AuthorSelectorLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedAuthor = _authorTable.ConvertDataRowToAuthor(_authors[AuthorSelectorLB.SelectedIndex]);
+            AuthorModel selectedAuthor = _authorTable.ConvertDataRowToAuthor(_authors[AuthorSelectorLB.SelectedIndex]);
+            newBook.AuthorInfo = selectedAuthor;
+
             TB_SelectAuthorFirstName.Text = selectedAuthor.FirstName;
             TB_SelectAuthorLastName.Text = selectedAuthor.LastName;
             TB_SelectAuthorMiddleName.Text = selectedAuthor.MiddleName;
@@ -153,7 +196,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
             TB_SelectAuthorLastName.Background = Brushes.Red;
             TB_SelectAuthorFirstName.Background = Brushes.Red;
             AuthorSelectorLB.Background = Brushes.Red;
-            FocusManager.SetFocusedElement(this, TB_SelectAuthorLastName);
+//            FocusManager.SetFocusedElement(this, TB_SelectAuthorLastName);
         }
 
         private void AddRowsToListBox()
@@ -183,101 +226,52 @@ namespace ExperimentSimpleBkLibInvTool.Views
         #endregion
 
         #region Publishing Info
-        private void InitPublishingInfo()
+
+        private void BTN_AddPublishingInfo_Click(object sender, RoutedEventArgs e)
         {
-            publishInfo = new PublishInfoModel();
+            AddPublishingInformation addPublishinginfoDlg = new AddPublishingInformation();
+            addPublishinginfoDlg.Closed += new EventHandler(GetPublishingInfoFromDialog);
+            addPublishinginfoDlg.Show();
         }
 
-        private void TB_Copyright_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void GetPublishingInfoFromDialog(object sender, EventArgs e)
         {
-            publishInfo.CopyRight = TB_Copyright.Text;
-        }
-
-        private void TB_ISBNumber_LostFocus(object sender, RoutedEventArgs e)
-        {
-            publishInfo.ISBNumber = TB_ISBNumber.Text;
-        }
-
-        private void TB_Publisher_LostFocus(object sender, RoutedEventArgs e)
-        {
-            publishInfo.Publisher = TB_Publisher.Text;
-        }
-
-        private void TB_Edition_LostFocus(object sender, RoutedEventArgs e)
-        {
-            publishInfo.Edition = TB_Edition.Text;
-        }
-
-        private void TB_Printing_LostFocus(object sender, RoutedEventArgs e)
-        {
-            publishInfo.Printing = TB_Printing.Text;
-        }
-
-        private void CB_OutofPrint_Click(object sender, RoutedEventArgs e)
-        {
-            publishInfo.OutOfPrint = CB_OutofPrint.IsChecked.Value;
+            AddPublishingInformation addPublishinginfoDlg = sender as AddPublishingInformation;
+            newBook.PublishInfo = addPublishinginfoDlg.PublishInfo;
         }
 
         #endregion
 
         #region Purchase Info
-        private void InitPuchaseInfo()
+
+        private void GetPurchasingInfoFromDialog(object sender, EventArgs e)
         {
-            purchaseInfo = new PuchaseInfoModel();
+            PurchasingDialog addPurchasingDlg = sender as PurchasingDialog;
+            newBook.PuchaseInfo = addPurchasingDlg.PurchaseInfo;
         }
 
-        private void TB_Vendor_LostFocus(object sender, RoutedEventArgs e)
+        private void BTN_AddPurchaseInfo_Click(object sender, RoutedEventArgs e)
         {
-            purchaseInfo.Vendor = TB_Vendor.Text;
-        }
-
-        private void TB_ListPrice_LostFocus(object sender, RoutedEventArgs e)
-        {
-            purchaseInfo.ListPrice = TB_ListPrice.Text;
-        }
-
-        private void TB_PaidPrice_LostFocus(object sender, RoutedEventArgs e)
-        {
-            purchaseInfo.PaidPrice = TB_PaidPrice.Text;
-        }
-
-        private void DP_DatePurchased_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            purchaseInfo.PurchaseDate = DP_DatePurchased.SelectedDate.Value.Date;
+            PurchasingDialog purchaseInfoDlg = new PurchasingDialog();
+            purchaseInfoDlg.Closed += new EventHandler(GetPurchasingInfoFromDialog);
+            purchaseInfoDlg.Show();
         }
 
         #endregion
 
         #region Ratings
 
-        private void TB_MyRating_LostFocus(object sender, RoutedEventArgs e)
+        private void BTN_AddRatings_Click(object sender, RoutedEventArgs e)
         {
-            if (ratings == null)
-            {
-                ratings = new RatingsModel();
-            }
-
-            ratings.MyRating = TB_MyRating.Text;
+            AddRatingsDlg addRatingsDlg = new AddRatingsDlg();
+            addRatingsDlg.Closed += new EventHandler(GetRatingsFromAddRatings);
+            addRatingsDlg.Show();
         }
 
-        private void TB_AmazonRating_LostFocus(object sender, RoutedEventArgs e)
+        private void GetRatingsFromAddRatings(object sender, EventArgs e)
         {
-            if (ratings == null)
-            {
-                ratings = new RatingsModel();
-            }
-
-            ratings.AmazonRating = TB_AmazonRating.Text;
-        }
-
-        private void TB_GoodReadsRating_LostFocus(object sender, RoutedEventArgs e)
-        {
-            if (ratings == null)
-            {
-                ratings = new RatingsModel();
-            }
-
-            ratings.GoodReadsRating = TB_GoodReadsRating.Text;
+            AddRatingsDlg addRatingsDlg = (AddRatingsDlg)sender;
+            newBook.Ratings = addRatingsDlg.Ratings;
         }
 
         #endregion
@@ -286,9 +280,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void InitCategorySelection()
         {
-            categoryTable = TheApp.Model.CategoryTable;
-            category = new CategoryModel();
-            List<string> categories = categoryTable.ListBoxSelectionList();
+            List<string> categories = TheApp.Model.CategoryTable.ListBoxSelectionList();
             LB_CategorySelector.DataContext = categories;
             if (categories.Count < 1)
             {
@@ -311,31 +303,27 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private void LB_CategorySelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             LB_CategorySelector.Background = Brushes.White;
-            category.Category = (string)LB_CategorySelector.SelectedValue;
-            category.Key = categoryTable.CategoryKey(category.Category);
+            newBook.Genre = LB_CategorySelector.SelectedValue.ToString();
         }
 
         #endregion
 
         #region Series Selection
 
-        private void InitSeriesSelection()
-        {
-            seriesTable = TheApp.Model.SeriesTable;
-            seriesInfo = null;
-            PopulateSeriesSelector();
-        }
-
         private void LB_SeriesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            AuthorModel selectedAuthor = newBook.AuthorInfo as AuthorModel;
+
             if (selectedAuthor != null && selectedAuthor.IsValid)
             {
-                seriesInfo = new SeriesModel(selectedAuthor, LB_SeriesSelector.SelectedValue.ToString());
+                newBook.SeriesInfo = new SeriesModel(selectedAuthor, LB_SeriesSelector.SelectedValue.ToString());
             }
         }
 
         private void PopulateSeriesSelector()
         {
+            AuthorModel selectedAuthor = newBook.AuthorInfo as AuthorModel;
+
             LB_SeriesSelector.Items.Clear();
             if (selectedAuthor == null || !selectedAuthor.IsValid)
             {
@@ -343,7 +331,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
             }
             else
             {
-                List<string> seriesTitles = seriesTable.SeriesSelectionListCreator(selectedAuthor);
+                List<string> seriesTitles = TheApp.Model.SeriesTable.SeriesSelectionListCreator(selectedAuthor);
                 if (seriesTitles.Count < 1)
                 {
                     LB_SeriesSelector.Items.Add("No Series to select.");
@@ -365,8 +353,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void InitFormatSelection()
         {
-            formatTable = TheApp.Model.FormatTable;
-            List<string> formats = formatTable.ListBoxSelectionList();
+            List<string> formats = TheApp.Model.FormatTable.ListBoxSelectionList();
             LB_FormatSelector.DataContext = formats;
             if (formats.Count < 1)
             {
@@ -389,8 +376,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void LB_FormatSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            formatModel = new FormatModel();
-            formatModel.Format = LB_FormatSelector.SelectedValue.ToString();
+            newBook.Format = LB_FormatSelector.SelectedValue.ToString();
         }
 
         #endregion
@@ -399,8 +385,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void InitStatusSelection()
         {
-            statusTable = TheApp.Model.StatusTable;
-            List<string> statuses = statusTable.ListBoxSelectionList();
+            List<string> statuses = TheApp.Model.StatusTable.ListBoxSelectionList();
             LB_StatusSelector.DataContext = statuses;
             LB_StatusSelector.Items.Clear();
             foreach (string status in statuses)
@@ -411,7 +396,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void LB_StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            bookStatus = LB_StatusSelector.SelectedValue.ToString();
+            newBook.Status = LB_StatusSelector.SelectedValue.ToString();
         }
 
         #endregion
@@ -420,8 +405,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void InitConditionSelection()
         {
-            conditionsTable  = TheApp.Model.ConditionsTable;
-            List<string> conditions = conditionsTable.ListBoxSelectionList();
+            List<string> conditions = TheApp.Model.ConditionsTable.ListBoxSelectionList();
             LB_ConditionSelector.DataContext = conditions;
             LB_ConditionSelector.Items.Clear();
             foreach (string condition in conditions)
@@ -432,7 +416,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void LB_ConditionSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            bookCondition = LB_ConditionSelector.SelectedValue.ToString();
+            newBook.Condition = LB_ConditionSelector.SelectedValue.ToString();
         }
 
         #endregion
@@ -477,8 +461,6 @@ namespace ExperimentSimpleBkLibInvTool.Views
             owned.IsWishListed = ChkBx_Wishlisted.IsChecked.Value;
         }
 
-
         #endregion
-
     }
 }

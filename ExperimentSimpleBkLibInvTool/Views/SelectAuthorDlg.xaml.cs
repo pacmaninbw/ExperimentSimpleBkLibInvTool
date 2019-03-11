@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
@@ -21,11 +22,18 @@ namespace ExperimentSimpleBkLibInvTool.Views
             InitializeComponent();
             SelectedAuthor = null;
             _authorTable = ((App)Application.Current).Model.AuthorTable;
-            _authors = _authorTable.FindAuthors("", "");    // Show all authors to beging with.
-            AddRowsToListBox();
+            TB_SelectAuthorLastName.Text = "";
+            TB_SelectAuthorFirstName.Text = "";
+            Loaded += new RoutedEventHandler(PreShowSetSelectAuthorsListBox);
         }
 
         public AuthorModel SelectedAuthor { get; private set; }
+
+        private void PreShowSetSelectAuthorsListBox(object sender, RoutedEventArgs e)
+        {
+            _authors = _authorTable.FindAuthors(TB_SelectAuthorLastName.Text, TB_SelectAuthorFirstName.Text);
+            AddRowsToListBox();
+        }
 
         private void TB_SelectAuthorLastName_KeyUp(object sender, KeyEventArgs e)
         {
@@ -45,18 +53,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
             TB_SelectAuthorFirstName.Text = SelectedAuthor.FirstName;
             TB_SelectAuthorLastName.Text = SelectedAuthor.LastName;
             TB_SelectAuthorMiddleName.Text = SelectedAuthor.MiddleName;
-            TB_SelectAuthorLastName.Background = Brushes.White;
-            TB_SelectAuthorFirstName.Background = Brushes.White;
-            AuthorSelectorLB.Background = Brushes.White;
-        }
-
-        private void HighLightAuthorAndReportError()
-        {
-            MessageBox.Show("The author is required for adding a new book!");
-            TB_SelectAuthorLastName.Background = Brushes.Red;
-            TB_SelectAuthorFirstName.Background = Brushes.Red;
-            AuthorSelectorLB.Background = Brushes.Red;
-            FocusManager.SetFocusedElement(this, TB_SelectAuthorLastName);
+            Close();
         }
 
         private void AddRowsToListBox()

@@ -20,13 +20,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             get { return DataTable; }
         }
 
-        public BookTableModel() : base("bookinfo", "getallbooks", "addBookToLibrary")
+        public BookTableModel() : base("bookinfo", "getallbooks", "") //"addBookToLibrary")
         {
         }
 
         public bool AddBook(BookModel NewBook)
         {
-            return addItem(NewBook);
+            return false;// addItem(NewBook);
         }
 
         public uint GetTitleKey(string Title)

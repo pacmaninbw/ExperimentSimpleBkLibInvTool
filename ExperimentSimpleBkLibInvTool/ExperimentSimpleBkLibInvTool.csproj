@@ -170,6 +170,8 @@
     <Compile Include="Models\BookTableModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\CategoryTableModel.cs" />
+    <Compile Include="Models\ConditionOptionsTableModel.cs" />
+    <Compile Include="Models\ConditionsAndOtherOptionsModel.cs" />
     <Compile Include="Models\ConditionsTableModel.cs" />
     <Compile Include="Models\DBColParameterData.cs" />
     <Compile Include="Models\DataTableItemBaseModel.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="Models\IAuthorModel.cs" />
     <Compile Include="Models\IBookInfoModel.cs" />
     <Compile Include="Models\IBookModel.cs" />
+    <Compile Include="Models\IConditionsAndOtherOptionsModel.cs" />
     <Compile Include="Models\IForSaleModel.cs" />
     <Compile Include="Models\IOwnerShipModel.cs" />
     <Compile Include="Models\IPublishInfoModel.cs" />
@@ -205,13 +208,15 @@
     <Compile Include="Views\AddBookDlg.xaml.cs">
       <DependentUpon>AddBookDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddPublishingInformation.xaml.cs">
+      <DependentUpon>AddPublishingInformation.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddRatingsDlg.xaml.cs">
       <DependentUpon>AddRatingsDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AuthorsTableView.xaml.cs">
       <DependentUpon>AuthorsTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\BaseViewObject.cs" />
     <Compile Include="Views\BooksTableView.xaml.cs">
       <DependentUpon>BooksTableView.xaml</DependentUpon>
     </Compile>
@@ -274,6 +279,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddPublishingInformation.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddRatingsDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -292,23 +301,6 @@
     <Compile Include="Model.cs" />
     <Compile Include="Models\SeriesModel.cs" />
     <Compile Include="Models\SeriesTableModel.cs" />
-    <Compile Include="pacswlibinvtool\Authorstab.cs" />
-    <Compile Include="pacswlibinvtool\Bkconditions.cs" />
-    <Compile Include="pacswlibinvtool\Bkstatuses.cs" />
-    <Compile Include="pacswlibinvtool\Bksynopsis.cs" />
-    <Compile Include="pacswlibinvtool\Bookcategories.cs" />
-    <Compile Include="pacswlibinvtool\Bookcondition.cs" />
-    <Compile Include="pacswlibinvtool\Bookformat.cs" />
-    <Compile Include="pacswlibinvtool\Bookinfo.cs" />
-    <Compile Include="pacswlibinvtool\Forsale.cs" />
-    <Compile Include="pacswlibinvtool\Owned.cs" />
-    <Compile Include="pacswlibinvtool\pacswlibinvtoolContext.cs" />
-    <Compile Include="pacswlibinvtool\Publishinginfo.cs" />
-    <Compile Include="pacswlibinvtool\Purchaseinfo.cs" />
-    <Compile Include="pacswlibinvtool\Ratings.cs" />
-    <Compile Include="pacswlibinvtool\Series.cs" />
-    <Compile Include="pacswlibinvtool\Title.cs" />
-    <Compile Include="pacswlibinvtool\Volumeinseries.cs" />
     <Page Include="Views\AuthorsTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -373,6 +365,7 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="BaseModelsLayer.cd" />
+    <None Include="BookModels.cd" />
     <None Include="ModelsClassDiagram.cd" />
     <None Include="ItemModels.cd" />
     <None Include="DataTableBaseModel.cd" />
@@ -388,12 +381,6 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="LibInvDDL.sql" />
-    <EmbeddedResource Include="LibInvFuncs.sql" />
-    <EmbeddedResource Include="LibInvProcs.sql" />
-    <EmbeddedResource Include="LibInvUnitTests.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

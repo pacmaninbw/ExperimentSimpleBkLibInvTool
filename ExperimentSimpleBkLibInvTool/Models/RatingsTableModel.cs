@@ -35,7 +35,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings
         {
             MySqlParameterCollection parameters = AddItemParameters;
 
-            _addSqlCommandParameter("Book ID", GetDBColumnData("BookFKRats"), parameters["@bookKey"]);
+            _addSqlCommandParameter("ID", GetDBColumnData("BookFKRats"), parameters["@bookKey"]);
             _addSqlCommandParameter("My Rating", GetDBColumnData("MyRatings"), parameters["@myRatings"]);
             _addSqlCommandParameter("Amazon Rating", GetDBColumnData("AmazonRatings"), parameters["@amazonRatings"]);
             _addSqlCommandParameter("GoodReads Rating", GetDBColumnData("GoodReadsRatings"), parameters["@goodReadsRatings"]);

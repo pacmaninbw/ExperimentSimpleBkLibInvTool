@@ -1,2 +1,0 @@
-@categoryName
-@primaryKey

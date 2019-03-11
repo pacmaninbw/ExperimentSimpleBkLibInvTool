@@ -36,7 +36,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
         {
             MySqlParameterCollection parameters = AddItemParameters;
 
-            _addSqlCommandParameter("Book Id", GetDBColumnData("BookFKPubI"), parameters["@bookKey"]);
+            _addSqlCommandParameter("ID", GetDBColumnData("BookFKPubI"), parameters["@bookKey"]);
             _addSqlCommandParameter("Copyright", GetDBColumnData("Copyright"), parameters["@copyright"]);
             _addSqlCommandParameter("ISB Number", GetDBColumnData("ISBNumber"), parameters["@iSBNumber"]);
             _addSqlCommandParameter("Edition", GetDBColumnData("Edition"), parameters["@edition"]);

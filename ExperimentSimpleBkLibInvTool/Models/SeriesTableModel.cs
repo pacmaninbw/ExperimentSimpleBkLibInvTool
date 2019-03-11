@@ -11,10 +11,14 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
     public class SeriesTableModel : CDataTableModel
     {
         private int seriesTitleIndex;
+        private int seriesKeyIndex;
+        private int seriesAuthorKeyIndex;
 
         public SeriesTableModel() : base("series", "getAllSeriesData", "addAuthorSeries")
         {
-            seriesTitleIndex = GetDBColumnData("SeriesName").Ordinal_Posistion;
+            seriesTitleIndex = GetDBColumnData("SeriesName").IndexBasedOnOrdinal;
+            seriesKeyIndex = GetDBColumnData("idSeries").IndexBasedOnOrdinal;
+            seriesAuthorKeyIndex = GetDBColumnData("AuthorOfSeries").IndexBasedOnOrdinal;
         }
 
         public DataTable Series { get { return DataTable; } }
@@ -30,27 +34,66 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             return addItem(seriesModel);
         }
 
-        // This method could be rewritten to use the stored procedure getAllSeriesByThisAuthor
-        // This is better because it doesn't require changing _getTableStoredProcedureName and
-        // then changing it back. It also refreshes the series list if necessary.
         public List<string> SeriesSelectionListCreator(AuthorModel author)
         {
             List<string> seriesSelectionList = new List<string>();
-            if (author == null || !author.IsValid)
-            {
-                return seriesSelectionList;
-            }
 
-            DataTable currentSeriesList = Series;
-            string filterString = "LastName = '" + author.LastName + "' AND FirstName = '" + author.FirstName + "'";
-            DataRow[] seriesTitleList = currentSeriesList.Select(filterString);
-
-            foreach (DataRow row in seriesTitleList)
+            if (author != null && author.IsValid)
             {
-                seriesSelectionList.Add(row[seriesTitleIndex].ToString());
+                DataTable currentSeriesList = Series;
+                string filterString = "LastName = '" + author.LastName + "' AND FirstName = '" + author.FirstName + "'";
+                DataRow[] seriesTitleList = currentSeriesList.Select(filterString);
+
+                foreach (DataRow row in seriesTitleList)
+                {
+                    seriesSelectionList.Add(row[seriesTitleIndex].ToString());
+                }
+
             }
 
             return seriesSelectionList;
+        }
+
+        public uint GetSeriesKey(IAuthorModel author, string seriesTitle)
+        {
+            return GetSeriesKey(author as AuthorModel, seriesTitle);
+        }
+
+        public uint GetSeriesKey(AuthorModel author, string seriesTitle)
+        {
+            uint key = 0;
+
+            if (author != null && author.IsValid)
+            {
+                DataTable seriesList = Series;
+                string filterString = "LastName = '" + author.LastName + "' AND FirstName = '" + author.FirstName + "' AND SeriesName = '" + seriesTitle + "'";
+                DataRow[] seriesTitleList = seriesList.Select(filterString);
+                if (seriesTitleList.Length > 0)
+                {
+                    key = seriesTitleList[0].Field<uint>(seriesKeyIndex);
+                }
+            }
+
+            return key;
+        }
+
+        public string GetSeriesTitle(uint seriesId)
+        {
+            string title = string.Empty;
+
+            if (seriesId > 0)
+            {
+                DataTable seriesList = Series;
+                string filterString = "idSeries = '" + seriesId.ToString() + "'";
+                DataRow[] seriesTitleList = seriesList.Select(filterString);
+
+                if (seriesTitleList.Length > 0)
+                {
+                    title = seriesTitleList[0].Field<string>(seriesTitleIndex);
+                }
+            }
+
+            return title;
         }
 
         protected override void InitializeSqlCommandParameters()

@@ -55,14 +55,18 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void Btn_AuthorsAddBook_Click(object sender, RoutedEventArgs e)
         {
-            AddBookDlg addBookDlg = new AddBookDlg();
-            addBookDlg.Closed += new EventHandler(AuthorsAddBook_FormClosed);
-            addBookDlg.Show();
-        }
+            if (_selectedAuthor != null)
+            {
+                AddBookDlg addBookDlg = new AddBookDlg();
+                addBookDlg.SelectedAuthor = _selectedAuthor;
+                addBookDlg.Show();
+            }
+            else
+            {
+                AddBookDlg addBookDlg = new AddBookDlg();
+                addBookDlg.Show();
+            }
 
-        private void AuthorsAddBook_FormClosed(object sender, EventArgs e)
-        {
-            AuthorsDataGrid.Items.Refresh();
         }
 
         private void Btn_AuthorTableClose_Click(object sender, RoutedEventArgs e)

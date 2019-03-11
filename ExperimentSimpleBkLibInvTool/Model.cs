@@ -10,7 +10,7 @@ using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable;
-
+using ExperimentSimpleBkLibInvTool.ModelInMVC.Options;
 
 namespace ExperimentSimpleBkLibInvTool.ModelInMVC
 {
@@ -29,6 +29,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
         private OwnerShipTableModel _ownerShip;
         private PurchaseInfoTableModel _purchase;
         private PublishInfoTableModel _publishInfo;
+        private ConditionOptionsTableModel _bookConditionsOptions;
 
         public Model()
         {
@@ -42,6 +43,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
             _ownerShip = new OwnerShipTableModel();
             _publishInfo = new PublishInfoTableModel();
             _purchase = new PurchaseInfoTableModel();
+            _bookConditionsOptions = new ConditionOptionsTableModel();
         }
 
         public void InitilizeTablesWithDependencies()
@@ -76,5 +78,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
         public PurchaseInfoTableModel PurchaseData { get { return _purchase; } }
 
         public BookInfoTableModel BookInfoTable { get { return _bookInfoTable; } }
+
+        public ConditionOptionsTableModel ConditionsAndOptions { get { return _bookConditionsOptions; } }
     }
 }

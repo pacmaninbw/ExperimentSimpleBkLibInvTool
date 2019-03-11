@@ -8,6 +8,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
 {
     public class AuthorTableModel : CDataTableModel
     {
+        private int AuthorIDColumnIndex;
         private int LastNameColumnIndex;
         private int FirstNameColumnIndex;
         private int MiddleNameColumnIndex;
@@ -18,6 +19,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
 
         public AuthorTableModel() : base("authorstab", "getAllAuthorsData", "addAuthor")
         {
+            AuthorIDColumnIndex = GetDBColumnData("idAuthors").IndexBasedOnOrdinal;
             LastNameColumnIndex = GetDBColumnData("LastName").IndexBasedOnOrdinal;
             FirstNameColumnIndex = GetDBColumnData("FirstName").IndexBasedOnOrdinal;
             MiddleNameColumnIndex = GetDBColumnData("MiddleName").IndexBasedOnOrdinal;
@@ -40,6 +42,45 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             DataRow[] authors = dt.Select(filterString);
 
             return authors;
+        }
+
+        public uint AuthorKey(AuthorModel author)
+        {
+            uint key = author.KeyValue;
+            if (key < 1)
+            {
+                DataTable dt = AuthorTable;
+                string filterString = "LastName = '" + author.LastName + "' AND FirstName = '" + author.FirstName + "' AND MiddleName Like '" + author.MiddleName + "'";
+                DataRow[] authors = dt.Select(filterString);
+                if (authors.Length > 0)
+                {
+                    if (!uint.TryParse(authors[0][AuthorIDColumnIndex].ToString(), out key))
+                    {
+                        key = 0;
+                    }
+                }
+                else
+                {
+                    key = 0;
+                }
+            }
+
+            return key;
+        }
+
+        public AuthorModel GetAuthorFromId(uint key)
+        {
+            AuthorModel author = null;
+            DataTable dt = AuthorTable;
+            string filterString = "idAuthors = '" + key.ToString() + "'";
+            DataRow[] authors = dt.Select(filterString);
+
+            if (authors.Length > 0)
+            {
+                author = ConvertDataRowToAuthor(authors[0]);
+            }
+
+            return author;
         }
 
         // Keeping all internal information about columns and rows encapsulated.

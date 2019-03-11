@@ -41,51 +41,15 @@ namespace ExperimentSimpleBkLibInvTool
             seriesTableView.Show();
         }
 
-        private void Btn_StatusTable_Click(object sender, RoutedEventArgs e)
-        {
-            StatusTableView statusTable = new StatusTableView();
-            statusTable.Show();
-        }
-
-        private void Btn_Exit_Click(object sender, RoutedEventArgs e)
-        {
-            Close();
-        }
-
         private void Btn_FormatsTable_Click(object sender, RoutedEventArgs e)
         {
             FormatTable formatTable = new FormatTable();
             formatTable.Show();
         }
 
-        private void Btn_ConditionsTable_Click(object sender, RoutedEventArgs e)
+        private void Btn_Exit_Click(object sender, RoutedEventArgs e)
         {
-            ConditionsTableView conditionsTable = new ConditionsTableView();
-            conditionsTable.Show();
-        }
-
-        private void Btn_AddBook_Click(object sender, RoutedEventArgs e)
-        {
-            AddBookDlg addBook = new AddBookDlg();
-            addBook.Show();
-        }
-
-        private void Btn_AddCategory_Click(object sender, RoutedEventArgs e)
-        {
-            AddCategoryDlg addCategory = new AddCategoryDlg();
-            addCategory.Show();
-        }
-
-        private void Btn_AddFormat_Click(object sender, RoutedEventArgs e)
-        {
-            AddFormatDlg addFormat = new AddFormatDlg();
-            addFormat.Show();
-        }
-
-        private void Btn_AddAuthor_Click(object sender, RoutedEventArgs e)
-        {
-            AddAuthorDlg addAuthorDlg = new AddAuthorDlg();
-            addAuthorDlg.Show();
+            Close();
         }
     }
 }

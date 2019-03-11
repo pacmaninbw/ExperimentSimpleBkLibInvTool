@@ -38,65 +38,21 @@
                         <TextBox Name="TB_BookTitle" Width="180" HorizontalAlignment="Right" VerticalAlignment="Top" TextWrapping="Wrap" Margin="20,10,0,0" LostFocus="TB_BookTitle_LostFocus"/>
                         <Label Content="*Required" HorizontalAlignment="Left" VerticalAlignment="Top" Height="27" Margin="10,5,0,0" FontWeight="Bold" Foreground="Red"/>
                     </StackPanel>
-                    <GroupBox Header="Publishing Information" Height="260" Width="340"  HorizontalAlignment="Right" VerticalAlignment="Top" Margin="25,15,0,0">
-                        <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Margin="0,10,0,0">
-                            <StackPanel Orientation="Vertical" Height="230" Width="160" HorizontalAlignment="Center" VerticalAlignment="Top">
-                                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
-                                    <Label Content="Copyright Year" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_Copyright" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FocusableChanged="TB_Copyright_FocusableChanged" />
-                                    <Label Content="Strongly Recommended" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
-                                    <Label Content="ISB Number" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_ISBNumber" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" LostFocus="TB_ISBNumber_LostFocus" />
-                                    <Label Content="Recommended" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
-                                    <Label Content="Publisher" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_Publisher" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" LostFocus="TB_Publisher_LostFocus" />
-                                </StackPanel>
-                            </StackPanel>
-                            <StackPanel Orientation="Vertical" Height="230" Width="160"  HorizontalAlignment="Center" Margin="10,0,0,0" VerticalAlignment="Top">
-                                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
-                                    <Label Content="Edition" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_Edition" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="1,2,3, etc." LostFocus="TB_Edition_LostFocus"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0">
-                                    <Label Content="Printing" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_Printing" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="1,2,3, etc." LostFocus="TB_Printing_LostFocus" />
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
-                                    <CheckBox Content="Out of Print" Name="CB_OutofPrint" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Click="CB_OutofPrint_Click"/>
-                                </StackPanel>
-                            </StackPanel>
+                    <GroupBox Header="Optional Information" Height="260" Width="340"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="25,15,0,0">
+                        <StackPanel Orientation="Vertical" Width="340">
+                            <Button Content="Add Publishing Information" Name="BTN_AddPublishingInfo" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="170" Click="BTN_AddPublishingInfo_Click" Margin="0,10,0,0"/>
+                            <Button Content="Rate Book" Name="BTN_AddRatings" HorizontalAlignment="Center" VerticalAlignment="Center" Width="75" Click="BTN_AddRatings_Click" Margin="0,10,0,0"/>
+                            <Button Content="Add Purchasing Information" Name="BTN_AddPurchaseInfo" HorizontalAlignment="Center" Width="170" Click="BTN_AddPurchaseInfo_Click" Margin="0,10,0,0"/>
                         </StackPanel>
                     </GroupBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,0,0,0" Height="320" Width="1000">
                 <GroupBox Header="Purchase Information" HorizontalAlignment="Left" Height="245" Margin="10,5,0,0" VerticalAlignment="Top" Width="184" >
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Height="235" Width="182" >
-                        <StackPanel Orientation="Vertical" Height="55" Margin="0,0,0,0" Width="180" >
-                            <Label Content="Book Seller" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox Name="TB_Vendor" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" LostFocus="TB_Vendor_LostFocus"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Height="55" Margin="0,0,0,0" Width="180" >
-                            <Label Content="List Price" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox Name="TB_ListPrice" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.00" LostFocus="TB_ListPrice_LostFocus"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Height="55" Margin="0,0,0,0" Width="180" >
-                            <Label Content="Amount Paid" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox Name="TB_PaidPrice" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.00" LostFocus="TB_PaidPrice_LostFocus"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Height="55" Margin="0,0,0,0" Width="180" >
-                            <Label Content="Date Purchased" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <DatePicker Name="DP_DatePurchased" Width="150" SelectedDateChanged="DP_DatePurchased_SelectedDateChanged"/>
-                        </StackPanel>
-                    </StackPanel>
                 </GroupBox>
                 <StackPanel Orientation="Vertical" Margin="10,0,0,0">
                     <StackPanel Orientation="Horizontal">
-                        <GroupBox Header="Select Category" HorizontalAlignment="Left" Height="160" Margin="0,0,0,0" VerticalAlignment="Top" Width="164" >
+                        <GroupBox Header="Select Genre" HorizontalAlignment="Left" Height="160" Margin="0,0,0,0" VerticalAlignment="Top" Width="164" >
                             <ListBox Name="LB_CategorySelector" HorizontalAlignment="Center" Height="150" VerticalAlignment="Top" Width="160" Background="Wheat" SelectionChanged="LB_CategorySelector_SelectionChanged"/>
                         </GroupBox>
                         <GroupBox Header="Author Series" HorizontalAlignment="Left" Height="160" Margin="0,0,0,0" VerticalAlignment="Top" Width="204" >
@@ -116,20 +72,6 @@
                     </StackPanel>
                 </StackPanel>
                 <GroupBox Header="Ratings" HorizontalAlignment="Left" Height="245" Margin="10,0,0,0" VerticalAlignment="Top" Width="164" >
-                    <StackPanel Orientation="Vertical" VerticalAlignment="Top" HorizontalAlignment="Center" Height="235" Width="162">
-                        <StackPanel Orientation="Vertical" Height="75" Margin="0,5,0,0" Width="160">
-                            <Label Content="My Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox Name="TB_MyRating" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0" LostFocus="TB_MyRating_LostFocus"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Height="75" Margin="0,0,0,0" Width="160">
-                            <Label Content="Amazon Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox Name="TB_AmazonRating" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0" LostFocus="TB_AmazonRating_LostFocus"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Vertical" Height="75" Margin="0,0,0,0" Width="160">
-                            <Label Content="GoodReads Rating" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                            <TextBox Name="TB_GoodReadsRating" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.0" LostFocus="TB_GoodReadsRating_LostFocus"/>
-                        </StackPanel>
-                    </StackPanel>
                 </GroupBox>
                 <StackPanel Orientation="Vertical" Width="180" HorizontalAlignment="Left" Height="250" VerticalAlignment="Top" Margin="10,0,0,0">
                     <GroupBox  Header="Ownership" Width="178" Height="80" HorizontalAlignment="Left" VerticalAlignment="Top">
