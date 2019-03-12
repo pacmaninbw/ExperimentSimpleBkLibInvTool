@@ -86,7 +86,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
         // Keeping all internal information about columns and rows encapsulated.
         public AuthorModel ConvertDataRowToAuthor(DataRow AuthorInfo)
         {
-            AuthorModel author = new AuthorModel(AuthorInfo[FirstNameColumnIndex].ToString(), AuthorInfo[LastNameColumnIndex].ToString(), AuthorInfo[MiddleNameColumnIndex].ToString(),
+            AuthorModel author = new AuthorModel(AuthorInfo[AuthorIDColumnIndex].ToString(), AuthorInfo[FirstNameColumnIndex].ToString(), AuthorInfo[LastNameColumnIndex].ToString(), AuthorInfo[MiddleNameColumnIndex].ToString(),
                 AuthorInfo[DobColumnIndex].ToString(), AuthorInfo[DodColumnIntex].ToString());
 
             return author;

@@ -2,24 +2,16 @@
 {
     public interface IBookInfoModel
     {
-        string Genre { get; set; }
+        uint GenreId { get; set; }
 
-        string Series { get; set; }
+        uint SeriesId { get; set; }
 
-        string Title { get; set; }
+        uint TitleId { get; set; }
 
-        string Format { get; set; }
+        uint FormatId { get; set; }
 
-        uint AuthorId { get; }
+        uint AuthorId { get; set; }
 
         uint BookID { get; }
-
-        uint CategoryId { get; }
-
-        uint FormatId { get; }
-
-        uint SeriesKey { get; }
-
-        uint TitleId { get; }
     }
 }

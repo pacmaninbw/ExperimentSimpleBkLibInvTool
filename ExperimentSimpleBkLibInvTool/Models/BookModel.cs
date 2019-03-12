@@ -80,13 +80,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         public IAuthorModel AuthorInfo
         {
             get { return _authorInfo; }
-            set { _authorInfo = (AuthorModel)value; }
+            set { SetAuthorValues((AuthorModel)value); }
         }
 
         public ISeriesModel SeriesInfo
         {
             get { return _seriesInfo; }
-            set { _seriesInfo = (SeriesModel)value; }
+            set { SetSeriesValues((SeriesModel)value); }
         }
 
         public IRatingsModel Ratings
@@ -103,20 +103,20 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public string Genre
         {
-            get { return _bookInfo.Genre; }
-            set { _bookInfo.Genre = value; }
+            get { return TheModel.CategoryTable.CategoryTitle(_bookInfo.GenreId); ; }
+            set { _bookInfo.GenreId = TheModel.CategoryTable.CategoryKey(value); }
         }
 
         public string Title
         {
-            get { return _bookInfo.Title; }
-            set { _bookInfo.Title = value; }
+            get { return TheModel.BookTable.GetTitle(_bookInfo.TitleId); }
+            set { _bookInfo.TitleId = TheModel.BookTable.InsertTitleIfNotInTable(value); }
         }
 
         public string Format
         {
-            get { return _bookInfo.Format; }
-            set { _bookInfo.Format = value; }
+            get { return TheModel.FormatTable.FormatTitle(_bookInfo.FormatId); }
+            set { _bookInfo.FormatId = TheModel.FormatTable.FormatKey(value); }
         }
 
         public string Condition
@@ -209,7 +209,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             return isValid;
         }
 
-        protected void SetAuthorValues(AuthorModel authorInfo)
+        private void SetAuthorValues(AuthorModel authorInfo)
         {
             if (!authorInfo.IsValid)
             {
@@ -218,7 +218,19 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
                 return;
             }
 
-            _bookInfo.Author = authorInfo;
+            _authorInfo = authorInfo;
+            _bookInfo.AuthorId = authorInfo.AuthorId;
+        }
+
+        private void SetSeriesValues(SeriesModel seriesModel)
+        {
+            if (!seriesModel.IsValid)
+            {
+                return;
+            }
+
+            _seriesInfo = seriesModel;
+            _bookInfo.SeriesId = seriesModel.KeyValue;
         }
 
         private bool AddToDb(bool success, DataTableItemBaseModel item)
@@ -230,6 +242,28 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             }
 
             return success;
+        }
+
+        private uint ConvertSeriesToKey(IAuthorModel author, string series)
+        {
+            return ConvertSeriesToKey(author as AuthorModel, series);
+        }
+
+        private uint ConvertSeriesToKey(AuthorModel author, string series)
+        {
+            return TheModel.SeriesTable.GetSeriesKey(author, series);
+        }
+
+        private uint ConvertSeriesToKey(string title)
+        {
+            uint key = 0; ;
+
+            if (_authorInfo.KeyValue > 0)
+            {
+                key = TheModel.SeriesTable.GetSeriesKey(_authorInfo, title);
+            }
+
+            return key;
         }
     }
 }

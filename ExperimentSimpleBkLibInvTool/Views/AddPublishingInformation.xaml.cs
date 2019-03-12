@@ -23,14 +23,10 @@ namespace ExperimentSimpleBkLibInvTool.Views
         public AddPublishingInformation()
         {
             InitializeComponent();
+            PublishInfo = new PublishInfoModel();
         }
 
         public PublishInfoModel PublishInfo { get; private set; }
-
-        private void InitPublishingInfo()
-        {
-            PublishInfo = new PublishInfoModel();
-        }
 
         private void TB_Copyright_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
