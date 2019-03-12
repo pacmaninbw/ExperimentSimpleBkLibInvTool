@@ -20,8 +20,7 @@ d.	devMySql/LibInvUnitTests.sql - This provides some data for testing and experi
 4.	Run
 # Known Issues:
 1.	While there are models and views there is no controller. This limits some of the functionality and will be corrected in a later version or another repository.
-2.	Add Book does not update the database yet. The controls are all in place, and all data is stored in the in memory models. All other models update the database, several new models have been added to implement Add Book.
-3.	All Add dialogs are implemented except for Add Book.
-4.	The entire user interface is clunky and not in its final form.
+2.	Avery basic add book is implemented, this is author, title, genre, and format. Trying to set the status or condition will cause the tool to crash.
+3.	The entire user interface is clunky and not in its final form.
 # A Note on the user interface
 I am not and never have been a graphic artist. I realize that the Add Book Dialog is crowded and too busy. I would value input on what might make it more attractive to users. The application may need a few more dialogs such as Buy Book, and Describe Book.
