@@ -12,12 +12,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
 
         public DataTable PurchaseInfoTable { get { return DataTable; } }
 
-        public bool AddPurchaseInfo(IPuchaseInfoModel purchaseData, uint bookId)
+        public bool AddPurchaseInfo(IPuchaseInfoModel purchaseData)
         {
             PuchaseInfoModel purchaseInfoModel = (PuchaseInfoModel)purchaseData;
-            if (bookId > 0 || purchaseInfoModel.getBookID() > 0)
+            if (purchaseInfoModel.getBookID() > 0)
             {
-                purchaseInfoModel.setBookId(bookId);
                 return addItem(purchaseInfoModel);
             }
             else

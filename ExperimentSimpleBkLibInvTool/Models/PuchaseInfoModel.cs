@@ -53,6 +53,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
             _datePurchased = puchaseDate;
         }
 
+        public override bool AddToDb()
+        {
+            return ((App)Application.Current).Model.PurchaseData.AddPurchaseInfo(this);
+        }
+
         protected override bool _dataIsValid()
         {
             bool dataIsValid = true;

@@ -19,13 +19,12 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             if (string.IsNullOrEmpty(TxtBx_FormatName.Text))
             {
-                MessageBox.Show("Please enter a category name before clicking the Save button.");
+                MessageBox.Show("Please enter a Format name before clicking the Save button.");
             }
             else
             {
                 FormatModel format = new FormatModel(TxtBx_FormatName.Text);
-                FormatTableModel formats = ((App)Application.Current).Model.FormatTable;
-                formats.AddFormat(format);
+                format.AddToDb();
                 Close();
             }
         }

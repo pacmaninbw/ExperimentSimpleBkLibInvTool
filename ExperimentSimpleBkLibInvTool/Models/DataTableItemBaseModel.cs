@@ -43,6 +43,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
             _bookId = BookId;
         }
 
+        public abstract bool AddToDb();
+
         protected abstract bool _dataIsValid();
 
         protected DataTableItemBaseModel(CDataTableModel DBInterfaceModel)

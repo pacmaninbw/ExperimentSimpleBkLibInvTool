@@ -62,6 +62,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             }
         }
 
+        public override bool AddToDb()
+        {
+            return ((App)Application.Current).Model.AuthorTable.AddAuthor(this);
+        }
+
         private void SetFirstName(string textBoxInput)
         {
             if (string.IsNullOrEmpty(textBoxInput))

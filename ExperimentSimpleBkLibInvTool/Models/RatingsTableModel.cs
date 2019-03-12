@@ -17,12 +17,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings
 
         public DataTable PublishInfoTable { get { return DataTable; } }
 
-        public bool AddRatings(IRatingsModel PublishingData, uint bookId)
+        public bool AddRatings(RatingsModel ratings)
         {
-            RatingsModel ratings = (RatingsModel)PublishingData;
-            if (bookId > 0 || ratings.getBookID() > 0)
+            if (ratings.getBookID() > 0)
             {
-                ratings.setBookId(bookId);
                 return addItem(ratings);
             }
             else

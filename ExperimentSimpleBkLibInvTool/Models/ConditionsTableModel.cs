@@ -26,6 +26,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable
 
         protected override void InitializeSqlCommandParameters()
         {
+            // There is no plan to implement the addition of conditions to the condition table
+            // so this method is to remain unimplmented.
             throw new System.NotImplementedException();
         }
     }

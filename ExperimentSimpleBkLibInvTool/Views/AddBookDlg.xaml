@@ -11,25 +11,23 @@
             <StackPanel Orientation="Horizontal" Height="315" Width="1000" VerticalAlignment="Top" HorizontalAlignment="Left">
                 <GroupBox Height="300" Header="Select Author" Background="White" BorderThickness="2">
                     <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="245" VerticalAlignment="Top" Width="455"  Margin="0,0,0,0" Background="White">
-                            <StackPanel Orientation="Vertical" Height="240" Width="160" HorizontalAlignment="Center" Margin="7,0,0,0">
-                                <TextBlock HorizontalAlignment="Center" Margin="0,0,0,0" TextWrapping="Wrap" Text="Select a name from the list on the right, or enter the last name of the author." VerticalAlignment="Top" Width="160" TextAlignment="Center"/>
-                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
-                                    <Label Content="Last Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_SelectAuthorLastName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="TB_SelectAuthorLastName_KeyUp"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
-                                    <Label Content="First Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_SelectAuthorFirstName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="TB_SelectAuthorFirstName_KeyUp"/>
-                                </StackPanel>
-                                <StackPanel Orientation="Vertical" Height="55" Margin="0,5,0,0">
-                                    <Label Content="Middle Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold"/>
-                                    <TextBox Name="TB_SelectAuthorMiddleName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                                </StackPanel>
+                        <StackPanel Orientation="Vertical" Height="240" Width="245" HorizontalAlignment="Center" Margin="7,0,0,0">
+                            <StackPanel Orientation="Horizontal" Height="55" Margin="0,5,0,0" Width="300">
+                                <Label Content="Last Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Width="95"/>
+                                <TextBox Name="TB_SelectAuthorLastName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="TB_SelectAuthorLastName_KeyUp"/>
                             </StackPanel>
-                            <ListBox Name="AuthorSelectorLB" HorizontalAlignment="Left" Height="240" Margin="7,5,0,0" VerticalAlignment="Top" Width="275" FontWeight="Bold" Background="Wheat" SelectionChanged="AuthorSelectorLB_SelectionChanged"/>
+                            <StackPanel Orientation="Horizontal" Height="55" Margin="0,5,0,0">
+                                <Label Content="First Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Width="95"/>
+                                <TextBox Name="TB_SelectAuthorFirstName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" KeyUp="TB_SelectAuthorFirstName_KeyUp"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="55" Margin="0,5,0,0">
+                                <Label Content="Middle Name" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Width="95"/>
+                                <TextBox Name="TB_SelectAuthorMiddleName" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal" Height="55" Margin="0,5,0,0" HorizontalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="* Author is Required" FontWeight="Bold" Foreground="Red" />
+                            </StackPanel>
                         </StackPanel>
-                        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Text="* Author is Required" FontWeight="Bold" Foreground="Red" />
                     </StackPanel>
                 </GroupBox>
                 <StackPanel Orientation="Vertical" Width="370" Margin="20,0,0,0">

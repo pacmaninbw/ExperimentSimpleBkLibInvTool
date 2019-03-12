@@ -31,5 +31,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
         {
             return true;    // No required fields
         }
+
+        public override bool AddToDb()
+        {
+            return ((App)Application.Current).Model.OwnerShip.AddOwnerShipData(this);
+        }
     }
 }

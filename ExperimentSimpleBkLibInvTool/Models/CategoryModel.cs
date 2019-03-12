@@ -34,6 +34,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
             set { SetKeyValue(value); }
         }
 
+        public override bool AddToDb()
+        {
+            ((App)Application.Current).Model.CategoryTable.AddCategory(this);
+            return true;
+        }
+
         protected override bool _dataIsValid()
         {
             bool isValid = GetParameterIsValid("Name");

@@ -34,10 +34,6 @@ namespace ExperimentSimpleBkLibInvTool.Views
     /// </summary>
     public partial class AddBookDlg : Window
     {
-        private readonly App TheApp = Application.Current as App;
-
-        private AuthorTableModel _authorTable;
-        private DataRow[] _authors;
         private BookModel newBook;
         private OwnerShipModel owned;
         private ForSaleModel salesInfo;
@@ -48,7 +44,6 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             InitializeComponent();
             newBook = new BookModel();
-            InitAuthorSelection();
             PopulateSeriesSelector();
             InitCategorySelection();
             InitStatusSelection();
@@ -113,13 +108,6 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         #region AuthorSelection
 
-        private void InitAuthorSelection()
-        {
-            _authorTable = TheApp.Model.AuthorTable;
-            _authors = _authorTable.FindAuthors("", "");    // Show all authors to beging with.
-            AddRowsToListBox();
-        }
-
         private void SetAuthorNameValues()
         {
             AuthorModel selectedAuthor = newBook.AuthorInfo as AuthorModel;
@@ -128,7 +116,6 @@ namespace ExperimentSimpleBkLibInvTool.Views
             TB_SelectAuthorMiddleName.Text = selectedAuthor.MiddleName;
             TB_SelectAuthorLastName.Background = Brushes.White;
             TB_SelectAuthorFirstName.Background = Brushes.White;
-            AuthorSelectorLB.Background = Brushes.White;
             PopulateSeriesSelector();   // if the author has any series list them so they can be selected.
         }
 
@@ -176,56 +163,17 @@ namespace ExperimentSimpleBkLibInvTool.Views
             selectAuthor.Show();
         }
 
-        private void AuthorSelectorLB_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            AuthorModel selectedAuthor = _authorTable.ConvertDataRowToAuthor(_authors[AuthorSelectorLB.SelectedIndex]);
-            newBook.AuthorInfo = selectedAuthor;
-
-            TB_SelectAuthorFirstName.Text = selectedAuthor.FirstName;
-            TB_SelectAuthorLastName.Text = selectedAuthor.LastName;
-            TB_SelectAuthorMiddleName.Text = selectedAuthor.MiddleName;
-            TB_SelectAuthorLastName.Background = Brushes.White;
-            TB_SelectAuthorFirstName.Background = Brushes.White;
-            AuthorSelectorLB.Background = Brushes.White;
-            PopulateSeriesSelector();   // if the author has any series list them so they can be selected.
-        }
-
         private void HighLightAuthorAndReportError()
         {
             MessageBox.Show("The author is required for adding a new book!");
             TB_SelectAuthorLastName.Background = Brushes.Red;
             TB_SelectAuthorFirstName.Background = Brushes.Red;
-            AuthorSelectorLB.Background = Brushes.Red;
 //            FocusManager.SetFocusedElement(this, TB_SelectAuthorLastName);
         }
 
-        private void AddRowsToListBox()
-        {
-            List<string> authorNames = _authorTable.AuthorNamesForSelector(_authors);
-            if (authorNames.Count < 1)
-            {
-                string mbMsg = "There are no authors with that name, would you like to add an author?";
-                MessageBoxResult messageBoxResult = MessageBox.Show(mbMsg, "Add Author Confirmation", MessageBoxButton.YesNo);
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-                    AddAuthorDlg AddAuthorControl = new AddAuthorDlg();
-                    AddAuthorControl.Show();
-                }
-            }
-            else
-            {
-                AuthorSelectorLB.Items.Clear();
-                AuthorSelectorLB.DataContext = authorNames;
-                foreach (string author in authorNames)
-                {
-                    AuthorSelectorLB.Items.Add(author);
-                }
-            }
-        }
+#endregion
 
-        #endregion
-
-        #region Publishing Info
+#region Publishing Info
 
         private void BTN_AddPublishingInfo_Click(object sender, RoutedEventArgs e)
         {
@@ -240,9 +188,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
             newBook.PublishInfo = addPublishinginfoDlg.PublishInfo;
         }
 
-        #endregion
+#endregion
 
-        #region Purchase Info
+#region Purchase Info
 
         private void GetPurchasingInfoFromDialog(object sender, EventArgs e)
         {
@@ -257,9 +205,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
             purchaseInfoDlg.Show();
         }
 
-        #endregion
+#endregion
 
-        #region Ratings
+#region Ratings
 
         private void BTN_AddRatings_Click(object sender, RoutedEventArgs e)
         {
@@ -274,17 +222,17 @@ namespace ExperimentSimpleBkLibInvTool.Views
             newBook.Ratings = addRatingsDlg.Ratings;
         }
 
-        #endregion
+#endregion
 
-        #region Category Selection
+#region Category Selection
 
         private void InitCategorySelection()
         {
-            List<string> categories = TheApp.Model.CategoryTable.ListBoxSelectionList();
+            List<string> categories = ((App)Application.Current).Model.CategoryTable.ListBoxSelectionList();
             LB_CategorySelector.DataContext = categories;
             if (categories.Count < 1)
             {
-                string mbMsg = "There are no categories, would you like to add one?";
+                string mbMsg = "There are no genres, would you like to add one?";
                 MessageBoxResult messageBoxResult = MessageBox.Show(mbMsg, "Add Category Confirmation", MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
@@ -306,9 +254,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
             newBook.Genre = LB_CategorySelector.SelectedValue.ToString();
         }
 
-        #endregion
+#endregion
 
-        #region Series Selection
+#region Series Selection
 
         private void LB_SeriesSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -331,7 +279,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
             }
             else
             {
-                List<string> seriesTitles = TheApp.Model.SeriesTable.SeriesSelectionListCreator(selectedAuthor);
+                List<string> seriesTitles = ((App)Application.Current).Model.SeriesTable.SeriesSelectionListCreator(selectedAuthor);
                 if (seriesTitles.Count < 1)
                 {
                     LB_SeriesSelector.Items.Add("No Series to select.");
@@ -347,13 +295,13 @@ namespace ExperimentSimpleBkLibInvTool.Views
             }
         }
 
-        #endregion
+#endregion
 
-        #region Format Selection
+#region Format Selection
 
         private void InitFormatSelection()
         {
-            List<string> formats = TheApp.Model.FormatTable.ListBoxSelectionList();
+            List<string> formats = ((App)Application.Current).Model.FormatTable.ListBoxSelectionList();
             LB_FormatSelector.DataContext = formats;
             if (formats.Count < 1)
             {
@@ -379,13 +327,13 @@ namespace ExperimentSimpleBkLibInvTool.Views
             newBook.Format = LB_FormatSelector.SelectedValue.ToString();
         }
 
-        #endregion
+#endregion
 
-        #region Status Selection
+#region Status Selection
 
         private void InitStatusSelection()
         {
-            List<string> statuses = TheApp.Model.StatusTable.ListBoxSelectionList();
+            List<string> statuses = ((App)Application.Current).Model.StatusTable.ListBoxSelectionList();
             LB_StatusSelector.DataContext = statuses;
             LB_StatusSelector.Items.Clear();
             foreach (string status in statuses)
@@ -399,13 +347,13 @@ namespace ExperimentSimpleBkLibInvTool.Views
             newBook.Status = LB_StatusSelector.SelectedValue.ToString();
         }
 
-        #endregion
+#endregion
 
-        #region Condition Selection
+#region Condition Selection
 
         private void InitConditionSelection()
         {
-            List<string> conditions = TheApp.Model.ConditionsTable.ListBoxSelectionList();
+            List<string> conditions = ((App)Application.Current).Model.ConditionsTable.ListBoxSelectionList();
             LB_ConditionSelector.DataContext = conditions;
             LB_ConditionSelector.Items.Clear();
             foreach (string condition in conditions)
@@ -419,9 +367,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
             newBook.Condition = LB_ConditionSelector.SelectedValue.ToString();
         }
 
-        #endregion
+#endregion
 
-        #region For Sale 
+#region For Sale 
         private void InitForSaleData()
         {
             salesInfo = new ForSaleModel();
@@ -442,9 +390,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
             salesInfo.EstimatedValue = TB_EstimatedValue.Text;
         }
 
-        #endregion
+#endregion
 
-        #region Owned
+#region Owned
 
         private void InitOwnerShip()
         {
@@ -461,6 +409,6 @@ namespace ExperimentSimpleBkLibInvTool.Views
             owned.IsWishListed = ChkBx_Wishlisted.IsChecked.Value;
         }
 
-        #endregion
+#endregion
     }
 }

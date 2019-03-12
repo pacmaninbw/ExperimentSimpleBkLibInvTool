@@ -24,7 +24,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
             else
             {
                 CategoryModel category = new CategoryModel(TxtBx_CategorTitle.Text);
-                ((App)Application.Current).Model.CategoryTable.AddCategory(category);
+                category.AddToDb();
                 Close();
             }
         }

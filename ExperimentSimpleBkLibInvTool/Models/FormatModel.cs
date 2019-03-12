@@ -29,6 +29,12 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
             set { Name = value; }
         }
 
+        public override bool AddToDb()
+        {
+            ((App)Application.Current).Model.FormatTable.AddFormat(this);
+            return true;
+        }
+
         protected override bool _dataIsValid()
         {
             bool isValid = GetParameterIsValid("Name");

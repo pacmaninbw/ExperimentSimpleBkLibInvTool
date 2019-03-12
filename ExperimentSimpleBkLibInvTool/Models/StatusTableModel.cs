@@ -26,6 +26,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable
 
         protected override void InitializeSqlCommandParameters()
         {
+            // There is no plan to implement the addition of status to the status table
+            // so this method is to remain unimplmented.
             throw new System.NotImplementedException();
         }
     }

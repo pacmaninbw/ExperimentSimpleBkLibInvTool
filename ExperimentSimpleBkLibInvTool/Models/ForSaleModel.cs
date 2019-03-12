@@ -35,6 +35,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
             _isForSale = isForSale;
         }
 
+        public override bool AddToDb()
+        {
+            return ((App)Application.Current).Model.ForSaleTable.AddForSaleData(this);
+        }
+
         protected override bool _dataIsValid()
         {
             bool dataIsValid = true;

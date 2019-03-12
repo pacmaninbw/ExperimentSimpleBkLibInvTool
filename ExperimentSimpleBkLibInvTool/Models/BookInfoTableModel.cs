@@ -34,10 +34,23 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
             return addBookWasSuccessful;
         }
-
-        public uint GetTitleKey(string title)
+        
+        public uint InsertTitleIfNotInTable(string title)
         {
-            uint titleKey = 0;
+            uint titleKey = GetTitleKey(title);
+
+            if (titleKey < 1)
+            {
+                InsertTitleString(title);
+                titleKey = GetTitleKey(title);
+            }
+
+            return titleKey;
+        }
+
+        public void InsertTitleString(string title)
+        {
+            string SqlInsert = "INSERT INTO title (title.TitleStr) VALUES('" + title + "');";
 
             using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
             {
@@ -47,11 +60,43 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
                     using (MySqlCommand cmd = new MySqlCommand())
                     {
                         cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "insertTitleIfNotExist";
-                        cmd.Parameters.AddWithValue("@titleStr", title);
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = SqlInsert;
                         cmd.ExecuteNonQuery();
-                        titleKey = (uint)cmd.Parameters["@RETURN_VALUE"].Value;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMsg = "Database Error: " + ex.Message;
+                    MessageBox.Show(errorMsg);
+                }
+            }
+        }
+
+        public uint GetTitleKey(string title)
+        {
+            uint titleKey = 0;
+            string SqlQuery = "SELECT title.idTitle FROM title WHERE title.TitleStr = '" + title + "';";
+
+            using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
+            {
+                int ResultCount = 0;
+                DataTable Dt = new DataTable();
+                try
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandType = CommandType.Text;
+                        cmd.CommandText = SqlQuery;
+                        cmd.ExecuteNonQuery();
+                        MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+                        ResultCount = sda.Fill(Dt);
+                        if (ResultCount > 0)
+                        {
+                            titleKey = Dt.Rows[0].Field<uint>(0);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -95,7 +140,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
                 {
                     string errorMsg = "Database Error: " + ex.Message;
                     MessageBox.Show(errorMsg);
-                    titleKey = 0;
                 }
             }
 

@@ -39,6 +39,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings
             ID = iD;
         }
 
+        public override bool AddToDb()
+        {
+            return ((App)Application.Current).Model.RatingsTable.AddRatings(this);
+        }
+
         protected override bool _dataIsValid()
         {
             bool isValid = true;

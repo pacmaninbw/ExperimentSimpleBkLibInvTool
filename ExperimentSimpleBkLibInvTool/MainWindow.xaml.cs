@@ -10,7 +10,6 @@ namespace ExperimentSimpleBkLibInvTool
     /// </summary>
     public partial class MainWindow : Window
     {
-        private readonly App TheApp = Application.Current as App;
 
         public MainWindow()
         {

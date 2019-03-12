@@ -71,5 +71,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             }
             return dataIsValid;
         }
+
+        public override bool AddToDb()
+        {
+            return ((App)Application.Current).Model.SeriesTable.AddSeries(this);
+        }
     }
 }

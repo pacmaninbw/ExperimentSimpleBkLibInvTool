@@ -183,7 +183,6 @@
     <Compile Include="Models\ForSaleTableModel.cs" />
     <Compile Include="Models\IAuthorModel.cs" />
     <Compile Include="Models\IBookInfoModel.cs" />
-    <Compile Include="Models\IBookModel.cs" />
     <Compile Include="Models\IConditionsAndOtherOptionsModel.cs" />
     <Compile Include="Models\IForSaleModel.cs" />
     <Compile Include="Models\IOwnerShipModel.cs" />

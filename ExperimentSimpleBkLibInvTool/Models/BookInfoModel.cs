@@ -91,22 +91,33 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public uint TitleId { get { return _titleKey; } }
 
-        public bool AddBookInfo()
+        public override bool AddToDb()
         {
-            bool wasAdded = false;
-
-            wasAdded = TheModel.BookInfoTable.AddBookInfo(this);
-
-            return wasAdded;
+           return TheModel.BookInfoTable.AddBookInfo(this);
         }
 
         protected override bool _dataIsValid()
         {
-            if (_defaultIsValid())
+            bool isValid = _defaultIsValid();
+
+            if (!isValid)
             {
-                return true;
+                return isValid;
             }
-            throw new NotImplementedException();
+
+            if (_authorKey < 1)
+            {
+                MessageBox.Show("Author has not been selected", "Missing Author selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
+            }
+
+            if (_titleKey < 1)
+            {
+                MessageBox.Show("The title has not been entered", "Missing title", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
+            }
+
+            return isValid;
         }
 
         private void SetGenreParameter(string genre)
@@ -150,14 +161,14 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         private void SetTitleKeyParameter(string title)
         {
             _titleKey = ConvertTitleToKey(title);
-            SetParameterValue("Title Id", _authorKey);
+            SetParameterValue("Title Key", _titleKey);
         }
 
         private uint ConvertTitleToKey(string title)
         {
             uint titleid = 0;
 
-            titleid = TheModel.BookInfoTable.GetTitleKey(title);
+            titleid = TheModel.BookInfoTable.InsertTitleIfNotInTable(title);
 
             return titleid;
         }

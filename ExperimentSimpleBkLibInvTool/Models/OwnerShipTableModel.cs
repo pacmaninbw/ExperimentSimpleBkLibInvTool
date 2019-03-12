@@ -17,12 +17,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
 
         public DataTable OwnerShipTable { get { return DataTable; } }
 
-        public bool AddOwnerShipData(IOwnerShipModel ownerShipData, uint bookId)
+        public bool AddOwnerShipData(IOwnerShipModel ownerShipData)
         {
             OwnerShipModel ownerShipModel = (OwnerShipModel)ownerShipData;
-            if (bookId > 0 || ownerShipModel.getBookID() > 0)
+            if (ownerShipModel.getBookID() > 0)
             {
-                ownerShipModel.setBookId(bookId);
                 return addItem(ownerShipModel);
             }
             else

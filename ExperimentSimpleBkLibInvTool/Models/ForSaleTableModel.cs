@@ -17,12 +17,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
 
         public DataTable ForSaleTable { get { return DataTable; } }
 
-        public bool AddForSaleData(IForSaleModel forSaleData, uint bookId)
+        public bool AddForSaleData(IForSaleModel forSaleData)
         {
             ForSaleModel forSaleModel = (ForSaleModel)forSaleData;
-            if (bookId > 0 || forSaleModel.getBookID() > 0)
+            if (forSaleModel.getBookID() > 0)
             {
-                forSaleModel.setBookId(bookId);
                 return addItem(forSaleModel);
             }
             else

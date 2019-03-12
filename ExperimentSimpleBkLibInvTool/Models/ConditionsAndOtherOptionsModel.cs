@@ -11,14 +11,29 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
 {
     public class ConditionsAndOtherOptionsModel : DataTableItemBaseModel, IConditionsAndOtherOptionsModel
     {
+        string _conditionStr;
+        string _statusStr;
+        private readonly Model TheModel = ((App)Application.Current).Model;
+
+
         public ConditionsAndOtherOptionsModel() :
             base(((App)Application.Current).Model.ConditionsAndOptions)
         {
+            _conditionStr = string.Empty;
+            _statusStr = string.Empty;
         }
 
-        public string Condition { get; set; }
+        public string Condition {
+            get { return _conditionStr; }
+            set { SaveConditionAndConvertToKey(value); }
+        }
 
-        public string Status { get; set; }
+        public uint ConditionKey { get { return GetParameterKValue("Condition Id"); } }
+
+        public string Status {
+            get { return _statusStr; }
+            set { SaveStatusAndConvertToKey(value); }
+        }
 
         public string PhysicalCondition { get; set; }
 
@@ -26,9 +41,26 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
 
         public bool Read { get; set; }
 
+        public override bool AddToDb()
+        {
+            return ((App)Application.Current).Model.ConditionsAndOptions.AddConditionsAndOptions(this);
+        }
+
         protected override bool _dataIsValid()
         {
             throw new NotImplementedException();
+        }
+
+        private void SaveConditionAndConvertToKey(string condition)
+        {
+            _conditionStr = condition;
+            SetParameterValue("Condition Id", TheModel.ConditionsTable.ConditionKey(condition));
+        }
+
+        private void SaveStatusAndConvertToKey(string status)
+        {
+            _statusStr = status;
+            SetParameterValue("Status Id", TheModel.StatusTable.StatusKey(status));
         }
     }
 }

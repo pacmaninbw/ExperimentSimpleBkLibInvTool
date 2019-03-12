@@ -18,11 +18,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
 
         public DataTable OptionsTable { get { return DataTable; } }
 
-        public bool AddConditionsAndOptions()
+        public bool AddConditionsAndOptions(ConditionsAndOtherOptionsModel conditionsAndOtherOptions)
         {
-            bool wasAdded = false;
-
-            return wasAdded;
+            return addItem(conditionsAndOtherOptions);
         }
 
         protected override void InitializeSqlCommandParameters()

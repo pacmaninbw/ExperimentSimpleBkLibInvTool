@@ -72,6 +72,11 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
             _outOfPrint = OutOfPrint;
         }
 
+        public override bool AddToDb()
+        {            
+            return ((App)Application.Current).Model.PublishingData.AddPublishingInfo(this);
+        }
+
         protected override bool _dataIsValid()
         {
             bool dataIsValid = true;
