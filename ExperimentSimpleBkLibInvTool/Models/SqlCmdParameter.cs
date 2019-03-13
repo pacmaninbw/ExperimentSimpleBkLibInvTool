@@ -236,7 +236,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
         protected void SetValue(bool InVal)
         {
             _value = (InVal) ? "true" : "false";
-            if (_type == MySqlDbType.Int16)
+            if (_type == MySqlDbType.Int16 || _type == MySqlDbType.Byte)
             {
                 _valueInt = (InVal) ? 1 : 0;
             }
