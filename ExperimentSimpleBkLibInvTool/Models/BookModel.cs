@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
@@ -46,6 +47,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             _bookInfo = new BookInfoModel();
             _authorInfo = null;
             _forSale = null;
+            _optionalItems = new ConditionsAndOtherOptionsModel();
             _owned = null;
             _publishInfo = null;
             _puchaseInfo = null;
@@ -98,7 +100,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         public IConditionsAndOtherOptionsModel ConditionsAndOptions
         {
             get { return _optionalItems; }
-            set { _optionalItems = (ConditionsAndOtherOptionsModel) value; }
+            set { _optionalItems.Copy(value); }
         }
 
         public string Genre
@@ -135,22 +137,30 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         {
             bool success = IsValid;
 
-            if (success)
+            try
             {
-                if (success = _bookInfo.AddToDb())
+                if (success)
                 {
-                    _bookKey = _bookInfo.getBookID();
-                }
+                    if (success = _bookInfo.AddToDb())
+                    {
+                        _bookKey = _bookInfo.BookID;
+                    }
 
-                if (_bookKey > 0)
-                {
-                    success = AddToDb(success, _publishInfo);
-                    success = AddToDb(success, _puchaseInfo);
-                    success = AddToDb(success, _optionalItems);
-                    success = AddToDb(success, _forSale);
-                    success = AddToDb(success, _owned);
-                    success = AddToDb(success, _ratings);
+                    if (_bookKey > 0)
+                    {
+                        success = AddToDb(success, _optionalItems);
+                        success = AddToDb(success, _owned);
+                        success = AddToDb(success, _ratings);
+                        success = AddToDb(success, _publishInfo);
+                        success = AddToDb(success, _forSale);
+                        success = AddToDb(success, _puchaseInfo);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                string errorMsg = "Database Error: " + ex.Message;
+                MessageBox.Show(errorMsg);
             }
 
             return success;
@@ -224,46 +234,24 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         private void SetSeriesValues(SeriesModel seriesModel)
         {
-            if (!seriesModel.IsValid)
+            if (!seriesModel.IsValid || !_authorInfo.IsValid)
             {
                 return;
             }
 
             _seriesInfo = seriesModel;
-            _bookInfo.SeriesId = seriesModel.KeyValue;
+            _bookInfo.SeriesId = TheModel.SeriesTable.GetSeriesKey(_authorInfo, _seriesInfo.Title); ;
         }
 
         private bool AddToDb(bool success, DataTableItemBaseModel item)
         {
             if (success && item != null)
             {
-                item.setBookId(_bookKey);
+                item.BookId =_bookKey;
                 success = item.AddToDb();
             }
 
             return success;
-        }
-
-        private uint ConvertSeriesToKey(IAuthorModel author, string series)
-        {
-            return ConvertSeriesToKey(author as AuthorModel, series);
-        }
-
-        private uint ConvertSeriesToKey(AuthorModel author, string series)
-        {
-            return TheModel.SeriesTable.GetSeriesKey(author, series);
-        }
-
-        private uint ConvertSeriesToKey(string title)
-        {
-            uint key = 0; ;
-
-            if (_authorInfo.KeyValue > 0)
-            {
-                key = TheModel.SeriesTable.GetSeriesKey(_authorInfo, title);
-            }
-
-            return key;
         }
     }
 }

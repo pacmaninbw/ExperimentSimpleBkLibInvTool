@@ -44,7 +44,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             _addSqlCommandParameter("Genre Id", GetDBColumnData("CategoryFKbi"), parameters["@genreKey"]);
             _addSqlCommandParameter("Format Id", GetDBColumnData("BookFormatFKbi"), parameters["@formatKey"]);
             _addSqlCommandParameter("Series Id", GetDBColumnData("SeriesFKBi"), parameters["@seriesKey"]);
-            _addSqlCommandParameter("Book Key", GetDBColumnData("idBookInfo"), parameters["@bookKey"]);
+            _addSqlCommandParameter("ID", GetDBColumnData("idBookInfo"), parameters["@bookKey"]);
         }
     }
 }

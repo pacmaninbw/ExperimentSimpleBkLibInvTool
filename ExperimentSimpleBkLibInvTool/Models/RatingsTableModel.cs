@@ -19,7 +19,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings
 
         public bool AddRatings(RatingsModel ratings)
         {
-            if (ratings.getBookID() > 0)
+            if (ratings.BookId > 0)
             {
                 return addItem(ratings);
             }

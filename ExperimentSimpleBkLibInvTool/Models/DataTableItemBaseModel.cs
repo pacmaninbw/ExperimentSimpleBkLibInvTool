@@ -17,7 +17,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
 {
     public abstract class DataTableItemBaseModel
     {
-        private uint _bookId;
         /*
          * To save memory and correctly change the proper command parameter, only the
          * _sqlCmdParameters list contains SqlCmdParameters and the dictionaries provide
@@ -31,16 +30,15 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
 
         public bool IsValid { get { return _dataIsValid(); } }
 
-        public uint KeyValue { get { return _bookId; } }
-
-        public uint getBookID()
+        public uint BookId
         {
-            return _bookId;
+            get { return GetParameterKValue("ID"); }
+            set { SetParameterValue("ID", value); }
         }
 
         public void setBookId(uint BookId)
         {
-            _bookId = BookId;
+            SetParameterValue("ID", BookId);
         }
 
         public abstract bool AddToDb();
@@ -49,7 +47,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel
 
         protected DataTableItemBaseModel(CDataTableModel DBInterfaceModel)
         {
-            _bookId = 0;
             _sqlCmdParameters = new List<SqlCmdParameter>();
             List<SqlCmdParameter> sqlCmdParameters = DBInterfaceModel.SQLCommandParameters;
             foreach (SqlCmdParameter parameter in sqlCmdParameters)

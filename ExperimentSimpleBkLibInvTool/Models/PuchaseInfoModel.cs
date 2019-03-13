@@ -6,51 +6,46 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
 {
     public class PuchaseInfoModel : DataTableItemBaseModel, IPuchaseInfoModel
     {
-        private string _listPrice;
-        private string _paidPrice;
-        private string _vendor;
-        private DateTime _datePurchased;
-
         public string ListPrice
         {
-            get { return _listPrice; }
-            set { _listPrice = value; }
+            get { return GetParameterValue("List Price"); ; }
+            set { SetParameterValue("List Price", value); }
         }
 
         public string PaidPrice
         {
-            get {  return _paidPrice; }
-            set { _paidPrice = value; }
+            get { return GetParameterValue("Price Paid"); ; }
+            set { SetParameterValue("Price Paid", value); }
         }
 
         public string Vendor
         {
-            get { return _vendor; }
-            set { _vendor = value; }
+            get { return GetParameterValue("Vendor"); ; }
+            set { SetParameterValue("Vendor", value); }
         }
 
         public DateTime PurchaseDate
         {
-            get { return _datePurchased; }
-            set { _datePurchased = value; }
+            get { return DateTime.Parse(GetParameterValue("Date of Purchase")); }
+            set { SetParameterValue("Date of Purchase", value.ToString("yyyy/MM/dd")); }
         }
 
         public PuchaseInfoModel()
             : base(((App)Application.Current).Model.PurchaseData)
         {
-            _listPrice = null;
-            _paidPrice = null;
-            _vendor = null;
-            _datePurchased = new DateTime(1970,1,1);
+            ListPrice = string.Empty;
+            PaidPrice = string.Empty;
+            Vendor = string.Empty;
+            SetParameterValue("Date of Purchase", string.Empty);
         }
 
         public PuchaseInfoModel(string vendor, string listPrice, string paidPrice, DateTime puchaseDate)
             : base(((App)Application.Current).Model.PurchaseData)
         {
-            _listPrice = listPrice;
-            _paidPrice = paidPrice;
-            _vendor = vendor;
-            _datePurchased = puchaseDate;
+            ListPrice = listPrice;
+            PaidPrice = paidPrice;
+            Vendor = vendor;
+            PurchaseDate = puchaseDate;
         }
 
         public override bool AddToDb()
@@ -60,36 +55,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
 
         protected override bool _dataIsValid()
         {
-            bool dataIsValid = true;
-
-            // If the vendor is null then the user has not set this information.
-            // This information is not required but if it has been set then the
-            // values should be valid.
-            if (_vendor != null)
-            {
-                if (_vendor.Length < 1)
-                {
-                    string errorMsg = "The vendor name is empty";
-                    MessageBox.Show(errorMsg);
-                    dataIsValid = false;
-                }
-
-#if false
-                if (_paidPrice < 0.01)
-                {
-                    string errorMsg = "The price paid for the book is less than one cent.";
-                    MessageBox.Show(errorMsg);
-                    dataIsValid = false;
-                }
-
-                if (_listPrice < 0.01)
-                {
-                    string errorMsg = "The list price for the book is less than one cent.";
-                    MessageBox.Show(errorMsg);
-                    dataIsValid = false;
-                }
-#endif
-            }
+            bool dataIsValid = _defaultIsValid();
 
             return dataIsValid;
         }

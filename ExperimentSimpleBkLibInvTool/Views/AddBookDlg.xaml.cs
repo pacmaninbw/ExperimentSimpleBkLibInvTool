@@ -37,6 +37,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         private BookModel newBook;
         private OwnerShipModel owned;
         private ForSaleModel salesInfo;
+        private bool _genreSelected = false;
 
         public IAuthorModel SelectedAuthor { get { return newBook.AuthorInfo; } set { newBook.AuthorInfo = value as AuthorModel; } }
 
@@ -71,11 +72,21 @@ namespace ExperimentSimpleBkLibInvTool.Views
                 hasErrors = true;
             }
 
-            if (string.IsNullOrEmpty(newBook.Genre))
+            if (!_genreSelected || string.IsNullOrEmpty(newBook.Genre))
             {
                 LB_CategorySelector.Background = Brushes.Red;
                 MessageBox.Show("A category is required for adding a new book!");
                 hasErrors = true;
+            }
+
+            if (owned != null)
+            {
+                newBook.Owned = owned;
+            }
+
+            if (salesInfo != null)
+            {
+                newBook.ForSale = salesInfo;
             }
 
             if (!newBook.IsValid)
@@ -232,7 +243,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
             LB_CategorySelector.DataContext = categories;
             if (categories.Count < 1)
             {
-                string mbMsg = "There are no genres, would you like to add one?";
+                string mbMsg = "There are no genres, please add one?";
                 MessageBoxResult messageBoxResult = MessageBox.Show(mbMsg, "Add Category Confirmation", MessageBoxButton.YesNo);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
@@ -241,6 +252,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
                     return;
                 }
             }
+
             LB_CategorySelector.Items.Clear();
             foreach (string category in categories)
             {
@@ -252,6 +264,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
         {
             LB_CategorySelector.Background = Brushes.White;
             newBook.Genre = LB_CategorySelector.SelectedValue.ToString();
+            _genreSelected = true;
         }
 
 #endregion

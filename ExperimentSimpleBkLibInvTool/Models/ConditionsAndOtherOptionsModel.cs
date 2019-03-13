@@ -11,28 +11,24 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
 {
     public class ConditionsAndOtherOptionsModel : DataTableItemBaseModel, IConditionsAndOtherOptionsModel
     {
-        string _conditionStr;
-        string _statusStr;
         private readonly Model TheModel = ((App)Application.Current).Model;
 
 
         public ConditionsAndOtherOptionsModel() :
             base(((App)Application.Current).Model.ConditionsAndOptions)
         {
-            _conditionStr = string.Empty;
-            _statusStr = string.Empty;
         }
 
         public string Condition {
-            get { return _conditionStr; }
-            set { SaveConditionAndConvertToKey(value); }
+            get { return TheModel.ConditionsTable.ConditionTitle(GetParameterKValue("Condition Id")); }
+            set { SetParameterValue("Condition Id", TheModel.ConditionsTable.ConditionKey(value)); }
         }
 
         public uint ConditionKey { get { return GetParameterKValue("Condition Id"); } }
 
         public string Status {
-            get { return _statusStr; }
-            set { SaveStatusAndConvertToKey(value); }
+            get { return TheModel.StatusTable.StatusTitle(GetParameterKValue("Status Id")); }
+            set { SetParameterValue("Status Id", TheModel.StatusTable.StatusKey(value)); }
         }
 
         public string PhysicalCondition { get; set; }
@@ -46,21 +42,18 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
             return ((App)Application.Current).Model.ConditionsAndOptions.AddConditionsAndOptions(this);
         }
 
+        public void Copy(IConditionsAndOtherOptionsModel original)
+        {
+            Condition = original.Condition;
+            Status = original.Status;
+            PhysicalCondition = original.PhysicalCondition;
+            SignedByAuthor = original.SignedByAuthor;
+            Read = original.Read;
+        }
+
         protected override bool _dataIsValid()
         {
-            throw new NotImplementedException();
-        }
-
-        private void SaveConditionAndConvertToKey(string condition)
-        {
-            _conditionStr = condition;
-            SetParameterValue("Condition Id", TheModel.ConditionsTable.ConditionKey(condition));
-        }
-
-        private void SaveStatusAndConvertToKey(string status)
-        {
-            _statusStr = status;
-            SetParameterValue("Status Id", TheModel.StatusTable.StatusKey(status));
+            return _defaultIsValid();
         }
     }
 }

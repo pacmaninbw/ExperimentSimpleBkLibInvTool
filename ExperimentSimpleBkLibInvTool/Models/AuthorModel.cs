@@ -6,7 +6,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
     public class AuthorModel : DataTableItemBaseModel, IAuthorModel
     {
         private bool errorWasReported;
-        private uint _idAuthor;
 
         public string FirstName {
             get { return GetParameterValue("First Name"); }
@@ -34,21 +33,22 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
         }
 
         public uint AuthorId {
-            get { return _idAuthor; }
+            get { return GetParameterKValue("ID"); }
+            private set { SetParameterValue("ID", value); }
         }
 
         public AuthorModel()
             : base(((App)Application.Current).Model.AuthorTable)
         {
             errorWasReported = false;
-            _idAuthor = 0;
+            AuthorId = 0;
         }
 
         public AuthorModel(string firstName, string lastName, string middleName=null, string yearOfBirth=null, string yearOfDeath=null)
             : base(((App)Application.Current).Model.AuthorTable)
         {
             errorWasReported = false;
-            _idAuthor = 0;
+            AuthorId = 0;
 
             FirstName = firstName;
             LastName = lastName;
@@ -74,7 +74,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
         {
             errorWasReported = false;
 
-            uint.TryParse(idAuthor, out _idAuthor);
+            uint IdAuthor;
+            uint.TryParse(idAuthor, out IdAuthor);
+            AuthorId = IdAuthor;
 
             FirstName = firstName;
             LastName = lastName;

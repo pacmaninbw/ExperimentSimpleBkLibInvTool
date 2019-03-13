@@ -27,7 +27,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
         {
             MySqlParameterCollection parameters = AddItemParameters;
 
-            _addSqlCommandParameter("Book Id", GetDBColumnData("BookFKCond"), parameters["@bookKey"]);
+            _addSqlCommandParameter("ID", GetDBColumnData("BookFKCond"), parameters["@bookKey"]);
             _addSqlCommandParameter("Status Id", GetDBColumnData("NewOrUsed"), parameters["@statusKey"]);
             _addSqlCommandParameter("Condition Id", GetDBColumnData("ConditionOfBook"), parameters["@conditionKey"]);
             _addSqlCommandParameter("Physical Description", GetDBColumnData("PhysicalDescriptionStr"), parameters["@physicalDescStr"]);

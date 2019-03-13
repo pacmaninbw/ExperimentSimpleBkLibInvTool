@@ -28,7 +28,7 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         public PublishInfoModel PublishInfo { get; private set; }
 
-        private void TB_Copyright_FocusableChanged(object sender, DependencyPropertyChangedEventArgs e)
+        private void TB_Copyright_LostFocus(object sender, RoutedEventArgs e)
         {
             PublishInfo.CopyRight = TB_Copyright.Text;
         }

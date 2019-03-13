@@ -5,34 +5,30 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
 {
     public class ForSaleModel : DataTableItemBaseModel, IForSaleModel
     {
-        private string _askingPrice;
-        private string _estimatedPrice;
-        private bool _isForSale;
-
         public bool IsForSale
         {
-            get { return _isForSale; }
-            set { _isForSale = value; }
+            get { return GetParameterBValue("Is For Sale"); }
+            set { SetParameterValue("Is For Sale", value); }
         }
 
         public string AskingPrice
         {
-            get { return _askingPrice; }
-            set {  _askingPrice = value; }
+            get { return GetParameterValue("Asking Price"); }
+            set { SetParameterValue("Asking Price", value); }
         }
 
         public string EstimatedValue
         {
-            get { return _estimatedPrice; }
-            set { _estimatedPrice = value; }
+            get { return GetParameterValue("Estimated Value"); }
+            set { SetParameterValue("Estimated Value", value); }
         }
 
         public ForSaleModel(bool isForSale=false, string askingPrice=null, string estimatedPrice=null)
             : base(((App)Application.Current).Model.ForSaleTable)
         {
-            _askingPrice = askingPrice;
-            _estimatedPrice = estimatedPrice;
-            _isForSale = isForSale;
+            AskingPrice = askingPrice;
+            EstimatedValue = estimatedPrice;
+            IsForSale = isForSale;
         }
 
         public override bool AddToDb()
@@ -42,17 +38,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
 
         protected override bool _dataIsValid()
         {
-            bool dataIsValid = true;
-
-            if (string.IsNullOrEmpty(_estimatedPrice))
-            {
-                dataIsValid = false; ;
-            }
-
-            if (string.IsNullOrEmpty(_askingPrice))
-            {
-                dataIsValid = false; ;
-            }
+            bool dataIsValid = _defaultIsValid();
 
             return dataIsValid;
         }

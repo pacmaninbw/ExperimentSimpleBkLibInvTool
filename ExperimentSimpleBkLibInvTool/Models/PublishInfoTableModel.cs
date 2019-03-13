@@ -21,9 +21,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
         public bool AddPublishingInfo(IPublishInfoModel PublishingData, uint bookId = 0)
         {
             PublishInfoModel publishInfoModel = (PublishInfoModel)PublishingData;
-            if (bookId > 0 || publishInfoModel.getBookID() > 0)
+            if (publishInfoModel.BookId > 0)
             {
-                publishInfoModel.setBookId(bookId);
                 return addItem(publishInfoModel);
             }
             else

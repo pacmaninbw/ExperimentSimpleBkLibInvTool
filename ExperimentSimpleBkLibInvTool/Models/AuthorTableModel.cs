@@ -46,7 +46,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
 
         public uint AuthorKey(AuthorModel author)
         {
-            uint key = author.KeyValue;
+            uint key = author.AuthorId;
             if (key < 1)
             {
                 DataTable dt = AuthorTable;
@@ -120,7 +120,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
             _addSqlCommandParameter("Middle Name", GetDBColumnData("MiddleName"), parameters["@authorMiddleName"]);
             _addSqlCommandParameter("Year of Birth", GetDBColumnData("YearOfBirth"), parameters["@dob"]);
             _addSqlCommandParameter("Year of Death", GetDBColumnData("YearOfDeath"), parameters["@dod"]);
-            _addSqlCommandParameter("Primary Key", GetDBColumnData("idAuthors"), parameters["@primaryKey"]);
+            _addSqlCommandParameter("ID", GetDBColumnData("idAuthors"), parameters["@primaryKey"]);
         }
 
         #endregion

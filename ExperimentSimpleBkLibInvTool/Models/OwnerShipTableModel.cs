@@ -20,7 +20,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
         public bool AddOwnerShipData(IOwnerShipModel ownerShipData)
         {
             OwnerShipModel ownerShipModel = (OwnerShipModel)ownerShipData;
-            if (ownerShipModel.getBookID() > 0)
+            if (ownerShipModel.BookId > 0)
             {
                 return addItem(ownerShipModel);
             }

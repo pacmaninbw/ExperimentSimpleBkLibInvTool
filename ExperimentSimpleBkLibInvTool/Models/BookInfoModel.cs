@@ -8,14 +8,18 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         public BookInfoModel(uint genre = 0, uint titleId = 0, uint authorId = 0, uint seriesId = 0, uint formatId = 0)
             : base(((App)Application.Current).Model.BookInfoTable)
         {
+            BookID = 0;
             GenreId = genre;
             TitleId = titleId;
-            AuthorId = AuthorId;
+            AuthorId = authorId;
             SeriesId = seriesId;
             FormatId = formatId;
         }
 
-        public uint BookID { get { return GetParameterKValue("Book Key"); } }
+        public uint BookID {
+            get { return GetParameterKValue("ID"); }
+            private set { SetParameterValue("ID", value); }
+        }
 
         public uint GenreId {
             get { return GetParameterKValue("Genre Id"); }
@@ -45,7 +49,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
         public override bool AddToDb()
         {
-           return ((App)Application.Current).Model.BookInfoTable.AddBookInfo(this);
+            bool wasAdded = ((App)Application.Current).Model.BookInfoTable.AddBookInfo(this);
+            BookID = ((App)Application.Current).Model.BookInfoTable.NewKeyValue;
+
+            return wasAdded;
         }
 
         protected override bool _dataIsValid()
@@ -59,15 +66,27 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             }
 
             // Check for required fields
-            if (GetParameterKValue("Author Id") < 1)
+            if (AuthorId < 1)
             {
                 MessageBox.Show("Author has not been selected", "Missing Author selection", MessageBoxButton.OK, MessageBoxImage.Error);
                 isValid = false;
             }
 
-            if (GetParameterKValue("Title Id") < 1)
+            if (TitleId < 1)
             {
                 MessageBox.Show("The title has not been entered", "Missing title", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
+            }
+
+            if (GenreId < 1)
+            {
+                MessageBox.Show("Genre has not been selected", "Missing Genre selection", MessageBoxButton.OK, MessageBoxImage.Error);
+                isValid = false;
+            }
+
+            if (FormatId < 1)
+            {
+                MessageBox.Show("Format has not been selected", "Missing Format selection", MessageBoxButton.OK, MessageBoxImage.Error);
                 isValid = false;
             }
 

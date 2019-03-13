@@ -54,23 +54,41 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             return seriesSelectionList;
         }
 
-        public uint GetSeriesKey(IAuthorModel author, string seriesTitle)
-        {
-            return GetSeriesKey(author as AuthorModel, seriesTitle);
-        }
-
         public uint GetSeriesKey(AuthorModel author, string seriesTitle)
         {
             uint key = 0;
 
             if (author != null && author.IsValid)
             {
-                DataTable seriesList = Series;
-                string filterString = "LastName = '" + author.LastName + "' AND FirstName = '" + author.FirstName + "' AND SeriesName = '" + seriesTitle + "'";
-                DataRow[] seriesTitleList = seriesList.Select(filterString);
-                if (seriesTitleList.Length > 0)
+                string SqlQuery = "SELECT series.idSeries FROM series WHERE series.SeriesName = '" + seriesTitle + "' AND series.AuthorOfSeries = '" + author.AuthorId.ToString() + "';";
+
+                using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
                 {
-                    key = seriesTitleList[0].Field<uint>(seriesKeyIndex);
+                    int ResultCount = 0;
+                    DataTable Dt = new DataTable();
+                    try
+                    {
+                        conn.Open();
+                        using (MySqlCommand cmd = new MySqlCommand())
+                        {
+                            cmd.Connection = conn;
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = SqlQuery;
+                            cmd.ExecuteNonQuery();
+                            MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+                            ResultCount = sda.Fill(Dt);
+                            if (ResultCount > 0)
+                            {
+                                key = Dt.Rows[0].Field<uint>(0);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        string errorMsg = "Database Error: " + ex.Message;
+                        MessageBox.Show(errorMsg);
+                        key = 0;
+                    }
                 }
             }
 
@@ -83,17 +101,38 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
 
             if (seriesId > 0)
             {
-                DataTable seriesList = Series;
-                string filterString = "idSeries = '" + seriesId.ToString() + "'";
-                DataRow[] seriesTitleList = seriesList.Select(filterString);
+                string SqlQuery = "SELECT series.SeriesName FROM series WHERE series.idSeries = '" + seriesId + "';";
 
-                if (seriesTitleList.Length > 0)
+                using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
                 {
-                    title = seriesTitleList[0].Field<string>(seriesTitleIndex);
+                    int ResultCount = 0;
+                    DataTable Dt = new DataTable();
+                    try
+                    {
+                        conn.Open();
+                        using (MySqlCommand cmd = new MySqlCommand())
+                        {
+                            cmd.Connection = conn;
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = SqlQuery;
+                            cmd.ExecuteNonQuery();
+                            MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+                            ResultCount = sda.Fill(Dt);
+                            if (ResultCount > 0)
+                            {
+                                title = Dt.Rows[0].Field<string>(0);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        string errorMsg = "Database Error: " + ex.Message;
+                        MessageBox.Show(errorMsg);
+                    }
                 }
             }
 
-            return title;
+                return title;
         }
 
         protected override void InitializeSqlCommandParameters()
@@ -104,7 +143,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
             _addSqlCommandParameter("First Name", authorTable.GetDBColumnData("FirstName"), parameters["@authorFirst"]);
             _addSqlCommandParameter("Last Name", authorTable.GetDBColumnData("LastName"), parameters["@authorLast"]);
             _addSqlCommandParameter("Series Title", GetDBColumnData("SeriesName"), parameters["@seriesTitle"]);
-
         }
     }
 }

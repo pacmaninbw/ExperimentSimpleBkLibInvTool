@@ -15,7 +15,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
         public bool AddPurchaseInfo(IPuchaseInfoModel purchaseData)
         {
             PuchaseInfoModel purchaseInfoModel = (PuchaseInfoModel)purchaseData;
-            if (purchaseInfoModel.getBookID() > 0)
+            if (purchaseInfoModel.BookId > 0)
             {
                 return addItem(purchaseInfoModel);
             }

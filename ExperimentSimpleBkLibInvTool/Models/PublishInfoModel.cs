@@ -14,38 +14,38 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
 
         public string ISBNumber
         {
-            get { return _isbnNumber; }
-            set { _isbnNumber = value; }
+            get { return GetParameterValue("ISB Number"); }
+            set { SetParameterValue("ISB Number", value); }
         }
 
         public string CopyRight
         {
-            get { return _copyRight; }
-            set { _copyRight = value; }
+            get { return GetParameterValue("Copyright"); }
+            set { SetParameterValue("Copyright", value); }
         }
 
         public string Publisher
         {
-            get { return _publisher; }
-            set { _publisher = value; }
+            get { return GetParameterValue("Publisher"); }
+            set { SetParameterValue("Publisher", value); }
         }
 
         public string Printing
         {
-            get { return _printing; }
-            set { _printing = value; }
+            get { return GetParameterValue("Printing"); }
+            set { SetParameterValue("Printing", value); }
         }
 
         public string Edition
         {
-            get { return _edition; }
-            set { _edition = value; }
+            get { return GetParameterValue("Edition"); }
+            set { SetParameterValue("Edition", value); }
         }
 
         public bool OutOfPrint
         {
-            get { return _outOfPrint; }
-            set { _outOfPrint = value; }
+            get { return GetParameterBValue("OutOfPrint"); }
+            set { SetParameterValue("OutOfPrint", value); }
         }
 
         public PublishInfoModel()
@@ -79,35 +79,35 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
 
         protected override bool _dataIsValid()
         {
-            bool dataIsValid = true;
+            bool dataIsValid = _defaultIsValid();
+            if (!dataIsValid)
+            {
+                return dataIsValid;
+            }
+
             bool hasStringDataError = false;
 
 
             // If none of the fields have been updated the data is valid, if any of the fields
             // have been updated that at least the ISBN, CopyRight and Publisher should have values
-            if (_isbnNumber == null && _copyRight == null && _publisher == null && _printing == null && _edition == null && _outOfPrint == false)
+            if (string.IsNullOrEmpty(ISBNumber)  && string.IsNullOrEmpty(CopyRight) && string.IsNullOrEmpty(Publisher) && string.IsNullOrEmpty(Printing) && string.IsNullOrEmpty(Edition) && OutOfPrint == false)
             {
                 return dataIsValid;
             }
 
-            if (string.IsNullOrEmpty(_isbnNumber))
+            if (string.IsNullOrEmpty(ISBNumber))
             {
                 hasStringDataError = true;
             }
 
-            if (string.IsNullOrEmpty(_copyRight))
-            {
-                hasStringDataError = true;
-            }
-
-            if (string.IsNullOrEmpty(_publisher))
+            if (string.IsNullOrEmpty(CopyRight))
             {
                 hasStringDataError = true;
             }
 
             if (hasStringDataError)
             {
-                string errorMsg = "When using the publishing information the ISBN, Copyright and Publisher are required fields";
+                string errorMsg = "When using the publishing information the ISBN and Copyright are required fields";
                 MessageBox.Show(errorMsg);
                 dataIsValid = false;
             }

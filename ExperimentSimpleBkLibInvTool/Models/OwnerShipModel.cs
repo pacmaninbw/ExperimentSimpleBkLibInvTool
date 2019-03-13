@@ -5,26 +5,23 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
 {
     public class OwnerShipModel : DataTableItemBaseModel, IOwnerShipModel
     {
-        private bool _isOwned;
-        private bool _isWishListed;
-
         public bool IsOwned
         {
-            get { return _isOwned; }
-            set { _isOwned = value; }
+            get { return GetParameterBValue("In Library"); }
+            set { SetParameterValue("In Library", value); }
         }
 
         public bool IsWishListed
         {
-            get  { return _isWishListed; }
-            set { _isWishListed = value; }
+            get { return GetParameterBValue("Wish Listed"); }
+            set { SetParameterValue("Wish Listed", value); }
         }
 
         public OwnerShipModel(bool isOwned = true, bool isWishListed = false)
             : base(((App)Application.Current).Model.OwnerShip)
         {
-            _isOwned = isOwned;
-            _isWishListed = isWishListed;
+            IsOwned = isOwned;
+            IsWishListed = isWishListed;
         }
 
         protected override bool _dataIsValid()

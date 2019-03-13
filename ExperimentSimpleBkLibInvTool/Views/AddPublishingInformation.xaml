@@ -15,7 +15,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="55" Margin="0,5,0,0" Width="590">
                 <Label Content="Copyright Year" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Width="120"/>
-                <TextBox Name="TB_Copyright" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" FocusableChanged="TB_Copyright_FocusableChanged" Margin="10,0,0,0"/>
+                <TextBox Name="TB_Copyright" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" LostFocus="TB_Copyright_LostFocus" Margin="10,0,0,0"/>
                 <TextBlock Text="Recommended" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="10,0,0,0"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Height="55" Margin="0,5,0,0" Width="590">
@@ -43,7 +43,7 @@
             <StackPanel Orientation="Horizontal" Height="55" Width="590" HorizontalAlignment="Center">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Height="55" Width="300">
                     <Button Content="Save" Width="75" Height="30" Margin="75,0,0,0" Background="LightGreen" Name="BTN_SavePublishingInfo" Click="BTN_SavePublishingInfo_Click"/>
-                    <Button Content="Button" Width="75" Height="30" Name="BTN_CancelPublishingInfoDlg" Background="Red" Margin="75,0,0,0" Click="BTN_CancelPublishingInfoDlg_Click"/>
+                    <Button Content="Cancel" Width="75" Height="30" Name="BTN_CancelPublishingInfoDlg" Background="Red" Margin="75,0,0,0" Click="BTN_CancelPublishingInfoDlg_Click"/>
                 </StackPanel>
             </StackPanel>
         </StackPanel>
