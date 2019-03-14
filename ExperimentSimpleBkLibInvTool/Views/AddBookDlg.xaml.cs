@@ -1,30 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Category;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
 using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable;
+using ExperimentSimpleBkLibInvTool.ModelInMVC.Options;
 
 namespace ExperimentSimpleBkLibInvTool.Views
 {
@@ -36,8 +20,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
     {
         private BookModel newBook;
         private OwnerShipModel owned;
-        private ForSaleModel salesInfo;
-        private bool _genreSelected = false;
+        private ConditionsAndOtherOptionsModel options;
+        private bool _genreSelected;
+        private bool _formatSelected;
 
         public IAuthorModel SelectedAuthor { get { return newBook.AuthorInfo; } set { newBook.AuthorInfo = value as AuthorModel; } }
 
@@ -50,9 +35,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
             InitStatusSelection();
             InitFormatSelection();
             InitConditionSelection();
-            InitForSaleData();
-            InitOwnerShip();
             Loaded += new RoutedEventHandler(bypassAuthorSelectionIfAuthorSelected);
+            _formatSelected = false;
+            _genreSelected = false;
         }
 
         private void Btn_AddBookSave_Click(object sender, RoutedEventArgs e)
@@ -75,7 +60,14 @@ namespace ExperimentSimpleBkLibInvTool.Views
             if (!_genreSelected || string.IsNullOrEmpty(newBook.Genre))
             {
                 LB_CategorySelector.Background = Brushes.Red;
-                MessageBox.Show("A category is required for adding a new book!");
+                MessageBox.Show("A Genre is required for adding a new book!");
+                hasErrors = true;
+            }
+
+            if (!_formatSelected || string.IsNullOrEmpty(newBook.Format))
+            {
+                LB_FormatSelector.Background = Brushes.Red;
+                MessageBox.Show("A Format is required for adding a new book!");
                 hasErrors = true;
             }
 
@@ -84,9 +76,9 @@ namespace ExperimentSimpleBkLibInvTool.Views
                 newBook.Owned = owned;
             }
 
-            if (salesInfo != null)
+            if (options != null)
             {
-                newBook.ForSale = salesInfo;
+                newBook.ConditionsAndOptions = options;
             }
 
             if (!newBook.IsValid)
@@ -337,32 +329,46 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void LB_FormatSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            LB_FormatSelector.Background = Brushes.White;
             newBook.Format = LB_FormatSelector.SelectedValue.ToString();
+            _formatSelected = true;
         }
 
 #endregion
 
-#region Status Selection
+#region Owned and Options
 
-        private void InitStatusSelection()
+        private void CreateOwnedIfDoesntExist()
         {
-            List<string> statuses = ((App)Application.Current).Model.StatusTable.ListBoxSelectionList();
-            LB_StatusSelector.DataContext = statuses;
-            LB_StatusSelector.Items.Clear();
-            foreach (string status in statuses)
+            if (owned == null)
             {
-                LB_StatusSelector.Items.Add(status);
+                owned = new OwnerShipModel(false);
             }
         }
 
-        private void LB_StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void ChkBx_BookIsOwned_Click(object sender, RoutedEventArgs e)
         {
-            newBook.Status = LB_StatusSelector.SelectedValue.ToString();
+            CreateOwnedIfDoesntExist();
+            owned.IsOwned = ChkBx_BookIsOwned.IsChecked.Value;
         }
 
-#endregion
+        private void ChkBx_Wishlisted_Click(object sender, RoutedEventArgs e)
+        {
+            CreateOwnedIfDoesntExist();
+            owned.IsWishListed = ChkBx_Wishlisted.IsChecked.Value;
+        }
 
-#region Condition Selection
+        private void ChkBx_BookWasRead_Click(object sender, RoutedEventArgs e)
+        {
+            CreateOptionsIfDoesntExist();
+            options.Read = ChkBx_BookWasRead.IsChecked.Value;
+        }
+
+        private void ChkBx_SignedByAuthor_Click(object sender, RoutedEventArgs e)
+        {
+            CreateOptionsIfDoesntExist();
+            options.SignedByAuthor = ChkBx_SignedByAuthor.IsChecked.Value;
+        }
 
         private void InitConditionSelection()
         {
@@ -377,51 +383,53 @@ namespace ExperimentSimpleBkLibInvTool.Views
 
         private void LB_ConditionSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            newBook.Condition = LB_ConditionSelector.SelectedValue.ToString();
+            CreateOptionsIfDoesntExist();
+            options.Condition = LB_ConditionSelector.SelectedValue.ToString();
         }
 
-#endregion
-
-#region For Sale 
-        private void InitForSaleData()
+        private void CreateOptionsIfDoesntExist()
         {
-            salesInfo = new ForSaleModel();
+            if (options == null)
+            {
+                options = new ConditionsAndOtherOptionsModel();
+            }
         }
 
-        private void ChkBx_IsForSale_Click(object sender, RoutedEventArgs e)
+        private void InitStatusSelection()
         {
-            salesInfo.IsForSale = ChkBx_IsForSale.IsChecked.Value;
+            List<string> statuses = ((App)Application.Current).Model.StatusTable.ListBoxSelectionList();
+            LB_StatusSelector.DataContext = statuses;
+            LB_StatusSelector.Items.Clear();
+            foreach (string status in statuses)
+            {
+                LB_StatusSelector.Items.Add(status);
+            }
         }
 
-        private void TB_AskingPrice_LostFocus(object sender, RoutedEventArgs e)
+        private void LB_StatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            salesInfo.AskingPrice = TB_AskingPrice.Text;
+            CreateOptionsIfDoesntExist();
+            options.Status = LB_StatusSelector.SelectedValue.ToString();
         }
 
-        private void TB_EstimatedValue_LostFocus(object sender, RoutedEventArgs e)
+        #endregion
+
+        #region ForSale Info
+
+        private void BTN_AddSalesInfo_Click(object sender, RoutedEventArgs e)
         {
-            salesInfo.EstimatedValue = TB_EstimatedValue.Text;
+            AddSalesInfoDlg addSalesInfoDlg = new AddSalesInfoDlg();
+            addSalesInfoDlg.Closed += new EventHandler(GetSalesInfoFromDialog);
+            addSalesInfoDlg.Show();
         }
 
-#endregion
-
-#region Owned
-
-        private void InitOwnerShip()
+        private void GetSalesInfoFromDialog(object sender, EventArgs e)
         {
-            owned = new OwnerShipModel(false);
+            AddSalesInfoDlg addSalesInfoDlg = sender as AddSalesInfoDlg;
+            newBook.ForSale = addSalesInfoDlg.SalesInfo;
         }
 
-        private void ChkBx_BookIsOwned_Click(object sender, RoutedEventArgs e)
-        {
-            owned.IsOwned = ChkBx_BookIsOwned.IsChecked.Value;
-        }
+        #endregion
 
-        private void ChkBx_Wishlisted_Click(object sender, RoutedEventArgs e)
-        {
-            owned.IsWishListed = ChkBx_Wishlisted.IsChecked.Value;
-        }
-
-#endregion
     }
 }

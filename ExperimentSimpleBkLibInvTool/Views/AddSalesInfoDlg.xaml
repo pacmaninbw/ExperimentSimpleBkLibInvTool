@@ -1,0 +1,31 @@
+﻿<Window x:Class="ExperimentSimpleBkLibInvTool.Views.AddSalesInfoDlg"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool.Views"
+        mc:Ignorable="d"
+        Title="Sales Information" Height="260" Width="350">
+    <Grid>
+        <StackPanel Orientation="Vertical" Width="300">
+            <StackPanel Orientation="Horizontal" Height="55" Margin="0,5,0,0" Width="280" HorizontalAlignment="Center">
+                <Label Content="This book is for sale" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="10,0,10,0" Width="123"/>
+                <CheckBox Name="ChkBx_IsForSale" Margin="10,10,0,20"  FontWeight="Bold" Click="ChkBx_IsForSale_Click"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="55" Margin="0,5,0,0" Width="280" HorizontalAlignment="Center">
+                <Label Content="Asking Price" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="10,0,10,0" Width="123"/>
+                <TextBox Name="TB_AskingPrice" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.00" LostFocus="TB_AskingPrice_LostFocus"  Margin="10,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Height="55" Margin="0,5,0,0" Width="280" HorizontalAlignment="Center">
+                <Label Content="Estimated Value" HorizontalAlignment="Center" VerticalAlignment="Top" FontWeight="Bold" Margin="10,0,10,0"  Width="123"/>
+                <TextBox Name="TB_EstimatedValue" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Text="0.00" LostFocus="TB_EstimatedValue_LostFocus" Margin="10,0,10,0"/>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal" Width="200" HorizontalAlignment="Center">
+                    <Button Content="Save" Width="80" Background="LightGreen" Name="BTN_SaveSalesInfo" Click="BTN_SaveSalesInfo_Click"/>
+                    <Button Content="Cancel" Width="80" Background="Red" Name="BTN_CancelSalesInfoDlg" Margin="40,0,0,0" Click="BTN_CancelSalesInfoDlg_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

@@ -213,6 +213,9 @@
     <Compile Include="Views\AddRatingsDlg.xaml.cs">
       <DependentUpon>AddRatingsDlg.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddSalesInfoDlg.xaml.cs">
+      <DependentUpon>AddSalesInfoDlg.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AuthorsTableView.xaml.cs">
       <DependentUpon>AuthorsTableView.xaml</DependentUpon>
     </Compile>
@@ -231,7 +234,6 @@
     <Compile Include="Views\FormatTableView.xaml.cs">
       <DependentUpon>FormatTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ObservableViewObject.cs" />
     <Compile Include="Views\OwnerShipDialog.xaml.cs">
       <DependentUpon>OwnerShipDialog.xaml</DependentUpon>
     </Compile>
@@ -283,6 +285,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddRatingsDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddSalesInfoDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

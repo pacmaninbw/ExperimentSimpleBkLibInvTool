@@ -33,9 +33,15 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
 
         public string PhysicalCondition { get; set; }
 
-        public bool SignedByAuthor { get; set; }
+        public bool SignedByAuthor {
+            get { return GetParameterBValue("Autographed"); }
+            set { SetParameterValue("Autographed", value); }
+        }
 
-        public bool Read { get; set; }
+        public bool Read {
+            get { return GetParameterBValue("Read"); }
+            set { SetParameterValue("Read", value); }
+        }
 
         public override bool AddToDb()
         {

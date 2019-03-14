@@ -47,7 +47,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             _bookInfo = new BookInfoModel();
             _authorInfo = null;
             _forSale = null;
-            _optionalItems = new ConditionsAndOtherOptionsModel();
+            _optionalItems = null;
             _owned = null;
             _publishInfo = null;
             _puchaseInfo = null;
@@ -100,7 +100,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         public IConditionsAndOtherOptionsModel ConditionsAndOptions
         {
             get { return _optionalItems; }
-            set { _optionalItems.Copy(value); }
+            set { _optionalItems = (ConditionsAndOtherOptionsModel)value; }
         }
 
         public string Genre
@@ -119,18 +119,6 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         {
             get { return TheModel.FormatTable.FormatTitle(_bookInfo.FormatId); }
             set { _bookInfo.FormatId = TheModel.FormatTable.FormatKey(value); }
-        }
-
-        public string Condition
-        {
-            get { return _optionalItems.Condition; }
-            set { _optionalItems.Condition = value; }
-        }
-
-        public string Status
-        {
-            get { return _optionalItems.Status; }
-            set { _optionalItems.Status = value; }
         }
 
         public bool AddBookToLibrary()
