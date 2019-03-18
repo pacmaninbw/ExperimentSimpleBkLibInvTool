@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel;
+using pacsw.BookInventory.Models.DictionaryTabelBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
+namespace pacsw.BookInventory.Models.Category
 {
     public class CategoryTableModel : DictionaryTableModel
     {

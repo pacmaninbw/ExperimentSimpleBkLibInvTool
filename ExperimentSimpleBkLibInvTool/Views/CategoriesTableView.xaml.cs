@@ -3,9 +3,9 @@ using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Category;
+using pacsw.BookInventory.Models.Category;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for CategoriesTableView.xaml

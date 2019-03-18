@@ -1,6 +1,6 @@
-﻿using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
+﻿using pacsw.BookInventory.Models.Author;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
+namespace pacsw.BookInventory.Models.Series
 {
     public interface ISeriesModel
     {

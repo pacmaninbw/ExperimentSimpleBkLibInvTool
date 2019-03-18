@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel;
+using pacsw.BookInventory.Models.FormatsTableModel;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for AddFormatDlg.xaml

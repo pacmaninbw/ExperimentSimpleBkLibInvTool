@@ -1,8 +1,8 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo;
+using pacsw.BookInventory.Models.BookInfo.PuchaseInfo;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for PurchasingDialog.xaml

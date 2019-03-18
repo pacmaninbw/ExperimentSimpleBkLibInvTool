@@ -1,20 +1,19 @@
 ﻿using System;
-using System.Data;
+using System.Collections.Generic;
 using System.Windows;
-using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Category;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Options;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.BookInfo.ForSale;
+using pacsw.BookInventory.Models.BookInfo.Ownned;
+using pacsw.BookInventory.Models.BookInfo.PublishInfo;
+using pacsw.BookInventory.Models.BookInfo.PuchaseInfo;
+using pacsw.BookInventory.Models.BookInfo.Ratings;
+using pacsw.BookInventory.Models.Author;
+using pacsw.BookInventory.Models.Series;
+using pacsw.BookInventory.Models.Options;
+using pacsw.BookInventory.Models.ItemBaseModel;
+using pacsw.BookInventory.Models.VolumeInSeriesModels;
+using pacsw.BookInventory.Models.SynopsisNs;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
+namespace pacsw.BookInventory.Models.BookInfo
 {
     /*
      * 
@@ -28,6 +27,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
     public class BookModel
     {
         private readonly Model TheModel = ((App)Application.Current).Model;
+        private List<DataTableItemBaseModel> _itemsToValidate;
+        private List<DataTableItemBaseModel> _itemsToAddToDb;
 
         private uint _bookKey;
 
@@ -40,6 +41,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         private PublishInfoModel _publishInfo;
         private RatingsModel _ratings;
         private SeriesModel _seriesInfo;
+        private VolumeInSeries _volumeInSeries;
+        private Synopsis _synopsis;
 
         public BookModel()
         {
@@ -53,30 +56,36 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             _puchaseInfo = null;
             _ratings = null;
             _seriesInfo = null;
+            _volumeInSeries = null;
+            _synopsis = null;
+            _itemsToValidate = new List<DataTableItemBaseModel>();
+            _itemsToAddToDb = new List<DataTableItemBaseModel>();
+
+            _itemsToValidate.Add(_bookInfo);
         }
 
         public IPublishInfoModel PublishInfo
         {
             get { return _publishInfo; }
-            set { _publishInfo = (PublishInfoModel)value; }
+            set { InsertIntoLists(_publishInfo = (PublishInfoModel)value); }
         }
 
         public IPuchaseInfoModel PuchaseInfo
         {
             get { return _puchaseInfo; }
-            set { _puchaseInfo = (PuchaseInfoModel)value; }
+            set { InsertIntoLists(_puchaseInfo = (PuchaseInfoModel)value); }
         }
 
         public IOwnerShipModel Owned
         {
             get { return _owned; }
-            set { _owned = (OwnerShipModel)value; }
+            set { InsertIntoLists(_owned = (OwnerShipModel)value); }
         }
 
         public IForSaleModel ForSale
         {
             get { return (IForSaleModel) _forSale; }
-            set { _forSale = (ForSaleModel) value; }
+            set { InsertIntoLists(_forSale = (ForSaleModel)value); }
         }
 
         public IAuthorModel AuthorInfo
@@ -94,13 +103,25 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         public IRatingsModel Ratings
         {
             get { return _ratings; }
-            set { _ratings = (RatingsModel)value; }
+            set { InsertIntoLists(_ratings = (RatingsModel)value); }
         }
 
         public IConditionsAndOtherOptionsModel ConditionsAndOptions
         {
             get { return _optionalItems; }
-            set { _optionalItems = (ConditionsAndOtherOptionsModel)value; }
+            set { InsertIntoLists(_optionalItems = (ConditionsAndOtherOptionsModel)value); }
+        }
+
+        public VolumeInSeries VolumeNumber
+        {
+            get { return _volumeInSeries; }
+            set { InsertIntoLists(_volumeInSeries = value); }
+        }
+
+        public Synopsis Summary
+        {
+            get { return _synopsis; }
+            set { InsertIntoLists(_synopsis = value); }
         }
 
         public string Genre
@@ -132,16 +153,22 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
                     if (success = _bookInfo.AddToDb())
                     {
                         _bookKey = _bookInfo.BookID;
+                        if (_seriesInfo != null && _volumeInSeries != null)
+                        {
+                            _volumeInSeries.SeriesId = _bookInfo.SeriesId;
+                        }
                     }
 
                     if (_bookKey > 0)
                     {
-                        success = AddToDb(success, _optionalItems);
-                        success = AddToDb(success, _owned);
-                        success = AddToDb(success, _ratings);
-                        success = AddToDb(success, _publishInfo);
-                        success = AddToDb(success, _forSale);
-                        success = AddToDb(success, _puchaseInfo);
+                        foreach (DataTableItemBaseModel item in _itemsToAddToDb)
+                        {
+                            success = AddToDb(success, item);
+                            if (!success)
+                            {
+                                break;
+                            }
+                        }
                     }
                 }
             }
@@ -159,49 +186,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
         protected bool _dataIsValid()
         {
             bool isValid = true;
-            if (_authorInfo == null || !_authorInfo.IsValid)
-            {
-                isValid = false;
-            }
 
-            if (_bookInfo == null || !_bookInfo.IsValid)
+            foreach (DataTableItemBaseModel item in _itemsToValidate)
             {
-                isValid = false;
-            }
-
-            if (_forSale != null && !_forSale.IsValid)
-            {
-                isValid = false;
-            }
-
-            if (_optionalItems != null && !_optionalItems.IsValid)
-            {
-                isValid = false;
-            }
-
-            if (_owned != null && !_owned.IsValid)
-            {
-                isValid = false;
-            }
-
-            if (_publishInfo != null && !_publishInfo.IsValid)
-            {
-                isValid = false;
-            }
-
-            if (_puchaseInfo != null && !_puchaseInfo.IsValid)
-            {
-                isValid = false;
-            }
-
-            if (_ratings != null && !_ratings.IsValid)
-            {
-                isValid = false;
-            }
-
-            if (_seriesInfo != null && !_seriesInfo.IsValid)
-            {
-                isValid = false;
+                isValid = ValidityTest(item, isValid);
             }
 
             return isValid;
@@ -218,6 +206,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
             _authorInfo = authorInfo;
             _bookInfo.AuthorId = authorInfo.AuthorId;
+            _itemsToValidate.Add(authorInfo);
         }
 
         private void SetSeriesValues(SeriesModel seriesModel)
@@ -229,6 +218,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
 
             _seriesInfo = seriesModel;
             _bookInfo.SeriesId = TheModel.SeriesTable.GetSeriesKey(_authorInfo, _seriesInfo.Title); ;
+            _itemsToValidate.Add(seriesModel);
         }
 
         private bool AddToDb(bool success, DataTableItemBaseModel item)
@@ -240,6 +230,25 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
             }
 
             return success;
+        }
+
+        private bool ValidityTest(DataTableItemBaseModel item, bool isValid)
+        {
+            if (isValid)
+            {
+                if (item != null && !item.IsValid)
+                {
+                    isValid = false;
+                }
+            }
+
+            return isValid;
+        }
+
+        private void InsertIntoLists(DataTableItemBaseModel item)
+        {
+            _itemsToValidate.Add(item);
+            _itemsToAddToDb.Add(item);
         }
     }
 }

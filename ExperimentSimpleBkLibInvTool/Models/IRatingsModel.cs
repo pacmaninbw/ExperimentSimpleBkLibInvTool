@@ -1,4 +1,4 @@
-﻿namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings
+﻿namespace pacsw.BookInventory.Models.BookInfo.Ratings
 {
     public interface IRatingsModel
     {

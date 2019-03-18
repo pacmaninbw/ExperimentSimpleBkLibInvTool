@@ -1,10 +1,8 @@
-﻿using System;
-using System.Data;
-using System.Windows;
+﻿using System.Data;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
+using pacsw.BookInventory.Models.DataTableModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
+namespace pacsw.BookInventory.Models.BookInfo
 {
     public class BookInfoTableModel : CDataTableModel
     {

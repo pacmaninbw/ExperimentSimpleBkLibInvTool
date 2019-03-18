@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
+using pacsw.BookInventory.Models.Author;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for AddAuthorDlg.xaml

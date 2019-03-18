@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings
+namespace pacsw.BookInventory.Models.BookInfo.Ratings
 {
     public class RatingsModel : DataTableItemBaseModel, IRatingsModel
     {

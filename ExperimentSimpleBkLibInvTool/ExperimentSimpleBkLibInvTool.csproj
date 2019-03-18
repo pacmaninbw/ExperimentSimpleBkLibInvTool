@@ -201,11 +201,18 @@
     <Compile Include="Models\RatingsTableModel.cs" />
     <Compile Include="Models\SqlCmdParameter.cs" />
     <Compile Include="Models\StatusTableModel.cs" />
+    <Compile Include="Models\Synopsis.cs" />
+    <Compile Include="Models\SynopsisTable.cs" />
+    <Compile Include="Models\VolumeInSeries.cs" />
+    <Compile Include="Models\VolumeInSeriesTable.cs" />
     <Compile Include="Views\AddAuthorDlg.xaml.cs">
       <DependentUpon>AddAuthorDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddBookDlg.xaml.cs">
       <DependentUpon>AddBookDlg.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AddBookSummary.xaml.cs">
+      <DependentUpon>AddBookSummary.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddPublishingInformation.xaml.cs">
       <DependentUpon>AddPublishingInformation.xaml</DependentUpon>
@@ -225,17 +232,8 @@
     <Compile Include="Views\CategoriesTableView.xaml.cs">
       <DependentUpon>CategoriesTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ConditionsEtAl.xaml.cs">
-      <DependentUpon>ConditionsEtAl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ConditionsTableView.xaml.cs">
-      <DependentUpon>ConditionsTableView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\FormatTableView.xaml.cs">
       <DependentUpon>FormatTableView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\OwnerShipDialog.xaml.cs">
-      <DependentUpon>OwnerShipDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PurchasingDialog.xaml.cs">
       <DependentUpon>PurchasingDialog.xaml</DependentUpon>
@@ -245,9 +243,6 @@
     </Compile>
     <Compile Include="Views\SeriesTableView.xaml.cs">
       <DependentUpon>SeriesTableView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\StatusTableView.xaml.cs">
-      <DependentUpon>StatusTableView.xaml</DependentUpon>
     </Compile>
     <Page Include="ChernickConsulting.xaml">
       <SubType>Designer</SubType>
@@ -266,6 +261,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddBookDlg.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\AddBookSummary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -318,19 +317,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ConditionsEtAl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ConditionsTableView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\FormatTableView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\OwnerShipDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -343,10 +330,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SeriesTableView.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\StatusTableView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

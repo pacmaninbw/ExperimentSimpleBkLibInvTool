@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
+using pacsw.BookInventory.Models.DataTableModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings
+namespace pacsw.BookInventory.Models.BookInfo.Ratings
 {
     public class RatingsTableModel : CDataTableModel
     {

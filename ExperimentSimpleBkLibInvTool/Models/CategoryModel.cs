@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Category
+namespace pacsw.BookInventory.Models.Category
 {
     public class CategoryModel : DataTableItemBaseModel
     {

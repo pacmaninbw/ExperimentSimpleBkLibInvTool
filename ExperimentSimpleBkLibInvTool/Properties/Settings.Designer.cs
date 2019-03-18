@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ExperimentSimpleBkLibInvTool.Properties
+namespace pacsw.BookInventory.Properties
 {
 
 

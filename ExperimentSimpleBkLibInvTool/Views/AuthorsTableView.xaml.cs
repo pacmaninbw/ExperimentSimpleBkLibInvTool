@@ -2,9 +2,9 @@
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
+using pacsw.BookInventory.Models.Author;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for AuthorsTableView.xaml

@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Category;
+using pacsw.BookInventory.Models.Category;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for AddCategoryDlg.xaml

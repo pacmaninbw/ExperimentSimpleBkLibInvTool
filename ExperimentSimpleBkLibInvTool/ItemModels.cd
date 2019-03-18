@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Author.AuthorModel">
+  <Class Name="pacsw.BookInventory.Models.Author.AuthorModel">
     <Position X="0.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAEABAAAAACAAAAAUAAAAAAAAAAAAAAIAAAQAEAg=</HashCode>
@@ -8,7 +8,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.BookInfoModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.BookInfoModel">
     <Position X="9.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>BAAECAAAABBAQkAEAGIAAAAAEEgAAQAAABAAAAABECA=</HashCode>
@@ -16,7 +16,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.BookModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.BookModel">
     <Position X="16.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAFQgEAkAYCAAFBQAmAABABAAAgAAAAAAAAAIEKAGAg=</HashCode>
@@ -24,21 +24,21 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Category.CategoryModel">
+  <Class Name="pacsw.BookInventory.Models.Category.CategoryModel">
     <Position X="5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAGAA=</HashCode>
       <FileName>Models\CategoryModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel.FormatModel">
+  <Class Name="pacsw.BookInventory.Models.FormatsTableModel.FormatModel">
     <Position X="11.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>Models\FormatModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale.ForSaleModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.ForSale.ForSaleModel">
     <Position X="18.5" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIQAAAJAAAAAAAAAAAAAAAAAAAAAAAAAQBAAAAAEAA=</HashCode>
@@ -46,7 +46,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned.OwnerShipModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.Ownned.OwnerShipModel">
     <Position X="7.25" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAcAA=</HashCode>
@@ -54,7 +54,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo.PublishInfoModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.PublishInfo.PublishInfoModel">
     <Position X="20.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAIEAAgAAAEAAABACAAAAAAAAMIEAAAAAIAAQAAAEAA=</HashCode>
@@ -62,7 +62,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo.PuchaseInfoModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.PuchaseInfo.PuchaseInfoModel">
     <Position X="2.75" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>gIAgAAAAIAAAAAAAAIAAAAAAAAAAAABAEAAAAAAAEAA=</HashCode>
@@ -70,7 +70,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings.RatingsModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.Ratings.RatingsModel">
     <Position X="14" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AEAAAAAAAAAAoAAIAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
@@ -78,7 +78,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Series.SeriesModel">
+  <Class Name="pacsw.BookInventory.Models.Series.SeriesModel">
     <Position X="23" Y="9.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAABAAAAAEAAgAAAAAAEAAAAAAAAABAgAAAAEAA=</HashCode>
@@ -86,7 +86,7 @@
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel.DataTableItemBaseModel">
+  <Class Name="pacsw.BookInventory.Models.ItemBaseModel.DataTableItemBaseModel">
     <Position X="11.75" Y="0.5" Width="7.25" />
     <TypeIdentifier>
       <HashCode>AIAwCEAAAAgCAgQkgigAQAiAAAAAAAAAAAAAAACAGAQ=</HashCode>

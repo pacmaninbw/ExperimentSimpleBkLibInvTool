@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
+using pacsw.BookInventory.Models.DataTableModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
+namespace pacsw.BookInventory.Models.BookInfo.PuchaseInfo
 {
     public class PurchaseInfoTableModel : CDataTableModel
     {

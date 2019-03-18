@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
+using pacsw.BookInventory.Models.DataTableModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
+namespace pacsw.BookInventory.Models.Options
 {
     public class ConditionOptionsTableModel : CDataTableModel
     {

@@ -7,11 +7,11 @@ using System.Windows;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ExperimentSimpleBkLibInvTool")]
+[assembly: AssemblyTitle("pacsw.BookInventory")]
 [assembly: AssemblyDescription("Simple Library Inventory Tool for initial debug and testing")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Paul A. Chernick")]
-[assembly: AssemblyProduct("ExperimentSimpleBkLibInvTool")]
+[assembly: AssemblyProduct("pacsw.BookInventory")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

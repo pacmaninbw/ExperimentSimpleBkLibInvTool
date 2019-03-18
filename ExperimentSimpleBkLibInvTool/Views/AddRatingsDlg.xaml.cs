@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings;
+using pacsw.BookInventory.Models.BookInfo.Ratings;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for AddRatingsDlg.xaml

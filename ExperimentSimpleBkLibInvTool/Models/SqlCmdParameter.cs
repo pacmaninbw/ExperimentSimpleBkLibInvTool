@@ -15,7 +15,7 @@ using MySql.Data.MySqlClient;
  * type for the stored procedure. The coversion from input string to the expected SQL type
  * will occur during the input phase as an additional check on the validity of the input.
  */
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
+namespace pacsw.BookInventory.Models.DataTableModel
 {
     public class SqlCmdParameter 
     {

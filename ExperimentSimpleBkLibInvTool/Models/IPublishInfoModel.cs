@@ -1,4 +1,4 @@
-﻿namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
+﻿namespace pacsw.BookInventory.Models.BookInfo.PublishInfo
 {
     public interface IPublishInfoModel
     {

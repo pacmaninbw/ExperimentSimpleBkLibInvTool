@@ -1,43 +1,43 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Author.AuthorTableModel">
+  <Class Name="pacsw.BookInventory.Models.Author.AuthorTableModel">
     <Position X="1.5" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAEACAAAAAAAgAEABBAAgACAgAAAAAAEAJBACAAAAAA=</HashCode>
       <FileName>Models\AuthorTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.BookTableModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.BookTableModel">
     <Position X="5.75" Y="0.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAACCAAAAABAAAAAAABAABAAAAAAAA=</HashCode>
       <FileName>Models\BookTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Category.CategoryTableModel">
+  <Class Name="pacsw.BookInventory.Models.Category.CategoryTableModel">
     <Position X="13.25" Y="12" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAQIAAAAAAAAIAAAAAAAAAAAAABIAAAAAAA=</HashCode>
       <FileName>Models\CategoryTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable.ConditionsTableModel">
+  <Class Name="pacsw.BookInventory.Models.BkConditionTable.ConditionsTableModel">
     <Position X="15.75" Y="12" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAIAAAACAAAAAAAAAAAAAIAABAAAAAAAA=</HashCode>
       <FileName>Models\ConditionsTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel.CDataTableModel">
+  <Class Name="pacsw.BookInventory.Models.DataTableModel.CDataTableModel">
     <Position X="8.25" Y="0.5" Width="3" />
     <TypeIdentifier>
       <HashCode>AEAGBIAAAAAEHIAAAAKAgBABIAAADDEAIAlAAAAAAYQ=</HashCode>
       <FileName>Models\DataTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel.FormatTableModel">
+  <Class Name="pacsw.BookInventory.Models.FormatsTableModel.FormatTableModel">
     <Position X="7.75" Y="12.25" Width="1.75" />
-    <InheritanceLine Type="ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel.DictionaryTableModel" ManuallyRouted="true">
+    <InheritanceLine Type="pacsw.BookInventory.Models.DictionaryTabelBaseModel.DictionaryTableModel" ManuallyRouted="true">
       <Path>
         <Point X="9.875" Y="11.396" />
         <Point X="9.875" Y="11.673" />
@@ -50,56 +50,56 @@
       <FileName>Models\FormatsTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel.DictionaryTableModel">
+  <Class Name="pacsw.BookInventory.Models.DictionaryTabelBaseModel.DictionaryTableModel">
     <Position X="8.75" Y="8.75" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAACCAACAAAAAAAAAAAEAAAAAAAAI=</HashCode>
       <FileName>Models\DictionaryTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Series.SeriesTableModel">
+  <Class Name="pacsw.BookInventory.Models.Series.SeriesTableModel">
     <Position X="14.75" Y="0.75" Width="2" />
     <TypeIdentifier>
       <HashCode>EAAAAAAAACAAAAAAAAAACAAAAAAAIAAAAABABAAQBAE=</HashCode>
       <FileName>Models\SeriesTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo.PublishInfoTableModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.PublishInfo.PublishInfoTableModel">
     <Position X="3.75" Y="2" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAQAAAAAAAIAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>Models\PublishInfoTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable.StatusTableModel">
+  <Class Name="pacsw.BookInventory.Models.BkStatusTable.StatusTableModel">
     <Position X="10.75" Y="12" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAQABAAABAAAAAAABAAAAAAAA=</HashCode>
       <FileName>Models\StatusTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.Options.ConditionOptionsTableModel">
+  <Class Name="pacsw.BookInventory.Models.Options.ConditionOptionsTableModel">
     <Position X="4.25" Y="5.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgAAABAAAAAAAA=</HashCode>
       <FileName>Models\ConditionOptionsTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.BookInfoTableModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.BookInfoTableModel">
     <Position X="12.5" Y="7.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAQAAAAAAAAAAAAAABAAAAEAAAAABAAAAAAAA=</HashCode>
       <FileName>Models\BookInfoTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo.PurchaseInfoTableModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.PuchaseInfo.PurchaseInfoTableModel">
     <Position X="15.25" Y="5.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAACAAAAAAQAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
       <FileName>Models\PurchaseInfoTableModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned.OwnerShipTableModel">
+  <Class Name="pacsw.BookInventory.Models.BookInfo.Ownned.OwnerShipTableModel">
     <Position X="11.75" Y="2.5" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAABAAAIAAAA=</HashCode>

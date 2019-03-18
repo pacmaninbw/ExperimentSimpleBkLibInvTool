@@ -4,13 +4,14 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Options;
+using pacsw.BookInventory.Models.Author;
+using pacsw.BookInventory.Models.Series;
+using pacsw.BookInventory.Models.BookInfo;
+using pacsw.BookInventory.Models.BookInfo.Ownned;
+using pacsw.BookInventory.Models.Options;
+using pacsw.BookInventory.Models.VolumeInSeriesModels;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for AddBookDlg.xaml
@@ -38,6 +39,8 @@ namespace ExperimentSimpleBkLibInvTool.Views
             Loaded += new RoutedEventHandler(bypassAuthorSelectionIfAuthorSelected);
             _formatSelected = false;
             _genreSelected = false;
+            owned = null;
+            options = null;
         }
 
         private void Btn_AddBookSave_Click(object sender, RoutedEventArgs e)
@@ -79,6 +82,12 @@ namespace ExperimentSimpleBkLibInvTool.Views
             if (options != null)
             {
                 newBook.ConditionsAndOptions = options;
+            }
+
+            if (hasErrors)
+            {
+                // prevent duplicate error reporting
+                return;
             }
 
             if (!newBook.IsValid)
@@ -370,6 +379,12 @@ namespace ExperimentSimpleBkLibInvTool.Views
             options.SignedByAuthor = ChkBx_SignedByAuthor.IsChecked.Value;
         }
 
+        private void TXTBX_PhyscalDescription_LostFocus(object sender, RoutedEventArgs e)
+        {
+            CreateOptionsIfDoesntExist();
+            options.PhysicalCondition = TXTBX_PhyscalDescription.Text;
+        }
+
         private void InitConditionSelection()
         {
             List<string> conditions = ((App)Application.Current).Model.ConditionsTable.ListBoxSelectionList();
@@ -412,6 +427,23 @@ namespace ExperimentSimpleBkLibInvTool.Views
             options.Status = LB_StatusSelector.SelectedValue.ToString();
         }
 
+        private void TXTBX_VolumeInSeries_LostFocus(object sender, RoutedEventArgs e)
+        {
+            VolumeInSeries volumeInSeries = new VolumeInSeries();
+            int tmpVolumeNumber;
+            if (int.TryParse(TXTBX_VolumeInSeries.Text, out tmpVolumeNumber))
+            {
+                volumeInSeries.VolumeNumber = tmpVolumeNumber;
+                TXTBX_VolumeInSeries.Background = Brushes.White;
+                newBook.VolumeNumber = volumeInSeries;
+            }
+            else
+            {
+                MessageBox.Show("Please Enter a number.", "Volume Number Format Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                TXTBX_VolumeInSeries.Background = Brushes.Red;
+            }
+        }
+
         #endregion
 
         #region ForSale Info
@@ -430,6 +462,18 @@ namespace ExperimentSimpleBkLibInvTool.Views
         }
 
         #endregion
+
+        private void BTN_Synopsis_Click(object sender, RoutedEventArgs e)
+        {
+            AddBookSummary addSummaryDlg = new AddBookSummary();
+            addSummaryDlg.Closed += new EventHandler(GetSynopsisFromDialog);
+            addSummaryDlg.Show();
+        }
+        private void GetSynopsisFromDialog(object sender, EventArgs e)
+        {
+            AddBookSummary addSummaryDlg = sender as AddBookSummary;
+            newBook.Summary = addSummaryDlg.Summary;
+        }
 
     }
 }

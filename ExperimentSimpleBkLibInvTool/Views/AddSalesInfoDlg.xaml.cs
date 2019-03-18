@@ -11,9 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
+using pacsw.BookInventory.Models.BookInfo.ForSale;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for AddSalesInfoDlg.xaml

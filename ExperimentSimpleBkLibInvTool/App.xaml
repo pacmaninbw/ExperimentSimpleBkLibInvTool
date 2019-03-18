@@ -1,7 +1,7 @@
-﻿<Application x:Class="ExperimentSimpleBkLibInvTool.App"
+﻿<Application x:Class="pacsw.BookInventory.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:ExperimentSimpleBkLibInvTool"
+             xmlns:local="clr-namespace:pacsw.BookInventory"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         

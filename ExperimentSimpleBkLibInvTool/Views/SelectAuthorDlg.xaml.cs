@@ -5,9 +5,9 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
+using pacsw.BookInventory.Models.Author;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for SelectAuthorDlg.xaml

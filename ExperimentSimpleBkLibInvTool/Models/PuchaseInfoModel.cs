@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
+namespace pacsw.BookInventory.Models.BookInfo.PuchaseInfo
 {
     public class PuchaseInfoModel : DataTableItemBaseModel, IPuchaseInfoModel
     {

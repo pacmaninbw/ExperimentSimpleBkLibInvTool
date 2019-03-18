@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo
+namespace pacsw.BookInventory.Models.BookInfo.PuchaseInfo
 {
     public interface IPuchaseInfoModel
     {

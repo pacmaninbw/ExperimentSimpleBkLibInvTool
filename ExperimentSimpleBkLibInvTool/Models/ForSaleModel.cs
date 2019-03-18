@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
+namespace pacsw.BookInventory.Models.BookInfo.ForSale
 {
     public class ForSaleModel : DataTableItemBaseModel, IForSaleModel
     {

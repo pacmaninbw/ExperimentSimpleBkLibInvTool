@@ -6,9 +6,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Navigation;
-using ExperimentSimpleBkLibInvTool.ModelInMVC;
+using pacsw.BookInventory.Models;
 
-namespace ExperimentSimpleBkLibInvTool
+namespace pacsw.BookInventory
 {
     /// <summary>
     /// Interaction logic for App.xaml

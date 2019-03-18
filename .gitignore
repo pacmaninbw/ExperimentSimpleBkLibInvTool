@@ -259,3 +259,12 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
+/CodeReviewQ1/BaseModelsLayer.png
+/CodeReviewQ1/SpellingAndGrammarCheck.docx
+/CodeReviewQ1/ModelsClassDiagram.png
+/CodeReviewQ1/ItemModels.png
+/CodeReviewQ1/DataTableModel.png
+/CodeReviewQ1/DataTableItemsModel.png
+/CodeReviewQ1/DataTableBaseModel.png
+/CodeReviewQ1/CodeReviewQ1.txt
+/CodeReviewQ1/BookModels.png

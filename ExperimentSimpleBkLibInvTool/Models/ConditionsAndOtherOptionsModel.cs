@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.DataTableModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
+namespace pacsw.BookInventory.Models.Options
 {
     public class ConditionsAndOtherOptionsModel : DataTableItemBaseModel, IConditionsAndOtherOptionsModel
     {
@@ -31,7 +31,10 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
             set { SetParameterValue("Status Id", TheModel.StatusTable.StatusKey(value)); }
         }
 
-        public string PhysicalCondition { get; set; }
+        public string PhysicalCondition {
+            get { return GetParameterValue("Physical Description"); }
+            set { SetParameterValue("Physical Description", value); }
+        }
 
         public bool SignedByAuthor {
             get { return GetParameterBValue("Autographed"); }

@@ -1,8 +1,8 @@
 ﻿using System.Data;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel;
+using pacsw.BookInventory.Models.DictionaryTabelBaseModel;
 using MySql.Data.MySqlClient;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
+namespace pacsw.BookInventory.Models.FormatsTableModel
 {
     public class FormatTableModel : DictionaryTableModel
     {

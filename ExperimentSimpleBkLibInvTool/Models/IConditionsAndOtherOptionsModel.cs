@@ -1,4 +1,4 @@
-﻿namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Options
+﻿namespace pacsw.BookInventory.Models.Options
 {
     public interface IConditionsAndOtherOptionsModel
     {

@@ -12,9 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo;
+using pacsw.BookInventory.Models.BookInfo;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for BooksTableGrid.xaml

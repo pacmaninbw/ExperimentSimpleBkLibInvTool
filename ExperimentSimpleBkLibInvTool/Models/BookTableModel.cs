@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
+using pacsw.BookInventory.Models.DataTableModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
+using pacsw.BookInventory.Models.Author;
+using pacsw.BookInventory.Models.Series;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo
+namespace pacsw.BookInventory.Models.BookInfo
 {
     public class BookTableModel : CDataTableModel
     {

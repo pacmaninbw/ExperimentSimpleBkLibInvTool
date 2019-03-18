@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo
+namespace pacsw.BookInventory.Models.BookInfo.PublishInfo
 {
     public class PublishInfoModel : DataTableItemBaseModel, IPublishInfoModel
     {

@@ -1,4 +1,4 @@
-﻿namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
+﻿namespace pacsw.BookInventory.Models.BookInfo.Ownned
 {
     public interface IOwnerShipModel
     {

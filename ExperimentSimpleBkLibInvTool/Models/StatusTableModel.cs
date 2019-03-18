@@ -1,7 +1,7 @@
 ﻿using System.Data;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel;
+using pacsw.BookInventory.Models.DictionaryTabelBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable
+namespace pacsw.BookInventory.Models.BkStatusTable
 {
     public class StatusTableModel : DictionaryTableModel
     {

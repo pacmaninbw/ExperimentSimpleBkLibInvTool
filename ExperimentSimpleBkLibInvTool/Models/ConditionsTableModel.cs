@@ -1,7 +1,7 @@
 ﻿using System.Data;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel;
+using pacsw.BookInventory.Models.DictionaryTabelBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable
+namespace pacsw.BookInventory.Models.BkConditionTable
 {
     public class ConditionsTableModel : DictionaryTableModel
     {

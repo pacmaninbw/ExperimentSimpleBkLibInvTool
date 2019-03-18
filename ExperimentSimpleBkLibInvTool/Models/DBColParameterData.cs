@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Data;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC
+namespace pacsw.BookInventory.Models
 {
     public class DbColumnParameterData
     {

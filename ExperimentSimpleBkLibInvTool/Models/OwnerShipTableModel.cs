@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
+using pacsw.BookInventory.Models.DataTableModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
+namespace pacsw.BookInventory.Models.BookInfo.Ownned
 {
     public class OwnerShipTableModel : CDataTableModel
     {

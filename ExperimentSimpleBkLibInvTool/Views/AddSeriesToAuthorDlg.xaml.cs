@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
+using pacsw.BookInventory.Models.Author;
+using pacsw.BookInventory.Models.Series;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for AddSeriesToAuthorDlg.xaml

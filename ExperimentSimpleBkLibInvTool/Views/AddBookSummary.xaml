@@ -1,0 +1,19 @@
+﻿<Window x:Class="pacsw.BookInventory.Views.AddBookSummary"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:pacsw.BookInventory.Views"
+        mc:Ignorable="d"
+        Title="Add Book Summary" Height="420" Width="680">
+    <Grid>
+        <StackPanel Orientation="Vertical">
+            <TextBox Height="260" VerticalAlignment="Top" Width="600" MaxLength="1024" AcceptsReturn="True" TextWrapping="Wrap" HorizontalAlignment="Center" Margin="20,20,20,0" Name="TXTBX_Synopsis" LostFocus="TXTBX_Synopsis_LostFocus"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,30,0,30">
+                <Button Content="Save" Width="80" Margin="0,0,40,0" HorizontalAlignment="Left" Name="BTN_SaveSummary" Click="BTN_SaveSummary_Click" Background="LightGreen"/>
+                <Button Content="Cancel" Width="80" HorizontalAlignment="Right" Name="BTN_CancelSummary" Click="BTN_CancelSummary_Click" Background="Red"/>
+            </StackPanel>
+        </StackPanel>
+
+    </Grid>
+</Window>

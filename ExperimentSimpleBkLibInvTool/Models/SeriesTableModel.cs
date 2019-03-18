@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
+using pacsw.BookInventory.Models.DataTableModel;
+using pacsw.BookInventory.Models.Author;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
+namespace pacsw.BookInventory.Models.Series
 {
     public class SeriesTableModel : CDataTableModel
     {

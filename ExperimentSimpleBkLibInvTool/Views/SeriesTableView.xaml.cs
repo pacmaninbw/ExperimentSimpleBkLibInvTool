@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Data;
 using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
+using pacsw.BookInventory.Models.Series;
+using pacsw.BookInventory.Models.Author;
 
-namespace ExperimentSimpleBkLibInvTool.Views
+namespace pacsw.BookInventory.Views
 {
     /// <summary>
     /// Interaction logic for SeriesTableView.xaml

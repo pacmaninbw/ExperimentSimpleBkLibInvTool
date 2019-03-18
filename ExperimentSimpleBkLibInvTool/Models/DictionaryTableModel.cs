@@ -2,10 +2,10 @@
 using System.Data;
 using System.Linq;
 using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.DataTableModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DictionaryTabelBaseModel
+namespace pacsw.BookInventory.Models.DictionaryTabelBaseModel
 {
     public abstract class DictionaryTableModel : CDataTableModel
     {

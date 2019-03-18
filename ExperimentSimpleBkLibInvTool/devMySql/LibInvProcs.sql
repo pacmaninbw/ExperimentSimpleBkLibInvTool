@@ -2275,3 +2275,75 @@ END$$
 
 DELIMITER ;
 
+-- -----------------------------------------------------
+-- procedure getVolumeInSeriesByBook
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getVolumeInSeriesByBook`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getVolumeInSeriesByBook` 
+(
+    IN bookKey INT
+)
+DETERMINISTIC
+BEGIN
+    
+    IF bookKey > 0 THEN
+        SELECT * FROM volumeinseries WHERE BookFKvs = bookKey;
+    ELSE
+        SELECT * FROM volumeinseries;
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getVolumeInSeriesBySeries
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getVolumeInSeriesBySeries`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getVolumeInSeriesBySeries` 
+(
+    IN seriesKey INT
+)
+DETERMINISTIC
+BEGIN
+    
+    IF seriesKey > 0 THEN
+        SELECT * FROM volumeinseries WHERE SeriesFK = seriesKey;
+    END IF;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
+-- procedure getSynopsis
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`getSynopsis`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `getSynopsis`
+(
+    IN bookKey INT
+)
+DETERMINISTIC
+BEGIN
+
+    SELECT * FROM bksynopsis WHERE bksynopsis.BookFKsyop = bookKey;
+    
+END$$
+
+DELIMITER ;
+

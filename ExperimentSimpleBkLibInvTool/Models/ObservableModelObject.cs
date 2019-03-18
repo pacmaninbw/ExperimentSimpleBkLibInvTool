@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC
+namespace pacsw.BookInventory.Models
 {
     public class ObservableModelObject : INotifyPropertyChanged
     {

@@ -1,18 +1,20 @@
-﻿using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Series;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Category;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PublishInfo;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.PuchaseInfo;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ratings;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BkStatusTable;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.BkConditionTable;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Options;
+﻿using pacsw.BookInventory.Models.Author;
+using pacsw.BookInventory.Models.Series;
+using pacsw.BookInventory.Models.Category;
+using pacsw.BookInventory.Models.FormatsTableModel;
+using pacsw.BookInventory.Models.BookInfo;
+using pacsw.BookInventory.Models.BookInfo.ForSale;
+using pacsw.BookInventory.Models.BookInfo.Ownned;
+using pacsw.BookInventory.Models.BookInfo.PublishInfo;
+using pacsw.BookInventory.Models.BookInfo.PuchaseInfo;
+using pacsw.BookInventory.Models.BookInfo.Ratings;
+using pacsw.BookInventory.Models.BkStatusTable;
+using pacsw.BookInventory.Models.BkConditionTable;
+using pacsw.BookInventory.Models.Options;
+using pacsw.BookInventory.Models.VolumeInSeriesModels;
+using pacsw.BookInventory.Models.SynopsisNs;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC
+namespace pacsw.BookInventory.Models
 {
     public class Model
     {
@@ -30,6 +32,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
         private PurchaseInfoTableModel _purchase;
         private PublishInfoTableModel _publishInfo;
         private ConditionOptionsTableModel _bookConditionsOptions;
+        private VolumeInSeriesTable _volumeInSeries;
+        private SynopsisTable _synopsis;
 
         public Model()
         {
@@ -44,6 +48,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
             _publishInfo = new PublishInfoTableModel();
             _purchase = new PurchaseInfoTableModel();
             _bookConditionsOptions = new ConditionOptionsTableModel();
+            _volumeInSeries = new VolumeInSeriesTable();
+            _synopsis = new SynopsisTable();
         }
 
         public void InitilizeTablesWithDependencies()
@@ -80,5 +86,9 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC
         public BookInfoTableModel BookInfoTable { get { return _bookInfoTable; } }
 
         public ConditionOptionsTableModel ConditionsAndOptions { get { return _bookConditionsOptions; } }
+
+        public VolumeInSeriesTable VolumeInSeriesTable { get { return _volumeInSeries; } }
+
+        public SynopsisTable SynopsisTable { get { return _synopsis; } }
     }
 }

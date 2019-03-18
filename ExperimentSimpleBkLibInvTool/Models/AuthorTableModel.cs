@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Data;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel;
+using pacsw.BookInventory.Models.DataTableModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
+namespace pacsw.BookInventory.Models.Author
 {
     public class AuthorTableModel : CDataTableModel
     {

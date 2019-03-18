@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
+namespace pacsw.BookInventory.Models.Author
 {
     public class AuthorModel : DataTableItemBaseModel, IAuthorModel
     {

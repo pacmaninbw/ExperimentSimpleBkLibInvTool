@@ -1,4 +1,4 @@
-﻿namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.ForSale
+﻿namespace pacsw.BookInventory.Models.BookInfo.ForSale
 {
     public interface IForSaleModel
     {

@@ -4,7 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
 /*
  * 
@@ -14,7 +14,7 @@ using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
  * in this base class.
  * 
  */
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
+namespace pacsw.BookInventory.Models.DataTableModel
 {
     public abstract class CDataTableModel : ObservableModelObject
     {
@@ -30,6 +30,7 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
         protected Dictionary<string, int> ParametersIndexedByParameterName;
         private List<SqlCmdParameter> _sqlCmdParameters;
 
+        public int AddCount { get; private set; }
         public uint NewKeyValue { get { return _newKeyValue; } }
 
         public MySqlParameterCollection AddItemParameters { get { return _addItemStoredProcedureParameters; } }
@@ -75,6 +76,8 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
                 InitializeSqlCommandParameters();
                 ValidateParameterCount();
             }
+
+            AddCount = 0;
         }
 
         protected bool addItem(DataTableItemBaseModel NewDataItem)
@@ -132,6 +135,13 @@ namespace ExperimentSimpleBkLibInvTool.ModelInMVC.DataTableModel
         private bool dbAddItem(DataTableItemBaseModel NewDataItem)
         {
             bool AddItemSuccess = true;
+
+            AddCount++;
+            if (AddCount > 1)
+            {
+                MessageBox.Show("AddCount > 1");
+                return true;
+            }
 
             if (ReportProgrammerError(_addItemStoredProcedureName, "_addItemStoredProcedureName is not set!"))
             {

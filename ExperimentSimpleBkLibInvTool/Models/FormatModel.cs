@@ -1,8 +1,8 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.FormatsTableModel
+namespace pacsw.BookInventory.Models.FormatsTableModel
 {
     public class FormatModel : DataTableItemBaseModel
     {

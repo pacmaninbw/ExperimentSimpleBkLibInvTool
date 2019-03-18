@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
+using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.BookInfo.Ownned
+namespace pacsw.BookInventory.Models.BookInfo.Ownned
 {
     public class OwnerShipModel : DataTableItemBaseModel, IOwnerShipModel
     {

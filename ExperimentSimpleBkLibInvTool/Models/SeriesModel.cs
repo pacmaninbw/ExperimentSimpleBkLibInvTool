@@ -1,8 +1,8 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.ItemBaseModel;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
+using pacsw.BookInventory.Models.ItemBaseModel;
+using pacsw.BookInventory.Models.Author;
 
-namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Series
+namespace pacsw.BookInventory.Models.Series
 {
     public class SeriesModel : DataTableItemBaseModel, ISeriesModel
     {

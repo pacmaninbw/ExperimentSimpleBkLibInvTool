@@ -1,9 +1,9 @@
 ﻿using System.Windows;
-using ExperimentSimpleBkLibInvTool.Views;
-using ExperimentSimpleBkLibInvTool.ModelInMVC;
-using ExperimentSimpleBkLibInvTool.ModelInMVC.Author;
+using pacsw.BookInventory.Views;
+using pacsw.BookInventory.Models;
+using pacsw.BookInventory.Models.Author;
 
-namespace ExperimentSimpleBkLibInvTool
+namespace pacsw.BookInventory
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

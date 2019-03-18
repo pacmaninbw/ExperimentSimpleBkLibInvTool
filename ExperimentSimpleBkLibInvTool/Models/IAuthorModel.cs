@@ -1,4 +1,4 @@
-﻿namespace ExperimentSimpleBkLibInvTool.ModelInMVC.Author
+﻿namespace pacsw.BookInventory.Models.Author
 {
     public interface IAuthorModel
     {
