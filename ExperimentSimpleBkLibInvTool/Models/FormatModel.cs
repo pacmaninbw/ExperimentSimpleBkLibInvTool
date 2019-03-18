@@ -1,8 +1,6 @@
 ﻿using System.Windows;
-using pacsw.BookInventory.Models.ItemBaseModel;
 
-
-namespace pacsw.BookInventory.Models.FormatsTableModel
+namespace pacsw.BookInventory.Models
 {
     public class FormatModel : DataTableItemBaseModel
     {

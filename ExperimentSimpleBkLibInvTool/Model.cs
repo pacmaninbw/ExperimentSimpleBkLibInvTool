@@ -1,20 +1,4 @@
-﻿using pacsw.BookInventory.Models.Author;
-using pacsw.BookInventory.Models.Series;
-using pacsw.BookInventory.Models.Category;
-using pacsw.BookInventory.Models.FormatsTableModel;
-using pacsw.BookInventory.Models.BookInfo;
-using pacsw.BookInventory.Models.BookInfo.ForSale;
-using pacsw.BookInventory.Models.BookInfo.Ownned;
-using pacsw.BookInventory.Models.BookInfo.PublishInfo;
-using pacsw.BookInventory.Models.BookInfo.PuchaseInfo;
-using pacsw.BookInventory.Models.BookInfo.Ratings;
-using pacsw.BookInventory.Models.BkStatusTable;
-using pacsw.BookInventory.Models.BkConditionTable;
-using pacsw.BookInventory.Models.Options;
-using pacsw.BookInventory.Models.VolumeInSeriesModels;
-using pacsw.BookInventory.Models.SynopsisNs;
-
-namespace pacsw.BookInventory.Models
+﻿namespace pacsw.BookInventory.Models
 {
     public class Model
     {

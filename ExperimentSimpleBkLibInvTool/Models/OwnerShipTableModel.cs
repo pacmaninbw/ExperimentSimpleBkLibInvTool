@@ -5,9 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
-using pacsw.BookInventory.Models.DataTableModel;
 
-namespace pacsw.BookInventory.Models.BookInfo.Ownned
+namespace pacsw.BookInventory.Models
 {
     public class OwnerShipTableModel : CDataTableModel
     {

@@ -1,7 +1,6 @@
 ﻿using System.Data;
-using pacsw.BookInventory.Models.DictionaryTabelBaseModel;
 
-namespace pacsw.BookInventory.Models.BkStatusTable
+namespace pacsw.BookInventory.Models
 {
     public class StatusTableModel : DictionaryTableModel
     {

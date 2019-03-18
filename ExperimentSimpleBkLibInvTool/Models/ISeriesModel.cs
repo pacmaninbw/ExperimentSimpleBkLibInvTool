@@ -1,6 +1,4 @@
-﻿using pacsw.BookInventory.Models.Author;
-
-namespace pacsw.BookInventory.Models.Series
+﻿namespace pacsw.BookInventory.Models
 {
     public interface ISeriesModel
     {

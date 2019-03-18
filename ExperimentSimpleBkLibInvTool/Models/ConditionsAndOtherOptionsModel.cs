@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using pacsw.BookInventory.Models.DataTableModel;
-using pacsw.BookInventory.Models.ItemBaseModel;
+﻿using System.Windows;
 
-namespace pacsw.BookInventory.Models.Options
+namespace pacsw.BookInventory.Models
 {
     public class ConditionsAndOtherOptionsModel : DataTableItemBaseModel, IConditionsAndOtherOptionsModel
     {

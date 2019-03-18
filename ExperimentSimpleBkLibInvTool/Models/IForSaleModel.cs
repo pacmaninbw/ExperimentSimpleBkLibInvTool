@@ -1,4 +1,4 @@
-﻿namespace pacsw.BookInventory.Models.BookInfo.ForSale
+﻿namespace pacsw.BookInventory.Models
 {
     public interface IForSaleModel
     {

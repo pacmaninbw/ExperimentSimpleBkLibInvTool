@@ -1,8 +1,7 @@
 ﻿using System.Data;
 using MySql.Data.MySqlClient;
-using pacsw.BookInventory.Models.DataTableModel;
 
-namespace pacsw.BookInventory.Models.BookInfo.ForSale
+namespace pacsw.BookInventory.Models
 {
     public class ForSaleTableModel : CDataTableModel
     {

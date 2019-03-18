@@ -1,17 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using MySql.Data.MySqlClient;
-using pacsw.BookInventory.Models.DataTableModel;
-using pacsw.BookInventory.Models.ItemBaseModel;
-using pacsw.BookInventory.Models.Author;
-using pacsw.BookInventory.Models.Series;
 
-namespace pacsw.BookInventory.Models.BookInfo
+namespace pacsw.BookInventory.Models
 {
     public class BookTableModel : CDataTableModel
     {

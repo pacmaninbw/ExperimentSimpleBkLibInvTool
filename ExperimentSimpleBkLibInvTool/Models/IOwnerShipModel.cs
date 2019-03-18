@@ -1,4 +1,4 @@
-﻿namespace pacsw.BookInventory.Models.BookInfo.Ownned
+﻿namespace pacsw.BookInventory.Models
 {
     public interface IOwnerShipModel
     {

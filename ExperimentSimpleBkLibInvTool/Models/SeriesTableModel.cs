@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
-using pacsw.BookInventory.Models.DataTableModel;
-using pacsw.BookInventory.Models.Author;
 
-namespace pacsw.BookInventory.Models.Series
+namespace pacsw.BookInventory.Models
 {
     public class SeriesTableModel : CDataTableModel
     {

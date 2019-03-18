@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using pacsw.BookInventory.Models.BookInfo.PuchaseInfo;
+using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
 {

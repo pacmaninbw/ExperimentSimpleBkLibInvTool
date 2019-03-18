@@ -1,8 +1,6 @@
 ﻿using System.Windows;
-using pacsw.BookInventory.Models.DataTableModel;
-using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace pacsw.BookInventory.Models.SynopsisNs
+namespace pacsw.BookInventory.Models
 {
     public class Synopsis : DataTableItemBaseModel
     {

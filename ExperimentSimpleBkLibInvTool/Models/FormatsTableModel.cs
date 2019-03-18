@@ -1,8 +1,7 @@
 ﻿using System.Data;
-using pacsw.BookInventory.Models.DictionaryTabelBaseModel;
 using MySql.Data.MySqlClient;
 
-namespace pacsw.BookInventory.Models.FormatsTableModel
+namespace pacsw.BookInventory.Models
 {
     public class FormatTableModel : DictionaryTableModel
     {

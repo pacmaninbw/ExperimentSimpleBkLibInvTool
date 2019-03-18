@@ -1,8 +1,6 @@
 ﻿using System.Windows;
-using pacsw.BookInventory.Models.ItemBaseModel;
-using pacsw.BookInventory.Models.Author;
 
-namespace pacsw.BookInventory.Models.Series
+namespace pacsw.BookInventory.Models
 {
     public class SeriesModel : DataTableItemBaseModel, ISeriesModel
     {

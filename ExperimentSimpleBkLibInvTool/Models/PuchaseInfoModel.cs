@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Windows;
-using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace pacsw.BookInventory.Models.BookInfo.PuchaseInfo
+namespace pacsw.BookInventory.Models
 {
     public class PuchaseInfoModel : DataTableItemBaseModel, IPuchaseInfoModel
     {

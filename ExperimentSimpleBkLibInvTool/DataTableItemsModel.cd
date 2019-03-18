@@ -1,89 +1,83 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="pacsw.BookInventory.Models.Author.AuthorModel">
+  <Class Name="pacsw.BookInventory.Models.AuthorModel">
     <Position X="0.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAEABAAAAACAAAAAUAAAAAAAAAAAAAAIAAAQAEAg=</HashCode>
+      <HashCode>AAAAAEABAAAAACAAAAAUAAAAAAAAAQAAABIAAAQAEAg=</HashCode>
       <FileName>Models\AuthorModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="pacsw.BookInventory.Models.BookInfo.BookInfoModel">
-    <Position X="7.25" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>BAAECAAAABBAQkAEAGIAAAAAEEgAAQAAABAAAAABECA=</HashCode>
-      <FileName>Models\BookInfoModel.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="pacsw.BookInventory.Models.BookInfo.Ratings.RatingsModel">
+  <Class Name="pacsw.BookInventory.Models.RatingsModel">
     <Position X="14" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEAAAAAAAAAAoAAIAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <HashCode>AEAAAAAAAAAAoAAIAAAAAAAAAAAAAQAAAAAAAAAAEAA=</HashCode>
       <FileName>Models\RatingsModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="pacsw.BookInventory.Models.Category.CategoryModel">
+  <Class Name="pacsw.BookInventory.Models.CategoryModel">
     <Position X="18.5" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAAAAGAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAQAAAAAAQAAAAAAAAAAGAA=</HashCode>
       <FileName>Models\CategoryModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="pacsw.BookInventory.Models.FormatsTableModel.FormatModel">
+  <Class Name="pacsw.BookInventory.Models.FormatModel">
     <Position X="2.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAgAAAAAAAAAAAAAEAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAgAAQAAAAAAAAAAEAA=</HashCode>
       <FileName>Models\FormatModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="pacsw.BookInventory.Models.BookInfo.ForSale.ForSaleModel">
-    <Position X="9.5" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAIQAAAJAAAAAAAAAAAAAAAAAAAAAAAAAQBAAAAAEAA=</HashCode>
-      <FileName>Models\ForSaleModel.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="pacsw.BookInventory.Models.BookInfo.Ownned.OwnerShipModel">
-    <Position X="16.25" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAcAA=</HashCode>
-      <FileName>Models\OwnerShipModel.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="pacsw.BookInventory.Models.BookInfo.PublishInfo.PublishInfoModel">
+  <Class Name="pacsw.BookInventory.Models.PublishInfoModel">
     <Position X="20.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIEAAgAAAEAAABACAAAAAAAAMIEAAAAAIAAQAAAEAA=</HashCode>
+      <HashCode>AAIEAAgAAAEAAABACAAAAAAAAMIEAQAAAIAAQAAAEAA=</HashCode>
       <FileName>Models\PublishInfoModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="pacsw.BookInventory.Models.BookInfo.PuchaseInfo.PuchaseInfoModel">
-    <Position X="5" Y="8.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>gIAgAAAAIAAAAAAAAIAAAAAAAAAAAABAEAAAAAAAEAA=</HashCode>
-      <FileName>Models\PuchaseInfoModel.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="pacsw.BookInventory.Models.Series.SeriesModel">
+  <Class Name="pacsw.BookInventory.Models.SeriesModel">
     <Position X="11.75" Y="8.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAABAAAAAEAAgAAAAAAEAAAAAAAAABAgAAAAEAA=</HashCode>
+      <HashCode>AAAAAAABAAAAAEAAgAAAAAAEAAAAAQAAABAgAAAAEAA=</HashCode>
       <FileName>Models\SeriesModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="pacsw.BookInventory.Models.ItemBaseModel.DataTableItemBaseModel">
+  <Class Name="pacsw.BookInventory.Models.DataTableItemBaseModel">
     <Position X="10.5" Y="0.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AIAwCEAAAAgCAgQkgigAQAiAAAAAAAAAAAAAAACAGAQ=</HashCode>
+      <HashCode>AIAwCEAAAAgAAAQkgigAQAiAAAAAAQAAAAAAAACAEAQ=</HashCode>
       <FileName>Models\DataTableItemBaseModel.cs</FileName>
     </TypeIdentifier>
+  </Class>
+  <Class Name="pacsw.BookInventory.Models.BookInfoModel" Collapsed="true">
+    <Position X="4.75" Y="8.5" Width="1.5" />
+    <InheritanceLine Type="pacsw.BookInventory.Models.DataTableItemBaseModel" ManuallyRouted="true">
+      <Path>
+        <Point X="12.25" Y="6.545" />
+        <Point X="12.25" Y="8.108" />
+        <Point X="7.833" Y="8.108" Type="JumpStart" />
+        <Point X="7.667" Y="8.108" Type="JumpEnd" />
+        <Point X="5.5" Y="8.108" />
+        <Point X="5.5" Y="8.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>IAAACAAAAAAAYAAEAAAAAAAAAAAAAQAAABAAAAAAEAA=</HashCode>
+      <FileName>Models\BookInfoModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pacsw.BookInventory.Models.ConditionsAndOtherOptionsModel" Collapsed="true">
+    <Position X="7" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIEAADAIAAAAAAAAAAgAgAAQQAAAAAAAAAAEAA=</HashCode>
+      <FileName>Models\ConditionsAndOtherOptionsModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

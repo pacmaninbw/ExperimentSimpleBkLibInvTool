@@ -2,10 +2,8 @@
 using System.Data;
 using System.Linq;
 using System.Windows;
-using pacsw.BookInventory.Models.DataTableModel;
-using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace pacsw.BookInventory.Models.DictionaryTabelBaseModel
+namespace pacsw.BookInventory.Models
 {
     public abstract class DictionaryTableModel : CDataTableModel
     {

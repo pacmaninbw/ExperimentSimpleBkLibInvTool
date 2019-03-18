@@ -1,4 +1,4 @@
-﻿namespace pacsw.BookInventory.Models.Options
+﻿namespace pacsw.BookInventory.Models
 {
     public interface IConditionsAndOtherOptionsModel
     {

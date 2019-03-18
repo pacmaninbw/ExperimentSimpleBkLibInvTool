@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using MySql.Data.MySqlClient;
-using pacsw.BookInventory.Models.DataTableModel;
 
-namespace pacsw.BookInventory.Models.Author
+namespace pacsw.BookInventory.Models
 {
     public class AuthorTableModel : CDataTableModel
     {

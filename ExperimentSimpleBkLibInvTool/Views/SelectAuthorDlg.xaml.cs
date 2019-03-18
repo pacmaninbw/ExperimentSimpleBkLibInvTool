@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
-using pacsw.BookInventory.Models.Author;
+using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
 {

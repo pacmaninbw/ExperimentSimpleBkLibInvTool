@@ -1,13 +1,6 @@
-﻿using System;
-using System.Data;
-using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using pacsw.BookInventory.Models.DataTableModel;
+﻿using MySql.Data.MySqlClient;
 
-namespace pacsw.BookInventory.Models.VolumeInSeriesModels
+namespace pacsw.BookInventory.Models
 {
     public class VolumeInSeriesTable : CDataTableModel
     {

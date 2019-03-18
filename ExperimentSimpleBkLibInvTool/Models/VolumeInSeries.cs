@@ -1,9 +1,6 @@
-﻿using System;
-using System.Windows;
-using pacsw.BookInventory.Models.DataTableModel;
-using pacsw.BookInventory.Models.ItemBaseModel;
+﻿using System.Windows;
 
-namespace pacsw.BookInventory.Models.VolumeInSeriesModels
+namespace pacsw.BookInventory.Models
 {
     public class VolumeInSeries : DataTableItemBaseModel
     {

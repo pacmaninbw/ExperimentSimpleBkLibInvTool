@@ -1,4 +1,4 @@
-﻿namespace pacsw.BookInventory.Models.BookInfo.Ratings
+﻿namespace pacsw.BookInventory.Models
 {
     public interface IRatingsModel
     {

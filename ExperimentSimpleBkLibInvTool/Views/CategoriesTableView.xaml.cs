@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Input;
-using pacsw.BookInventory.Models.Category;
+using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
 {
@@ -43,23 +41,6 @@ namespace pacsw.BookInventory.Views
 
             AddCategoryDlg addCategory = sender as AddCategoryDlg;
             string target = addCategory.NewGenre;
-
-#if false
-            // Needs Debugging row is NULL
-            for (int i = 0; i < CategoriesDataGrid.Items.Count; i++)
-            {
-                DataGridRow row = (DataGridRow)CategoriesDataGrid.ItemContainerGenerator.ContainerFromIndex(i);
-                TextBlock cellContent = CategoriesDataGrid.Columns[0].GetCellContent(row) as TextBlock;
-                if (cellContent != null && cellContent.Text.Equals(target))
-                {
-                    object item = CategoriesDataGrid.Items[i];
-                    CategoriesDataGrid.SelectedItem = item;
-                    CategoriesDataGrid.ScrollIntoView(item);
-                    row.MoveFocus(new TraversalRequest(FocusNavigationDirection.Next));
-                    break;
-                }
-            }
-#endif
         }
     }
 }

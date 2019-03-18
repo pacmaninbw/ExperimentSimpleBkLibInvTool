@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
-using pacsw.BookInventory.Models.DataTableModel;
+using pacsw.BookInventory.Models;
 
 /*
  * There is a tight coupling between each model and the table it belongs to. This
@@ -13,7 +13,7 @@ using pacsw.BookInventory.Models.DataTableModel;
  * This class represents a row of data in a data table. Generally it will be used
  * to add a row to a database table.
  */
-namespace pacsw.BookInventory.Models.ItemBaseModel
+namespace pacsw.BookInventory.Models
 {
     public abstract class DataTableItemBaseModel
     {

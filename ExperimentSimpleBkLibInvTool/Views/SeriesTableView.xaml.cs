@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows;
-using pacsw.BookInventory.Models.Series;
-using pacsw.BookInventory.Models.Author;
+using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
 {

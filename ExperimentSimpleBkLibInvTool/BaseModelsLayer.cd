@@ -1,23 +1,23 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
-  <Class Name="pacsw.BookInventory.Models.DataTableModel.CDataTableModel">
+  <Class Name="pacsw.BookInventory.Models.CDataTableModel">
     <Position X="1" Y="0.5" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAGAIAAAAAEBIAAAiKAwBABAAAADDEAIAhAAAAAgYQ=</HashCode>
+      <HashCode>AEAGBIAAAAAEHIAAAAKAgBABIAAADDEAIAlAAAAAAYQ=</HashCode>
       <FileName>Models\DataTableModel.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
       <Field Name="_sqlCmdParameters" />
     </ShowAsCollectionAssociation>
   </Class>
-  <Class Name="pacsw.BookInventory.Models.ItemBaseModel.DataTableItemBaseModel">
+  <Class Name="pacsw.BookInventory.Models.DataTableItemBaseModel">
     <Position X="10.5" Y="0.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AIAwCEIAAAgCAgQkgigAQAiAAAAAAAAAAgAAAACAGAQ=</HashCode>
+      <HashCode>AIAwCEAAAAgAAAQkgigAQAiAAAAAAQAAAAAAAACAEAQ=</HashCode>
       <FileName>Models\DataTableItemBaseModel.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="pacsw.BookInventory.Models.DataTableModel.SqlCmdParameter">
+  <Class Name="pacsw.BookInventory.Models.SqlCmdParameter">
     <Position X="6.25" Y="0.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AJBAAAQAAAACAgUBCCgAAAAgEAIAEoAAAQAoAAAgEAA=</HashCode>

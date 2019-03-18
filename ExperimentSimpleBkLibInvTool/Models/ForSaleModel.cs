@@ -1,7 +1,6 @@
 ﻿using System.Windows;
-using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace pacsw.BookInventory.Models.BookInfo.ForSale
+namespace pacsw.BookInventory.Models
 {
     public class ForSaleModel : DataTableItemBaseModel, IForSaleModel
     {

@@ -1,7 +1,6 @@
 ﻿using System.Windows;
-using pacsw.BookInventory.Models.ItemBaseModel;
 
-namespace pacsw.BookInventory.Models.BookInfo.Ownned
+namespace pacsw.BookInventory.Models
 {
     public class OwnerShipModel : DataTableItemBaseModel, IOwnerShipModel
     {

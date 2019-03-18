@@ -4,12 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using pacsw.BookInventory.Models.Author;
-using pacsw.BookInventory.Models.Series;
-using pacsw.BookInventory.Models.BookInfo;
-using pacsw.BookInventory.Models.BookInfo.Ownned;
-using pacsw.BookInventory.Models.Options;
-using pacsw.BookInventory.Models.VolumeInSeriesModels;
+using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
 {

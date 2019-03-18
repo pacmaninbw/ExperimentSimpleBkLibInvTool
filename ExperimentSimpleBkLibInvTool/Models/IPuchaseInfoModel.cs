@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace pacsw.BookInventory.Models.BookInfo.PuchaseInfo
+namespace pacsw.BookInventory.Models
 {
     public interface IPuchaseInfoModel
     {

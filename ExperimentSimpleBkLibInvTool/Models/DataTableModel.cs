@@ -4,7 +4,6 @@ using System.Configuration;
 using System.Data;
 using System.Windows;
 using MySql.Data.MySqlClient;
-using pacsw.BookInventory.Models.ItemBaseModel;
 
 /*
  * 
@@ -14,7 +13,7 @@ using pacsw.BookInventory.Models.ItemBaseModel;
  * in this base class.
  * 
  */
-namespace pacsw.BookInventory.Models.DataTableModel
+namespace pacsw.BookInventory.Models
 {
     public abstract class CDataTableModel : ObservableModelObject
     {

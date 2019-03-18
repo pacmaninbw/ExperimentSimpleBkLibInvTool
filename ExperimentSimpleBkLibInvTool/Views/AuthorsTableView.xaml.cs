@@ -2,7 +2,7 @@
 using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using pacsw.BookInventory.Models.Author;
+using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
 {

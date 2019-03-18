@@ -1,19 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows;
-using pacsw.BookInventory.Models.BookInfo.ForSale;
-using pacsw.BookInventory.Models.BookInfo.Ownned;
-using pacsw.BookInventory.Models.BookInfo.PublishInfo;
-using pacsw.BookInventory.Models.BookInfo.PuchaseInfo;
-using pacsw.BookInventory.Models.BookInfo.Ratings;
-using pacsw.BookInventory.Models.Author;
-using pacsw.BookInventory.Models.Series;
-using pacsw.BookInventory.Models.Options;
-using pacsw.BookInventory.Models.ItemBaseModel;
-using pacsw.BookInventory.Models.VolumeInSeriesModels;
-using pacsw.BookInventory.Models.SynopsisNs;
 
-namespace pacsw.BookInventory.Models.BookInfo
+namespace pacsw.BookInventory.Models
 {
     /*
      * 

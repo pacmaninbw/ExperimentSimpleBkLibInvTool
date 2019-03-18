@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows;
-using pacsw.BookInventory.Models.FormatsTableModel;
+using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
 {

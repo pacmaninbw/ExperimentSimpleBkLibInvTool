@@ -1,7 +1,6 @@
 ﻿using System.Data;
-using pacsw.BookInventory.Models.DictionaryTabelBaseModel;
 
-namespace pacsw.BookInventory.Models.BkConditionTable
+namespace pacsw.BookInventory.Models
 {
     public class ConditionsTableModel : DictionaryTableModel
     {

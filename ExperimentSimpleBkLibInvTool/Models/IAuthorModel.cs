@@ -1,4 +1,4 @@
-﻿namespace pacsw.BookInventory.Models.Author
+﻿namespace pacsw.BookInventory.Models
 {
     public interface IAuthorModel
     {
