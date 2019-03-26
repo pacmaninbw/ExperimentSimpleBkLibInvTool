@@ -5,9 +5,22 @@ namespace pacsw.BookInventory.Models
 {
     public class ConditionOptionsTableModel : CDataTableModel
     {
+        private int BookIDColumnIndex;
+        private int StatusIDColumnIndex;
+        private int ConditionIDColumnIndex;
+        private int PhysicalDescriptionColumnIndex;
+        private int AutographedColumnIndex;
+        private int ReadColumnIndex;
+
         public ConditionOptionsTableModel() :
             base("bookcondition", "getBookCondition", "addConditionToBook")
         {
+            BookIDColumnIndex = GetDBColumnData("BookFKCond").IndexBasedOnOrdinal;
+            StatusIDColumnIndex = GetDBColumnData("NewOrUsed").IndexBasedOnOrdinal;
+            ConditionIDColumnIndex = GetDBColumnData("ConditionOfBook").IndexBasedOnOrdinal;
+            PhysicalDescriptionColumnIndex = GetDBColumnData("PhysicalDescriptionStr").IndexBasedOnOrdinal;
+            AutographedColumnIndex = GetDBColumnData("IsSignedByAuthor").IndexBasedOnOrdinal;
+            ReadColumnIndex = GetDBColumnData("BookHasBeenRead").IndexBasedOnOrdinal;
         }
 
         public DataTable OptionsTable { get { return DataTable; } }
@@ -15,6 +28,19 @@ namespace pacsw.BookInventory.Models
         public bool AddConditionsAndOptions(ConditionsAndOtherOptionsModel conditionsAndOtherOptions)
         {
             return addItem(conditionsAndOtherOptions);
+        }
+
+        public ConditionsAndOtherOptionsModel GetConditionsAndOtherOptions(uint bookId)
+        {
+            DataRow rawConditionsAndOptions = GetRawData(bookId);
+            ConditionsAndOtherOptionsModel conditionsAndOtherOptions = null;
+
+            if (rawConditionsAndOptions != null)
+            {
+                conditionsAndOtherOptions = ConvertDataRowConditionsAndOptions(rawConditionsAndOptions);
+            }
+
+            return conditionsAndOtherOptions;
         }
 
         protected override void InitializeSqlCommandParameters()
@@ -27,6 +53,18 @@ namespace pacsw.BookInventory.Models
             _addSqlCommandParameter("Physical Description", GetDBColumnData("PhysicalDescriptionStr"), parameters["@physicalDescStr"]);
             _addSqlCommandParameter("Autographed", GetDBColumnData("IsSignedByAuthor"), parameters["@signedByAuthor"]);
             _addSqlCommandParameter("Read", GetDBColumnData("BookHasBeenRead"), parameters["@haveRead"]);
+        }
+
+        private ConditionsAndOtherOptionsModel ConvertDataRowConditionsAndOptions(DataRow rawConditionsAndOptionsData)
+        {
+            uint bookId = uint.Parse(rawConditionsAndOptionsData[BookIDColumnIndex].ToString());
+            uint conditionId = uint.Parse(rawConditionsAndOptionsData[ConditionIDColumnIndex].ToString());
+            uint statusId = uint.Parse(rawConditionsAndOptionsData[StatusIDColumnIndex].ToString());
+            string physicalDescription = rawConditionsAndOptionsData[PhysicalDescriptionColumnIndex].ToString();
+            bool signedByAuthor = int.Parse(rawConditionsAndOptionsData[AutographedColumnIndex].ToString()) > 0;
+            bool isRead = int.Parse(rawConditionsAndOptionsData[ReadColumnIndex].ToString()) > 0;
+
+            return new ConditionsAndOtherOptionsModel(bookId, conditionId, statusId, physicalDescription, signedByAuthor, isRead);
         }
     }
 }

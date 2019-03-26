@@ -170,6 +170,34 @@ namespace pacsw.BookInventory.Models
             return success;
         }
 
+        public void DeleteBook()
+        {
+
+        }
+
+        // Identify the book in the database and fill all the aggregate class members with data
+        public void SelectBookForEditOrDelete(string lastName, string firstName, string title, string format)
+        {
+            if (string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(title) || string.IsNullOrEmpty(format))
+            {
+                // Should never get here. The fields are required when adding a book.
+                MessageBox.Show("One or more required fields are missing from the selected book.", "Select Book Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+
+            _authorInfo = TheModel.AuthorTable.GetAuthor(lastName, firstName);
+            Title = title;
+            Format = format;
+
+            _bookInfo = TheModel.BookInfoTable.GetBookInfo(_authorInfo.AuthorId, _bookInfo.TitleId, _bookInfo.FormatId);
+            _bookKey = _bookInfo.BookID;
+
+            if (_bookKey > 0)
+            {
+                FillBookModelWithExistingData(_bookKey);
+            }
+        }
+
         public bool IsValid { get { return _dataIsValid(); } }
 
         protected bool _dataIsValid()
@@ -238,6 +266,18 @@ namespace pacsw.BookInventory.Models
         {
             _itemsToValidate.Add(item);
             _itemsToAddToDb.Add(item);
+        }
+
+        // When the user selects a book in the grid, all parts of the aggregation
+        // are added to the book model.
+        private void FillBookModelWithExistingData(uint bookKey)
+        {
+            ConditionsAndOptions = TheModel.ConditionsAndOptions.GetConditionsAndOtherOptions(bookKey);
+            ForSale = TheModel.ForSaleTable.GetForSaleModel(bookKey);
+            Owned = TheModel.OwnerShip.GetOwnerShipModel(bookKey);
+            PublishInfo = TheModel.PublishingData.GetPublishInfo(bookKey);
+            PuchaseInfo = TheModel.PurchaseData.GetPuchaseInfo(bookKey);
+            Ratings = TheModel.RatingsTable.GetRatingsData(bookKey);
         }
     }
 }

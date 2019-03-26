@@ -23,6 +23,14 @@ namespace pacsw.BookInventory.Models
             IsWishListed = isWishListed;
         }
 
+        public OwnerShipModel(uint bookId, bool isOwned = true, bool isWishListed = false)
+            : base(((App)Application.Current).Model.OwnerShip)
+        {
+            BookId = bookId;
+            IsOwned = isOwned;
+            IsWishListed = isWishListed;
+        }
+
         protected override bool _dataIsValid()
         {
             return true;    // No required fields

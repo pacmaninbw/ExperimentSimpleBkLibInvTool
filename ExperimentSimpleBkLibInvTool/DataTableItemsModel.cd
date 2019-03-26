@@ -59,8 +59,6 @@
       <Path>
         <Point X="12.25" Y="6.545" />
         <Point X="12.25" Y="8.108" />
-        <Point X="7.833" Y="8.108" Type="JumpStart" />
-        <Point X="7.667" Y="8.108" Type="JumpEnd" />
         <Point X="5.5" Y="8.108" />
         <Point X="5.5" Y="8.5" />
       </Path>
@@ -72,12 +70,58 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="pacsw.BookInventory.Models.ConditionsAndOtherOptionsModel" Collapsed="true">
-    <Position X="7" Y="8.75" Width="1.5" />
+    <Position X="7" Y="8.5" Width="1.5" />
+    <InheritanceLine Type="pacsw.BookInventory.Models.DataTableItemBaseModel" ManuallyRouted="true">
+      <Path>
+        <Point X="12.25" Y="6.545" />
+        <Point X="12.25" Y="8.168" />
+        <Point X="7.75" Y="8.168" />
+        <Point X="7.75" Y="8.5" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAIEAADAIAAAAAAAAAAgAgAAQQAAAAAAAAAAEAA=</HashCode>
       <FileName>Models\ConditionsAndOtherOptionsModel.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pacsw.BookInventory.Models.ForSaleModel" Collapsed="true">
+    <Position X="5.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQBAAAAAEAA=</HashCode>
+      <FileName>Models\ForSaleModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pacsw.BookInventory.Models.OwnerShipModel" Collapsed="true">
+    <Position X="14.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAUAA=</HashCode>
+      <FileName>Models\OwnerShipModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pacsw.BookInventory.Models.PuchaseInfoModel" Collapsed="true">
+    <Position X="17.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAgAAAAAAAAAAAAAIAAAAAAAAAAAQBAAAAAAAAAEAA=</HashCode>
+      <FileName>Models\PuchaseInfoModel.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pacsw.BookInventory.Models.Synopsis">
+    <Position X="16.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAEAA=</HashCode>
+      <FileName>Models\Synopsis.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="pacsw.BookInventory.Models.VolumeInSeries" Collapsed="true">
+    <Position X="16.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAIAAAEAA=</HashCode>
+      <FileName>Models\VolumeInSeries.cs</FileName>
+    </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>

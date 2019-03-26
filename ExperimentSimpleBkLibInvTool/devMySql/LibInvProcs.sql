@@ -308,6 +308,38 @@ END$$
 DELIMITER ;
 
 -- -----------------------------------------------------
+-- procedure deleteBookById
+-- -----------------------------------------------------
+
+USE `pacswlibinvtool`;
+DROP procedure IF EXISTS `pacswlibinvtool`.`deleteBookById`;
+
+DELIMITER $$
+USE `pacswlibinvtool`$$
+CREATE PROCEDURE `deleteBook`
+(
+    IN bookId INT
+)
+DETERMINISTIC
+BEGIN
+    -- Do not delete authors, titles, series, formats or categories. These may be shared with other books.
+
+    DELETE BKI, bc, pub, pur, v, o, fs, BDesk
+        FROM bookinfo AS BKI 
+        LEFT JOIN bookcondition AS bc ON bc.BookFKCond = BKI.idBookInfo
+        LEFT JOIN publishinginfo AS pub ON pub.BookFKPubI = BKI.idBookInfo
+        LEFT JOIN purchaseinfo AS pur ON pur.BookFKPurI = BKI.idBookInfo
+        LEFT JOIN volumeinseries AS v ON v.BookFKvs = BKI.idBookInfo
+        LEFT JOIN owned AS o ON o.BookFKo = BKI.idBookInfo
+        LEFT JOIN forsale AS fs ON fs.BookFKfs = BKI.idBookInfo
+        LEFT JOIN bksynopsis AS BDesk ON BDesk.BookFKsyop = BKI.idBookInfo 
+        WHERE BKI.idBookInfo = bookId;
+
+END$$
+
+DELIMITER ;
+
+-- -----------------------------------------------------
 -- procedure insertOrUpdatePublishing
 -- -----------------------------------------------------
 
@@ -1944,7 +1976,7 @@ DETERMINISTIC
 BEGIN
     
     IF bookKey > 0 THEN
-        SELECT * FROM owned WHERE BookFKPubI = bookKey;
+        SELECT * FROM owned WHERE BookFKo = bookKey;
     ELSE
         SELECT * FROM owned;
     END IF;
@@ -2054,9 +2086,9 @@ DETERMINISTIC
 BEGIN
     
     IF bookKey > 0 THEN
-        SELECT * FROM foresale WHERE BookFKfs = bookKey;
+        SELECT * FROM forsale WHERE BookFKfs = bookKey;
     ELSE
-        SELECT * FROM foresale;
+        SELECT * FROM forsale;
     END IF;
 
 END$$

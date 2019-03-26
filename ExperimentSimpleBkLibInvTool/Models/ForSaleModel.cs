@@ -22,9 +22,10 @@ namespace pacsw.BookInventory.Models
             set { SetParameterValue("Estimated Value", value); }
         }
 
-        public ForSaleModel(bool isForSale=false, string askingPrice=null, string estimatedPrice=null)
+        public ForSaleModel(uint bookId=0, bool isForSale=false, string askingPrice=null, string estimatedPrice=null)
             : base(((App)Application.Current).Model.ForSaleTable)
         {
+            BookId = bookId;
             AskingPrice = askingPrice;
             EstimatedValue = estimatedPrice;
             IsForSale = isForSale;

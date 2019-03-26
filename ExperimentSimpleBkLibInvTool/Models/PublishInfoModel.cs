@@ -4,12 +4,6 @@ namespace pacsw.BookInventory.Models
 {
     public class PublishInfoModel : DataTableItemBaseModel, IPublishInfoModel
     {
-        private string _isbnNumber;
-        private string _copyRight;
-        private string _publisher;
-        private string _printing;
-        private string _edition;
-        private bool _outOfPrint;
 
         public string ISBNumber
         {
@@ -50,25 +44,25 @@ namespace pacsw.BookInventory.Models
         public PublishInfoModel()
             : base(((App)Application.Current).Model.PublishingData)
         {
-            // InitializeSqlCommandParameters();
-            _isbnNumber = null;
-            _copyRight = null;
-            _publisher = null;
-            _printing = null;
-            _edition = null;
-            _outOfPrint = false;
+            BookId = 0;
+            ISBNumber = string.Empty;
+            CopyRight = string.Empty;
+            Publisher = string.Empty;
+            Printing = string.Empty;
+            Edition = string.Empty;
+            OutOfPrint = false;
         }
 
-        public PublishInfoModel(string ISBNumber, string CopyRight, string Publisher, string Printing=null, string Edition=null, bool OutOfPrint=false)
+        public PublishInfoModel(uint bookId, string iSBNumber, string copyRight, string publisher, string printing=null, string edition=null, bool outOfPrint=false)
             :base(((App)Application.Current).Model.PublishingData)
         {
-            // InitializeSqlCommandParameters();
-            _isbnNumber = ISBNumber;
-            _copyRight = CopyRight;
-            _publisher = Publisher;
-            _printing = Printing;
-            _edition = Edition;
-            _outOfPrint = OutOfPrint;
+            BookId = bookId;
+            ISBNumber = iSBNumber;
+            CopyRight = copyRight;
+            Publisher = publisher;
+            Printing = printing;
+            Edition = edition;
+            OutOfPrint = outOfPrint;
         }
 
         public override bool AddToDb()
@@ -86,9 +80,8 @@ namespace pacsw.BookInventory.Models
 
             bool hasStringDataError = false;
 
-
             // If none of the fields have been updated the data is valid, if any of the fields
-            // have been updated that at least the ISBN, CopyRight and Publisher should have values
+            // have been updated then at least the ISBN and CopyRight should have values
             if (string.IsNullOrEmpty(ISBNumber)  && string.IsNullOrEmpty(CopyRight) && string.IsNullOrEmpty(Publisher) && string.IsNullOrEmpty(Printing) && string.IsNullOrEmpty(Edition) && OutOfPrint == false)
             {
                 return dataIsValid;

@@ -23,19 +23,13 @@ namespace pacsw.BookInventory.Models
             set { SetParameterValue("GoodReads Rating", value); }
         }
 
-        public uint ID
-        {
-            get { return GetKeyValue(); }
-            set { SetKeyValue(value); }
-        }
-
-        public RatingsModel(string myRating=null, string amazonRating=null, string goodReadsRating=null, uint iD=0)
+        public RatingsModel(uint bookId=0, string myRating=null, string amazonRating=null, string goodReadsRating=null)
             : base(((App)Application.Current).Model.RatingsTable)
         {
+            BookId = bookId;
             MyRating = myRating;
             AmazonRating = amazonRating;
             GoodReadsRating = goodReadsRating;
-            ID = iD;
         }
 
         public override bool AddToDb()
@@ -47,7 +41,7 @@ namespace pacsw.BookInventory.Models
         {
             bool isValid = true;
 
-            if (ID > 0)
+            if (BookId > 0)
             {
                 return _defaultIsValid();
             }

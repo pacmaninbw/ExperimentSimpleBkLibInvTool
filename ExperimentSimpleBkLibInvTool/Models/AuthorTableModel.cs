@@ -42,6 +42,15 @@ namespace pacsw.BookInventory.Models
             return authors;
         }
 
+        public AuthorModel GetAuthor(string lastName, string firstName)
+        {
+            DataTable dt = AuthorTable;
+            string filterString = "LastName LIKE '" + lastName + "*' AND FirstName LIKE '" + firstName + "*'";
+            DataRow[] authors = dt.Select(filterString);
+
+            return ConvertDataRowToAuthor(authors[0]);
+        }
+
         public uint AuthorKey(AuthorModel author)
         {
             uint key = author.AuthorId;

@@ -12,6 +12,17 @@ namespace pacsw.BookInventory.Models
         {
         }
 
+        public ConditionsAndOtherOptionsModel(uint bookId, uint conditionId, uint statusId, string physicalDescription, bool signedByAuthor, bool isRead) :
+            base(((App)Application.Current).Model.ConditionsAndOptions)
+        {
+            BookId = bookId;
+            SetParameterValue("Condition Id", conditionId);
+            SetParameterValue("Status Id", statusId);
+            PhysicalCondition = physicalDescription;
+            SignedByAuthor = signedByAuthor;
+            Read = isRead;
+        }
+
         public string Condition {
             get { return TheModel.ConditionsTable.ConditionTitle(GetParameterKValue("Condition Id")); }
             set { SetParameterValue("Condition Id", TheModel.ConditionsTable.ConditionKey(value)); }

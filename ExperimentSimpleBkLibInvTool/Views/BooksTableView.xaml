@@ -10,6 +10,7 @@
         <Image Stretch="None" Source="/Images/Chernick-Consulting-1-6-11.png" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="83,10,107,137"/>
         <Button Content="Add Book" Name="Btn_BooksAddBook" HorizontalAlignment="Left" Margin="80,30,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Click="Btn_BooksAddBook_Click" Background="Transparent" FontWeight="Bold"/>
         <Button Content="Close" Name="Btn_BooksTableClose" HorizontalAlignment="Left" Margin="875,30,0,0" VerticalAlignment="Top" Width="75" Click="Btn_BooksTableClose_Click" Background="Red" FontWeight="Bold"/>
-        <DataGrid Name="BooksGrid" HorizontalAlignment="Left" Height="530" Margin="65,105,0,0" VerticalAlignment="Top" Width="890" Background="Transparent" ItemsSource="{Binding}"/>
+        <Button Content="Delete Book" Name="Btn_DeleteBook" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="490,30,0,0" Width="80" FontWeight="Bold" Background="Yellow" Click="Btn_DeleteBook_Click"/>
+        <DataGrid Name="BooksGrid" HorizontalAlignment="Left" Height="530" Margin="65,105,0,0" VerticalAlignment="Top" Width="890" Background="Transparent" ItemsSource="{Binding}" SelectionChanged="BooksGrid_SelectionChanged"/>
     </Grid>
 </Window>

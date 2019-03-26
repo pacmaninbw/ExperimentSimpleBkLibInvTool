@@ -15,6 +15,17 @@ namespace pacsw.BookInventory.Models
             FormatId = formatId;
         }
 
+        public BookInfoModel(uint bookId, uint genre = 0, uint titleId = 0, uint authorId = 0, uint seriesId = 0, uint formatId = 0)
+            : base(((App)Application.Current).Model.BookInfoTable)
+        {
+            BookID = bookId;
+            GenreId = genre;
+            TitleId = titleId;
+            AuthorId = authorId;
+            SeriesId = seriesId;
+            FormatId = formatId;
+        }
+
         public uint BookID {
             get { return GetParameterKValue("ID"); }
             private set { SetParameterValue("ID", value); }

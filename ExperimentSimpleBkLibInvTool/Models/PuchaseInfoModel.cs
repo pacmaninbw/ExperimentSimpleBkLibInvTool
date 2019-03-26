@@ -32,15 +32,17 @@ namespace pacsw.BookInventory.Models
         public PuchaseInfoModel()
             : base(((App)Application.Current).Model.PurchaseData)
         {
+            BookId = 0;
             ListPrice = string.Empty;
             PaidPrice = string.Empty;
             Vendor = string.Empty;
             SetParameterValue("Date of Purchase", string.Empty);
         }
 
-        public PuchaseInfoModel(string vendor, string listPrice, string paidPrice, DateTime puchaseDate)
+        public PuchaseInfoModel(uint bookId, string vendor, string listPrice, string paidPrice, DateTime puchaseDate)
             : base(((App)Application.Current).Model.PurchaseData)
         {
+            BookId = bookId;
             ListPrice = listPrice;
             PaidPrice = paidPrice;
             Vendor = vendor;

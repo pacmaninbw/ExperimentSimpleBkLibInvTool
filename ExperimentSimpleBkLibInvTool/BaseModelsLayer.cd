@@ -11,11 +11,14 @@
     </ShowAsCollectionAssociation>
   </Class>
   <Class Name="pacsw.BookInventory.Models.DataTableItemBaseModel">
-    <Position X="10.5" Y="0.5" Width="3.5" />
+    <Position X="11" Y="0.5" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AIAwCEAAAAgAAAQkgigAQAiAAAAAAQAAAAAAAACAEAQ=</HashCode>
       <FileName>Models\DataTableItemBaseModel.cs</FileName>
     </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="_sqlCmdParameters" />
+    </ShowAsCollectionAssociation>
   </Class>
   <Class Name="pacsw.BookInventory.Models.SqlCmdParameter">
     <Position X="6.25" Y="0.5" Width="3.5" />

@@ -20,6 +20,8 @@ namespace pacsw.BookInventory.Models
         protected string _dbConnectionString;
         protected string _getTableStoredProcedureName;
         protected string _addItemStoredProcedureName;
+        protected string _updateItemStoredProcedureName;
+        protected string _deleteItemStoredProcedureName;
         protected string _tableName;
         protected uint _newKeyValue;
         protected MySqlParameterCollection _addItemStoredProcedureParameters;
@@ -30,6 +32,7 @@ namespace pacsw.BookInventory.Models
         private List<SqlCmdParameter> _sqlCmdParameters;
 
         public int AddCount { get; private set; }
+
         public uint NewKeyValue { get { return _newKeyValue; } }
 
         public MySqlParameterCollection AddItemParameters { get { return _addItemStoredProcedureParameters; } }
@@ -55,12 +58,15 @@ namespace pacsw.BookInventory.Models
 
         public Dictionary<string, int> ParametersIndexByStoredProcedureName { get { return ParametersIndexedByParameterName; } }
 
-        protected CDataTableModel(string TableName, string GetTableStoredProcedureName, string AddItemToTableStoredProcedureName=null)
+        protected CDataTableModel(string TableName, string GetTableStoredProcedureName, string AddItemToTableStoredProcedureName=null,
+            string UpdateItemStoredProcedureName=null, string DeleteItemStoredProcedureName=null)
         {
             _newKeyValue = 0;
             _tableName = TableName;
             _getTableStoredProcedureName = GetTableStoredProcedureName;
             _addItemStoredProcedureName = AddItemToTableStoredProcedureName;
+            _updateItemStoredProcedureName = UpdateItemStoredProcedureName;
+            _deleteItemStoredProcedureName = DeleteItemStoredProcedureName;
             _dbConnectionString = ConfigurationManager.ConnectionStrings["LibInvToolDBConnStr"].ConnectionString;
             _sqlCmdParameters = new List<SqlCmdParameter>();
             ParametersIndexedByPublicName = new Dictionary<string, int>();
@@ -205,6 +211,78 @@ namespace pacsw.BookInventory.Models
                             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
                             ResultCount = sda.Fill(Dt);
                             OnPropertyChanged();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMsg = "Database Error: " + ex.Message;
+                    MessageBox.Show(errorMsg);
+                }
+            }
+
+            return Dt;
+        }
+
+        protected DataRow GetRawData(uint bookId)
+        {
+            DataRow rawData = null;
+
+            if (!ReportProgrammerError(_getTableStoredProcedureName, "_getTableStoredProcedureName is not set!"))
+            {
+                try
+                {
+                    using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
+                    {
+                        int ResultCount = 0;
+                        DataTable Dt = new DataTable();
+                        conn.Open();
+                        using (MySqlCommand cmd = new MySqlCommand())
+                        {
+                            cmd.Connection = conn;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandText = _getTableStoredProcedureName;
+                            cmd.Parameters.AddWithValue("@bookKey", bookId);
+
+                            MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+                            ResultCount = sda.Fill(Dt);
+                            if (ResultCount > 0)
+                            {
+                                rawData = Dt.Rows[0];
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMsg = "Database Error: " + ex.Message;
+                    MessageBox.Show(errorMsg);
+                }
+            }
+
+            return rawData;
+        }
+
+        protected DataTable getDataTable(uint bookId)
+        {
+            int ResultCount = 0;
+            DataTable Dt = new DataTable();
+            if (!ReportProgrammerError(_getTableStoredProcedureName, "_getTableStoredProcedureName is not set!"))
+            {
+                try
+                {
+                    using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
+                    {
+                        conn.Open();
+                        using (MySqlCommand cmd = new MySqlCommand())
+                        {
+                            cmd.Connection = conn;
+                            cmd.CommandType = CommandType.StoredProcedure;
+                            cmd.CommandText = _getTableStoredProcedureName;
+                            cmd.Parameters.AddWithValue("@bookKey", bookId);
+
+                            MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+                            ResultCount = sda.Fill(Dt);
                         }
                     }
                 }
