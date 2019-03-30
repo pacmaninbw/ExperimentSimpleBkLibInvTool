@@ -316,7 +316,7 @@ DROP procedure IF EXISTS `pacswlibinvtool`.`deleteBookById`;
 
 DELIMITER $$
 USE `pacswlibinvtool`$$
-CREATE PROCEDURE `deleteBook`
+CREATE PROCEDURE `deleteBookById`
 (
     IN bookId INT
 )

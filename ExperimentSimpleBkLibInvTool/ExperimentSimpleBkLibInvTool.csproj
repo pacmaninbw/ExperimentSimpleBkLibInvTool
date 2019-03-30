@@ -352,13 +352,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="BaseModelsLayer.cd" />
-    <None Include="BookModels.cd" />
-    <None Include="ModelsClassDiagram.cd" />
-    <None Include="ItemModels.cd" />
-    <None Include="DataTableBaseModel.cd" />
-    <None Include="DataTableItemsModel.cd" />
-    <None Include="DataTableModel.cd" />
+    <None Include="SqlCmdParameterRelationShips.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

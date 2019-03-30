@@ -60,7 +60,7 @@ namespace pacsw.BookInventory.Models
         {
             return _getBookId(authorId, titleId, formatId);
         }
-        
+
         protected override void InitializeSqlCommandParameters()
         {
             MySqlParameterCollection parameters = AddItemParameters;

@@ -9,6 +9,13 @@ namespace pacsw.BookInventory.Models
         {
         }
 
+        public Synopsis(uint bookId, string summary)
+            : base(((App)Application.Current).Model.SynopsisTable)
+        {
+            BookId = bookId;
+            Summary = summary;
+        }
+
         public string Summary
         {
             get { return GetParameterValue("Synopsis"); }

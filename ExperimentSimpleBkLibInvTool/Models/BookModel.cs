@@ -172,7 +172,13 @@ namespace pacsw.BookInventory.Models
 
         public void DeleteBook()
         {
-
+            if (_bookKey > 0)
+            {
+                if (ConfirmDeleteBook())
+                {
+                    TheModel.BookTable.DeleteBook(_bookKey);
+                }
+            }
         }
 
         // Identify the book in the database and fill all the aggregate class members with data
@@ -269,7 +275,7 @@ namespace pacsw.BookInventory.Models
         }
 
         // When the user selects a book in the grid, all parts of the aggregation
-        // are added to the book model.
+        // that exist are added to the book model.
         private void FillBookModelWithExistingData(uint bookKey)
         {
             ConditionsAndOptions = TheModel.ConditionsAndOptions.GetConditionsAndOtherOptions(bookKey);
@@ -278,6 +284,25 @@ namespace pacsw.BookInventory.Models
             PublishInfo = TheModel.PublishingData.GetPublishInfo(bookKey);
             PuchaseInfo = TheModel.PurchaseData.GetPuchaseInfo(bookKey);
             Ratings = TheModel.RatingsTable.GetRatingsData(bookKey);
+            VolumeNumber = TheModel.VolumeInSeriesTable.GetVolumneInSersData(bookKey);
+            Summary = TheModel.SynopsisTable.GetSynopsisData(bookKey);
+        }
+
+        private bool ConfirmDeleteBook()
+        {
+            bool executeDelete = false;
+
+            string bookData = "Do you really want to delete the book:" + Environment.NewLine + "\t" + Title + Environment.NewLine;
+            bookData += "\tBy " + _authorInfo.FirstName + " " + _authorInfo.LastName + Environment.NewLine;
+            bookData += "from the inventory?" + Environment.NewLine + "Once this is done it can not be undone.";
+
+            MessageBoxResult confirmation = MessageBox.Show(bookData, "Delete Book Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (confirmation == MessageBoxResult.Yes)
+            {
+                executeDelete = true;
+            }
+
+            return executeDelete;
         }
     }
 }

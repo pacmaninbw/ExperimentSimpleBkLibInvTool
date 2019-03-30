@@ -142,5 +142,12 @@ namespace pacsw.BookInventory.Models
             _addSqlCommandParameter("Last Name", authorTable.GetDBColumnData("LastName"), parameters["@authorLast"]);
             _addSqlCommandParameter("Series Title", GetDBColumnData("SeriesName"), parameters["@seriesTitle"]);
         }
+
+        private SeriesModel ConvertDataRowToSeriesModel(DataRow rawSeriesData)
+        {
+            SeriesModel seriesModel = null;
+
+            return seriesModel;
+        }
     }
 }

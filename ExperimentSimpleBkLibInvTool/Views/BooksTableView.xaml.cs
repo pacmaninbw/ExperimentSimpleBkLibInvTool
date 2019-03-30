@@ -14,6 +14,7 @@ namespace pacsw.BookInventory.Views
         private BookTableModel _bookTableModel;
         private DataTable _bookTable;
         private BookModel _selectedBook;
+        private bool _deleteBtnClicked;
 
         private const int AuthorLastNameColumnIndex = 0;
         private const int AuthorFirstNameColumnIndex = 1;
@@ -25,8 +26,8 @@ namespace pacsw.BookInventory.Views
         {
             InitializeComponent();
             _bookTableModel = ((App)Application.Current).Model.BookTable;
-            _bookTable = _bookTableModel.BookTable;
-            BooksGrid.DataContext = _bookTable.DefaultView;
+            ShowOrRefreshBookGrid();
+
             _selectedBook = null;
             Btn_DeleteBook.IsEnabled = false;
         }
@@ -45,13 +46,16 @@ namespace pacsw.BookInventory.Views
 
         private void AddBook_FormClosed(object sender, EventArgs e)
         {
-            _bookTable = _bookTableModel.BookTable;
-            BooksGrid.DataContext = _bookTable.DefaultView;
-            BooksGrid.Items.Refresh();
+            ShowOrRefreshBookGrid();
         }
 
         private void BooksGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            if (_deleteBtnClicked)
+            {
+                return;
+            }
+
             DataGrid dataGrid = sender as DataGrid;
 
             // These 4 items are enough to distinctly identify a book in the database.
@@ -64,6 +68,7 @@ namespace pacsw.BookInventory.Views
             _selectedBook = new BookModel();
             _selectedBook.SelectBookForEditOrDelete(lastName, firstName, title, format);
             Btn_DeleteBook.IsEnabled = true;
+            _deleteBtnClicked = false;
         }
 
         private string GetColumnContents(DataGrid dataGrid, int columnIndex)
@@ -79,7 +84,18 @@ namespace pacsw.BookInventory.Views
             {
                 _selectedBook.DeleteBook();
             }
+            _deleteBtnClicked = true;
+            BooksGrid.UnselectAll();
+            ShowOrRefreshBookGrid();
             Btn_DeleteBook.IsEnabled = false;
+        }
+
+        private void ShowOrRefreshBookGrid()
+        {
+            _bookTable = _bookTableModel.BookTable;
+            BooksGrid.DataContext = _bookTable.DefaultView;
+            BooksGrid.Items.Refresh();
+            _deleteBtnClicked = false;
         }
     }
 }

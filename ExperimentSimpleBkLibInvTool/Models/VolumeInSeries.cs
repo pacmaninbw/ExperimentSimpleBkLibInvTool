@@ -11,9 +11,10 @@ namespace pacsw.BookInventory.Models
             VolumeNumber = 0;
         }
 
-        public VolumeInSeries(int volumeNumber, uint seriesId = 0) :
+        public VolumeInSeries(uint bookId, int volumeNumber, uint seriesId = 0) :
             base(((App)Application.Current).Model.VolumeInSeriesTable)
         {
+            BookId = bookId;
             SeriesId = seriesId;
             VolumeNumber = volumeNumber;
         }

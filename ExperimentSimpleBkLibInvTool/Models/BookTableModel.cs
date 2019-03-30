@@ -119,7 +119,7 @@ namespace pacsw.BookInventory.Models
                     }
                     if (ResultCount > 0)
                     {
-                        title = Dt.Rows[0].ToString();
+                        title = Dt.Rows[0][0].ToString();
                     }
                 }
                 catch (Exception ex)
@@ -130,6 +130,35 @@ namespace pacsw.BookInventory.Models
             }
 
             return title;
+        }
+
+        public bool DeleteBook(uint bookId)
+        {
+            bool deleted = true;
+
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = "deleteBookById";
+                        cmd.Parameters.AddWithValue("@bookId", bookId);
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMsg = "Database Error: " + ex.Message;
+                MessageBox.Show(errorMsg);
+                deleted = false;
+            }
+
+            return deleted;
         }
 
         public void DeleteBook(string lastName, string firstName, string title, string formatStr)
