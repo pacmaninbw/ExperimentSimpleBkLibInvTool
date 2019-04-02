@@ -11,10 +11,29 @@ namespace pacsw.BookInventory.Views
         public AddRatingsDlg()
         {
             InitializeComponent();
-            Ratings = new RatingsModel();
+            Ratings = null;
+            Cancelled = false;
+            Loaded += new RoutedEventHandler(LoadPreviousValues);
         }
 
-        public RatingsModel Ratings { get; private set; }
+        public RatingsModel Ratings { get; set; }
+
+        public bool Cancelled { get; private set; }
+
+        private void LoadPreviousValues(object sender, RoutedEventArgs e)
+        {
+            if (Ratings == null)
+            {
+                Ratings = new RatingsModel();
+            }
+            else
+            {
+                TB_MyRating.Text = Ratings.MyRating;
+                TB_AmazonRating.Text = Ratings.AmazonRating;
+                TB_GoodReadsRating.Text = Ratings.GoodReadsRating;
+
+            }
+        }
 
         private void TB_MyRating_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -43,9 +62,10 @@ namespace pacsw.BookInventory.Views
             }
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Btn_AddRatingsCancel_Click(object sender, RoutedEventArgs e)
         {
             Ratings = null;
+            Cancelled = true;
             Close();
         }
     }

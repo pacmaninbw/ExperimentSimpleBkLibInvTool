@@ -8,14 +8,31 @@ namespace pacsw.BookInventory.Views
     /// </summary>
     public partial class AddSalesInfoDlg : Window
     {
-        public ForSaleModel SalesInfo { get; private set; }
+        public ForSaleModel SalesInfo { get; set; }
 
         public AddSalesInfoDlg()
         {
             InitializeComponent();
-            SalesInfo = new ForSaleModel();
+            Cancelled = false;
+            Loaded += new RoutedEventHandler(LoadPreviousValues);
+            SalesInfo = null;
         }
 
+        public bool Cancelled { get; private set; }
+
+        private void LoadPreviousValues(object sender, RoutedEventArgs e)
+        {
+            if (SalesInfo == null)
+            {
+                SalesInfo = new ForSaleModel();
+            }
+            else
+            {
+                ChkBx_IsForSale.IsChecked = SalesInfo.IsForSale;
+                TB_AskingPrice.Text = SalesInfo.AskingPrice;
+                TB_EstimatedValue.Text = SalesInfo.EstimatedValue;
+            }
+        }
 
         private void ChkBx_IsForSale_Click(object sender, RoutedEventArgs e)
         {
@@ -35,6 +52,7 @@ namespace pacsw.BookInventory.Views
         private void BTN_CancelSalesInfoDlg_Click(object sender, RoutedEventArgs e)
         {
             SalesInfo = null;
+            Cancelled = true;
             Close();
         }
 

@@ -11,10 +11,31 @@ namespace pacsw.BookInventory.Views
         public AddPublishingInformation()
         {
             InitializeComponent();
-            PublishInfo = new PublishInfoModel();
+            PublishInfo = null;
+            Cancelled = false;
+            Loaded += new RoutedEventHandler(LoadPreviousValues);
         }
 
-        public PublishInfoModel PublishInfo { get; private set; }
+        public PublishInfoModel PublishInfo { get; set; }
+
+        public bool Cancelled { get; private set; }
+
+        private void LoadPreviousValues(object sender, RoutedEventArgs e)
+        {
+            if (PublishInfo == null)
+            {
+                PublishInfo = new PublishInfoModel();
+            }
+            else
+            {
+                TB_Copyright.Text = PublishInfo.CopyRight;
+                TB_ISBNumber.Text = PublishInfo.ISBNumber;
+                TB_Publisher.Text = PublishInfo.Publisher;
+                TB_Edition.Text = PublishInfo.Edition;
+                TB_Printing.Text = PublishInfo.Printing;
+                CB_OutofPrint.IsChecked = PublishInfo.OutOfPrint;
+            }
+        }
 
         private void TB_Copyright_LostFocus(object sender, RoutedEventArgs e)
         {
@@ -56,6 +77,7 @@ namespace pacsw.BookInventory.Views
 
         private void BTN_CancelPublishingInfoDlg_Click(object sender, RoutedEventArgs e)
         {
+            Cancelled = true;
             PublishInfo = null;
             Close();
         }

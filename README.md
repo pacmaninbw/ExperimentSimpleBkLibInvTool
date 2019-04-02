@@ -20,6 +20,6 @@ d.	devMySql/LibInvUnitTests.sql - This provides some data for testing and experi
 4.	Run
 # Known Issues:
 1.	The sort order of the selects need to be fixed. They are in the order they come out of the database and in some cases need to be sorted alphabetically. In some cases they need to be sorted by priority.
-2.	The Physical Description text field is not implemented yet.
+2.	Edit Book is currently being implemented, not everything works.
 # A Note on the user interface
 I am not and never have been a graphic artist. I realize that the Add Book Dialog is crowded and too busy. I would value input on what might make it more attractive to users. The application may need a few more dialogs such as Buy Book, and Describe Book.

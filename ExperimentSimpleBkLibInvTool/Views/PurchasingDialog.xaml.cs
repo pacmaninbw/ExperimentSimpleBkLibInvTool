@@ -12,10 +12,28 @@ namespace pacsw.BookInventory.Views
         public PurchasingDialog()
         {
             InitializeComponent();
-            PurchaseInfo = new PuchaseInfoModel();
+            PurchaseInfo = null;
+            Cancelled = false;
+            Loaded += new RoutedEventHandler(LoadPreviousValues);
         }
 
-        public PuchaseInfoModel PurchaseInfo { get; private set; }
+        public PuchaseInfoModel PurchaseInfo { get; set; }
+
+        public bool Cancelled { get; private set; }
+
+        private void LoadPreviousValues(object sender, RoutedEventArgs e)
+        {
+            if (PurchaseInfo == null)
+            {
+                PurchaseInfo = new PuchaseInfoModel();
+            }
+            else
+            {
+                TB_Vendor.Text = PurchaseInfo.Vendor;
+                TB_ListPrice.Text = PurchaseInfo.ListPrice;
+                TB_PaidPrice.Text = PurchaseInfo.PaidPrice;
+            }
+        }
 
         private void BTN_PurchaseInfoSave_Click(object sender, RoutedEventArgs e)
         {
@@ -27,6 +45,7 @@ namespace pacsw.BookInventory.Views
 
         private void BTN_PurchaseInfoCancel_Click(object sender, RoutedEventArgs e)
         {
+            Cancelled = true;
             PurchaseInfo = null;
             Close();
         }

@@ -15,6 +15,7 @@ namespace pacsw.BookInventory.Views
         private DataTable _bookTable;
         private BookModel _selectedBook;
         private bool _deleteBtnClicked;
+        private bool _editBtnClicked;
 
         private const int AuthorLastNameColumnIndex = 0;
         private const int AuthorFirstNameColumnIndex = 1;
@@ -30,6 +31,7 @@ namespace pacsw.BookInventory.Views
 
             _selectedBook = null;
             Btn_DeleteBook.IsEnabled = false;
+            Btn_EditBook.IsEnabled = false;
         }
 
         private void Btn_BooksAddBook_Click(object sender, RoutedEventArgs e)
@@ -51,7 +53,7 @@ namespace pacsw.BookInventory.Views
 
         private void BooksGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (_deleteBtnClicked)
+            if (_deleteBtnClicked || _editBtnClicked)
             {
                 return;
             }
@@ -68,7 +70,9 @@ namespace pacsw.BookInventory.Views
             _selectedBook = new BookModel();
             _selectedBook.SelectBookForEditOrDelete(lastName, firstName, title, format);
             Btn_DeleteBook.IsEnabled = true;
+            Btn_EditBook.IsEnabled = true;
             _deleteBtnClicked = false;
+            _editBtnClicked = false;
         }
 
         private string GetColumnContents(DataGrid dataGrid, int columnIndex)
@@ -88,6 +92,7 @@ namespace pacsw.BookInventory.Views
             BooksGrid.UnselectAll();
             ShowOrRefreshBookGrid();
             Btn_DeleteBook.IsEnabled = false;
+            Btn_EditBook.IsEnabled = false;
         }
 
         private void ShowOrRefreshBookGrid()
@@ -96,6 +101,23 @@ namespace pacsw.BookInventory.Views
             BooksGrid.DataContext = _bookTable.DefaultView;
             BooksGrid.Items.Refresh();
             _deleteBtnClicked = false;
+            _editBtnClicked = false;
+        }
+
+        private void Btn_EditBook_Click(object sender, RoutedEventArgs e)
+        {
+            EditBookDlg2 bookEditor = new EditBookDlg2();
+            bookEditor.ThisBook = _selectedBook;
+            Btn_DeleteBook.IsEnabled = false;
+            Btn_EditBook.IsEnabled = false;
+            _editBtnClicked = true;
+            bookEditor.Closed += new EventHandler(AddBook_FormClosed);
+            bookEditor.Show();
+        }
+
+        private void EditBook_FormClosed(object sender, EventArgs e)
+        {
+            ShowOrRefreshBookGrid();
         }
     }
 }

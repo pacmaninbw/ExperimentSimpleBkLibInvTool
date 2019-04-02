@@ -12,10 +12,26 @@ namespace pacsw.BookInventory.Views
         public AddBookSummary()
         {
             InitializeComponent();
-            Summary = new Synopsis();
+            Loaded += new RoutedEventHandler(LoadPreviousValues);
+            Cancelled = false;
+            Summary = null;
         }
 
-        public Synopsis Summary { get; private set; }
+        public Synopsis Summary { get; set; }
+
+        public bool Cancelled { get; private set; }
+
+        private void LoadPreviousValues(object sender, RoutedEventArgs e)
+        {
+            if (Summary == null)
+            {
+                Summary = new Synopsis();
+            }
+            else
+            {
+                TXTBX_Synopsis.Text = Summary.Summary;
+            }
+        }
 
         private void BTN_SaveSummary_Click(object sender, RoutedEventArgs e)
         {
@@ -25,6 +41,7 @@ namespace pacsw.BookInventory.Views
         private void BTN_CancelSummary_Click(object sender, RoutedEventArgs e)
         {
             Summary = null;
+            Cancelled = true;
             Close();
         }
 

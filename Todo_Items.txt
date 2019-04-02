@@ -1,2 +1,1 @@
-Add Volume in Series
-Add Synopsys
+Add Loaded event handlers to all popup editors. Move Instantiation of models from constructors to Loaded event handler. 

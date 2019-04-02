@@ -170,6 +170,45 @@ namespace pacsw.BookInventory.Models
             return success;
         }
 
+        public bool UpdateBookWithEdits()
+        {
+            bool success = IsValid;
+
+            try
+            {
+                if (success)
+                {
+                    if (success = _bookInfo.AddToDb())
+                    {
+                        _bookKey = _bookInfo.BookID;
+                        if (_seriesInfo != null && _volumeInSeries != null)
+                        {
+                            _volumeInSeries.SeriesId = _bookInfo.SeriesId;
+                        }
+                    }
+
+                    if (_bookKey > 0)
+                    {
+                        foreach (DataTableItemBaseModel item in _itemsToAddToDb)
+                        {
+                            success = AddToDb(success, item);
+                            if (!success)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                string errorMsg = "Database Error: " + ex.Message;
+                MessageBox.Show(errorMsg);
+            }
+
+            return success;
+        }
+
         public void DeleteBook()
         {
             if (_bookKey > 0)

@@ -232,6 +232,9 @@
     <Compile Include="Views\CategoriesTableView.xaml.cs">
       <DependentUpon>CategoriesTableView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditBookDlg2.xaml.cs">
+      <DependentUpon>EditBookDlg2.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\FormatTableView.xaml.cs">
       <DependentUpon>FormatTableView.xaml</DependentUpon>
     </Compile>
@@ -314,6 +317,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CategoriesTableView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditBookDlg2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

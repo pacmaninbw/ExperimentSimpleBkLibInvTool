@@ -23,7 +23,7 @@
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Height="75" Width="350">
                     <Button Content="Save" Name="Btn_AddRatingsSave" VerticalAlignment="Top" HorizontalAlignment="Left" Height="26" Width="120" Click="Btn_AddRatingsSave_Click" Margin="30,10,0,0" Background="LightGreen"/>
-                    <Button Content="Cancel" Height="26" Width="120" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="30,10,0,0" Click="Button_Click" Background="Red"/>
+                    <Button Content="Cancel" Name="Btn_AddRatingsCancel" Height="26" Width="120" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="30,10,0,0" Background="Red" Click="Btn_AddRatingsCancel_Click"/>
                 </StackPanel>
             </StackPanel>
         </GroupBox>
