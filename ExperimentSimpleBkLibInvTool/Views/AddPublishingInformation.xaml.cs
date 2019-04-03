@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.ComponentModel;
 using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
@@ -8,12 +9,16 @@ namespace pacsw.BookInventory.Views
     /// </summary>
     public partial class AddPublishingInformation : Window
     {
+        bool _saveClicked;
+
         public AddPublishingInformation()
         {
             InitializeComponent();
             PublishInfo = null;
             Cancelled = false;
             Loaded += new RoutedEventHandler(LoadPreviousValues);
+            Closing += AddPublishingInformation_Closing;
+            _saveClicked = false;
         }
 
         public PublishInfoModel PublishInfo { get; set; }
@@ -71,6 +76,7 @@ namespace pacsw.BookInventory.Views
         {
             if (PublishInfo.IsValid)
             {
+                _saveClicked = true;
                 Close();
             }
         }
@@ -80,6 +86,16 @@ namespace pacsw.BookInventory.Views
             Cancelled = true;
             PublishInfo = null;
             Close();
+        }
+
+        // Closing the popup editor should be the same as cancelling.
+        private void AddPublishingInformation_Closing(object sender, CancelEventArgs e)
+        {
+            if (!_saveClicked)
+            {
+                Cancelled = true;
+                PublishInfo = null;
+            }
         }
     }
 }

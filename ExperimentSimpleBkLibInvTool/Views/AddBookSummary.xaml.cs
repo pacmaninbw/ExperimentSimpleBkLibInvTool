@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.ComponentModel;
 using pacsw.BookInventory.Models;
 
 
@@ -9,11 +10,15 @@ namespace pacsw.BookInventory.Views
     /// </summary>
     public partial class AddBookSummary : Window
     {
+        private bool _saveClicked;
+
         public AddBookSummary()
         {
             InitializeComponent();
             Loaded += new RoutedEventHandler(LoadPreviousValues);
+            Closing += AddBookSummary_Closing;
             Cancelled = false;
+            _saveClicked = false;
             Summary = null;
         }
 
@@ -35,6 +40,7 @@ namespace pacsw.BookInventory.Views
 
         private void BTN_SaveSummary_Click(object sender, RoutedEventArgs e)
         {
+            _saveClicked = true;
             Close();
         }
 
@@ -48,6 +54,15 @@ namespace pacsw.BookInventory.Views
         private void TXTBX_Synopsis_LostFocus(object sender, RoutedEventArgs e)
         {
             Summary.Summary = TXTBX_Synopsis.Text;
+        }
+
+        private void AddBookSummary_Closing(object sender, CancelEventArgs e)
+        {
+            if (!_saveClicked)
+            {
+                Summary = null;
+                Cancelled = true;
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.ComponentModel;
 using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
@@ -8,13 +9,17 @@ namespace pacsw.BookInventory.Views
     /// </summary>
     public partial class AddSalesInfoDlg : Window
     {
+        private bool _saveClicked;
+
         public ForSaleModel SalesInfo { get; set; }
 
         public AddSalesInfoDlg()
         {
             InitializeComponent();
             Cancelled = false;
+            _saveClicked = false;
             Loaded += new RoutedEventHandler(LoadPreviousValues);
+            Closing += AddSalesInfoDlg_Closing;
             SalesInfo = null;
         }
 
@@ -60,7 +65,17 @@ namespace pacsw.BookInventory.Views
         {
             if (SalesInfo.IsValid)
             {
+                _saveClicked = true;
                 Close();
+            }
+        }
+
+        private void AddSalesInfoDlg_Closing(object sender, CancelEventArgs e)
+        {
+            if (!_saveClicked)
+            {
+                SalesInfo = null;
+                Cancelled = true;
             }
         }
     }

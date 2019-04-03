@@ -34,7 +34,7 @@ namespace pacsw.BookInventory.Views
             optionsIsDirty = false;
         }
 
-        private void Btn_AddBookSave_Click(object sender, RoutedEventArgs e)
+        private void Btn_EditBookSave_Click(object sender, RoutedEventArgs e)
         {
             if (ownedIsDirty)
             {
@@ -55,7 +55,7 @@ namespace pacsw.BookInventory.Views
             }
         }
 
-        private void Btn_AddBookCancel_Click(object sender, RoutedEventArgs e)
+        private void Btn_EditBookCancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }

@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.ComponentModel;
 using pacsw.BookInventory.Models;
 
 namespace pacsw.BookInventory.Views
@@ -8,12 +9,16 @@ namespace pacsw.BookInventory.Views
     /// </summary>
     public partial class AddRatingsDlg : Window
     {
+        private bool _saveClicked;
+
         public AddRatingsDlg()
         {
             InitializeComponent();
             Ratings = null;
             Cancelled = false;
             Loaded += new RoutedEventHandler(LoadPreviousValues);
+            _saveClicked = false;
+            Closing += AddRatingsDlg_Closing;
         }
 
         public RatingsModel Ratings { get; set; }
@@ -58,6 +63,7 @@ namespace pacsw.BookInventory.Views
             }
             else
             {
+                _saveClicked = true;
                 Close();
             }
         }
@@ -67,6 +73,15 @@ namespace pacsw.BookInventory.Views
             Ratings = null;
             Cancelled = true;
             Close();
+        }
+
+        private void AddRatingsDlg_Closing(object sender, CancelEventArgs e)
+        {
+            if (!_saveClicked)
+            {
+                Ratings = null;
+                Cancelled = true;
+            }
         }
     }
 }

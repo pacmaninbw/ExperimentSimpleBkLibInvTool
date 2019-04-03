@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Windows;
 using System.Windows.Controls;
 using pacsw.BookInventory.Models;
 
@@ -9,12 +10,16 @@ namespace pacsw.BookInventory.Views
     /// </summary>
     public partial class PurchasingDialog : Window
     {
+        private bool _saveClicked;
+
         public PurchasingDialog()
         {
             InitializeComponent();
             PurchaseInfo = null;
             Cancelled = false;
+            _saveClicked = false;
             Loaded += new RoutedEventHandler(LoadPreviousValues);
+            Closing += PurchasingDialog_Closing;
         }
 
         public PuchaseInfoModel PurchaseInfo { get; set; }
@@ -39,6 +44,7 @@ namespace pacsw.BookInventory.Views
         {
             if (PurchaseInfo.IsValid)
             {
+                _saveClicked = true;
                 Close();
             }
         }
@@ -48,6 +54,15 @@ namespace pacsw.BookInventory.Views
             Cancelled = true;
             PurchaseInfo = null;
             Close();
+        }
+
+        private void PurchasingDialog_Closing(object sender, CancelEventArgs e)
+        {
+            if (!_saveClicked)
+            {
+                Cancelled = true;
+                PurchaseInfo = null;
+            }
         }
 
         private void TB_Vendor_LostFocus(object sender, RoutedEventArgs e)
