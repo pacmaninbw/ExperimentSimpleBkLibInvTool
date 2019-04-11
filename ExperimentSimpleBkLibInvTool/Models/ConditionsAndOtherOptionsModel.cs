@@ -2,7 +2,7 @@
 
 namespace pacsw.BookInventory.Models
 {
-    public class ConditionsAndOtherOptionsModel : DataTableItemBaseModel, IConditionsAndOtherOptionsModel
+    public class ConditionsAndOtherOptionsModel : DataTableItemBaseModel
     {
         private readonly Model TheModel = ((App)Application.Current).Model;
 
@@ -55,7 +55,7 @@ namespace pacsw.BookInventory.Models
             return ((App)Application.Current).Model.ConditionsAndOptions.AddConditionsAndOptions(this);
         }
 
-        public void Copy(IConditionsAndOtherOptionsModel original)
+        public void Copy(ConditionsAndOtherOptionsModel original)
         {
             Condition = original.Condition;
             Status = original.Status;

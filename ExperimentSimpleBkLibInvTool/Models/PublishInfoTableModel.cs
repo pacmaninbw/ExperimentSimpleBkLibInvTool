@@ -27,9 +27,8 @@ namespace pacsw.BookInventory.Models
 
         public DataTable PublishInfoTable => DataTable;
 
-        public bool AddPublishingInfo(IPublishInfoModel PublishingData, uint bookId = 0)
+        public bool AddPublishingInfo(PublishInfoModel publishInfoModel, uint bookId = 0)
         {
-            PublishInfoModel publishInfoModel = (PublishInfoModel)PublishingData;
             return (publishInfoModel.BookId > 0) ? addItem(publishInfoModel) : false;
         }
 

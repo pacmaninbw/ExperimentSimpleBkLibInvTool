@@ -20,7 +20,6 @@ namespace pacsw.BookInventory.Models
         }
 
         public DataTable Series=> DataTable;
-        public bool AddSeries(ISeriesModel iSeriesData) => addItem((SeriesModel) iSeriesData);
         public bool AddSeries(SeriesModel seriesModel) => addItem(seriesModel); 
 
         public List<string> SeriesSelectionListCreator(AuthorModel author)

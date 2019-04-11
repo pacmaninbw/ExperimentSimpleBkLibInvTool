@@ -20,7 +20,7 @@ namespace pacsw.BookInventory.Views
         private bool _genreSelected;
         private bool _formatSelected;
 
-        public IAuthorModel SelectedAuthor { get { return newBook.AuthorInfo; } set { newBook.AuthorInfo = value as AuthorModel; } }
+        public AuthorModel SelectedAuthor { get { return newBook.AuthorInfo; } set { newBook.AuthorInfo = value; } }
 
         public AddBookDlg()
         {

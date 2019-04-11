@@ -2,7 +2,7 @@
 
 namespace pacsw.BookInventory.Models
 {
-    public class RatingsModel : DataTableItemBaseModel, IRatingsModel
+    public class RatingsModel : DataTableItemBaseModel
     {
 
         public string MyRating

@@ -2,7 +2,7 @@
 
 namespace pacsw.BookInventory.Models
 {
-    public class PublishInfoModel : DataTableItemBaseModel, IPublishInfoModel
+    public class PublishInfoModel : DataTableItemBaseModel
     {
 
         public string ISBNumber

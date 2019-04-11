@@ -23,9 +23,8 @@ namespace pacsw.BookInventory.Models
 
         public DataTable PurchaseInfoTable => DataTable;
 
-        public bool AddPurchaseInfo(IPuchaseInfoModel purchaseData)
+        public bool AddPurchaseInfo(PuchaseInfoModel purchaseInfoModel)
         {
-            PuchaseInfoModel purchaseInfoModel = (PuchaseInfoModel)purchaseData;
             return (purchaseInfoModel.BookId > 0) ? addItem(purchaseInfoModel) : false;
         }
 

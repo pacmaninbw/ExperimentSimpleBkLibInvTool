@@ -181,15 +181,6 @@
     <Compile Include="Models\FormatsTableModel.cs" />
     <Compile Include="Models\ForSaleModel.cs" />
     <Compile Include="Models\ForSaleTableModel.cs" />
-    <Compile Include="Models\IAuthorModel.cs" />
-    <Compile Include="Models\IBookInfoModel.cs" />
-    <Compile Include="Models\IConditionsAndOtherOptionsModel.cs" />
-    <Compile Include="Models\IForSaleModel.cs" />
-    <Compile Include="Models\IOwnerShipModel.cs" />
-    <Compile Include="Models\IPublishInfoModel.cs" />
-    <Compile Include="Models\IPuchaseInfoModel.cs" />
-    <Compile Include="Models\IRatingsModel.cs" />
-    <Compile Include="Models\ISeriesModel.cs" />
     <Compile Include="Models\ModelUtilities.cs" />
     <Compile Include="Models\ObservableModelObject.cs" />
     <Compile Include="Models\OwnerShipModel.cs" />

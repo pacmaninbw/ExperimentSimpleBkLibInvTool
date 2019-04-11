@@ -3,7 +3,7 @@ using System.Windows;
 
 namespace pacsw.BookInventory.Models
 {
-    public class PuchaseInfoModel : DataTableItemBaseModel, IPuchaseInfoModel
+    public class PuchaseInfoModel : DataTableItemBaseModel
     {
         public string ListPrice
         {

@@ -2,7 +2,7 @@
 
 namespace pacsw.BookInventory.Models
 {
-    public class OwnerShipModel : DataTableItemBaseModel, IOwnerShipModel
+    public class OwnerShipModel : DataTableItemBaseModel
     {
         public bool IsOwned
         {

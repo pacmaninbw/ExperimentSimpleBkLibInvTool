@@ -2,7 +2,7 @@
 
 namespace pacsw.BookInventory.Models
 {
-    public class ForSaleModel : DataTableItemBaseModel, IForSaleModel
+    public class ForSaleModel : DataTableItemBaseModel
     {
         public bool IsForSale
         {

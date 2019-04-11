@@ -2,7 +2,7 @@
 
 namespace pacsw.BookInventory.Models
 {
-    public class AuthorModel : DataTableItemBaseModel, IAuthorModel
+    public class AuthorModel : DataTableItemBaseModel
     {
         private bool errorWasReported;
 

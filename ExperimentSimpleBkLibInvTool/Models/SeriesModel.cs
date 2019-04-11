@@ -2,7 +2,7 @@
 
 namespace pacsw.BookInventory.Models
 {
-    public class SeriesModel : DataTableItemBaseModel, ISeriesModel
+    public class SeriesModel : DataTableItemBaseModel
     {
         private AuthorModel _author;
         private uint _authorId;

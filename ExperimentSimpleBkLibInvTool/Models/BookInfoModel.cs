@@ -2,7 +2,7 @@
 
 namespace pacsw.BookInventory.Models
 {
-    public class BookInfoModel : DataTableItemBaseModel, IBookInfoModel
+    public class BookInfoModel : DataTableItemBaseModel
     {
         public BookInfoModel(uint genre = 0, uint titleId = 0, uint authorId = 0, uint seriesId = 0, uint formatId = 0)
             : base(((App)Application.Current).Model.BookInfoTable)

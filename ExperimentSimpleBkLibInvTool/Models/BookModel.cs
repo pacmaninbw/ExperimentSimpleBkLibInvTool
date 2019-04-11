@@ -53,52 +53,52 @@ namespace pacsw.BookInventory.Models
             _itemsToValidate.Add(_bookInfo);
         }
 
-        public IPublishInfoModel PublishInfo
+        public PublishInfoModel PublishInfo
         {
             get { return _publishInfo; }
-            set { InsertIntoLists(_publishInfo = (PublishInfoModel)value); }
+            set { InsertIntoLists(_publishInfo = value); }
         }
 
-        public IPuchaseInfoModel PuchaseInfo
+        public PuchaseInfoModel PuchaseInfo
         {
             get { return _puchaseInfo; }
-            set { InsertIntoLists(_puchaseInfo = (PuchaseInfoModel)value); }
+            set { InsertIntoLists(_puchaseInfo = value); }
         }
 
-        public IOwnerShipModel Owned
+        public OwnerShipModel Owned
         {
             get { return _owned; }
-            set { InsertIntoLists(_owned = (OwnerShipModel)value); }
+            set { InsertIntoLists(_owned = value); }
         }
 
-        public IForSaleModel ForSale
+        public ForSaleModel ForSale
         {
-            get { return (IForSaleModel) _forSale; }
-            set { InsertIntoLists(_forSale = (ForSaleModel)value); }
+            get { return _forSale; }
+            set { InsertIntoLists(_forSale = value); }
         }
 
-        public IAuthorModel AuthorInfo
+        public AuthorModel AuthorInfo
         {
             get { return _authorInfo; }
-            set { SetAuthorValues((AuthorModel)value); }
+            set { SetAuthorValues(value); }
         }
 
-        public ISeriesModel SeriesInfo
+        public SeriesModel SeriesInfo
         {
             get { return _seriesInfo; }
-            set { SetSeriesValues((SeriesModel)value); }
+            set { SetSeriesValues(value); }
         }
 
-        public IRatingsModel Ratings
+        public RatingsModel Ratings
         {
             get { return _ratings; }
-            set { InsertIntoLists(_ratings = (RatingsModel)value); }
+            set { InsertIntoLists(_ratings = value); }
         }
 
-        public IConditionsAndOtherOptionsModel ConditionsAndOptions
+        public ConditionsAndOtherOptionsModel ConditionsAndOptions
         {
             get { return _optionalItems; }
-            set { InsertIntoLists(_optionalItems = (ConditionsAndOtherOptionsModel)value); }
+            set { InsertIntoLists(_optionalItems = value); }
         }
 
         public VolumeInSeries VolumeNumber

@@ -20,30 +20,15 @@ namespace pacsw.BookInventory.Models
 
         public DataTable ForSaleTable => DataTable;
 
-        public bool AddForSaleData(IForSaleModel forSaleData)
+        public bool AddForSaleData(ForSaleModel forSaleData)
         {
-            ForSaleModel forSaleModel = (ForSaleModel)forSaleData;
-            if (forSaleModel.BookId > 0)
-            {
-                return addItem(forSaleModel);
-            }
-            else
-            {
-                return false;
-            }
+            return (forSaleData.BookId > 0) ? addItem(forSaleData) : false;
         }
 
         public ForSaleModel GetForSaleModel(uint bookId)
         {
             DataRow rawForSaleData = GetRawData(bookId);
-            ForSaleModel forSaleModel = null;
-
-            if (rawForSaleData != null)
-            {
-                forSaleModel = ConvertDataRowToForSaleModel(rawForSaleData);
-            }
-
-            return forSaleModel;
+            return (rawForSaleData != null) ? ConvertDataRowToForSaleModel(rawForSaleData) : null;
         }
 
         protected override void InitializeSqlCommandParameters()

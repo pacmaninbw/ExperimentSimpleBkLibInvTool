@@ -27,11 +27,11 @@ namespace pacsw.BookInventory.Models
 
         public DataTable BookInfoTable { get { return DataTable; } }
 
-        public bool AddBookInfo(IBookInfoModel bookInfo, out uint bookId)
+        public bool AddBookInfo(BookInfoModel bookInfo, out uint bookId)
         {
             bool addBookWasSuccessful = false;
 
-            addBookWasSuccessful = addItem((BookInfoModel)bookInfo);
+            addBookWasSuccessful = addItem(bookInfo);
             bookId = _newKeyValue;
 
             return addBookWasSuccessful;
