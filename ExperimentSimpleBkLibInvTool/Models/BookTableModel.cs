@@ -160,40 +160,6 @@ namespace pacsw.BookInventory.Models
             return deleted;
         }
 
-        public void DeleteBook(string lastName, string firstName, string title, string formatStr)
-        {
-            using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
-            {
-                try
-                {
-                    int ResultCount = 0;
-                    DataTable Dt = new DataTable();
-                    conn.Open();
-                    using (MySqlCommand cmd = new MySqlCommand())
-                    {
-                        cmd.Connection = conn;
-                        cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.CommandText = "deletebook";
-                        cmd.Parameters.AddWithValue("@authorLast", lastName);
-                        cmd.Parameters.AddWithValue("@authorFirst", firstName);
-                        cmd.Parameters.AddWithValue("@titleStr", title);
-                        cmd.Parameters.AddWithValue("@formatStr", formatStr);
-
-                        cmd.ExecuteNonQuery();
-                    }
-                    if (ResultCount > 0)
-                    {
-                        title = Dt.Rows[0].ToString();
-                    }
-                }
-                catch (Exception ex)
-                {
-                    string errorMsg = "Database Error: " + ex.Message;
-                    MessageBox.Show(errorMsg);
-                }
-            }
-        }
-
         protected override void InitializeSqlCommandParameters()
         {
             MySqlParameterCollection parameters = AddItemParameters;

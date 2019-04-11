@@ -14,9 +14,11 @@ namespace pacsw.BookInventory.Views
     {
         private OwnerShipModel owned;
         private ConditionsAndOtherOptionsModel options;
+        private VolumeInSeries volumeInSeries;
 
         private bool ownedIsDirty;
         private bool optionsIsDirty;
+        private bool volumeInSeriesIsDirty;
 
         public BookModel ThisBook { get; set; }
 
@@ -24,12 +26,14 @@ namespace pacsw.BookInventory.Views
         {
             InitializeComponent();
             Loaded += new RoutedEventHandler(LoadPreviousValues);
-            // The owned and options data is edited in the main editor and requires different handling
-            // from the other data that is edited in it's own popup editor.
+            // The owned, options and volumeinseries data is edited in the main editor and requires
+            // different handling from the other data that is edited in it's own popup editor.
             owned = null;
             options = null;
+            volumeInSeries = null;
             ownedIsDirty = false;
             optionsIsDirty = false;
+            volumeInSeriesIsDirty = false;
         }
 
         private void Btn_EditBookSave_Click(object sender, RoutedEventArgs e)
@@ -42,6 +46,11 @@ namespace pacsw.BookInventory.Views
             if (optionsIsDirty)
             {
                 ThisBook.ConditionsAndOptions = options;
+            }
+
+            if (volumeInSeriesIsDirty)
+            {
+                ThisBook.VolumeNumber = volumeInSeries;
             }
 
             if (ThisBook.IsValid)
@@ -62,17 +71,25 @@ namespace pacsw.BookInventory.Views
         {
             TB_BookTitle.Text = ThisBook.Title;
             SetAuthorNameValues();
+            TBXBL_SelectedGenre.Text = ThisBook.Genre;
+            TXTBL_SelectedFormat.Text = ThisBook.Format;
 
-            owned = (OwnerShipModel)ThisBook.Owned;
+            owned = ThisBook.Owned;
             if (owned != null)
             {
                 LoadPreviousOwnedValues();
             }
 
-            options = (ConditionsAndOtherOptionsModel)ThisBook.ConditionsAndOptions;
+            options = ThisBook.ConditionsAndOptions;
             if (options != null)
             {
                 LoadPreviousOptionValues();
+            }
+
+            volumeInSeries = ThisBook.VolumeNumber;
+            if (volumeInSeries != null)
+            {
+                TXTBX_VolumeInSeries.Text = volumeInSeries.VolumeNumber.ToString();
             }
         }
 
@@ -348,13 +365,17 @@ namespace pacsw.BookInventory.Views
 
         private void TXTBX_VolumeInSeries_LostFocus(object sender, RoutedEventArgs e)
         {
-            VolumeInSeries volumeInSeries = new VolumeInSeries();
+            if (volumeInSeries == null)
+            {
+                volumeInSeries = new VolumeInSeries();
+            }
+
             int tmpVolumeNumber;
             if (int.TryParse(TXTBX_VolumeInSeries.Text, out tmpVolumeNumber))
             {
                 volumeInSeries.VolumeNumber = tmpVolumeNumber;
                 TXTBX_VolumeInSeries.Background = Brushes.White;
-                ThisBook.VolumeNumber = volumeInSeries;
+                volumeInSeriesIsDirty = true;
             }
             else
             {
