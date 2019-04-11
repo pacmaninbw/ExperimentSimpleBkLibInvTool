@@ -1540,7 +1540,8 @@ BEGIN
  * Example usage would be to get all the categories to CREATE a control that embeds the primary key rather than the text.
  */
 
-    SELECT bookcategories.CategoryName, bookcategories.idBookCategories FROM bookcategories;
+    SELECT bookcategories.CategoryName, bookcategories.idBookCategories FROM bookcategories
+	    ORDER BY CategoryName ASC;
 
 END$$
 
@@ -1563,7 +1564,8 @@ BEGIN
  * Example usage would be to get all the formats to CREATE a control that embeds the primary key rather than the text.
  */
 
-    SELECT bookformat.FormatName, bookformat.idFormat FROM bookformat;
+    SELECT bookformat.FormatName, bookformat.idFormat FROM bookformat
+		ORDER BY idFormat ASC;
 
 END$$
 
@@ -1586,7 +1588,8 @@ BEGIN
  * Example usage would be to get all the statuses to CREATE a control that embeds the primary key rather than the text.
  */
 
-    SELECT bkstatuses.BkStatusStr, bkstatuses.idBkStatus FROM bkstatuses;
+    SELECT bkstatuses.BkStatusStr, bkstatuses.idBkStatus FROM bkstatuses
+    ORDER BY idBkstatus ASC;
 
 END$$
 
@@ -1609,7 +1612,8 @@ BEGIN
  * Example usage would be to get all the conditions to CREATE a control that embeds the primary key rather than the text.
  */
 
-    SELECT bkconditions.ConditionOfBookStr, bkconditions.idBkConditions FROM bkconditions;
+    SELECT bkconditions.ConditionOfBookStr, bkconditions.idBkConditions FROM bkconditions
+    ORDER BY idBkConditions ASC;
 
 END$$
 
