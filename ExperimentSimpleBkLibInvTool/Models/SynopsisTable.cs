@@ -15,31 +15,15 @@ namespace pacsw.BookInventory.Models
             SummaryColumnIndex = GetDBColumnData("StoryLine").IndexBasedOnOrdinal;
         }
 
-        public DataTable BookInfoTable { get { return DataTable; } }
-
         public bool AddSynopsis(Synopsis synopsis)
         {
-            if (synopsis.BookId > 0)
-            {
-                return addItem(synopsis);
-            }
-            else
-            {
-                return false;
-            }
+            return (synopsis.BookId > 0) ? addItem(synopsis) : false;
         }
 
         public Synopsis GetSynopsisData(uint bookId)
         {
-            Synopsis bookSummary = null;
             DataRow rawSynopsisData = GetRawData(bookId);
-
-            if (rawSynopsisData != null)
-            {
-                bookSummary = ConvertDataRowToSynopsis(rawSynopsisData);
-            }
-
-            return bookSummary;
+            return (rawSynopsisData != null) ? ConvertDataRowToSynopsis(rawSynopsisData) : null;
         }
 
         protected override void InitializeSqlCommandParameters()

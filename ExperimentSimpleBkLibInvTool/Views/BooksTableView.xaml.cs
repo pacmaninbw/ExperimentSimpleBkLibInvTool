@@ -106,7 +106,7 @@ namespace pacsw.BookInventory.Views
 
         private void Btn_EditBook_Click(object sender, RoutedEventArgs e)
         {
-            EditBookDlg2 bookEditor = new EditBookDlg2();
+            EditBookDlg bookEditor = new EditBookDlg();
             bookEditor.ThisBook = _selectedBook;
             Btn_DeleteBook.IsEnabled = false;
             Btn_EditBook.IsEnabled = false;

@@ -19,18 +19,9 @@ namespace pacsw.BookInventory.Models
             seriesAuthorKeyIndex = GetDBColumnData("AuthorOfSeries").IndexBasedOnOrdinal;
         }
 
-        public DataTable Series { get { return DataTable; } }
-
-        public bool AddSeries(ISeriesModel iSeriesData)
-        {
-            SeriesModel seriesModel = (SeriesModel)iSeriesData;
-            return addItem(seriesModel);
-        }
-
-        public bool AddSeries(SeriesModel seriesModel)
-        {
-            return addItem(seriesModel);
-        }
+        public DataTable Series=> DataTable;
+        public bool AddSeries(ISeriesModel iSeriesData) => addItem((SeriesModel) iSeriesData);
+        public bool AddSeries(SeriesModel seriesModel) => addItem(seriesModel); 
 
         public List<string> SeriesSelectionListCreator(AuthorModel author)
         {
@@ -58,7 +49,7 @@ namespace pacsw.BookInventory.Models
 
             if (author != null && author.IsValid)
             {
-                string SqlQuery = "SELECT series.idSeries FROM series WHERE series.SeriesName = '" + seriesTitle + "' AND series.AuthorOfSeries = '" + author.AuthorId.ToString() + "';";
+                string SqlQuery = "SELECT series.idSeries FROM series WHERE series.SeriesName = @title AND series.AuthorOfSeries = @authorid;";
 
                 using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
                 {
@@ -72,6 +63,9 @@ namespace pacsw.BookInventory.Models
                             cmd.Connection = conn;
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandText = SqlQuery;
+                            cmd.AddParameter("@title", MySqlDbType.String, seriesTitle)
+                               .AddParameter("@authorid", MySqlDbType.UInt32, author.AuthorId);
+
                             cmd.ExecuteNonQuery();
                             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
                             ResultCount = sda.Fill(Dt);
@@ -99,7 +93,7 @@ namespace pacsw.BookInventory.Models
 
             if (seriesId > 0)
             {
-                string SqlQuery = "SELECT series.SeriesName FROM series WHERE series.idSeries = '" + seriesId + "';";
+                string SqlQuery = "SELECT series.SeriesName FROM series WHERE series.idSeries = @seriesid;";
 
                 using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
                 {
@@ -113,6 +107,8 @@ namespace pacsw.BookInventory.Models
                             cmd.Connection = conn;
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandText = SqlQuery;
+                            cmd.AddParameter("@seriesid", MySqlDbType.UInt32, seriesId);
+
                             cmd.ExecuteNonQuery();
                             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
                             ResultCount = sda.Fill(Dt);
@@ -133,6 +129,19 @@ namespace pacsw.BookInventory.Models
                 return title;
         }
 
+        public SeriesModel GetSeriesModel(uint seriesId)
+        {
+            SeriesModel seriesData = null;
+            DataRow rawSeriesData = GetRawSeriesData(seriesId);
+
+            if (rawSeriesData != null)
+            {
+                seriesData = ConvertDataRowToSeriesModel(rawSeriesData);
+            }
+
+            return seriesData;
+        }
+
         protected override void InitializeSqlCommandParameters()
         {
             AuthorTableModel authorTable = ((App)Application.Current).Model.AuthorTable;
@@ -145,9 +154,56 @@ namespace pacsw.BookInventory.Models
 
         private SeriesModel ConvertDataRowToSeriesModel(DataRow rawSeriesData)
         {
-            SeriesModel seriesModel = null;
+            uint authorId;
+            uint.TryParse(rawSeriesData[seriesAuthorKeyIndex].ToString(), out authorId);
+            string title = rawSeriesData[seriesTitleIndex].ToString();
+
+            AuthorModel author = ((App)Application.Current).Model.AuthorTable.GetAuthorFromId(authorId);
+
+            SeriesModel seriesModel = new SeriesModel(author, title);
 
             return seriesModel;
         }
+
+        private DataRow GetRawSeriesData(uint seriesId)
+        {
+            DataRow rawData = null;
+
+            if (seriesId > 0)
+            {
+                try
+                {
+                    using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
+                    {
+                        string queryString = "SELECT * FROM series WHERE idSeries = @seriesid;";
+                        int ResultCount = 0;
+                        DataTable Dt = new DataTable();
+                        conn.Open();
+                        using (MySqlCommand cmd = new MySqlCommand())
+                        {
+                            cmd.Connection = conn;
+                            cmd.CommandType = CommandType.Text;
+                            cmd.CommandText = queryString;
+                            cmd.AddParameter("@seriesid", MySqlDbType.UInt32, seriesId);
+
+                            MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
+                            ResultCount = sda.Fill(Dt);
+                            if (ResultCount > 0)
+                            {
+                                rawData = Dt.Rows[0];
+                            }
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMsg = "Database Error: " + ex.Message;
+                    MessageBox.Show(errorMsg);
+                }
+            }
+
+            return rawData;
+        }
+
     }
 }

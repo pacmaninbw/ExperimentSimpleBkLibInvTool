@@ -190,6 +190,7 @@
     <Compile Include="Models\IPuchaseInfoModel.cs" />
     <Compile Include="Models\IRatingsModel.cs" />
     <Compile Include="Models\ISeriesModel.cs" />
+    <Compile Include="Models\ModelUtilities.cs" />
     <Compile Include="Models\ObservableModelObject.cs" />
     <Compile Include="Models\OwnerShipModel.cs" />
     <Compile Include="Models\OwnerShipTableModel.cs" />
@@ -232,8 +233,8 @@
     <Compile Include="Views\CategoriesTableView.xaml.cs">
       <DependentUpon>CategoriesTableView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditBookDlg2.xaml.cs">
-      <DependentUpon>EditBookDlg2.xaml</DependentUpon>
+    <Compile Include="Views\EditBookDlg.xaml.cs">
+      <DependentUpon>EditBookDlg.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\FormatTableView.xaml.cs">
       <DependentUpon>FormatTableView.xaml</DependentUpon>
@@ -320,7 +321,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditBookDlg2.xaml">
+    <Page Include="Views\EditBookDlg.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

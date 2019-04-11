@@ -236,6 +236,7 @@ namespace pacsw.BookInventory.Models
 
             _bookInfo = TheModel.BookInfoTable.GetBookInfo(_authorInfo.AuthorId, _bookInfo.TitleId, _bookInfo.FormatId);
             _bookKey = _bookInfo.BookID;
+            _seriesInfo = TheModel.SeriesTable.GetSeriesModel(_bookInfo.SeriesId);
 
             if (_bookKey > 0)
             {

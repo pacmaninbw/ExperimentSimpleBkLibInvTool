@@ -11,6 +11,7 @@ namespace pacsw.BookInventory.Models
             get { return _author; }
             set {
                 _author = value;
+                _authorId = _author.AuthorId;
                 SetParameterValue("First Name", _author.FirstName);
                 SetParameterValue("Last Name", _author.LastName);
             }
@@ -33,21 +34,14 @@ namespace pacsw.BookInventory.Models
         public SeriesModel(AuthorModel author)
             : base(((App)Application.Current).Model.SeriesTable)
         {
-            InitAuthorDetails(author);
+            Author = author;
         }
 
         public SeriesModel(AuthorModel author, string title)
             : base(((App)Application.Current).Model.SeriesTable)
         {
-            InitAuthorDetails(author);
-            SetParameterValue("Series Title", title);
-        }
-
-        private void InitAuthorDetails(AuthorModel author)
-        {
-            _author = author;
-            SetParameterValue("First Name", _author.FirstName);
-            SetParameterValue("Last Name", _author.LastName);
+            Author = author;
+            Title = title;
         }
 
         protected override bool _dataIsValid()

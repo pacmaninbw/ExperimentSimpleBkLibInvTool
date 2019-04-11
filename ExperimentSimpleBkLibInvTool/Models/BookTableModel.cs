@@ -12,13 +12,8 @@ namespace pacsw.BookInventory.Models
             get { return DataTable; }
         }
 
-        public BookTableModel() : base("bookinfo", "getallbooks", "") //"addBookToLibrary")
+        public BookTableModel() : base("bookinfo", "getallbooks")
         {
-        }
-
-        public bool AddBook(BookModel NewBook)
-        {
-            return false;// addItem(NewBook);
         }
 
         public uint InsertTitleIfNotInTable(string title)
@@ -62,7 +57,7 @@ namespace pacsw.BookInventory.Models
         public uint GetTitleKey(string title)
         {
             uint titleKey = 0;
-            string SqlQuery = "SELECT title.idTitle FROM title WHERE title.TitleStr = '" + title + "';";
+            string SqlQuery = "SELECT title.idTitle FROM title WHERE title.TitleStr = @title;";
 
             using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
             {
@@ -76,6 +71,8 @@ namespace pacsw.BookInventory.Models
                         cmd.Connection = conn;
                         cmd.CommandType = CommandType.Text;
                         cmd.CommandText = SqlQuery;
+                        cmd.AddParameter("@title", MySqlDbType.String, title);
+
                         cmd.ExecuteNonQuery();
                         MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
                         ResultCount = sda.Fill(Dt);
@@ -99,7 +96,7 @@ namespace pacsw.BookInventory.Models
         public string GetTitle(uint titleKey)
         {
             string title = "";
-            string SqlQuery = "SELECT title.TitleStr FROM title WHERE title.idTitle = " + titleKey.ToString() + ";";
+            string SqlQuery = "SELECT title.TitleStr FROM title WHERE title.idTitle = @titleid;";
 
             using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
             {
@@ -113,6 +110,8 @@ namespace pacsw.BookInventory.Models
                         cmd.Connection = conn;
                         cmd.CommandType = CommandType.Text;
                         cmd.CommandText = SqlQuery;
+                        cmd.AddParameter("@titleid", MySqlDbType.UInt32, titleKey);
+
                         cmd.ExecuteNonQuery();
                         MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
                         ResultCount = sda.Fill(Dt);

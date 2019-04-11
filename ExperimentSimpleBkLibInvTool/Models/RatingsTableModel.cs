@@ -18,31 +18,17 @@ namespace pacsw.BookInventory.Models
             GoodReadsRatingsColumnIndex = GetDBColumnData("GoodReadsRatings").IndexBasedOnOrdinal;
         }
 
-        public DataTable PublishInfoTable { get { return DataTable; } }
+        public DataTable PublishInfoTable =>DataTable;
 
         public bool AddRatings(RatingsModel ratings)
         {
-            if (ratings.BookId > 0)
-            {
-                return addItem(ratings);
-            }
-            else
-            {
-                return false;
-            }
+            return (ratings.BookId > 0) ? addItem(ratings) : false;
         }
 
         public RatingsModel GetRatingsData(uint bookId)
         {
-            RatingsModel ratingsData = null;
             DataRow rawRatingsData = GetRawData(bookId);
-
-            if (rawRatingsData != null)
-            {
-                ratingsData = ConvertDataRowToRatingsModel(rawRatingsData);
-            }
-
-            return ratingsData;
+            return (rawRatingsData != null) ? ConvertDataRowToRatingsModel(rawRatingsData) : null;
         }
 
         protected override void InitializeSqlCommandParameters()

@@ -19,27 +19,13 @@ namespace pacsw.BookInventory.Models
 
         public bool AddVolumeInSeries(VolumeInSeries volumeInSeries)
         {
-            if (volumeInSeries.BookId > 0)
-            {
-                return addItem(volumeInSeries);
-            }
-            else
-            {
-                return false;
-            }
+            return (volumeInSeries.BookId > 0) ? addItem(volumeInSeries) : false;
         }
 
         public VolumeInSeries GetVolumneInSersData(uint bookId)
         {
-            VolumeInSeries volumeInSeries = null;
             DataRow rawVolumeInSeries = GetRawData(bookId);
-
-            if (rawVolumeInSeries != null)
-            {
-                volumeInSeries = ConvertDataRowToVolumeInSeries(rawVolumeInSeries);
-            }
-
-            return volumeInSeries;
+            return (rawVolumeInSeries != null) ? ConvertDataRowToVolumeInSeries(rawVolumeInSeries) : null;
         }
 
         protected override void InitializeSqlCommandParameters()

@@ -10,7 +10,7 @@ namespace pacsw.BookInventory.Views
     /// <summary>
     /// Interaction logic for EditBookDlg2.xaml
     /// </summary>
-    public partial class EditBookDlg2 : Window
+    public partial class EditBookDlg : Window
     {
         private OwnerShipModel owned;
         private ConditionsAndOtherOptionsModel options;
@@ -20,11 +20,9 @@ namespace pacsw.BookInventory.Views
 
         public BookModel ThisBook { get; set; }
 
-        public EditBookDlg2()
+        public EditBookDlg()
         {
             InitializeComponent();
-            InitConditionSelection();
-            InitStatusSelection();
             Loaded += new RoutedEventHandler(LoadPreviousValues);
             // The owned and options data is edited in the main editor and requires different handling
             // from the other data that is edited in it's own popup editor.
@@ -86,6 +84,8 @@ namespace pacsw.BookInventory.Views
 
         private void LoadPreviousOptionValues()
         {
+            InitConditionSelection();
+            InitStatusSelection();
             ChkBx_SignedByAuthor.IsChecked = options.SignedByAuthor;
             ChkBx_BookWasRead.IsChecked = options.Read;
             TXTBX_PhyscalDescription.Text = options.PhysicalCondition;
@@ -197,8 +197,31 @@ namespace pacsw.BookInventory.Views
                     {
                         LB_SeriesSelector.Items.Add(title);
                     }
+
+                    if (ThisBook.SeriesInfo != null)
+                    {
+                        SetPreviouslySelectedSeries(seriesTitles);
+                    }
                 }
             }
+        }
+
+        private void SetPreviouslySelectedSeries(List<string> seriesTitles)
+        {
+            LB_SeriesSelector.SelectionChanged -= new SelectionChangedEventHandler(LB_SeriesSelector_SelectionChanged);
+
+            string selectedSeries = ThisBook.SeriesInfo.Title;
+            int idx = 0;
+            foreach (string title in seriesTitles)
+            {
+                if (title.CompareTo(selectedSeries) == 0)
+                {
+                    LB_SeriesSelector.SelectedIndex = idx;
+                }
+                idx++;
+            }
+
+            LB_SeriesSelector.SelectionChanged += new SelectionChangedEventHandler(LB_SeriesSelector_SelectionChanged);
         }
 
         #endregion
@@ -246,12 +269,30 @@ namespace pacsw.BookInventory.Views
 
         private void InitConditionSelection()
         {
+            //CreateOptionsIfDoesntExist();
             List<string> conditions = ((App)Application.Current).Model.ConditionsTable.ListBoxSelectionList();
             LB_ConditionSelector.DataContext = conditions;
             LB_ConditionSelector.Items.Clear();
             foreach (string condition in conditions)
             {
                 LB_ConditionSelector.Items.Add(condition);
+            }
+
+            if (options != null && !string.IsNullOrEmpty(ThisBook.ConditionsAndOptions.Condition))
+            {
+                LB_ConditionSelector.SelectionChanged -= new SelectionChangedEventHandler(LB_ConditionSelector_SelectionChanged);
+
+                int index = 0;
+                foreach (string status in conditions)
+                {
+                    if (options.Condition.CompareTo(status) == 0)
+                    {
+                        LB_ConditionSelector.SelectedIndex = index;
+                    }
+                    index++;
+                }
+
+                LB_ConditionSelector.SelectionChanged -= new SelectionChangedEventHandler(LB_ConditionSelector_SelectionChanged);
             }
         }
 
@@ -272,12 +313,30 @@ namespace pacsw.BookInventory.Views
 
         private void InitStatusSelection()
         {
+            //CreateOptionsIfDoesntExist();
             List<string> statuses = ((App)Application.Current).Model.StatusTable.ListBoxSelectionList();
             LB_StatusSelector.DataContext = statuses;
             LB_StatusSelector.Items.Clear();
             foreach (string status in statuses)
             {
                 LB_StatusSelector.Items.Add(status);
+            }
+
+            if (options != null && !string.IsNullOrEmpty(options.Status))
+            {
+                LB_StatusSelector.SelectionChanged -= new SelectionChangedEventHandler(LB_StatusSelector_SelectionChanged);
+
+                int index = 0;
+                foreach (string status in statuses)
+                {
+                    if (options.Status.CompareTo(status) == 0)
+                    {
+                        LB_StatusSelector.SelectedIndex = index;
+                    }
+                    index++;
+                }
+
+                LB_StatusSelector.SelectionChanged -= new SelectionChangedEventHandler(LB_StatusSelector_SelectionChanged);
             }
         }
 

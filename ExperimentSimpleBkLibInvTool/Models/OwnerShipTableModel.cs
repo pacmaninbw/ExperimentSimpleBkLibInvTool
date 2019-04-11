@@ -21,32 +21,18 @@ namespace pacsw.BookInventory.Models
             WishListColumnIndex = GetDBColumnData("IsWishListed").IndexBasedOnOrdinal;
         }
 
-        public DataTable OwnerShipTable { get { return DataTable; } }
+        public DataTable OwnerShipTable => DataTable;
 
         public bool AddOwnerShipData(IOwnerShipModel ownerShipData)
         {
             OwnerShipModel ownerShipModel = (OwnerShipModel)ownerShipData;
-            if (ownerShipModel.BookId > 0)
-            {
-                return addItem(ownerShipModel);
-            }
-            else
-            {
-                return false;
-            }
+            return (ownerShipModel.BookId > 0) ? addItem(ownerShipModel) : false;
         }
 
         public OwnerShipModel GetOwnerShipModel(uint bookId)
         {
             DataRow rawOwnerShipModel = GetRawData(bookId);
-            OwnerShipModel ownerShipModel = null;
-
-            if (rawOwnerShipModel != null)
-            {
-                ownerShipModel = ConvertDataRowToOwnerShipModel(rawOwnerShipModel);
-            }
-
-            return ownerShipModel;
+            return (rawOwnerShipModel != null) ? ConvertDataRowToOwnerShipModel(rawOwnerShipModel) : null ;
         }
 
         protected override void InitializeSqlCommandParameters()

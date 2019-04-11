@@ -18,7 +18,7 @@ namespace pacsw.BookInventory.Models
             EstimatedValueColumnIndex = GetDBColumnData("EstimatedValue").IndexBasedOnOrdinal;
         }
 
-        public DataTable ForSaleTable { get { return DataTable; } }
+        public DataTable ForSaleTable => DataTable;
 
         public bool AddForSaleData(IForSaleModel forSaleData)
         {

@@ -21,32 +21,18 @@ namespace pacsw.BookInventory.Models
             ListPriceColumnIndex = GetDBColumnData("ListPrice").IndexBasedOnOrdinal;
         }
 
-        public DataTable PurchaseInfoTable { get { return DataTable; } }
+        public DataTable PurchaseInfoTable => DataTable;
 
         public bool AddPurchaseInfo(IPuchaseInfoModel purchaseData)
         {
             PuchaseInfoModel purchaseInfoModel = (PuchaseInfoModel)purchaseData;
-            if (purchaseInfoModel.BookId > 0)
-            {
-                return addItem(purchaseInfoModel);
-            }
-            else
-            {
-                return false;
-            }
+            return (purchaseInfoModel.BookId > 0) ? addItem(purchaseInfoModel) : false;
         }
 
         public PuchaseInfoModel GetPuchaseInfo(uint bookId)
         {
-            PuchaseInfoModel purchasingData = null;
             DataRow rawPurchasingData = GetRawData(bookId);
-
-            if (rawPurchasingData != null)
-            {
-                purchasingData = ConvertDataRowToPurchaseInfoModel(rawPurchasingData);
-            }
-
-            return purchasingData;
+            return (rawPurchasingData != null) ? ConvertDataRowToPurchaseInfoModel(rawPurchasingData) : null;
         }
 
         protected override void InitializeSqlCommandParameters()

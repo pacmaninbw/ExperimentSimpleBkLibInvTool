@@ -9,22 +9,11 @@ namespace pacsw.BookInventory.Models
         {
         }
 
-        public DataTable FormatTable { get { return DataTable; } }
+        public DataTable FormatTable => DataTable;
 
-        public string FormatTitle(uint Key)
-        {
-            return KeyToName(Key);
-        }
-
-        public uint FormatKey(string FormatTitle)
-        {
-            return NameToKey(FormatTitle);
-        }
-
-        public void AddFormat(FormatModel Format)
-        {
-            AddItemToDictionary(Format);
-        }
+        public string FormatTitle(uint Key) => KeyToName(Key);
+        public uint FormatKey(string FormatTitle) => NameToKey(FormatTitle);
+        public void AddFormat(FormatModel Format) => AddItemToDictionary(Format);
 
         protected override void InitializeSqlCommandParameters()
         {

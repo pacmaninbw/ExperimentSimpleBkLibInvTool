@@ -25,32 +25,18 @@ namespace pacsw.BookInventory.Models
             OutOfPrintColumnIndex = GetDBColumnData("OutOfPrint").IndexBasedOnOrdinal;
         }
 
-        public DataTable PublishInfoTable { get { return DataTable; } }
+        public DataTable PublishInfoTable => DataTable;
 
         public bool AddPublishingInfo(IPublishInfoModel PublishingData, uint bookId = 0)
         {
             PublishInfoModel publishInfoModel = (PublishInfoModel)PublishingData;
-            if (publishInfoModel.BookId > 0)
-            {
-                return addItem(publishInfoModel);
-            }
-            else
-            {
-                return false;
-            }
+            return (publishInfoModel.BookId > 0) ? addItem(publishInfoModel) : false;
         }
 
         public PublishInfoModel GetPublishInfo(uint bookId)
         {
-            PublishInfoModel publishData = null;
             DataRow rawPublishingData = GetRawData(bookId);
-
-            if (rawPublishingData != null)
-            {
-                publishData = ConvertDataRowToPublishInfoModel(rawPublishingData);
-            }
-
-            return publishData;
+            return (rawPublishingData != null) ? ConvertDataRowToPublishInfoModel(rawPublishingData) : null;
         }
 
         protected override void InitializeSqlCommandParameters()

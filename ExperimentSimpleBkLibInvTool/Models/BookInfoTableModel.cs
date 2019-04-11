@@ -119,13 +119,16 @@ namespace pacsw.BookInventory.Models
                     using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
                     {
 
-                        string SqlQuery = "SELECT bookinfo.idBookInfo FROM BookInfo WHERE bookinfo.AuthorFKbi = '" + authorId + "' AND bookinfo.TitleFKbi = '" + titleId + "' AND bookinfo.BookFormatFKbi = '" + formatId + "';";
+                        string SqlQuery = "SELECT bookinfo.idBookInfo FROM BookInfo WHERE bookinfo.AuthorFKbi = @authoirid AND bookinfo.TitleFKbi = @titleid AND bookinfo.BookFormatFKbi = @formatid;";
                         conn.Open();
                         using (MySqlCommand cmd = new MySqlCommand())
                         {
                             cmd.Connection = conn;
                             cmd.CommandType = CommandType.Text;
                             cmd.CommandText = SqlQuery;
+                            cmd.AddParameter("@authoirid", MySqlDbType.UInt32, authorId)
+                               .AddParameter("@titleid", MySqlDbType.UInt32, titleId)
+                               .AddParameter("@formatid", MySqlDbType.UInt32, formatId);
 
                             bookId = (uint)cmd.ExecuteScalar();
                         }
