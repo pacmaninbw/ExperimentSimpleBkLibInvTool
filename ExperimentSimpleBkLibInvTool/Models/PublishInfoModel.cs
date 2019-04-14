@@ -51,6 +51,8 @@ namespace pacsw.BookInventory.Models
             Printing = string.Empty;
             Edition = string.Empty;
             OutOfPrint = false;
+
+            Modified = false;       // Initialization is not modification.
         }
 
         public PublishInfoModel(uint bookId, string iSBNumber, string copyRight, string publisher, string printing=null, string edition=null, bool outOfPrint=false)
@@ -63,12 +65,12 @@ namespace pacsw.BookInventory.Models
             Printing = printing;
             Edition = edition;
             OutOfPrint = outOfPrint;
+
+            Modified = false;       // Initialization is not modification.
         }
 
-        public override bool AddToDb()
-        {            
-            return ((App)Application.Current).Model.PublishingData.AddPublishingInfo(this);
-        }
+        public override bool AddToDb() => ((App)Application.Current).Model.PublishingData.AddPublishingInfo(this);
+        public override bool DbUpdate() => ((App)Application.Current).Model.PublishingData.UpdatePublishingInfo(this);
 
         protected override bool _dataIsValid()
         {

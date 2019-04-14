@@ -67,7 +67,7 @@ namespace pacsw.BookInventory.Views
             string format = GetColumnContents(dataGrid, FormatColumnIndex);
             string title = GetColumnContents(dataGrid, TitleColumnIndex);
 
-            _selectedBook = new BookModel();
+            _selectedBook = new BookModel(true);
             _selectedBook.SelectBookForEditOrDelete(lastName, firstName, title, format);
             Btn_DeleteBook.IsEnabled = true;
             Btn_EditBook.IsEnabled = true;

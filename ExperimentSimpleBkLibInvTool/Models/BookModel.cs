@@ -18,8 +18,10 @@ namespace pacsw.BookInventory.Models
         private readonly Model TheModel = ((App)Application.Current).Model;
         private List<DataTableItemBaseModel> _itemsToValidate;
         private List<DataTableItemBaseModel> _itemsToAddToDb;
+        private List<DataTableItemBaseModel> _itemsToUpDate;
 
         private uint _bookKey;
+        private bool _editMode;
 
         private BookInfoModel _bookInfo;
         private AuthorModel _authorInfo;
@@ -33,7 +35,7 @@ namespace pacsw.BookInventory.Models
         private VolumeInSeries _volumeInSeries;
         private Synopsis _synopsis;
 
-        public BookModel()
+        public BookModel(bool EditNotInsert)
         {
             _bookKey = 0;
             _bookInfo = new BookInfoModel();
@@ -49,86 +51,91 @@ namespace pacsw.BookInventory.Models
             _synopsis = null;
             _itemsToValidate = new List<DataTableItemBaseModel>();
             _itemsToAddToDb = new List<DataTableItemBaseModel>();
+            _itemsToUpDate = new List<DataTableItemBaseModel>();
+            _editMode = EditNotInsert;
 
-            _itemsToValidate.Add(_bookInfo);
+            if (!EditNotInsert)
+            {
+                _itemsToValidate.Add(_bookInfo);
+            }
         }
 
         public PublishInfoModel PublishInfo
         {
-            get { return _publishInfo; }
-            set { InsertIntoLists(_publishInfo = value); }
+            get => _publishInfo;
+            set => _publishInfo = IsInsertedIntoLists(_publishInfo, value) ? value : _publishInfo;
         }
 
         public PuchaseInfoModel PuchaseInfo
         {
-            get { return _puchaseInfo; }
-            set { InsertIntoLists(_puchaseInfo = value); }
+            get  => _puchaseInfo;
+            set => _puchaseInfo = (IsInsertedIntoLists(_puchaseInfo, value)) ? value : _puchaseInfo;
         }
 
         public OwnerShipModel Owned
         {
-            get { return _owned; }
-            set { InsertIntoLists(_owned = value); }
+            get => _owned;
+            set => _owned =  IsInsertedIntoLists(_owned, value) ? value : _owned;
         }
 
         public ForSaleModel ForSale
         {
-            get { return _forSale; }
-            set { InsertIntoLists(_forSale = value); }
+            get => _forSale;
+            set => _forSale = IsInsertedIntoLists(_forSale, value) ? value : _forSale;
         }
 
         public AuthorModel AuthorInfo
         {
-            get { return _authorInfo; }
-            set { SetAuthorValues(value); }
+            get => _authorInfo;
+            set => SetAuthorValues(value);
         }
 
         public SeriesModel SeriesInfo
         {
-            get { return _seriesInfo; }
-            set { SetSeriesValues(value); }
+            get => _seriesInfo;
+            set => SetSeriesValues(value);
         }
 
         public RatingsModel Ratings
         {
-            get { return _ratings; }
-            set { InsertIntoLists(_ratings = value); }
+            get => _ratings;
+            set => _ratings = IsInsertedIntoLists(_ratings, value) ? value : _ratings;
         }
 
         public ConditionsAndOtherOptionsModel ConditionsAndOptions
         {
-            get { return _optionalItems; }
-            set { InsertIntoLists(_optionalItems = value); }
+            get => _optionalItems;
+            set => _optionalItems = IsInsertedIntoLists(_optionalItems, value) ? value : _optionalItems;
         }
 
         public VolumeInSeries VolumeNumber
         {
-            get { return _volumeInSeries; }
-            set { InsertIntoLists(_volumeInSeries = value); }
+            get => _volumeInSeries;
+            set => _volumeInSeries = IsInsertedIntoLists(_volumeInSeries, value) ? value : _volumeInSeries;
         }
 
         public Synopsis Summary
         {
-            get { return _synopsis; }
-            set { InsertIntoLists(_synopsis = value); }
+            get => _synopsis;
+            set => _synopsis = IsInsertedIntoLists(_synopsis, value) ? value : _synopsis;
         }
 
         public string Genre
         {
             get { return TheModel.CategoryTable.CategoryTitle(_bookInfo.GenreId); ; }
-            set { _bookInfo.GenreId = TheModel.CategoryTable.CategoryKey(value); }
+            set => _bookInfo.GenreId = TheModel.CategoryTable.CategoryKey(value);
         }
 
         public string Title
         {
-            get { return TheModel.BookTable.GetTitle(_bookInfo.TitleId); }
-            set { _bookInfo.TitleId = TheModel.BookTable.InsertTitleIfNotInTable(value); }
+            get => TheModel.BookTable.GetTitle(_bookInfo.TitleId);
+            set => _bookInfo.TitleId = TheModel.BookTable.InsertTitleIfNotInTable(value);
         }
 
         public string Format
         {
-            get { return TheModel.FormatTable.FormatTitle(_bookInfo.FormatId); }
-            set { _bookInfo.FormatId = TheModel.FormatTable.FormatKey(value); }
+            get => TheModel.FormatTable.FormatTitle(_bookInfo.FormatId);
+            set => _bookInfo.FormatId = TheModel.FormatTable.FormatKey(value);
         }
 
         public bool AddBookToLibrary()
@@ -176,22 +183,22 @@ namespace pacsw.BookInventory.Models
 
             try
             {
-                if (success)
+                if (success && _bookKey > 0)
                 {
-                    if (success = _bookInfo.AddToDb())
+                    foreach (DataTableItemBaseModel item in _itemsToAddToDb)
                     {
-                        _bookKey = _bookInfo.BookID;
-                        if (_seriesInfo != null && _volumeInSeries != null)
+                        success = AddToDb(success, item);
+                        if (!success)
                         {
-                            _volumeInSeries.SeriesId = _bookInfo.SeriesId;
+                            break;
                         }
                     }
 
-                    if (_bookKey > 0)
+                    if (success)
                     {
-                        foreach (DataTableItemBaseModel item in _itemsToAddToDb)
+                        foreach (DataTableItemBaseModel item in _itemsToUpDate)
                         {
-                            success = AddToDb(success, item);
+                            success = DbUpdate(success, item);
                             if (!success)
                             {
                                 break;
@@ -237,6 +244,7 @@ namespace pacsw.BookInventory.Models
             _bookInfo = TheModel.BookInfoTable.GetBookInfo(_authorInfo.AuthorId, _bookInfo.TitleId, _bookInfo.FormatId);
             _bookKey = _bookInfo.BookID;
             _seriesInfo = TheModel.SeriesTable.GetSeriesModel(_bookInfo.SeriesId);
+            _itemsToValidate.Add(_bookInfo);
 
             if (_bookKey > 0)
             {
@@ -295,6 +303,17 @@ namespace pacsw.BookInventory.Models
             return success;
         }
 
+        private bool DbUpdate(bool success, DataTableItemBaseModel item)
+        {
+            if (success && item != null)
+            {
+                item.BookId = _bookKey;
+                success = item.DbUpdate();
+            }
+
+            return success;
+        }
+
         private bool ValidityTest(DataTableItemBaseModel item, bool isValid)
         {
             if (isValid)
@@ -308,24 +327,52 @@ namespace pacsw.BookInventory.Models
             return isValid;
         }
 
-        private void InsertIntoLists(DataTableItemBaseModel item)
+        private bool IsInsertedIntoLists(DataTableItemBaseModel localItem, DataTableItemBaseModel incomingItem)
         {
-            _itemsToValidate.Add(item);
-            _itemsToAddToDb.Add(item);
+            if (!_editMode)
+            {
+                localItem = incomingItem;
+                _itemsToAddToDb.Add(localItem);
+                _itemsToValidate.Add(localItem);
+                return true;
+            }
+            else
+            {
+                if (localItem == incomingItem)
+                {
+                    MessageBox.Show("Local Item and Incoming Item are same item");
+                }
+                bool localItemWasNull = localItem == null;
+                if (localItemWasNull || (!localItem.Modified && incomingItem.Modified))
+                {
+                    localItem = incomingItem;
+                    _itemsToValidate.Add(localItem);
+                    if (localItemWasNull)
+                    {
+                        _itemsToAddToDb.Add(localItem);
+                    }
+                    else
+                    {
+                        _itemsToUpDate.Add(localItem);
+                    }
+                    return true;
+                }
+                return false;
+            }
         }
 
         // When the user selects a book in the grid, all parts of the aggregation
         // that exist are added to the book model.
         private void FillBookModelWithExistingData(uint bookKey)
         {
-            ConditionsAndOptions = TheModel.ConditionsAndOptions.GetConditionsAndOtherOptions(bookKey);
-            ForSale = TheModel.ForSaleTable.GetForSaleModel(bookKey);
-            Owned = TheModel.OwnerShip.GetOwnerShipModel(bookKey);
-            PublishInfo = TheModel.PublishingData.GetPublishInfo(bookKey);
-            PuchaseInfo = TheModel.PurchaseData.GetPuchaseInfo(bookKey);
-            Ratings = TheModel.RatingsTable.GetRatingsData(bookKey);
-            VolumeNumber = TheModel.VolumeInSeriesTable.GetVolumneInSersData(bookKey);
-            Summary = TheModel.SynopsisTable.GetSynopsisData(bookKey);
+            _optionalItems = TheModel.ConditionsAndOptions.GetConditionsAndOtherOptions(bookKey);
+            _forSale = TheModel.ForSaleTable.GetForSaleModel(bookKey);
+            _owned = TheModel.OwnerShip.GetOwnerShipModel(bookKey);
+            _publishInfo = TheModel.PublishingData.GetPublishInfo(bookKey);
+            _puchaseInfo = TheModel.PurchaseData.GetPuchaseInfo(bookKey);
+            _ratings = TheModel.RatingsTable.GetRatingsData(bookKey);
+            _volumeInSeries = TheModel.VolumeInSeriesTable.GetVolumneInSersData(bookKey);
+            _synopsis = TheModel.SynopsisTable.GetSynopsisData(bookKey);
         }
 
         private bool ConfirmDeleteBook()

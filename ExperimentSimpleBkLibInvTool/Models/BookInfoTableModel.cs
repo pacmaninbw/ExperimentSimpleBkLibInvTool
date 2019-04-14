@@ -42,7 +42,7 @@ namespace pacsw.BookInventory.Models
             bool addBookWasSuccessful = false;
 
             addBookWasSuccessful = addItem(bookInfo);
-            bookInfo.setBookId(_newKeyValue);
+            bookInfo.BookId = _newKeyValue;
 
             return addBookWasSuccessful;
         }

@@ -29,12 +29,12 @@ namespace pacsw.BookInventory.Models
             AskingPrice = askingPrice;
             EstimatedValue = estimatedPrice;
             IsForSale = isForSale;
+
+            Modified = false;       // Initialization is not modification.
         }
 
-        public override bool AddToDb()
-        {
-            return ((App)Application.Current).Model.ForSaleTable.AddForSaleData(this);
-        }
+        public override bool AddToDb() => ((App)Application.Current).Model.ForSaleTable.AddForSaleData(this);
+        public override bool DbUpdate() => ((App)Application.Current).Model.ForSaleTable.UpdateForSaleData(this);
 
         protected override bool _dataIsValid()
         {

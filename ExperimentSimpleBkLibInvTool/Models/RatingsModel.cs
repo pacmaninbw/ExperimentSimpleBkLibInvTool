@@ -30,12 +30,12 @@ namespace pacsw.BookInventory.Models
             MyRating = myRating;
             AmazonRating = amazonRating;
             GoodReadsRating = goodReadsRating;
+
+            Modified = false;       // Initialization is not modification.
         }
 
-        public override bool AddToDb()
-        {
-            return ((App)Application.Current).Model.RatingsTable.AddRatings(this);
-        }
+        public override bool AddToDb() => ((App)Application.Current).Model.RatingsTable.AddRatings(this);
+        public override bool DbUpdate() => ((App)Application.Current).Model.RatingsTable.UpdateRatings(this);
 
         protected override bool _dataIsValid()
         {

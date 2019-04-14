@@ -25,13 +25,10 @@ namespace pacsw.BookInventory.Models
             DodColumnIntex = GetDBColumnData("YearOfDeath").IndexBasedOnOrdinal;
         }
 
-        public bool AddAuthor(AuthorModel NewAuthor)
-        {
-            return addItem(NewAuthor);
-        }
+        public bool AddAuthor(AuthorModel NewAuthor) => addItem(NewAuthor);
+        public bool UpdateAuthor(AuthorModel NewAuthor) => updateItem(NewAuthor);
 
-
-#region Author Selector tool support
+        #region Author Selector tool support
 
         public DataRow[] FindAuthors(string lastName, string firstname=null)
         {

@@ -21,6 +21,8 @@ namespace pacsw.BookInventory.Models
         {
             IsOwned = isOwned;
             IsWishListed = isWishListed;
+
+            Modified = false;       // Initialization is not modification.
         }
 
         public OwnerShipModel(uint bookId, bool isOwned = true, bool isWishListed = false)
@@ -29,16 +31,13 @@ namespace pacsw.BookInventory.Models
             BookId = bookId;
             IsOwned = isOwned;
             IsWishListed = isWishListed;
+
+            Modified = false;       // Initialization is not modification.
         }
 
-        protected override bool _dataIsValid()
-        {
-            return true;    // No required fields
-        }
+        public override bool AddToDb() => ((App)Application.Current).Model.OwnerShip.AddOwnerShipData(this);
+        public override bool DbUpdate() => ((App)Application.Current).Model.OwnerShip.UpdateOwnerShipData(this);
 
-        public override bool AddToDb()
-        {
-            return ((App)Application.Current).Model.OwnerShip.AddOwnerShipData(this);
-        }
+        protected override bool _dataIsValid() => true;     // No Required fields
     }
 }

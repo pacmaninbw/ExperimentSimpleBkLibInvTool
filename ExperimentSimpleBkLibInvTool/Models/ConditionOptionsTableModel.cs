@@ -24,23 +24,13 @@ namespace pacsw.BookInventory.Models
         }
 
         public DataTable OptionsTable { get { return DataTable; } }
-
-        public bool AddConditionsAndOptions(ConditionsAndOtherOptionsModel conditionsAndOtherOptions)
-        {
-            return addItem(conditionsAndOtherOptions);
-        }
+        public bool AddConditionsAndOptions(ConditionsAndOtherOptionsModel conditionsAndOtherOptions) => addItem(conditionsAndOtherOptions);
+        public bool UpdateConditionsAndOptions(ConditionsAndOtherOptionsModel conditionsAndOtherOptions) => updateItem(conditionsAndOtherOptions);
 
         public ConditionsAndOtherOptionsModel GetConditionsAndOtherOptions(uint bookId)
         {
             DataRow rawConditionsAndOptions = GetRawData(bookId);
-            ConditionsAndOtherOptionsModel conditionsAndOtherOptions = null;
-
-            if (rawConditionsAndOptions != null)
-            {
-                conditionsAndOtherOptions = ConvertDataRowConditionsAndOptions(rawConditionsAndOptions);
-            }
-
-            return conditionsAndOtherOptions;
+            return (rawConditionsAndOptions != null) ? ConvertDataRowConditionsAndOptions(rawConditionsAndOptions) : null;
         }
 
         protected override void InitializeSqlCommandParameters()

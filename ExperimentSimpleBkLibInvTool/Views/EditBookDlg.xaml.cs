@@ -16,10 +16,6 @@ namespace pacsw.BookInventory.Views
         private ConditionsAndOtherOptionsModel options;
         private VolumeInSeries volumeInSeries;
 
-        private bool ownedIsDirty;
-        private bool optionsIsDirty;
-        private bool volumeInSeriesIsDirty;
-
         public BookModel ThisBook { get; set; }
 
         public EditBookDlg()
@@ -31,24 +27,21 @@ namespace pacsw.BookInventory.Views
             owned = null;
             options = null;
             volumeInSeries = null;
-            ownedIsDirty = false;
-            optionsIsDirty = false;
-            volumeInSeriesIsDirty = false;
         }
 
         private void Btn_EditBookSave_Click(object sender, RoutedEventArgs e)
         {
-            if (ownedIsDirty)
+            if (owned.Modified)
             {
                 ThisBook.Owned = owned;
             }
 
-            if (optionsIsDirty)
+            if (options.Modified)
             {
                 ThisBook.ConditionsAndOptions = options;
             }
 
-            if (volumeInSeriesIsDirty)
+            if (volumeInSeries.Modified)
             {
                 ThisBook.VolumeNumber = volumeInSeries;
             }
@@ -247,7 +240,6 @@ namespace pacsw.BookInventory.Views
 
         private void CreateOwnedIfDoesntExist()
         {
-            ownedIsDirty = true;
             if (owned == null)
             {
                 owned = new OwnerShipModel(false);
@@ -321,7 +313,6 @@ namespace pacsw.BookInventory.Views
 
         private void CreateOptionsIfDoesntExist()
         {
-            optionsIsDirty = true;
             if (options == null)
             {
                 options = new ConditionsAndOtherOptionsModel();
@@ -375,7 +366,6 @@ namespace pacsw.BookInventory.Views
             {
                 volumeInSeries.VolumeNumber = tmpVolumeNumber;
                 TXTBX_VolumeInSeries.Background = Brushes.White;
-                volumeInSeriesIsDirty = true;
             }
             else
             {

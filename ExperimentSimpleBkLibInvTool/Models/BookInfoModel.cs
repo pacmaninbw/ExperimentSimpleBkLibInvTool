@@ -13,6 +13,7 @@ namespace pacsw.BookInventory.Models
             AuthorId = authorId;
             SeriesId = seriesId;
             FormatId = formatId;
+            Modified = false;       // Initialization is not modification.
         }
 
         public BookInfoModel(uint bookId, uint genre = 0, uint titleId = 0, uint authorId = 0, uint seriesId = 0, uint formatId = 0)
@@ -24,6 +25,7 @@ namespace pacsw.BookInventory.Models
             AuthorId = authorId;
             SeriesId = seriesId;
             FormatId = formatId;
+            Modified = false;       // Initialization is not modification.
         }
 
         public uint BookID {
@@ -63,6 +65,11 @@ namespace pacsw.BookInventory.Models
             BookID = ((App)Application.Current).Model.BookInfoTable.NewKeyValue;
 
             return wasAdded;
+        }
+
+        public override bool DbUpdate()
+        {
+            throw new System.NotImplementedException();
         }
 
         protected override bool _dataIsValid()

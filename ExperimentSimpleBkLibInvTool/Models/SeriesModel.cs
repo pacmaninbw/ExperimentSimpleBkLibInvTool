@@ -24,24 +24,12 @@ namespace pacsw.BookInventory.Models
 
         public uint AuthorId { get { return _authorId; } }
 
-        public SeriesModel()
-            : base(((App)Application.Current).Model.SeriesTable)
-        {
-            _author = null;
-            _authorId = 0;
-        }
-
-        public SeriesModel(AuthorModel author)
-            : base(((App)Application.Current).Model.SeriesTable)
-        {
-            Author = author;
-        }
-
-        public SeriesModel(AuthorModel author, string title)
+        public SeriesModel(AuthorModel author = null, string title = null)
             : base(((App)Application.Current).Model.SeriesTable)
         {
             Author = author;
             Title = title;
+            Modified = false;       // Initialization is not modification.
         }
 
         protected override bool _dataIsValid()
@@ -64,9 +52,7 @@ namespace pacsw.BookInventory.Models
             return dataIsValid;
         }
 
-        public override bool AddToDb()
-        {
-            return ((App)Application.Current).Model.SeriesTable.AddSeries(this);
-        }
+        public override bool AddToDb() => ((App)Application.Current).Model.SeriesTable.AddSeries(this);
+        public override bool DbUpdate() => ((App)Application.Current).Model.SeriesTable.UpdateSeries(this);
     }
 }

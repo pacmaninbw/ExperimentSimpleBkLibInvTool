@@ -22,11 +22,8 @@ namespace pacsw.BookInventory.Models
         }
 
         public DataTable PurchaseInfoTable => DataTable;
-
-        public bool AddPurchaseInfo(PuchaseInfoModel purchaseInfoModel)
-        {
-            return (purchaseInfoModel.BookId > 0) ? addItem(purchaseInfoModel) : false;
-        }
+        public bool AddPurchaseInfo(PuchaseInfoModel purchaseInfoModel) => (purchaseInfoModel.BookId > 0) ? addItem(purchaseInfoModel) : false;
+        public bool UpdatePurchaseInfo(PuchaseInfoModel purchaseInfoModel) => (purchaseInfoModel.BookId > 0) ? updateItem(purchaseInfoModel) : false;
 
         public PuchaseInfoModel GetPuchaseInfo(uint bookId)
         {
@@ -51,7 +48,19 @@ namespace pacsw.BookInventory.Models
             string vendor = rawPurchasingData[VendorColumnIndex].ToString();
             string listPrice = rawPurchasingData[ListPriceColumnIndex].ToString();
             string purchasePrice = rawPurchasingData[PricePaidColumnIndex].ToString();
-            DateTime datePurchased = DateTime.Parse(rawPurchasingData[DateOfPurchaseColumnIndex].ToString());
+            string tmpDate = rawPurchasingData[DateOfPurchaseColumnIndex].ToString();
+            DateTime datePurchased = DateTime.Today;
+            if (!string.IsNullOrEmpty(tmpDate))
+            {
+                try
+                {
+                    datePurchased = DateTime.Parse(rawPurchasingData[DateOfPurchaseColumnIndex].ToString());
+                }
+                catch
+                {
+                    datePurchased = DateTime.Today;
+                }
+            }
 
             return new PuchaseInfoModel(bookId, vendor, listPrice, purchasePrice, datePurchased);
         }

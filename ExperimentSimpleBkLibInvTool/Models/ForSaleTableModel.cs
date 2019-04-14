@@ -19,11 +19,8 @@ namespace pacsw.BookInventory.Models
         }
 
         public DataTable ForSaleTable => DataTable;
-
-        public bool AddForSaleData(ForSaleModel forSaleData)
-        {
-            return (forSaleData.BookId > 0) ? addItem(forSaleData) : false;
-        }
+        public bool AddForSaleData(ForSaleModel forSaleData) => (forSaleData.BookId > 0) ? addItem(forSaleData) : false;
+        public bool UpdateForSaleData(ForSaleModel forSaleData) => (forSaleData.BookId > 0) ? updateItem(forSaleData) : false;
 
         public ForSaleModel GetForSaleModel(uint bookId)
         {

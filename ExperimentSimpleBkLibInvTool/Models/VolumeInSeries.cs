@@ -4,19 +4,14 @@ namespace pacsw.BookInventory.Models
 {
     public class VolumeInSeries : DataTableItemBaseModel
     {
-        public VolumeInSeries() :
-            base(((App)Application.Current).Model.VolumeInSeriesTable)
-        {
-            SeriesId = 0;
-            VolumeNumber = 0;
-        }
-
-        public VolumeInSeries(uint bookId, int volumeNumber, uint seriesId = 0) :
+        public VolumeInSeries(uint bookId = 0, int volumeNumber = 0, uint seriesId = 0) :
             base(((App)Application.Current).Model.VolumeInSeriesTable)
         {
             BookId = bookId;
             SeriesId = seriesId;
             VolumeNumber = volumeNumber;
+
+            Modified = false;       // Initialization is not modification.
         }
 
         public int VolumeNumber
@@ -31,10 +26,8 @@ namespace pacsw.BookInventory.Models
             set { SetParameterValue("Series Id", value); }
         }
 
-        public override bool AddToDb()
-        {
-            return ((App)Application.Current).Model.VolumeInSeriesTable.AddVolumeInSeries(this);
-        }
+        public override bool AddToDb() => ((App)Application.Current).Model.VolumeInSeriesTable.AddVolumeInSeries(this);
+        public override bool DbUpdate() => ((App) Application.Current).Model.VolumeInSeriesTable.UpdateVolumeInSeries(this);
 
         protected override bool _dataIsValid()
         {

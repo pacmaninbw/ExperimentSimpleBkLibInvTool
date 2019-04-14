@@ -13,6 +13,7 @@ namespace pacsw.BookInventory.Models
             : base(((App)Application.Current).Model.FormatTable)
         {
             SetParameterValue("Name", FormatName);
+            Modified = false;       // Initialization is not modification.
         }
 
         public string Name
@@ -31,6 +32,11 @@ namespace pacsw.BookInventory.Models
         {
             ((App)Application.Current).Model.FormatTable.AddFormat(this);
             return true;
+        }
+
+        public override bool DbUpdate()
+        {
+            throw new System.NotImplementedException();
         }
 
         protected override bool _dataIsValid()

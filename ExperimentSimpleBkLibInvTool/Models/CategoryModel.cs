@@ -13,6 +13,7 @@ namespace pacsw.BookInventory.Models
             : base(((App)Application.Current).Model.CategoryTable)
         {
             SetParameterValue("Name", CategoryName);
+            Modified = false;       // Initialization is not modification.
         }
 
         public string Name
@@ -38,6 +39,8 @@ namespace pacsw.BookInventory.Models
             ((App)Application.Current).Model.CategoryTable.AddCategory(this);
             return true;
         }
+
+        public override bool DbUpdate() => true;
 
         protected override bool _dataIsValid()
         {

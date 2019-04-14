@@ -25,7 +25,7 @@ namespace pacsw.BookInventory.Views
         public AddBookDlg()
         {
             InitializeComponent();
-            newBook = new BookModel();
+            newBook = new BookModel(false);
             PopulateSeriesSelector();
             InitCategorySelection();
             InitStatusSelection();

@@ -21,6 +21,8 @@ namespace pacsw.BookInventory.Models
             PhysicalCondition = physicalDescription;
             SignedByAuthor = signedByAuthor;
             Read = isRead;
+
+            Modified = false;       // Initialization is not modification.
         }
 
         public string Condition {
@@ -50,10 +52,8 @@ namespace pacsw.BookInventory.Models
             set { SetParameterValue("Read", value); }
         }
 
-        public override bool AddToDb()
-        {
-            return ((App)Application.Current).Model.ConditionsAndOptions.AddConditionsAndOptions(this);
-        }
+        public override bool AddToDb() => ((App)Application.Current).Model.ConditionsAndOptions.AddConditionsAndOptions(this);
+        public override bool DbUpdate() => ((App)Application.Current).Model.ConditionsAndOptions.UpdateConditionsAndOptions(this);
 
         public void Copy(ConditionsAndOtherOptionsModel original)
         {

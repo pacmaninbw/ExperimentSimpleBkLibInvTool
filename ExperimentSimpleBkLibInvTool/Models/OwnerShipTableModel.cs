@@ -22,11 +22,8 @@ namespace pacsw.BookInventory.Models
         }
 
         public DataTable OwnerShipTable => DataTable;
-
-        public bool AddOwnerShipData(OwnerShipModel ownerShipModel)
-        {
-            return (ownerShipModel.BookId > 0) ? addItem(ownerShipModel) : false;
-        }
+        public bool AddOwnerShipData(OwnerShipModel ownerShipModel) => (ownerShipModel.BookId > 0) ? addItem(ownerShipModel) : false;
+        public bool UpdateOwnerShipData(OwnerShipModel ownerShipModel) => (ownerShipModel.BookId > 0) ? updateItem(ownerShipModel) : false;
 
         public OwnerShipModel GetOwnerShipModel(uint bookId)
         {

@@ -27,6 +27,11 @@ namespace pacsw.BookInventory.Models
             return ((App)Application.Current).Model.SynopsisTable.AddSynopsis(this);
         }
 
+        public override bool DbUpdate()
+        {
+            throw new System.NotImplementedException();
+        }
+
         protected override bool _dataIsValid()
         {
             return _defaultIsValid();

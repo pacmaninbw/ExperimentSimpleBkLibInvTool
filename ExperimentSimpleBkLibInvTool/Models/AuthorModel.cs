@@ -43,31 +43,6 @@ namespace pacsw.BookInventory.Models
             AuthorId = 0;
         }
 
-        public AuthorModel(string firstName, string lastName, string middleName=null, string yearOfBirth=null, string yearOfDeath=null)
-            : base(((App)Application.Current).Model.AuthorTable)
-        {
-            errorWasReported = false;
-            AuthorId = 0;
-
-            FirstName = firstName;
-            LastName = lastName;
-
-            if (!string.IsNullOrEmpty(middleName))
-            {
-                MiddleName = middleName;
-            }
-
-            if (!string.IsNullOrEmpty(yearOfBirth))
-            {
-                YearOfBirth = yearOfBirth;
-            }
-
-            if (!string.IsNullOrEmpty(yearOfDeath))
-            {
-                YearOfDeath = yearOfDeath;
-            }
-        }
-
         public AuthorModel(string idAuthor, string firstName, string lastName, string middleName = null, string yearOfBirth = null, string yearOfDeath = null)
             : base(((App)Application.Current).Model.AuthorTable)
         {
@@ -94,12 +69,12 @@ namespace pacsw.BookInventory.Models
             {
                 YearOfDeath = yearOfDeath;
             }
+
+            Modified = false;       // Initialization is not modification.
         }
 
-        public override bool AddToDb()
-        {
-            return ((App)Application.Current).Model.AuthorTable.AddAuthor(this);
-        }
+        public override bool AddToDb() => ((App)Application.Current).Model.AuthorTable.AddAuthor(this);
+        public override bool DbUpdate() => ((App)Application.Current).Model.AuthorTable.UpdateAuthor(this);
 
         private void SetFirstName(string textBoxInput)
         {

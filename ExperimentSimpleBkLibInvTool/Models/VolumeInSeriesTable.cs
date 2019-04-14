@@ -17,10 +17,8 @@ namespace pacsw.BookInventory.Models
             VolumeNumberColumnIndex = GetDBColumnData("VolumeNumber").IndexBasedOnOrdinal;
         }
 
-        public bool AddVolumeInSeries(VolumeInSeries volumeInSeries)
-        {
-            return (volumeInSeries.BookId > 0) ? addItem(volumeInSeries) : false;
-        }
+        public bool AddVolumeInSeries(VolumeInSeries volumeInSeries) =>(volumeInSeries.BookId > 0) ? addItem(volumeInSeries) : false;
+        public bool UpdateVolumeInSeries(VolumeInSeries volumeInSeries) => (volumeInSeries.BookId > 0) ? updateItem(volumeInSeries) : false;
 
         public VolumeInSeries GetVolumneInSersData(uint bookId)
         {

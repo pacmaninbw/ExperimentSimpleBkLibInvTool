@@ -29,19 +29,19 @@ namespace pacsw.BookInventory.Models
         private Dictionary<string, int> _parameterIndexByParameterName;
 
         public bool IsValid { get { return _dataIsValid(); } }
-
         public uint BookId
         {
             get { return GetParameterKValue("ID"); }
-            set { SetParameterValue("ID", value); }
-        }
-
-        public void setBookId(uint BookId)
-        {
-            SetParameterValue("ID", BookId);
+            set
+            {
+                SetParameterValue("ID", value);
+                Modified = true;
+            }
         }
 
         public abstract bool AddToDb();
+        public abstract bool DbUpdate();
+        public bool Modified { get; protected set;  }
 
         protected abstract bool _dataIsValid();
 
@@ -59,6 +59,10 @@ namespace pacsw.BookInventory.Models
             _parameterIndexByParameterName = new Dictionary<string, int>(DBInterfaceModel.ParametersIndexByStoredProcedureName);
             _parameterIndexByDatabaseTableName = new Dictionary<string, int>();
             _parameterIndexByDatabaseTableName = new Dictionary<string, int>(DBInterfaceModel.ParametersIndexByDbColumnName);
+
+            // If a new class is created from this class make sure than any constructor that performs initialization of
+            // parameters sets Modified to false after all the parameters are initialized.
+            Modified = false;
         }
 
         /*
@@ -149,6 +153,7 @@ namespace pacsw.BookInventory.Models
             if (tableIndex >= 0)
             {
                 _sqlCmdParameters[tableIndex].Value = value;
+                Modified = true;
             }
         }
 
@@ -159,6 +164,7 @@ namespace pacsw.BookInventory.Models
             {
                 _sqlCmdParameters[tableIndex].Value = value.ToString();
                 _sqlCmdParameters[tableIndex].KeyValue = value;
+                Modified = true;
             }
         }
 
@@ -168,6 +174,7 @@ namespace pacsw.BookInventory.Models
             if (tableIndex >= 0)
             {
                 _sqlCmdParameters[tableIndex].Value = value.ToString();
+                Modified = true;
             }
         }
 
@@ -177,6 +184,7 @@ namespace pacsw.BookInventory.Models
             if (tableIndex >= 0)
             {
                 _sqlCmdParameters[tableIndex].BValue = value;
+                Modified = true;
             }
         }
 
@@ -212,6 +220,7 @@ namespace pacsw.BookInventory.Models
             if (tableIndex >= 0)
             {
                 _sqlCmdParameters[tableIndex].KeyValue = KeyValue;
+                Modified = true;
             }
         }
 

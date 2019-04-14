@@ -15,13 +15,12 @@ using MySql.Data.MySqlClient;
  */
 namespace pacsw.BookInventory.Models
 {
-    public abstract class CDataTableModel : ObservableModelObject
+    public abstract class CDataTableModel
     {
         protected string _dbConnectionString;
         protected string _getTableStoredProcedureName;
         protected string _addItemStoredProcedureName;
         protected string _updateItemStoredProcedureName;
-        protected string _deleteItemStoredProcedureName;
         protected string _tableName;
         protected uint _newKeyValue;
         protected MySqlParameterCollection _addItemStoredProcedureParameters;
@@ -31,7 +30,9 @@ namespace pacsw.BookInventory.Models
         protected Dictionary<string, int> ParametersIndexedByParameterName;
         private List<SqlCmdParameter> _sqlCmdParameters;
 
+#if false
         public int AddCount { get; private set; }
+#endif
 
         public uint NewKeyValue { get { return _newKeyValue; } }
 
@@ -66,7 +67,6 @@ namespace pacsw.BookInventory.Models
             _getTableStoredProcedureName = GetTableStoredProcedureName;
             _addItemStoredProcedureName = AddItemToTableStoredProcedureName;
             _updateItemStoredProcedureName = UpdateItemStoredProcedureName;
-            _deleteItemStoredProcedureName = DeleteItemStoredProcedureName;
             _dbConnectionString = ConfigurationManager.ConnectionStrings["LibInvToolDBConnStr"].ConnectionString;
             _sqlCmdParameters = new List<SqlCmdParameter>();
             ParametersIndexedByPublicName = new Dictionary<string, int>();
@@ -81,8 +81,9 @@ namespace pacsw.BookInventory.Models
                 InitializeSqlCommandParameters();
                 ValidateParameterCount();
             }
-
+#if false
             AddCount = 0;
+#endif
         }
 
         protected bool addItem(DataTableItemBaseModel NewDataItem)
@@ -96,6 +97,19 @@ namespace pacsw.BookInventory.Models
             }
 
             return canAddItemToTable;
+        }
+
+        protected bool updateItem(DataTableItemBaseModel UpdatedDataItem)
+        {
+            bool canUpdateItemToTable = true;
+
+            canUpdateItemToTable = UpdatedDataItem.IsValid;
+            if (canUpdateItemToTable)
+            {
+                canUpdateItemToTable = dbUpdateItem(UpdatedDataItem);
+            }
+
+            return canUpdateItemToTable;
         }
 
         protected bool _addParametersInOrder(MySqlCommand cmd, DataTableItemBaseModel NewDataItem)
@@ -141,12 +155,14 @@ namespace pacsw.BookInventory.Models
         {
             bool AddItemSuccess = true;
 
+#if false
             AddCount++;
             if (AddCount > 1)
             {
                 MessageBox.Show("AddCount > 1");
                 return true;
             }
+#endif
 
             if (ReportProgrammerError(_addItemStoredProcedureName, "_addItemStoredProcedureName is not set!"))
             {
@@ -173,7 +189,6 @@ namespace pacsw.BookInventory.Models
                             {
                                uint.TryParse(cmd.Parameters[paramtercount].Value.ToString(), out _newKeyValue);
                             }
-                            OnPropertyChanged();
                         }
                         else
                         {
@@ -210,7 +225,6 @@ namespace pacsw.BookInventory.Models
 
                             MySqlDataAdapter sda = new MySqlDataAdapter(cmd);
                             ResultCount = sda.Fill(Dt);
-                            OnPropertyChanged();
                         }
                     }
                 }
@@ -420,5 +434,52 @@ namespace pacsw.BookInventory.Models
 
             return (validCount);
         }
+
+        private bool dbUpdateItem(DataTableItemBaseModel NewDataItem)
+        {
+            bool success = true;
+
+            if (ReportProgrammerError(_updateItemStoredProcedureName, "_updateItemStoredProcedureName is not set!"))
+            {
+                return false;
+            }
+
+            using (MySqlConnection conn = new MySqlConnection(_dbConnectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    using (MySqlCommand cmd = new MySqlCommand())
+                    {
+                        cmd.Connection = conn;
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.CommandText = _updateItemStoredProcedureName;
+                        if (_addParametersInOrder(cmd, NewDataItem))
+                        {
+                            cmd.ExecuteNonQuery();
+                            // Some of the stored procedures return the new key in the last parameter
+                            // in those cases get the returned key so that the new row can be accessed.
+                            int paramtercount = cmd.Parameters.Count - 1;   // indexing starts at 0 ends at count - 1
+                            if (cmd.Parameters[paramtercount].Direction != ParameterDirection.Input)
+                            {
+                                uint.TryParse(cmd.Parameters[paramtercount].Value.ToString(), out _newKeyValue);
+                            }
+                        }
+                        else
+                        {
+                            success = false;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string errorMsg = "Database Error: " + ex.Message;
+                    MessageBox.Show(errorMsg);
+                    success = false;
+                }
+            }
+            return success;
+        }
     }
 }
+
