@@ -14,7 +14,7 @@ namespace pacsw.BookInventory.Models
         private int PublisherColumnIndex;
         private int OutOfPrintColumnIndex;
 
-        public PublishInfoTableModel() : base("publishinginfo", "getPublishingInfo", "addPublishingInfo")
+        public PublishInfoTableModel() : base("publishinginfo", "getPublishingInfo", "addPublishingInfo", "insertOrUpdatePublishing")
         {
             BookIDColumnIndex = GetDBColumnData("BookFKPubI").IndexBasedOnOrdinal;
             ISBNumberColumnIndex = GetDBColumnData("ISBNumber").IndexBasedOnOrdinal;

@@ -10,7 +10,7 @@ namespace pacsw.BookInventory.Models
         private int AskingPriceColumnIndex;
         private int EstimatedValueColumnIndex;
 
-        public ForSaleTableModel() : base("forsale", "getBookForSaleData", "addForSaleDataToBook")
+        public ForSaleTableModel() : base("forsale", "getBookForSaleData", "addForSaleDataToBook", "insertOrUpdateForSale")
         {
             BookIDColumnIndex = GetDBColumnData("BookFKfs").IndexBasedOnOrdinal;
             IsForSaleColumnIndex = GetDBColumnData("IsForSale").IndexBasedOnOrdinal;

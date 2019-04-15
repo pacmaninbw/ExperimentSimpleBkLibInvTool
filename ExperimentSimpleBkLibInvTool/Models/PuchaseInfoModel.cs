@@ -38,7 +38,7 @@ namespace pacsw.BookInventory.Models
             Vendor = string.Empty;
             SetParameterValue("Date of Purchase", string.Empty);
 
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public PuchaseInfoModel(uint bookId, string vendor, string listPrice, string paidPrice, DateTime puchaseDate)
@@ -50,7 +50,7 @@ namespace pacsw.BookInventory.Models
             Vendor = vendor;
             PurchaseDate = puchaseDate;
 
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public override bool AddToDb() => ((App)Application.Current).Model.PurchaseData.AddPurchaseInfo(this);

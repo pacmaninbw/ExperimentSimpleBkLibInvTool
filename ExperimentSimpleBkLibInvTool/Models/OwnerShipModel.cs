@@ -22,7 +22,7 @@ namespace pacsw.BookInventory.Models
             IsOwned = isOwned;
             IsWishListed = isWishListed;
 
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public OwnerShipModel(uint bookId, bool isOwned = true, bool isWishListed = false)
@@ -32,7 +32,7 @@ namespace pacsw.BookInventory.Models
             IsOwned = isOwned;
             IsWishListed = isWishListed;
 
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public override bool AddToDb() => ((App)Application.Current).Model.OwnerShip.AddOwnerShipData(this);

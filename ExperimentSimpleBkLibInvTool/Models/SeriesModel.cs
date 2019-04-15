@@ -29,7 +29,7 @@ namespace pacsw.BookInventory.Models
         {
             Author = author;
             Title = title;
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         protected override bool _dataIsValid()

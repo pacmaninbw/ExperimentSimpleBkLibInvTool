@@ -13,7 +13,7 @@ namespace pacsw.BookInventory.Models
             : base(((App)Application.Current).Model.FormatTable)
         {
             SetParameterValue("Name", FormatName);
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public string Name

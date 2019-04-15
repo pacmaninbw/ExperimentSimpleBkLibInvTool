@@ -25,99 +25,97 @@ namespace pacsw.BookInventory.Models
 
         private BookInfoModel _bookInfo;
         private AuthorModel _authorInfo;
-        private ForSaleModel _forSale;
-        private OwnerShipModel _owned;
-        private ConditionsAndOtherOptionsModel _optionalItems;
-        private PuchaseInfoModel _puchaseInfo;
-        private PublishInfoModel _publishInfo;
-        private RatingsModel _ratings;
         private SeriesModel _seriesInfo;
-        private VolumeInSeries _volumeInSeries;
-        private Synopsis _synopsis;
+
+        private int _bookInfoIndex = -1;
+        private int _authorIndex = -1;
+        private int _seriesIndex = -1;
+        private int _forSaleIndex = -1;
+        private int _optionsIndex = -1;
+        private int _ownedIndex = -1;
+        private int _puchaseInfoIndex = -1;
+        private int _publishInfoIndex = -1;
+        private int _ratingsIndex = -1;
+        private int _volumeInSeriesIndex = -1;
+        private int _synopsisIndex = -1;
 
         public BookModel(bool EditNotInsert)
         {
             _bookKey = 0;
             _bookInfo = new BookInfoModel();
             _authorInfo = null;
-            _forSale = null;
-            _optionalItems = null;
-            _owned = null;
-            _publishInfo = null;
-            _puchaseInfo = null;
-            _ratings = null;
-            _seriesInfo = null;
-            _volumeInSeries = null;
-            _synopsis = null;
             _itemsToValidate = new List<DataTableItemBaseModel>();
             _itemsToAddToDb = new List<DataTableItemBaseModel>();
-            _itemsToUpDate = new List<DataTableItemBaseModel>();
             _editMode = EditNotInsert;
 
             if (!EditNotInsert)
             {
-                _itemsToValidate.Add(_bookInfo);
+                _bookInfoIndex = AddUnique(_itemsToValidate, _bookInfo);
+            }
+            else
+            {
+                _itemsToUpDate = new List<DataTableItemBaseModel>();
             }
         }
 
         public PublishInfoModel PublishInfo
         {
-            get => _publishInfo;
-            set => _publishInfo = IsInsertedIntoLists(_publishInfo, value) ? value : _publishInfo;
+            get => GetItemFromValidateList(_publishInfoIndex) as PublishInfoModel;
+            set => _publishInfoIndex = InsertIntoLists(value, _publishInfoIndex);
         }
 
         public PuchaseInfoModel PuchaseInfo
         {
-            get  => _puchaseInfo;
-            set => _puchaseInfo = (IsInsertedIntoLists(_puchaseInfo, value)) ? value : _puchaseInfo;
+            get  => GetItemFromValidateList(_puchaseInfoIndex) as PuchaseInfoModel;
+            set => _puchaseInfoIndex = InsertIntoLists(value, _puchaseInfoIndex);
         }
 
         public OwnerShipModel Owned
         {
-            get => _owned;
-            set => _owned =  IsInsertedIntoLists(_owned, value) ? value : _owned;
+            get => GetItemFromValidateList(_ownedIndex) as OwnerShipModel;
+            set => _ownedIndex = InsertIntoLists(value, _ownedIndex);
         }
 
         public ForSaleModel ForSale
         {
-            get => _forSale;
-            set => _forSale = IsInsertedIntoLists(_forSale, value) ? value : _forSale;
+            get => GetItemFromValidateList(_forSaleIndex) as ForSaleModel;
+            set => _forSaleIndex = InsertIntoLists(value, _forSaleIndex);
+        }
+
+        public RatingsModel Ratings
+        {
+            get => GetItemFromValidateList(_ratingsIndex) as RatingsModel;
+            set => _ratingsIndex = InsertIntoLists(value, _ratingsIndex);
+        }
+
+        public ConditionsAndOtherOptionsModel ConditionsAndOptions
+        {
+            get => GetItemFromValidateList(_optionsIndex) as ConditionsAndOtherOptionsModel;
+            set => _optionsIndex = InsertIntoLists(value, _optionsIndex);
+        }
+
+        public VolumeInSeries VolumeNumber
+        {
+            get => GetItemFromValidateList(_volumeInSeriesIndex) as VolumeInSeries;
+            set => _volumeInSeriesIndex = InsertIntoLists(value, _volumeInSeriesIndex);
+        }
+
+        public Synopsis Summary
+        {
+            get => GetItemFromValidateList(_synopsisIndex) as Synopsis;
+            set => _synopsisIndex = InsertIntoLists(value, _synopsisIndex);
         }
 
         public AuthorModel AuthorInfo
         {
-            get => _authorInfo;
+            get => GetItemFromValidateList(_authorIndex) as AuthorModel;
             set => SetAuthorValues(value);
         }
 
         public SeriesModel SeriesInfo
         {
-            get => _seriesInfo;
+            get => GetItemFromValidateList(_seriesIndex) as SeriesModel;
             set => SetSeriesValues(value);
-        }
-
-        public RatingsModel Ratings
-        {
-            get => _ratings;
-            set => _ratings = IsInsertedIntoLists(_ratings, value) ? value : _ratings;
-        }
-
-        public ConditionsAndOtherOptionsModel ConditionsAndOptions
-        {
-            get => _optionalItems;
-            set => _optionalItems = IsInsertedIntoLists(_optionalItems, value) ? value : _optionalItems;
-        }
-
-        public VolumeInSeries VolumeNumber
-        {
-            get => _volumeInSeries;
-            set => _volumeInSeries = IsInsertedIntoLists(_volumeInSeries, value) ? value : _volumeInSeries;
-        }
-
-        public Synopsis Summary
-        {
-            get => _synopsis;
-            set => _synopsis = IsInsertedIntoLists(_synopsis, value) ? value : _synopsis;
         }
 
         public string Genre
@@ -149,9 +147,9 @@ namespace pacsw.BookInventory.Models
                     if (success = _bookInfo.AddToDb())
                     {
                         _bookKey = _bookInfo.BookID;
-                        if (_seriesInfo != null && _volumeInSeries != null)
+                        if (_seriesIndex > -1 && _volumeInSeriesIndex > -1)
                         {
-                            _volumeInSeries.SeriesId = _bookInfo.SeriesId;
+                           ((VolumeInSeries)_itemsToValidate[_volumeInSeriesIndex]).SeriesId = _bookInfo.SeriesId;
                         }
                     }
 
@@ -172,6 +170,7 @@ namespace pacsw.BookInventory.Models
             {
                 string errorMsg = "Database Error: " + ex.Message;
                 MessageBox.Show(errorMsg);
+                success = false;
             }
 
             return success;
@@ -196,6 +195,7 @@ namespace pacsw.BookInventory.Models
 
                     if (success)
                     {
+                        FinalizeItemsToUpdate();
                         foreach (DataTableItemBaseModel item in _itemsToUpDate)
                         {
                             success = DbUpdate(success, item);
@@ -211,6 +211,7 @@ namespace pacsw.BookInventory.Models
             {
                 string errorMsg = "Database Error: " + ex.Message;
                 MessageBox.Show(errorMsg);
+                success = false;
             }
 
             return success;
@@ -237,18 +238,23 @@ namespace pacsw.BookInventory.Models
                 return;
             }
 
-            _authorInfo = TheModel.AuthorTable.GetAuthor(lastName, firstName);
+            AuthorInfo = TheModel.AuthorTable.GetAuthor(lastName, firstName);
             Title = title;
             Format = format;
 
             _bookInfo = TheModel.BookInfoTable.GetBookInfo(_authorInfo.AuthorId, _bookInfo.TitleId, _bookInfo.FormatId);
             _bookKey = _bookInfo.BookID;
-            _seriesInfo = TheModel.SeriesTable.GetSeriesModel(_bookInfo.SeriesId);
-            _itemsToValidate.Add(_bookInfo);
+            SeriesInfo = TheModel.SeriesTable.GetSeriesModel(_bookInfo.SeriesId);
+            _bookInfoIndex = AddUnique(_itemsToValidate, _bookInfo);
 
             if (_bookKey > 0)
             {
                 FillBookModelWithExistingData(_bookKey);
+                // Make sure nothings modified at the start.
+                foreach(DataTableItemBaseModel item in _itemsToValidate)
+                {
+                    item.Reset();
+                }
             }
         }
 
@@ -277,7 +283,7 @@ namespace pacsw.BookInventory.Models
 
             _authorInfo = authorInfo;
             _bookInfo.AuthorId = authorInfo.AuthorId;
-            _itemsToValidate.Add(authorInfo);
+            _authorIndex = AddUnique(_itemsToValidate, _authorInfo);
         }
 
         private void SetSeriesValues(SeriesModel seriesModel)
@@ -289,7 +295,7 @@ namespace pacsw.BookInventory.Models
 
             _seriesInfo = seriesModel;
             _bookInfo.SeriesId = TheModel.SeriesTable.GetSeriesKey(_authorInfo, _seriesInfo.Title); ;
-            _itemsToValidate.Add(seriesModel);
+            _seriesIndex = AddUnique(_itemsToValidate, seriesModel);
         }
 
         private bool AddToDb(bool success, DataTableItemBaseModel item)
@@ -327,52 +333,92 @@ namespace pacsw.BookInventory.Models
             return isValid;
         }
 
-        private bool IsInsertedIntoLists(DataTableItemBaseModel localItem, DataTableItemBaseModel incomingItem)
+        private int InsertIntoLists(DataTableItemBaseModel localItem, int itemIndex)
         {
-            if (!_editMode)
+            int validationIndex = itemIndex;
+            if (_editMode)
             {
-                localItem = incomingItem;
-                _itemsToAddToDb.Add(localItem);
-                _itemsToValidate.Add(localItem);
-                return true;
+                // User added new data.
+                if (itemIndex < 0)
+                {
+                    validationIndex = AddUnique(_itemsToValidate, localItem);
+                    AddUnique(_itemsToAddToDb, localItem);
+                }
+                else
+                {
+                    // User updated exisitng value.
+                    AddUnique(_itemsToUpDate, localItem);
+                }
             }
             else
             {
-                if (localItem == incomingItem)
-                {
-                    MessageBox.Show("Local Item and Incoming Item are same item");
-                }
-                bool localItemWasNull = localItem == null;
-                if (localItemWasNull || (!localItem.Modified && incomingItem.Modified))
-                {
-                    localItem = incomingItem;
-                    _itemsToValidate.Add(localItem);
-                    if (localItemWasNull)
-                    {
-                        _itemsToAddToDb.Add(localItem);
-                    }
-                    else
-                    {
-                        _itemsToUpDate.Add(localItem);
-                    }
-                    return true;
-                }
-                return false;
+                validationIndex = AddUnique(_itemsToValidate, localItem);
+                AddUnique(_itemsToAddToDb, localItem);
             }
+
+            return validationIndex;
         }
 
         // When the user selects a book in the grid, all parts of the aggregation
         // that exist are added to the book model.
         private void FillBookModelWithExistingData(uint bookKey)
         {
-            _optionalItems = TheModel.ConditionsAndOptions.GetConditionsAndOtherOptions(bookKey);
-            _forSale = TheModel.ForSaleTable.GetForSaleModel(bookKey);
-            _owned = TheModel.OwnerShip.GetOwnerShipModel(bookKey);
-            _publishInfo = TheModel.PublishingData.GetPublishInfo(bookKey);
-            _puchaseInfo = TheModel.PurchaseData.GetPuchaseInfo(bookKey);
-            _ratings = TheModel.RatingsTable.GetRatingsData(bookKey);
-            _volumeInSeries = TheModel.VolumeInSeriesTable.GetVolumneInSersData(bookKey);
-            _synopsis = TheModel.SynopsisTable.GetSynopsisData(bookKey);
+            _optionsIndex =  AddUnique(_itemsToValidate, TheModel.ConditionsAndOptions.GetConditionsAndOtherOptions(bookKey));
+            _forSaleIndex = AddUnique(_itemsToValidate, TheModel.ForSaleTable.GetForSaleModel(bookKey));
+            _ownedIndex = AddUnique(_itemsToValidate, TheModel.OwnerShip.GetOwnerShipModel(bookKey));
+            _publishInfoIndex = AddUnique(_itemsToValidate, TheModel.PublishingData.GetPublishInfo(bookKey));
+            _puchaseInfoIndex = AddUnique(_itemsToValidate, TheModel.PurchaseData.GetPuchaseInfo(bookKey));
+            _ratingsIndex = AddUnique(_itemsToValidate, TheModel.RatingsTable.GetRatingsData(bookKey));
+            _volumeInSeriesIndex = AddUnique(_itemsToValidate, TheModel.VolumeInSeriesTable.GetVolumneInSersData(bookKey));
+            _synopsisIndex = AddUnique(_itemsToValidate, TheModel.SynopsisTable.GetSynopsisData(bookKey));
+        }
+
+        private int AddUnique(List<DataTableItemBaseModel> list, DataTableItemBaseModel item)
+        {
+            int indexOf = -1;
+
+            if (item != null)
+            {
+                Type itemType = item.GetType();
+                DataTableItemBaseModel Found = null;
+                Found = list.Find(x => x.GetType() == itemType);
+                if (Found == null)
+                {
+                    list.Add(item);
+                    indexOf = list.Count - 1;
+                }
+                else
+                {
+                    indexOf = list.IndexOf(Found);
+                }
+            }
+
+            return indexOf;
+        }
+
+        /*
+         * This function is only called when editing a book, it is not necessary when adding a book
+         * because all items will be in the _itemsToAddToDb list.
+         */
+        private void FinalizeItemsToUpdate()
+        {
+            // Shouldn't need these.
+            //_itemsToValidate[_bookInfoIndex].Reset();
+            //_itemsToValidate[_authorIndex].Reset();
+
+            foreach (DataTableItemBaseModel item in _itemsToValidate)
+            {
+                if (item.IsModified)
+                {
+                    Type itemType = item.GetType();
+                    object Found = null;
+                    Found = _itemsToAddToDb.Find(x => x.GetType() == itemType);
+                    if (Found == null)
+                    {
+                        AddUnique(_itemsToUpDate, item);
+                    }
+                }
+            }
         }
 
         private bool ConfirmDeleteBook()
@@ -390,6 +436,11 @@ namespace pacsw.BookInventory.Models
             }
 
             return executeDelete;
+        }
+
+        private DataTableItemBaseModel GetItemFromValidateList(int itemIndex)
+        {
+            return (itemIndex > -1) ? _itemsToValidate[itemIndex] : null;
         }
     }
 }

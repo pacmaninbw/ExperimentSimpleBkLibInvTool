@@ -70,7 +70,7 @@ namespace pacsw.BookInventory.Models
                 YearOfDeath = yearOfDeath;
             }
 
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public override bool AddToDb() => ((App)Application.Current).Model.AuthorTable.AddAuthor(this);

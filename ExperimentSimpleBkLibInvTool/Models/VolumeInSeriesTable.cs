@@ -10,7 +10,7 @@ namespace pacsw.BookInventory.Models
         private int VolumeNumberColumnIndex;
 
         public VolumeInSeriesTable() :
-            base("volumeinseries", "getVolumeInSeriesByBook", "insertOrUpdateVolumeInSeries")
+            base("volumeinseries", "getVolumeInSeriesByBook", "insertOrUpdateVolumeInSeries", "insertOrUpdateVolumeInSeries")
         {
             BookIDColumnIndex = GetDBColumnData("BookFKvs").IndexBasedOnOrdinal;
             SeriesIdColumnIndex = GetDBColumnData("SeriesFK").IndexBasedOnOrdinal;

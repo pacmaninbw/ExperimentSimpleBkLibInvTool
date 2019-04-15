@@ -11,7 +11,7 @@ namespace pacsw.BookInventory.Models
             SeriesId = seriesId;
             VolumeNumber = volumeNumber;
 
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public int VolumeNumber

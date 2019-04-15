@@ -10,7 +10,7 @@ namespace pacsw.BookInventory.Models
         private int AmazonRatingsColumnIndex;
         private int GoodReadsRatingsColumnIndex;
 
-        public RatingsTableModel() : base("ratings", "getRatings", "addBookRatings")
+        public RatingsTableModel() : base("ratings", "getRatings", "addBookRatings", "insertOrUpdateBookRatings")
         {
             BookIDColumnIndex = GetDBColumnData("BookFKRats").IndexBasedOnOrdinal;
             MyRatingColumnIndex = GetDBColumnData("MyRatings").IndexBasedOnOrdinal;

@@ -13,7 +13,7 @@ namespace pacsw.BookInventory.Models
             : base(((App)Application.Current).Model.CategoryTable)
         {
             SetParameterValue("Name", CategoryName);
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public string Name

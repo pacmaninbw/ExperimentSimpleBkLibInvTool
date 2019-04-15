@@ -22,7 +22,7 @@ namespace pacsw.BookInventory.Models
             SignedByAuthor = signedByAuthor;
             Read = isRead;
 
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public string Condition {

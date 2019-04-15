@@ -9,7 +9,7 @@ namespace pacsw.BookInventory.Models
         private int SummaryColumnIndex;
 
         public SynopsisTable() :
-            base("bksynopsis", "getSynopsis", "insertOrUpdateSynopsis")
+            base("bksynopsis", "getSynopsis", "insertOrUpdateSynopsis", "insertOrUpdateSynopsis")
         {
             BookIDColumnIndex = GetDBColumnData("BookFKsyop").IndexBasedOnOrdinal;
             SummaryColumnIndex = GetDBColumnData("StoryLine").IndexBasedOnOrdinal;

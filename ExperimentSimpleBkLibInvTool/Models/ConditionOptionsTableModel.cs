@@ -13,7 +13,7 @@ namespace pacsw.BookInventory.Models
         private int ReadColumnIndex;
 
         public ConditionOptionsTableModel() :
-            base("bookcondition", "getBookCondition", "addConditionToBook")
+            base("bookcondition", "getBookCondition", "addConditionToBook", "insertOrUpdateBookCondition")
         {
             BookIDColumnIndex = GetDBColumnData("BookFKCond").IndexBasedOnOrdinal;
             StatusIDColumnIndex = GetDBColumnData("NewOrUsed").IndexBasedOnOrdinal;

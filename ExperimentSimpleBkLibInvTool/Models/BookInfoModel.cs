@@ -13,7 +13,7 @@ namespace pacsw.BookInventory.Models
             AuthorId = authorId;
             SeriesId = seriesId;
             FormatId = formatId;
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public BookInfoModel(uint bookId, uint genre = 0, uint titleId = 0, uint authorId = 0, uint seriesId = 0, uint formatId = 0)
@@ -25,7 +25,7 @@ namespace pacsw.BookInventory.Models
             AuthorId = authorId;
             SeriesId = seriesId;
             FormatId = formatId;
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public uint BookID {

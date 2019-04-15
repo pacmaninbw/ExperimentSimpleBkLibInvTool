@@ -30,7 +30,7 @@ namespace pacsw.BookInventory.Models
             EstimatedValue = estimatedPrice;
             IsForSale = isForSale;
 
-            Modified = false;       // Initialization is not modification.
+            IsModified = false;       // Initialization is not modification.
         }
 
         public override bool AddToDb() => ((App)Application.Current).Model.ForSaleTable.AddForSaleData(this);

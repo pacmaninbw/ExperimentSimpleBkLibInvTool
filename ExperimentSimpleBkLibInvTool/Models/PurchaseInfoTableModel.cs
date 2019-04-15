@@ -12,7 +12,7 @@ namespace pacsw.BookInventory.Models
         private int ListPriceColumnIndex;
         private int DateOfPurchaseColumnIndex;
 
-        public PurchaseInfoTableModel() : base("purchaseinfo", "getPurchaseInfo", "addPurchaseInfo")
+        public PurchaseInfoTableModel() : base("purchaseinfo", "getPurchaseInfo", "addPurchaseInfo", "insertOrUpdatePurchaseInfo")
         {
             BookIDColumnIndex = GetDBColumnData("BookFKPurI").IndexBasedOnOrdinal;
             VendorColumnIndex = GetDBColumnData("Vendor").IndexBasedOnOrdinal;

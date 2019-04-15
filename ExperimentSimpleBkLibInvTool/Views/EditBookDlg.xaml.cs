@@ -31,17 +31,17 @@ namespace pacsw.BookInventory.Views
 
         private void Btn_EditBookSave_Click(object sender, RoutedEventArgs e)
         {
-            if (owned.Modified)
+            if (owned.IsModified)
             {
                 ThisBook.Owned = owned;
             }
 
-            if (options.Modified)
+            if (options.IsModified)
             {
                 ThisBook.ConditionsAndOptions = options;
             }
 
-            if (volumeInSeries.Modified)
+            if (volumeInSeries.IsModified)
             {
                 ThisBook.VolumeNumber = volumeInSeries;
             }
@@ -103,7 +103,7 @@ namespace pacsw.BookInventory.Views
 
         private void SetAuthorNameValues()
         {
-            AuthorModel selectedAuthor = ThisBook.AuthorInfo as AuthorModel;
+            AuthorModel selectedAuthor = ThisBook.AuthorInfo;
             TB_SelectAuthorFirstName.Text = selectedAuthor.FirstName;
             TB_SelectAuthorLastName.Text = selectedAuthor.LastName;
             TB_SelectAuthorMiddleName.Text = selectedAuthor.MiddleName;

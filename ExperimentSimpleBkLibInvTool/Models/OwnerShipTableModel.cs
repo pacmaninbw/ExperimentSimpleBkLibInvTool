@@ -14,7 +14,7 @@ namespace pacsw.BookInventory.Models
         private int InLibraryColumnIndex;
         private int WishListColumnIndex;
 
-        public OwnerShipTableModel() : base("owned", "getOwnerShipData", "addOwnerShipData")
+        public OwnerShipTableModel() : base("owned", "getOwnerShipData", "addOwnerShipData", "insertOrUpdateOwned")
         {
             BookIDColumnIndex = GetDBColumnData("BookFKo").IndexBasedOnOrdinal;
             InLibraryColumnIndex = GetDBColumnData("IsOwned").IndexBasedOnOrdinal;
