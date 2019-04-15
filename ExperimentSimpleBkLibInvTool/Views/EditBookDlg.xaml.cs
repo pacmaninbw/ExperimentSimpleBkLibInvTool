@@ -31,17 +31,17 @@ namespace pacsw.BookInventory.Views
 
         private void Btn_EditBookSave_Click(object sender, RoutedEventArgs e)
         {
-            if (owned.IsModified)
+            if (owned != null && owned.IsModified)
             {
                 ThisBook.Owned = owned;
             }
 
-            if (options.IsModified)
+            if (options != null && options.IsModified)
             {
                 ThisBook.ConditionsAndOptions = options;
             }
 
-            if (volumeInSeries.IsModified)
+            if (volumeInSeries != null && volumeInSeries.IsModified)
             {
                 ThisBook.VolumeNumber = volumeInSeries;
             }
