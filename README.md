@@ -5,18 +5,16 @@ This is also a self-training project for learning XAML, WPF and how to interface
 
 There are differences to the database originally posted in LibraryInventoryTool. Tables have been refactored and added. Additional functionality has been added as well.
 
-#Currently Implemented Features
+# Currently Implemented Features
 1. Add Author
 2. Add Author Series
 3. Add Book
 4. Edit Book
-
-#Planned Future Features to Implement
+# Planned Future Features to Implement
 1. The user can rename columns shown in the tables.
 2. The user can hide columns they are not interested in.
 3. The user can resize a table window to reduce or remove horizontal scrolling.
 4. MSI installer to easily install the application.
-
 # User Requirements
 The current user requirements are in Documentation/Requirements/Requirements.xlsx
 # Requirements to build this tool:
