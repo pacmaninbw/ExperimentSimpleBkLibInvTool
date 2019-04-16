@@ -30,10 +30,6 @@ namespace pacsw.BookInventory.Models
         protected Dictionary<string, int> ParametersIndexedByParameterName;
         private List<SqlCmdParameter> _sqlCmdParameters;
 
-#if false
-        public int AddCount { get; private set; }
-#endif
-
         public uint NewKeyValue { get { return _newKeyValue; } }
 
         public MySqlParameterCollection AddItemParameters { get { return _addItemStoredProcedureParameters; } }
@@ -81,9 +77,6 @@ namespace pacsw.BookInventory.Models
                 InitializeSqlCommandParameters();
                 ValidateParameterCount();
             }
-#if false
-            AddCount = 0;
-#endif
         }
 
         protected bool addItem(DataTableItemBaseModel NewDataItem)
@@ -154,15 +147,6 @@ namespace pacsw.BookInventory.Models
         private bool dbAddItem(DataTableItemBaseModel NewDataItem)
         {
             bool AddItemSuccess = true;
-
-#if false
-            AddCount++;
-            if (AddCount > 1)
-            {
-                MessageBox.Show("AddCount > 1");
-                return true;
-            }
-#endif
 
             if (ReportProgrammerError(_addItemStoredProcedureName, "_addItemStoredProcedureName is not set!"))
             {
