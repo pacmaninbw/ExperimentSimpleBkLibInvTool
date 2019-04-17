@@ -5,11 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pacsw.BookInventory.Views"
         mc:Ignorable="d"
-        Title="Series" Height="768" Width="1024">
+        Title="Series" MaxHeight="768" Width="390" FontWeight="Bold">
     <Grid>
-        <Image Stretch="None" Source="/Images/Chernick-Consulting-1-6-11.png" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.ColumnSpan="2" Margin="83,10,107,137"/>
-        <Button Content="Add Series" Name="Btn_SeriesAddSeries" HorizontalAlignment="Left" Margin="80,30,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Background="Transparent" FontWeight="Bold" Click="Btn_SeriesAddSeries_Click"/>
-        <Button Content="Close" Name="Btn_SeriesTableClose" HorizontalAlignment="Left" Margin="875,30,0,0" VerticalAlignment="Top" Width="75" Background="Red" FontWeight="Bold" Click="Btn_SeriesTableClose_Click"/>
-        <DataGrid Name="SeriesGrid" HorizontalAlignment="Left" Height="530" Margin="65,105,0,0" VerticalAlignment="Top" Width="890" Background="Transparent" ItemsSource="{Binding}"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0" Height="23">
+            <Button Content="Add Series" Name="Btn_SeriesAddSeries" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="80" Grid.Column="1" Background="Transparent" FontWeight="Bold" Click="Btn_SeriesAddSeries_Click"/>
+            <Button Content="Close" Name="Btn_SeriesTableClose" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Top" Width="75" Background="Red" FontWeight="Bold" Click="Btn_SeriesTableClose_Click"/>
+        </StackPanel>
+        <DataGrid Name="SeriesGrid" HorizontalAlignment="Center" Margin="0,65,0,0" VerticalAlignment="Top" Background="Transparent" ItemsSource="{Binding}"/>
     </Grid>
 </Window>

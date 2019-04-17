@@ -5,12 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:pacsw.BookInventory.Views"
         mc:Ignorable="d"
-        Title="My Books" Height="763" Width="1024">
+        Title="My Books" MinHeight="763" MinWidth="1024">
     <Grid>
-        <Button Content="Add Book" Name="Btn_BooksAddBook" HorizontalAlignment="Left" Margin="65,30,0,0" VerticalAlignment="Top" Width="80"  Background="LightGreen" FontWeight="Bold" Click="Btn_BooksAddBook_Click"/>
-        <Button Content="Edit Book" Name="Btn_EditBook" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="320,30,0,0" Width="80" Background="LightGreen" FontWeight="Bold" Click="Btn_EditBook_Click"/>
-        <Button Content="Delete Book" Name="Btn_DeleteBook" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="600,30,0,0" Width="80" FontWeight="Bold" Background="Yellow" Click="Btn_DeleteBook_Click"/>
-        <Button Content="Close" Name="Btn_BooksTableClose" HorizontalAlignment="Left" Margin="880,30,0,0" VerticalAlignment="Top" Width="75" Background="Red" FontWeight="Bold" Click="Btn_BooksTableClose_Click" />
-        <DataGrid Name="BooksGrid" HorizontalAlignment="Left" Height="590" Margin="65,85,0,0" VerticalAlignment="Top" Width="890" Background="Transparent" ItemsSource="{Binding}" SelectionChanged="BooksGrid_SelectionChanged"/>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" Height="23">
+            <Button Content="Add Book" Name="Btn_BooksAddBook" HorizontalAlignment="Left" Margin="0,0,0,0" VerticalAlignment="Top" Width="80"  Background="LightGreen" FontWeight="Bold" Click="Btn_BooksAddBook_Click"/>
+            <Button Content="Edit Book" Name="Btn_EditBook" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Top"  Width="80" Background="LightGreen" FontWeight="Bold" Click="Btn_EditBook_Click"/>
+            <Button Content="Delete Book" Name="Btn_DeleteBook" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Top" Width="80" FontWeight="Bold" Background="Yellow" Click="Btn_DeleteBook_Click"/>
+            <Button Content="Close" Name="Btn_BooksTableClose" HorizontalAlignment="Left" Margin="65,0,0,0" VerticalAlignment="Top" Width="75" Background="Red" FontWeight="Bold" Click="Btn_BooksTableClose_Click" />
+        </StackPanel>
+        <DataGrid Name="BooksGrid" HorizontalAlignment="Center" Margin="65,65,65,65" VerticalAlignment="Top" Background="Transparent" ItemsSource="{Binding}" SelectionChanged="BooksGrid_SelectionChanged"/>
     </Grid>
 </Window>
